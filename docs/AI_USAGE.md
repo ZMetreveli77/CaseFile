@@ -68,14 +68,49 @@
 - **Code-review follow-up (AI):** after I ran `/code-review` on my reranker fix, the AI fixed the issues in its own
   milestone-3 code:
   - `rerank_results` no longer modifies its input and keeps the fused score in `details["fused_score"]`
-  - `HybridSearcher` now passes `mmr_lambda` / `min_relevance` through
+  - `HybridSearcher` now passes `mmr_lambda` through (it also passed `min_relevance`, which my v2 later removed)
   - inner functions renamed to verbs; rounding uses a named constant
   - 2 new tests
 - **Limitation found:** min-max normalisation is harsh on very small candidate pools (e.g. a 3-document corpus
-  returned an unrelated chunk as the 2nd result). **Fixed by me afterwards**: see "What I changed or verified
-  independently" below (`MIN_RELEVANCE` in `rerank.py`, test `test_irrelevant_chunks_are_dropped_instead_of_filling_top_k`).
-- **Remaining limitation:** the cutoff is relative to the candidate pool (because of min-max), so a pool where every
-  chunk is irrelevant still returns its best one. To be measured on the full dataset in milestone 7.
+  returned an unrelated chunk as the 2nd result). **Fixed by me afterwards** (v1, then v2): see
+  "What I changed or verified independently" below.
+- **Remaining limitation:** see the v2 trade-off below.
 
 ## What I changed or verified independently
-_MMR’s diversity penalty made a totally unrelated chunk look better than a slightly related one, because the reranker always filled every slot; I added a minimum-relevance cutoff before MMR so it returns fewer results instead of junk, and a regression test that failed before the fix and passes after._
+
+### Reranker fix v1: minimum-relevance cutoff
+MMR's diversity penalty made a totally unrelated chunk look better than a slightly related one, because the
+reranker always filled every slot. I added a minimum-relevance cutoff (`MIN_RELEVANCE = 0.05`) before MMR, so it
+returns fewer results instead of junk. I also added the regression test
+`test_irrelevant_chunks_are_dropped_instead_of_filling_top_k`.
+
+### Code review of my v1
+I ran `/code-review` on my fix. It found that my cutoff was applied to a **pool-relative** (min-max) score, so
+whether a chunk was dropped depended on the other candidates, not on the chunk itself:
+- A relevant chunk that came **last** in a small pool always got normalised score 0 and was dropped.
+- When all candidates had the **same** score, every chunk got normalised score 1, so the cutoff never dropped anything.
+
+Both cases were reproduced with small scripts before changing anything.
+
+### Reranker fix v2: absolute signals
+I replaced the cutoff with `is_junk()` in `rerank.py`. A candidate is junk only if:
+- **none of the query's words** appear in it (coverage == 0), **and**
+- semantic search did **not** rank it in its top `DENSE_RANK_LIMIT` (10).
+
+The single best candidate is always kept, so the LLM still sees the best evidence and can decide to abstain.
+I removed `MIN_RELEVANCE` (also from `HybridSearcher`) and deleted the test for it, since the setting no longer exists.
+
+- **AI help for v2:** I wrote the code and tests in my editor. I used Claude Code's hints, its review feedback,
+  and code suggestions from earlier messages in the same session. No other AI tool was used.
+
+- **Tests I wrote:**
+  - `test_relevant_chunk_is_kept`: a near-tied relevant chunk that is last in the pool is kept
+  - `test_tied_pool_of_irrelevant_chunks_is_filtered`: a tied pool of irrelevant chunks is filtered
+- **Test I updated:** `test_close_rrf_scores_do_not_let_diversity_pick_an_unrelated_chunk`. Its candidates now
+  carry `dense_rank` values, because in the real pipeline every chunk found by semantic search has one.
+- **Verified:** all tests pass. Both review scenarios behave correctly. A real-model run (fastembed) still answers
+  "why did payments stop working?" with `incident.txt`, then `changes.txt`.
+- **Trade-off (known limitation):** when the corpus is smaller than `DENSE_RANK_LIMIT`, every chunk is in the
+  dense top 10, so `is_junk` never fires. In the 3-document smoke test, "CHG-43" again returns `offsite.txt`
+  as the 2nd result. On the 50k-paragraph corpus, being in the dense top 10 is a meaningful signal.
+  `DENSE_RANK_LIMIT` will be tuned in the evaluation (milestone 7).

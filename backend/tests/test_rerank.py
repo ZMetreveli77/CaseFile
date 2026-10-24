@@ -2,8 +2,11 @@ from casefile.models import Chunk, SearchResult
 from casefile.retrieval.rerank import measure_overlap, measure_query_coverage, rerank_results
 
 
-def make_result(chunk_id, doc_id, text, score):
-    return SearchResult(Chunk(chunk_id=chunk_id, doc_id=doc_id, index=0, text=text), score)
+def make_result(chunk_id, doc_id, text, score, details=None):
+    result = SearchResult(Chunk(chunk_id=chunk_id, doc_id=doc_id, index=0, text=text), score)
+    if details:
+        result.details.update(details)
+    return result
 
 
 def test_coverage_and_overlap():
@@ -45,9 +48,12 @@ def test_close_rrf_scores_do_not_let_diversity_pick_an_unrelated_chunk():
     # Regression: with scores 1/61, 1/62, 1/63 and divide-by-max normalisation, the unrelated
     # offsite note (zero overlap with the top result) beat the relevant change log.
     candidates = [
-        make_result("1", "incident", "checkout api went down march root cause change chg-42 load balancer", 1 / 61),
-        make_result("2", "changes", "change log chg-42 raised load balancer timeout chg-43 invoice template", 1 / 62),
-        make_result("3", "offsite", "team offsite notes hiring plans office move may", 1 / 63),
+        make_result("1", "incident", "checkout api went down march root cause change chg-42 load balancer", 1 / 61,
+                    details={"dense_rank": 1}),
+        make_result("2", "changes", "change log chg-42 raised load balancer timeout chg-43 invoice template", 1 / 62,
+                    details={"dense_rank": 2}),
+        make_result("3", "offsite", "team offsite notes hiring plans office move may", 1 / 63,
+                    details={"dense_rank": 3}),
     ]
     reranked = rerank_results("why did payments stop working", candidates, top_k=2)
     assert [result.chunk.doc_id for result in reranked] == ["incident", "changes"]
@@ -60,13 +66,25 @@ def test_top_k_and_empty():
 
 
 def test_irrelevant_chunks_are_dropped_instead_of_filling_top_k():
+    # Regression: only the change log mentions CHG-43. MMR used to fill the 2nd slot with the
+    # offsite note, because it had zero similarity to the already-picked change log.
+    # Candidates carry no dense_rank: they simulate chunks without a strong semantic match,
+    # which is the case is_junk is meant to drop.
     candidates = [
-        make_result("1", "change", "change log chg-42 raised load balancer timeout chg-43 invoice template", 1 / 61 + 1 / 61),
-        make_result("2", "incident", "checkout api went down march root cause change chg-42 load balancer", 1 / 62),
-        make_result("3", "offsite", "team offsite notes hiring plans office move any", 1 / 63),
+        make_result(
+            "1", "changes",
+            "change log chg-42 raised load balancer timeout chg-43 invoice template",
+            1 / 61 + 1 / 61,  # ranked 1st in both result lists
+        ),
+        make_result(
+            "2", "incident",
+            "checkout api went down march root cause change chg-42 load balancer",
+            1 / 62,
+        ),
+        make_result("3", "offsite", "team offsite notes hiring plans office move may", 1 / 63),
     ]
     reranked = rerank_results("CHG-43", candidates, top_k=2)
-    assert [result.chunk.doc_id for result in reranked] == ["change"]
+    assert [result.chunk.doc_id for result in reranked] == ["changes"]
 
 
 def test_candidates_are_not_modified_and_fused_score_is_kept():
@@ -77,3 +95,26 @@ def test_candidates_are_not_modified_and_fused_score_is_kept():
     assert all(result.details == {} for result in candidates)
     assert top_result.details["fused_score"] == 1 / 61
     assert top_result is not candidates[0]
+
+
+def test_relevant_chunk_is_kept():
+    candidates = [
+        make_result("A", "doc_a", "checkout payments failed in march after a change", 1 / 61 + 1 / 62),
+        make_result(
+            "B", "doc_b",
+            "the api went down and orders could not complete working",
+            1 / 61 + 1 / 63,
+            details={"dense_rank": 2},
+        ),
+    ]
+    reranked = rerank_results("why did the checkout payments stop working last march", candidates, top_k=2)
+    assert {result.chunk.chunk_id for result in reranked} == {"A", "B"}
+
+
+def test_tied_pool_of_irrelevant_chunks_is_filtered():
+    candidates = [
+        make_result("1", "doc1", "team offsite notes hiring plans", 1 / 61),
+        make_result("2", "doc2", "office move planned for may", 1 / 61)
+    ]
+    reranked = rerank_results("CHG-43", candidates, top_k=2)
+    assert len(reranked) <= 1

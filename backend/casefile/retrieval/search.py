@@ -3,7 +3,7 @@ from casefile.models import SearchResult
 from casefile.retrieval import bm25
 from casefile.retrieval.embeddings import TextEmbedder
 from casefile.retrieval.fusion import combine_search_results
-from casefile.retrieval.rerank import MIN_RELEVANCE, MMR_LAMBDA, rerank_results
+from casefile.retrieval.rerank import MMR_LAMBDA, rerank_results
 from casefile.retrieval.store import QdrantStore
 
 SEARCH_MODES = ("dense", "hybrid", "hybrid_rerank")
@@ -14,7 +14,7 @@ DEFAULT_TOP_K = 8
 class HybridSearcher:
     def __init__(self, store: QdrantStore, embedder: TextEmbedder, mode: str = "hybrid_rerank",
                  dense_weight: float = 1.0, sparse_weight: float = 1.0,
-                 mmr_lambda: float = MMR_LAMBDA, min_relevance: float = MIN_RELEVANCE):
+                 mmr_lambda: float = MMR_LAMBDA):
         if mode not in SEARCH_MODES:
             raise ValueError(f"Unknown search mode '{mode}'. Choose one of {SEARCH_MODES}")
         self.store = store
@@ -23,7 +23,6 @@ class HybridSearcher:
         self.dense_weight = dense_weight
         self.sparse_weight = sparse_weight
         self.mmr_lambda = mmr_lambda  # passed to the reranker so the evaluation can tune it per configuration
-        self.min_relevance = min_relevance
 
     def search(self, query: str, top_k: int = DEFAULT_TOP_K) -> list[SearchResult]:
         if not query.strip():
@@ -40,7 +39,7 @@ class HybridSearcher:
         if self.mode == "hybrid":
             return fused_results[:top_k]
         return rerank_results(query, fused_results, top_k,
-                              mmr_lambda=self.mmr_lambda, min_relevance=self.min_relevance)
+                              mmr_lambda=self.mmr_lambda)
 
     def fuse(self, dense_results: list[SearchResult], sparse_results: list[SearchResult]) -> list[SearchResult]:
         result_by_chunk_id = {result.chunk.chunk_id: result for result in sparse_results + dense_results}
