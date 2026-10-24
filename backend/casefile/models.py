@@ -22,3 +22,12 @@ class Chunk:
     text: str
     title: str = ""
     metadata: dict = field(default_factory=dict)
+
+
+@dataclass
+class SearchResult:
+    """A chunk returned by retrieval, with its score and how it was found (for debugging and evaluation)."""
+
+    chunk: Chunk
+    score: float
+    details: dict = field(default_factory=dict)  # e.g. {"dense_rank": 2, "sparse_rank": 5, "coverage": 0.6}

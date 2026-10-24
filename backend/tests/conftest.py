@@ -1,6 +1,33 @@
+import math
+import re
+import zlib
+
 import pytest
+from qdrant_client import QdrantClient
 
 from casefile.models import Chunk, Document
+from casefile.retrieval.store import QdrantStore
+
+FAKE_EMBEDDING_DIMENSION = 384
+
+
+class FakeEmbedder:
+    """Bag-of-words hashed into a fixed-size vector: texts sharing words get similar vectors. No model download."""
+
+    dimension = FAKE_EMBEDDING_DIMENSION
+
+    def embed_text(self, text):
+        vector = [0.0] * self.dimension
+        for word in re.findall(r"\w+", text.lower()):
+            vector[zlib.crc32(word.encode()) % self.dimension] += 1.0
+        length = math.sqrt(sum(value * value for value in vector)) or 1.0
+        return [value / length for value in vector]
+
+    def embed_documents(self, texts):
+        return [self.embed_text(text) for text in texts]
+
+    def embed_query(self, text):
+        return self.embed_text(text)
 
 
 class InMemoryStore:
@@ -33,3 +60,13 @@ class InMemoryStore:
 @pytest.fixture
 def store():
     return InMemoryStore()
+
+
+@pytest.fixture
+def embedder():
+    return FakeEmbedder()
+
+
+@pytest.fixture
+def qdrant_store(embedder):
+    return QdrantStore(QdrantClient(":memory:"), embedder)

@@ -24,8 +24,8 @@ Interview: I must explain and change the code live without AI, so every part sta
 - [x] Text and metadata extraction, chunking, duplicate handling
 - [x] Add / update / delete documents (pipeline logic; persisted once the Qdrant store exists)
 - [ ] 2+ chunking strategies, compared (both implemented; comparison happens in milestone 7)
-- [ ] Embeddings + semantic search + hybrid search (semantic + keyword)
-- [ ] At least one **own** ranking/search component (BM25 encoder, RRF fusion, reranker)
+- [x] Embeddings + semantic search + hybrid search (semantic + keyword)
+- [x] At least one **own** ranking/search component (BM25 encoder, RRF fusion, reranker)
 - [ ] RAG with an LLM, multi-step reasoning, citations
 - [ ] Contradiction detection and abstention when evidence is insufficient
 - [ ] LLM error handling, and at least one tool-calling mechanism
