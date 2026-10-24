@@ -1,89 +1,116 @@
-"""Exact + near-duplicate detection (own MinHash/LSH implementation)."""
+"""Exact + near-duplicate detection (own MinHash/LSH implementation).
+
+MinHash: estimates how similar two texts are (Jaccard similarity of their word shingles) from short signatures.
+LSH (locality-sensitive hashing): groups signatures into buckets so we only compare likely duplicates.
+"""
 import hashlib
 import random
 import re
 import zlib
 from collections import defaultdict
 
-_PRIME = (1 << 61) - 1
-_MAX = (1 << 32) - 1
+LARGE_PRIME = (1 << 61) - 1
+MAX_HASH_VALUE = (1 << 32) - 1
+WORDS_PER_SHINGLE = 5
+SIGNATURE_LENGTH = 64
+LSH_BANDS = 16
+NEAR_DUPLICATE_SIMILARITY = 0.85
+RANDOM_SEED = 42
+
+Signature = tuple[int, ...]
 
 
-def normalize(text: str) -> str:
+def normalize_text(text: str) -> str:
     return re.sub(r"\s+", " ", text.lower()).strip()
 
 
-def exact_hash(text: str) -> str:
-    return hashlib.sha256(normalize(text).encode("utf-8")).hexdigest()
+def hash_normalized_text(text: str) -> str:
+    return hashlib.sha256(normalize_text(text).encode("utf-8")).hexdigest()
 
 
-def shingles(text: str, k: int = 5) -> set[int]:
+def build_shingle_hashes(text: str, words_per_shingle: int = WORDS_PER_SHINGLE) -> set[int]:
+    """A shingle is a run of consecutive words; we keep a hash of each one."""
     words = re.findall(r"\w+", text.lower())
-    if len(words) < k:
+    if len(words) < words_per_shingle:
         return {zlib.crc32(" ".join(words).encode())} if words else set()
-    return {zlib.crc32(" ".join(words[i:i + k]).encode()) for i in range(len(words) - k + 1)}
+    return {
+        zlib.crc32(" ".join(words[position:position + words_per_shingle]).encode())
+        for position in range(len(words) - words_per_shingle + 1)
+    }
 
 
-class MinHasher:
-    def __init__(self, num_perm: int = 64, seed: int = 42):
-        rng = random.Random(seed)  # fixed seed -> same signatures on every run
-        self.params = [(rng.randint(1, _PRIME - 1), rng.randint(0, _PRIME - 1)) for _ in range(num_perm)]
+class MinHashSignatureBuilder:
+    def __init__(self, signature_length: int = SIGNATURE_LENGTH, seed: int = RANDOM_SEED):
+        random_generator = random.Random(seed)  # fixed seed -> same signatures on every run
+        self.hash_functions = [
+            (random_generator.randint(1, LARGE_PRIME - 1), random_generator.randint(0, LARGE_PRIME - 1))
+            for _ in range(signature_length)
+        ]
 
-    def signature(self, text: str) -> tuple[int, ...]:
-        sh = shingles(text)
-        if not sh:
-            return tuple([_MAX] * len(self.params))
-        return tuple(min(((a * x + b) % _PRIME) & _MAX for x in sh) for a, b in self.params)
+    def build_signature(self, text: str) -> Signature:
+        shingle_hashes = build_shingle_hashes(text)
+        if not shingle_hashes:
+            return tuple([MAX_HASH_VALUE] * len(self.hash_functions))
+        return tuple(
+            min(((multiplier * shingle + offset) % LARGE_PRIME) & MAX_HASH_VALUE for shingle in shingle_hashes)
+            for multiplier, offset in self.hash_functions
+        )
 
 
-def estimated_jaccard(sig_a: tuple[int, ...], sig_b: tuple[int, ...]) -> float:
-    return sum(x == y for x, y in zip(sig_a, sig_b)) / len(sig_a)
+def estimate_similarity(first_signature: Signature, second_signature: Signature) -> float:
+    matching_positions = sum(a == b for a, b in zip(first_signature, second_signature))
+    return matching_positions / len(first_signature)
 
 
-class Deduplicator:
+class DuplicateDetector:
     """Remembers texts by key; `find_duplicate` returns the key of an exact or near duplicate, or None."""
 
-    def __init__(self, threshold: float = 0.85, num_perm: int = 64, bands: int = 16):
-        if num_perm % bands:
-            raise ValueError("num_perm must be divisible by bands")
-        self.threshold = threshold
+    def __init__(self, similarity_threshold: float = NEAR_DUPLICATE_SIMILARITY,
+                 signature_length: int = SIGNATURE_LENGTH, bands: int = LSH_BANDS):
+        if signature_length % bands:
+            raise ValueError("signature_length must be divisible by bands")
+        self.similarity_threshold = similarity_threshold
         self.bands = bands
-        self.rows = num_perm // bands
-        self.hasher = MinHasher(num_perm)
-        self.exact: dict[str, str] = {}  # hash -> key
-        self.key_hash: dict[str, str] = {}  # key -> hash (for fast removal)
-        self.signatures: dict[str, tuple[int, ...]] = {}  # key -> signature
-        self.buckets: dict[tuple, set[str]] = defaultdict(set)  # (band, values) -> keys
+        self.rows_per_band = signature_length // bands
+        self.signature_builder = MinHashSignatureBuilder(signature_length)
+        self.key_by_exact_hash: dict[str, str] = {}
+        self.exact_hash_by_key: dict[str, str] = {}  # reverse map, for fast removal
+        self.signature_by_key: dict[str, Signature] = {}
+        self.keys_by_bucket: dict[tuple, set[str]] = defaultdict(set)
 
-    def _band_keys(self, sig: tuple[int, ...]):
-        for b in range(self.bands):
-            yield (b, sig[b * self.rows:(b + 1) * self.rows])
+    def lsh_bucket_keys(self, signature: Signature):
+        for band in range(self.bands):
+            band_values = signature[band * self.rows_per_band:(band + 1) * self.rows_per_band]
+            yield (band, band_values)
 
     def find_duplicate(self, text: str) -> str | None:
-        if (key := self.exact.get(exact_hash(text))) is not None:
-            return key
-        sig = self.hasher.signature(text)
-        candidates = set().union(*(self.buckets.get(bk, set()) for bk in self._band_keys(sig)))
-        best = max(candidates, key=lambda k: estimated_jaccard(sig, self.signatures[k]), default=None)
-        if best is not None and estimated_jaccard(sig, self.signatures[best]) >= self.threshold:
-            return best
-        return None
+        exact_match = self.key_by_exact_hash.get(hash_normalized_text(text))
+        if exact_match is not None:
+            return exact_match
+        signature = self.signature_builder.build_signature(text)
+        candidate_keys = set().union(*(self.keys_by_bucket.get(bucket_key, set())
+                                       for bucket_key in self.lsh_bucket_keys(signature)))
+        best_key = max(candidate_keys,
+                       key=lambda key: estimate_similarity(signature, self.signature_by_key[key]), default=None)
+        is_near_duplicate = (best_key is not None and
+                             estimate_similarity(signature, self.signature_by_key[best_key]) >= self.similarity_threshold)
+        return best_key if is_near_duplicate else None
 
     def add(self, key: str, text: str) -> None:
-        sig = self.hasher.signature(text)
-        h = exact_hash(text)
-        self.exact[h] = key
-        self.key_hash[key] = h
-        self.signatures[key] = sig
-        for bk in self._band_keys(sig):
-            self.buckets[bk].add(key)
+        signature = self.signature_builder.build_signature(text)
+        exact_hash = hash_normalized_text(text)
+        self.key_by_exact_hash[exact_hash] = key
+        self.exact_hash_by_key[key] = exact_hash
+        self.signature_by_key[key] = signature
+        for bucket_key in self.lsh_bucket_keys(signature):
+            self.keys_by_bucket[bucket_key].add(key)
 
     def remove(self, key: str) -> None:
-        sig = self.signatures.pop(key, None)
-        if sig is None:
+        signature = self.signature_by_key.pop(key, None)
+        if signature is None:
             return
-        h = self.key_hash.pop(key, None)
-        if h is not None and self.exact.get(h) == key:
-            del self.exact[h]
-        for bk in self._band_keys(sig):
-            self.buckets[bk].discard(key)
+        exact_hash = self.exact_hash_by_key.pop(key, None)
+        if exact_hash is not None and self.key_by_exact_hash.get(exact_hash) == key:
+            del self.key_by_exact_hash[exact_hash]
+        for bucket_key in self.lsh_bucket_keys(signature):
+            self.keys_by_bucket[bucket_key].discard(key)
