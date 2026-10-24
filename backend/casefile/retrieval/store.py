@@ -66,7 +66,8 @@ class QdrantStore:
         return convert_payload_to_document(points[0].payload) if points else None
 
     def find_by_hash(self, content_hash: str) -> Document | None:
-        points, _ = self.client.scroll(self.documents_collection, scroll_filter=match_field("content_hash", content_hash),
+        points, _ = self.client.scroll(self.documents_collection,
+                                       scroll_filter=match_field("content_hash", content_hash),
                                        limit=1, with_payload=True)
         return convert_payload_to_document(points[0].payload) if points else None
 

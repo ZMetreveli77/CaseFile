@@ -92,8 +92,8 @@ class DuplicateDetector:
                                        for bucket_key in self.lsh_bucket_keys(signature)))
         best_key = max(candidate_keys,
                        key=lambda key: estimate_similarity(signature, self.signature_by_key[key]), default=None)
-        is_near_duplicate = (best_key is not None and
-                             estimate_similarity(signature, self.signature_by_key[best_key]) >= self.similarity_threshold)
+        is_near_duplicate = best_key is not None and (
+            estimate_similarity(signature, self.signature_by_key[best_key]) >= self.similarity_threshold)
         return best_key if is_near_duplicate else None
 
     def add(self, key: str, text: str) -> None:
