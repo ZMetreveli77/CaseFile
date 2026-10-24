@@ -20,10 +20,10 @@ Interview: I must explain and change the code live without AI, so every part sta
 | Hosting | Render (free) + Qdrant Cloud (free) | Free, public URL, data persists in Qdrant |
 
 ## 3. Requirements checklist (what must exist)
-- [ ] 3+ file formats (we plan 5: PDF, TXT/MD, HTML, JSON/JSONL, CSV)
-- [ ] Text and metadata extraction, chunking, duplicate handling
-- [ ] Add / update / delete documents
-- [ ] 2+ chunking strategies, compared
+- [x] 3+ file formats (we plan 5: PDF, TXT/MD, HTML, JSON/JSONL, CSV)
+- [x] Text and metadata extraction, chunking, duplicate handling
+- [x] Add / update / delete documents (pipeline logic; persisted once the Qdrant store exists)
+- [ ] 2+ chunking strategies, compared (both implemented; comparison happens in milestone 7)
 - [ ] Embeddings + semantic search + hybrid search (semantic + keyword)
 - [ ] At least one **own** ranking/search component (BM25 encoder, RRF fusion, reranker)
 - [ ] RAG with an LLM, multi-step reasoning, citations
