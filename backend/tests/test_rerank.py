@@ -57,3 +57,13 @@ def test_top_k_and_empty():
     candidates = [make_result(str(number), f"d{number}", f"text {number}", 1.0) for number in range(5)]
     assert len(rerank_results("text", candidates, top_k=3)) == 3
     assert rerank_results("anything", [], top_k=3) == []
+
+
+def test_irrelevant_chunks_are_dropped_instead_of_filling_top_k():
+    candidates = [
+        make_result("1", "change", "change log chg-42 raised load balancer timeout chg-43 invoice template", 1 / 61 + 1 / 61),
+        make_result("2", "incident", "checkout api went down march root cause change chg-42 load balancer", 1 / 62),
+        make_result("3", "offsite", "team offsite notes hiring plans office move any", 1 / 63),
+    ]
+    reranked = rerank_results("CHG-43", candidates, top_k=2)
+    assert [result.chunk.doc_id for result in reranked] == ["change"]

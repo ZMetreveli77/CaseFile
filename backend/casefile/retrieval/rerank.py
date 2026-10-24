@@ -9,6 +9,7 @@ from casefile.retrieval.bm25 import tokenize
 COVERAGE_WEIGHT = 0.3  # share of relevance that comes from query-term coverage (rest from fused score)
 MMR_LAMBDA = 0.6  # 1.0 = pure relevance, 0.0 = pure diversity; tuned in the evaluation (milestone 7)
 SAME_DOCUMENT_SIMILARITY = 0.5  # minimum similarity assumed between two chunks of the same document
+MIN_RELEVANCE = 0.05  # candidates below this are dropped, even if fewer than top_k remain
 
 
 def measure_query_coverage(query_terms: set[str], chunk_terms: set[str]) -> float:
@@ -26,7 +27,7 @@ def measure_overlap(first_terms: set[str], second_terms: set[str]) -> float:
 
 
 def rerank_results(query: str, candidates: list[SearchResult], top_k: int,
-                   mmr_lambda: float = MMR_LAMBDA) -> list[SearchResult]:
+                   mmr_lambda: float = MMR_LAMBDA, min_relevance: float = MIN_RELEVANCE) -> list[SearchResult]:
     if not candidates:
         return []
     query_terms = set(tokenize(query))
@@ -49,7 +50,9 @@ def rerank_results(query: str, candidates: list[SearchResult], top_k: int,
         is_same_document = first.chunk.doc_id == second.chunk.doc_id
         return max(overlap, SAME_DOCUMENT_SIMILARITY) if is_same_document else overlap
 
-    remaining, selected = list(candidates), []
+    remaining = [result for result in candidates
+                 if relevance_by_chunk[result.chunk.chunk_id] >= min_relevance]
+    selected = []
     while remaining and len(selected) < top_k:
         def mmr_score(result: SearchResult) -> float:
             redundancy = max((similarity(result, picked) for picked in selected), default=0.0)
