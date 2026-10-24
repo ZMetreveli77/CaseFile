@@ -67,3 +67,13 @@ def test_irrelevant_chunks_are_dropped_instead_of_filling_top_k():
     ]
     reranked = rerank_results("CHG-43", candidates, top_k=2)
     assert [result.chunk.doc_id for result in reranked] == ["change"]
+
+
+def test_candidates_are_not_modified_and_fused_score_is_kept():
+    candidates = [make_result("1", "doc1", "payment outage march", 1 / 61), *weak_tail()]
+    scores_before = [result.score for result in candidates]
+    [top_result] = rerank_results("payment outage", candidates, top_k=1)
+    assert [result.score for result in candidates] == scores_before
+    assert all(result.details == {} for result in candidates)
+    assert top_result.details["fused_score"] == 1 / 61
+    assert top_result is not candidates[0]

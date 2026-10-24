@@ -38,6 +38,13 @@ def test_rerank_spreads_results_across_documents(filled_store, embedder):
     assert len({result.chunk.doc_id for result in results}) == 3
 
 
+def test_reranker_settings_are_passed_through(filled_store, embedder):
+    keep_everything = HybridSearcher(filled_store, embedder, min_relevance=0.0)
+    drop_everything_but_top = HybridSearcher(filled_store, embedder, min_relevance=0.99)
+    assert len(keep_everything.search("CHG-42", top_k=4)) == 4
+    assert len(drop_everything_but_top.search("CHG-42", top_k=4)) < 4
+
+
 def test_invalid_mode_and_empty_query(filled_store, embedder):
     with pytest.raises(ValueError):
         HybridSearcher(filled_store, embedder, mode="magic")

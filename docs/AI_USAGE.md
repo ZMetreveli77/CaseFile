@@ -65,6 +65,12 @@
     (1/61 vs 1/63) and divide-by-max normalisation made all chunks look equally relevant. Switched to min-max
     normalisation and added a regression test. Two unit tests that used unrealistic two-item pools were rewritten
     with realistic RRF-style scores.
+- **Code-review follow-up (AI):** after I ran `/code-review` on my reranker fix, the AI fixed the issues in its own
+  milestone-3 code:
+  - `rerank_results` no longer modifies its input and keeps the fused score in `details["fused_score"]`
+  - `HybridSearcher` now passes `mmr_lambda` / `min_relevance` through
+  - inner functions renamed to verbs; rounding uses a named constant
+  - 2 new tests
 - **Limitation found:** min-max normalisation is harsh on very small candidate pools (e.g. a 3-document corpus
   returned an unrelated chunk as the 2nd result). **Fixed by me afterwards**: see "What I changed or verified
   independently" below (`MIN_RELEVANCE` in `rerank.py`, test `test_irrelevant_chunks_are_dropped_instead_of_filling_top_k`).
