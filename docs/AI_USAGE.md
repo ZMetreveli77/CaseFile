@@ -346,3 +346,12 @@ Before uploading the (Georgian) assignment PDF, **I predicted that it wouldn't w
 **Possible fixes** (open decision):
 - A Unicode-aware tokenizer.
 - A multilingual embedding model (needs a full re-index of about 1 hour, and a re-check on English).
+
+I then ran the full API flow in the browser (`/docs`):
+1. Started the server.
+2. Uploaded an English document (`plan.md`).
+3. Asked a question about it with `POST /ask` and got the right answer.
+4. Deleted the upload.
+
+Afterwards the Qdrant Cloud corpus was back to exactly 66,555 documents and 78,730 chunks, with no chunks of the test
+upload left. (Page numbers only exist for PDFs, so that part of the check applied to the Georgian PDF above.)
