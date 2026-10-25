@@ -76,7 +76,7 @@
   "What I changed or verified independently" below.
 - **Remaining limitation:** see the v2 trade-off below.
 
-### Milestone 4: Dataset + indexing (in progress)
+### Milestone 4: Dataset + indexing
 - **I decided:** to use the **whole HotpotQA dev set** (66,581 unique paragraphs, all 7,405 questions usable for
   evaluation) instead of a sampled subset. The full official split already exceeds the 50k requirement, so no sampling
   is needed and every question stays answerable from the corpus.
@@ -90,8 +90,14 @@
   - Wrote `eval/index_corpus.py` and 4 new tests (55 total).
 - **I set up** the Qdrant Cloud cluster (AWS Frankfurt, close to the planned Render region) and the git-ignored `.env`.
 - **I measured `AVERAGE_CHUNK_TOKENS`** (see "What I changed or verified independently").
-- **Measured:** embedding is about 95% of indexing time (about 30 chunks/s on an Apple M4 CPU), so a full index takes
-  about 40 minutes once. MinHash dedup adds about 2 minutes; chunking and BM25 are negligible.
+- **Measured:** embedding is about 95% of indexing time (about 30 chunks/s on an Apple M4 CPU). MinHash dedup adds
+  about 2 minutes; chunking and BM25 are negligible.
+- **Full indexing run:**
+  - 66,555 documents added, 26 duplicate documents skipped, **78,730 chunks** in Qdrant Cloud.
+  - Took 60 min 32 s; the cloud uploads made it slower than the ~40 min estimate.
+  - Meets the 50,000-record requirement.
+- **I wrote and ran the retrieval spot check, and wrote the dataset tests** (see "What I changed or verified
+  independently").
 
 ## What I changed or verified independently
 
@@ -157,3 +163,40 @@ I wrote `backend/tests/test_hotpotqa.py`: 6 tests on small fake HotpotQA rows (n
   - Breaking `join_sentences` on purpose makes 2 of the tests fail, so they catch real bugs.
   - On the real data, all 7,405 questions have every supporting paragraph in the corpus (0 missing).
 - **AI help:** Claude Code proposed the list of tests and the `make_row` shape. I wrote the tests.
+
+### Retrieval spot check (milestone 4)
+I wrote `eval/spot_check.py`. It takes the first 3 *bridge* and the first 2 *comparison* questions from
+`data/questions.jsonl` (a fixed, reproducible choice), runs each through all three search modes (`dense`, `hybrid`,
+`hybrid_rerank`), and reports the rank of each supporting paragraph in the top 8.
+
+- **Results** (supporting paragraphs found in the top 8):
+
+  | Mode | Partial corpus (about 27% indexed) | **Full corpus (78,730 chunks)** |
+  |---|---|---|
+  | dense | 7/10 | **7/10** |
+  | hybrid | 8/10 | **7/10** |
+  | hybrid_rerank | 8/10 | **6/10** |
+
+  The partial run was optimistic: fewer indexed paragraphs means fewer distractors competing for the top 8.
+- **Findings (full corpus):**
+  - **Bridge second hops are never found.** In all three bridge questions the second paragraph is missed in every
+    mode ("Shirley Temple", "The Hork-Bajir Chronicles", "Adriana Trigiani"). The question never names that entity:
+    "the woman who portrayed Corliss Archer in the film Kiss and Tell" only leads to "Shirley Temple" after reading the
+    "Kiss and Tell" paragraph, so one search can't find it. This is the case for the multi-step agent planned for
+    milestone 5: search, read, then search again for the bridge entity.
+  - **The reranker penalises paraphrases.** In `hybrid_rerank`, the correct "Ed Wood" paragraph (dense rank 2) fell
+    to rank 10, behind the irrelevant "Woodson, Arkansas". Why:
+    1. The paragraph says "Edward Davis Wood Jr.", never "Ed".
+    2. BM25 didn't return it at all, so it got only the dense half of the RRF score.
+    3. Its exact-word query coverage was only 1/6.
+
+    The reranker's relevance (70% fused score + 30% exact-word coverage) therefore ranked it below a place name that
+    shares more query words. MMR was not the cause: the word overlap with "Ed Wood (film)" is only 7%.
+  - Comparison questions did better (4/4 paragraphs found in dense and hybrid, 3/4 in hybrid_rerank because of the
+    "Ed Wood" drop), because both entities are named in the question.
+  - **Decision:** not to tune the reranker on 5 questions (that would be overfitting). `COVERAGE_WEIGHT` and the dense
+    weight will be tuned in the milestone 7 evaluation on 40+ questions.
+- **AI help:** Claude Code defined the task (what to measure, the three-mode comparison), reviewed the script, and
+  ran it on the partial and the full corpus. It also diagnosed the "Ed Wood" drop by printing each candidate's
+  ranks, coverage and relevance. Claude Code wrote this entry at my request, from the run output, to keep the
+  description neutral.
