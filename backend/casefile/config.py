@@ -1,12 +1,17 @@
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+# The repository root's .env, found the same way whatever folder a command is started from
+# (config.py is backend/casefile/config.py). On a server the variables come from the environment instead.
+ENV_FILE = Path(__file__).resolve().parents[2] / ".env"
+
 
 class Settings(BaseSettings):
-    """All configuration comes from environment variables (or a local .env). No secrets in code."""
+    """All configuration comes from environment variables (or the repository's .env). No secrets in code."""
 
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(env_file=ENV_FILE, extra="ignore")
 
     gemini_api_key: str = ""
     groq_api_key: str = ""
