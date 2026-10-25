@@ -53,6 +53,17 @@ def test_dense_search_ranks_related_text_first(qdrant_store, embedder):
     assert "hiring" in top_result.chunk.text
 
 
+def test_batch_methods_and_count(qdrant_store):
+    first = store_text(qdrant_store, "inc.txt", INCIDENT_TEXT)
+    second = store_text(qdrant_store, "notes.txt", UNRELATED_TEXT)
+    found_by_id = qdrant_store.get_documents([first.doc_id, second.doc_id, "missing"])
+    assert set(found_by_id) == {first.doc_id, second.doc_id}
+    found_by_hash = qdrant_store.find_by_hashes([second.content_hash, "no-such-hash"])
+    assert found_by_hash[second.content_hash].doc_id == second.doc_id and len(found_by_hash) == 1
+    assert qdrant_store.get_documents([]) == {} and qdrant_store.find_by_hashes([]) == {}
+    assert qdrant_store.count_chunks() == len(list(qdrant_store.iter_chunks()))
+
+
 def test_pipeline_works_with_qdrant_store(qdrant_store):
     pipeline = IngestionPipeline(qdrant_store, max_characters=100)
     [added] = pipeline.ingest_file("inc.txt", INCIDENT_TEXT.encode())

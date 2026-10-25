@@ -6,13 +6,17 @@ from casefile.ingestion.dedup import DuplicateDetector
 from casefile.ingestion.loaders import load_documents
 from casefile.models import Chunk, Document
 
+# Documents handled per round trip to the store. Each batch costs 3 calls (lookup ids, lookup hashes, upsert)
+# instead of 3 calls per document, which matters when the store is a cloud service.
+INGEST_BATCH_SIZE = 256
+
 
 class DocumentStore(Protocol):
-    """What the pipeline needs from storage. Implemented by the Qdrant store (milestone 3)."""
+    """What the pipeline needs from storage. Implemented by QdrantStore; batch methods keep network calls low."""
 
-    def get_document(self, doc_id: str) -> Document | None: ...
-    def find_by_hash(self, content_hash: str) -> Document | None: ...
-    def upsert(self, document: Document, chunks: list[Chunk]) -> None: ...
+    def get_documents(self, doc_ids: list[str]) -> dict[str, Document]: ...  # doc_id -> stored document
+    def find_by_hashes(self, content_hashes: list[str]) -> dict[str, Document]: ...  # hash -> stored document
+    def upsert_many(self, items: list[tuple[Document, list[Chunk]]]) -> None: ...
     def delete(self, doc_id: str) -> list[str]: ...  # returns removed chunk ids
     def iter_chunks(self) -> Iterable[Chunk]: ...
 
@@ -40,26 +44,57 @@ class IngestionPipeline:
             self.duplicate_detector.add(stored_chunk.chunk_id, stored_chunk.text)
 
     def ingest_file(self, file_name: str, file_bytes: bytes) -> list[IngestResult]:
-        return [self.ingest_document(document) for document in load_documents(file_name, file_bytes)]
+        return self.ingest_documents(load_documents(file_name, file_bytes))
 
     def ingest_document(self, document: Document) -> IngestResult:
-        existing_document = self.store.get_document(document.doc_id)
-        is_unchanged = existing_document is not None and existing_document.content_hash == document.content_hash
-        if is_unchanged:
-            return IngestResult(document.doc_id, document.title, "unchanged")
+        [result] = self.ingest_documents([document])
+        return result
 
-        document_with_same_content = self.store.find_by_hash(document.content_hash)
-        is_duplicate = (document_with_same_content is not None and
-                        document_with_same_content.doc_id != document.doc_id)
-        if is_duplicate:
-            return IngestResult(document.doc_id, document.title, "duplicate",
-                                duplicate_of=document_with_same_content.doc_id)
+    def ingest_documents(self, documents: list[Document], batch_size: int = INGEST_BATCH_SIZE) -> list[IngestResult]:
+        """Results come back in the same order as `documents`."""
+        results = []
+        for batch_start in range(0, len(documents), batch_size):
+            results.extend(self.ingest_batch(documents[batch_start:batch_start + batch_size]))
+        return results
 
-        status = "added"
-        if existing_document is not None:
-            self.delete(document.doc_id)
-            status = "updated"
+    def ingest_batch(self, documents: list[Document]) -> list[IngestResult]:
+        # Assumes doc_ids are unique within one batch (the loaders and the corpus builder guarantee this).
+        existing_by_id = self.store.get_documents([document.doc_id for document in documents])
+        stored_by_hash = self.store.find_by_hashes([document.content_hash for document in documents])
+        owner_by_hash_in_batch: dict[str, str] = {}  # same content twice in one batch: the store can't know yet
 
+        results, items_to_store = [], []
+        for document in documents:
+            existing_document = existing_by_id.get(document.doc_id)
+            is_unchanged = existing_document is not None and existing_document.content_hash == document.content_hash
+            if is_unchanged:
+                results.append(IngestResult(document.doc_id, document.title, "unchanged"))
+                continue
+
+            stored_owner = stored_by_hash.get(document.content_hash)
+            content_owner_id = stored_owner.doc_id if stored_owner else owner_by_hash_in_batch.get(document.content_hash)
+            is_duplicate = content_owner_id is not None and content_owner_id != document.doc_id
+            if is_duplicate:
+                results.append(IngestResult(document.doc_id, document.title, "duplicate", duplicate_of=content_owner_id))
+                continue
+            owner_by_hash_in_batch[document.content_hash] = document.doc_id
+
+            status = "added"
+            if existing_document is not None:
+                self.delete(document.doc_id)
+                status = "updated"
+
+            unique_chunks, duplicate_chunks = self.split_into_unique_chunks(document)
+            document.metadata["duplicate_chunks"] = len(duplicate_chunks)
+            items_to_store.append((document, unique_chunks))
+            results.append(IngestResult(document.doc_id, document.title, status,
+                                        chunks=len(unique_chunks), skipped_chunks=duplicate_chunks))
+
+        if items_to_store:
+            self.store.upsert_many(items_to_store)
+        return results
+
+    def split_into_unique_chunks(self, document: Document) -> tuple[list[Chunk], list[dict]]:
         unique_chunks, duplicate_chunks = [], []
         for chunk in chunk_document(document, self.strategy, self.max_characters, self.overlap_characters):
             duplicate_chunk_id = self.duplicate_detector.find_duplicate(chunk.text)
@@ -68,15 +103,11 @@ class IngestionPipeline:
                 continue
             self.duplicate_detector.add(chunk.chunk_id, chunk.text)
             unique_chunks.append(chunk)
-
-        document.metadata["duplicate_chunks"] = len(duplicate_chunks)
-        self.store.upsert(document, unique_chunks)
-        return IngestResult(document.doc_id, document.title, status,
-                            chunks=len(unique_chunks), skipped_chunks=duplicate_chunks)
+        return unique_chunks, duplicate_chunks
 
     def delete(self, doc_id: str) -> bool:
         """Remove a document and its chunks. Returns False if it did not exist."""
-        if self.store.get_document(doc_id) is None:
+        if doc_id not in self.store.get_documents([doc_id]):
             return False
         for removed_chunk_id in self.store.delete(doc_id):
             self.duplicate_detector.remove(removed_chunk_id)

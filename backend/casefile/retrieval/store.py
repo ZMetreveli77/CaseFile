@@ -13,6 +13,14 @@ DENSE_VECTOR_NAME = "dense"
 SPARSE_VECTOR_NAME = "bm25"
 UPLOAD_BATCH_SIZE = 128
 SCROLL_PAGE_SIZE = 256
+CLOUD_TIMEOUT_SECONDS = 60
+
+
+def create_qdrant_client(qdrant_url: str = "", qdrant_api_key: str = "") -> QdrantClient:
+    """Qdrant Cloud when a URL is configured; otherwise an in-memory instance (tests, quick local runs)."""
+    if qdrant_url:
+        return QdrantClient(url=qdrant_url, api_key=qdrant_api_key or None, timeout=CLOUD_TIMEOUT_SECONDS)
+    return QdrantClient(":memory:")
 
 
 def create_point_id(key: str) -> str:
@@ -59,41 +67,73 @@ class QdrantStore:
                 self.client.create_payload_index(self.documents_collection, field_name,
                                                  qdrant.PayloadSchemaType.KEYWORD)
 
-    # ---- DocumentStore interface (used by IngestionPipeline) ----
+    # ---- DocumentStore interface (used by IngestionPipeline; batch methods = one network call per batch) ----
 
-    def get_document(self, doc_id: str) -> Document | None:
-        points = self.client.retrieve(self.documents_collection, [create_point_id(doc_id)], with_payload=True)
-        return convert_payload_to_document(points[0].payload) if points else None
+    def get_documents(self, doc_ids: list[str]) -> dict[str, Document]:
+        if not doc_ids:
+            return {}
+        points = self.client.retrieve(self.documents_collection, [create_point_id(doc_id) for doc_id in doc_ids],
+                                      with_payload=True)
+        documents = [convert_payload_to_document(point.payload) for point in points]
+        return {document.doc_id: document for document in documents}
 
-    def find_by_hash(self, content_hash: str) -> Document | None:
-        points, _ = self.client.scroll(self.documents_collection,
-                                       scroll_filter=match_field("content_hash", content_hash),
-                                       limit=1, with_payload=True)
-        return convert_payload_to_document(points[0].payload) if points else None
+    def find_by_hashes(self, content_hashes: list[str]) -> dict[str, Document]:
+        unique_hashes = list(dict.fromkeys(content_hashes))
+        if not unique_hashes:
+            return {}
+        hash_filter = qdrant.Filter(must=[qdrant.FieldCondition(key="content_hash",
+                                                                match=qdrant.MatchAny(any=unique_hashes))])
+        document_by_hash, next_page = {}, None
+        while True:
+            points, next_page = self.client.scroll(self.documents_collection, scroll_filter=hash_filter,
+                                                   limit=SCROLL_PAGE_SIZE, offset=next_page, with_payload=True)
+            for point in points:
+                document = convert_payload_to_document(point.payload)
+                document_by_hash.setdefault(document.content_hash, document)
+            if next_page is None:
+                return document_by_hash
 
-    def upsert(self, document: Document, chunks: list[Chunk]) -> None:
-        for batch_start in range(0, len(chunks), UPLOAD_BATCH_SIZE):
-            batch = chunks[batch_start:batch_start + UPLOAD_BATCH_SIZE]
+    def upsert_many(self, items: list[tuple[Document, list[Chunk]]]) -> None:
+        all_chunks = [chunk for _, chunks in items for chunk in chunks]
+        for batch_start in range(0, len(all_chunks), UPLOAD_BATCH_SIZE):
+            batch = all_chunks[batch_start:batch_start + UPLOAD_BATCH_SIZE]
             dense_vectors = self.embedder.embed_documents([chunk.text for chunk in batch])
-            points = []
-            for chunk, dense_vector in zip(batch, dense_vectors):
-                sparse_vector = bm25.encode_document(chunk.text)
-                points.append(qdrant.PointStruct(
-                    id=create_point_id(chunk.chunk_id),
-                    vector={DENSE_VECTOR_NAME: dense_vector,
-                            SPARSE_VECTOR_NAME: qdrant.SparseVector(indices=sparse_vector.indices,
-                                                                    values=sparse_vector.values)},
-                    payload={"chunk_id": chunk.chunk_id, "doc_id": chunk.doc_id, "index": chunk.index,
-                             "text": chunk.text, "title": chunk.title, "metadata": chunk.metadata},
-                ))
+            points = [self.build_chunk_point(chunk, dense_vector) for chunk, dense_vector in zip(batch, dense_vectors)]
             self.client.upsert(self.chunks_collection, points)
-        # Register the document last: if chunk upload fails, the document is not marked as stored.
-        self.client.upsert(self.documents_collection, [qdrant.PointStruct(
+        # Register documents last: if a chunk upload fails, those documents are not marked as stored,
+        # so a re-run of the indexer processes them again (this is what makes indexing resumable).
+        document_points = [qdrant.PointStruct(
             id=create_point_id(document.doc_id), vector={},
             payload={"doc_id": document.doc_id, "title": document.title, "text": document.text,
                      "content_hash": document.content_hash, "metadata": document.metadata,
                      "chunk_count": len(chunks)},
-        )])
+        ) for document, chunks in items]
+        if document_points:
+            self.client.upsert(self.documents_collection, document_points)
+
+    def build_chunk_point(self, chunk: Chunk, dense_vector: list[float]) -> qdrant.PointStruct:
+        sparse_vector = bm25.encode_document(chunk.text)
+        return qdrant.PointStruct(
+            id=create_point_id(chunk.chunk_id),
+            vector={DENSE_VECTOR_NAME: dense_vector,
+                    SPARSE_VECTOR_NAME: qdrant.SparseVector(indices=sparse_vector.indices, values=sparse_vector.values)},
+            payload={"chunk_id": chunk.chunk_id, "doc_id": chunk.doc_id, "index": chunk.index,
+                     "text": chunk.text, "title": chunk.title, "metadata": chunk.metadata},
+        )
+
+    # Single-document conveniences (used by the API and tests).
+
+    def get_document(self, doc_id: str) -> Document | None:
+        return self.get_documents([doc_id]).get(doc_id)
+
+    def find_by_hash(self, content_hash: str) -> Document | None:
+        return self.find_by_hashes([content_hash]).get(content_hash)
+
+    def upsert(self, document: Document, chunks: list[Chunk]) -> None:
+        self.upsert_many([(document, chunks)])
+
+    def count_chunks(self) -> int:
+        return self.client.count(self.chunks_collection, exact=True).count
 
     def delete(self, doc_id: str) -> list[str]:
         removed_chunk_ids = [chunk.chunk_id for chunk in self.iter_chunks(doc_id)]

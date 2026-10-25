@@ -36,17 +36,25 @@ class InMemoryStore:
     def __init__(self):
         self.documents: dict[str, Document] = {}
         self.chunks_by_doc_id: dict[str, list[Chunk]] = {}
+        self.call_count = 0  # store calls made by the pipeline (to check batching)
+
+    def get_documents(self, doc_ids):
+        self.call_count += 1
+        return {doc_id: self.documents[doc_id] for doc_id in doc_ids if doc_id in self.documents}
+
+    def find_by_hashes(self, content_hashes):
+        self.call_count += 1
+        return {document.content_hash: document for document in self.documents.values()
+                if document.content_hash in content_hashes}
+
+    def upsert_many(self, items):
+        self.call_count += 1
+        for document, chunks in items:
+            self.documents[document.doc_id] = document
+            self.chunks_by_doc_id[document.doc_id] = chunks
 
     def get_document(self, doc_id):
         return self.documents.get(doc_id)
-
-    def find_by_hash(self, content_hash):
-        return next((document for document in self.documents.values()
-                     if document.content_hash == content_hash), None)
-
-    def upsert(self, document, chunks):
-        self.documents[document.doc_id] = document
-        self.chunks_by_doc_id[document.doc_id] = chunks
 
     def delete(self, doc_id):
         self.documents.pop(doc_id, None)

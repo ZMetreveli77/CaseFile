@@ -76,6 +76,21 @@
   "What I changed or verified independently" below.
 - **Remaining limitation:** see the v2 trade-off below.
 
+### Milestone 4: Dataset + indexing (in progress)
+- **I decided:** to use the **whole HotpotQA dev set** (66,581 unique paragraphs, all 7,405 questions usable for
+  evaluation) instead of a sampled subset. The full official split already exceeds the 50k requirement, so no sampling
+  is needed and every question stays answerable from the corpus.
+- **AI did:**
+  - Found the official CMU download server unreachable and switched to the Hugging Face copy (linked in the assignment).
+  - Worked around missing SSL certificates in the macOS Python by using `httpx`.
+  - Wrote `casefile/datasets/hotpotqa.py` (rows → corpus + questions; one paragraph per Wikipedia title) and
+    `eval/build_dataset.py` (download + write `data/corpus.jsonl`, `data/questions.jsonl`).
+  - Added a **batched ingestion path**: 3 store calls per batch of 256 documents instead of 3 per document
+    (about 5.5 hours of network round trips down to about a minute). Re-runs are resumable.
+  - Wrote `eval/index_corpus.py` and 4 new tests (55 total).
+- **Measured:** embedding is about 95% of indexing time (about 30 chunks/s on an Apple M4 CPU), so a full index takes
+  about 40 minutes once. MinHash dedup adds about 2 minutes; chunking and BM25 are negligible.
+
 ## What I changed or verified independently
 
 ### Reranker fix v1: minimum-relevance cutoff
