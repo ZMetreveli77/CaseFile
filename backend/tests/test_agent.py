@@ -2,6 +2,7 @@ import json
 
 import pytest
 
+from casefile.models import Chunk
 from casefile.rag.agent import INVALID_FORMAT_REASON, InvestigationAgent, extract_json_object
 from casefile.rag.llm import LLMError, LLMReply, ToolCall
 from casefile.rag.prompts import FINAL_ANSWER_REMINDER
@@ -35,7 +36,7 @@ class FakeToolExecutor:
         query = tool_call.arguments["query"]
         self.search_queries.append(query)
         chunk_id = f"chunk-{len(self.search_queries)}"
-        self.retrieved_chunks[chunk_id] = object()
+        self.retrieved_chunks[chunk_id] = Chunk(chunk_id=chunk_id, doc_id="doc", index=0, text="", title=query)
         return {"results": [{"chunk_id": chunk_id, "title": query, "text": f"text about {query}"}]}
 
 
@@ -72,6 +73,8 @@ def test_two_searches_then_cited_answer():
     assert [claim.citations for claim in answer.claims] == [["chunk-1"], ["chunk-2"]]
     assert answer.search_queries == ["Kiss and Tell 1945 film Corliss Archer", "Shirley Temple government position"]
     assert answer.retrieved_chunk_ids == ["chunk-1", "chunk-2"] and answer.llm_calls == 3
+    assert answer.source_titles == {"chunk-1": "Kiss and Tell 1945 film Corliss Archer",
+                                    "chunk-2": "Shirley Temple government position"}
 
 
 def test_tool_results_are_sent_back_to_the_llm():

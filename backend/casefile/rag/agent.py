@@ -38,6 +38,7 @@ class InvestigationAnswer:
     # Trace, for the UI and the evaluation:
     search_queries: list[str] = field(default_factory=list)
     retrieved_chunk_ids: list[str] = field(default_factory=list)
+    source_titles: dict[str, str] = field(default_factory=dict)  # chunk_id -> document title, to show citations
     llm_calls: int = 0
     notes: list[str] = field(default_factory=list)  # e.g. citations removed by the validator
 
@@ -109,6 +110,7 @@ class InvestigationAgent:
                                          notes=[f"unparseable final reply: {final_text[:200]!r}"])
         answer.search_queries = list(tool_executor.search_queries)
         answer.retrieved_chunk_ids = list(tool_executor.retrieved_chunks)
+        answer.source_titles = {chunk_id: chunk.title for chunk_id, chunk in tool_executor.retrieved_chunks.items()}
         answer.llm_calls = llm_calls
 
         validate_citations = self.validate_citations
