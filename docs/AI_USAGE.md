@@ -331,3 +331,18 @@ a normal document ("built in 1902 by Margaret Hale") plus an attack document.
 
 **AI help:** Claude Code proposed the checks and the scenario wording, reviewed my injection script, and confirmed that
 search returned the attack documents. I ran the questions, recorded the results and wrote `eval/injection_check.py`.
+
+### Georgian documents: prediction and finding (milestone 6, E2)
+Before uploading the (Georgian) assignment PDF, **I predicted that it wouldn't work**, because the BM25 tokenizer regex
+(`[a-z0-9]`) drops Georgian letters.
+
+**Verified** (in memory, without touching the Qdrant Cloud corpus):
+- Only 250 BM25 tokens survive from the PDF's 1,368 words: the English words, plus numbers.
+- There is a second cause: the embedding model `bge-small-en` is English-only. An English question ("How many test
+  questions must the evaluation contain?") ranked the right page (4) outside the top 3.
+- A Georgian query found page 4 first, but only through BM25 matching the number "40".
+- Page metadata in citations is correct.
+
+**Possible fixes** (open decision):
+- A Unicode-aware tokenizer.
+- A multilingual embedding model (needs a full re-index of about 1 hour, and a re-check on English).
