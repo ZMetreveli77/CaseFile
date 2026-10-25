@@ -152,6 +152,10 @@
     - `/health` reports 66,555 documents and 78,730 chunks.
     - `/ask` answered the Big Stone Gap question correctly with both sources in 3.8 s.
     - **Startup took 107 s**, mostly rebuilding the duplicate index from all stored chunks (my task H2).
+  - Bug I hit when starting the server: "Application startup failed". The settings looked for `.env` in the current
+    folder, and the server is started from `backend/`, so no API key was found. The AI's own test had passed the
+    path explicitly and missed it. Fixed by loading the repository root's `.env` by absolute path (it now works from
+    any folder) and verified by starting the real server.
 - **I am doing:** the error-case tests (E1), a manual end-to-end check (E2), the startup redesign (H2), and streaming
   answers (H1).
 
