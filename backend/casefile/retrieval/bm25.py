@@ -11,7 +11,7 @@ from dataclasses import dataclass
 
 K1 = 1.2  # how quickly repeated terms stop adding score
 B = 0.75  # how strongly long chunks are penalised
-AVERAGE_CHUNK_TOKENS = 120  # ~800-character chunks; measured value is written in the evaluation report
+AVERAGE_CHUNK_TOKENS = 53  # measured: mean over 78,828 chunks of the HotpotQA corpus (eval/measure_chunk_tokens.py)
 
 TOKEN_PATTERN = re.compile(r"[a-z0-9]+(?:[-_][a-z0-9]+)*")  # keeps ids like "chg-42" as one token
 STOP_WORDS = frozenset(

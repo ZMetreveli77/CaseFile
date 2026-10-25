@@ -88,6 +88,8 @@
   - Added a **batched ingestion path**: 3 store calls per batch of 256 documents instead of 3 per document
     (about 5.5 hours of network round trips down to about a minute). Re-runs are resumable.
   - Wrote `eval/index_corpus.py` and 4 new tests (55 total).
+- **I set up** the Qdrant Cloud cluster (AWS Frankfurt, close to the planned Render region) and the git-ignored `.env`.
+- **I measured `AVERAGE_CHUNK_TOKENS`** (see "What I changed or verified independently").
 - **Measured:** embedding is about 95% of indexing time (about 30 chunks/s on an Apple M4 CPU), so a full index takes
   about 40 minutes once. MinHash dedup adds about 2 minutes; chunking and BM25 are negligible.
 
@@ -129,3 +131,15 @@ I removed `MIN_RELEVANCE` (also from `HybridSearcher`) and deleted the test for 
   dense top 10, so `is_junk` never fires. In the 3-document smoke test, "CHG-43" again returns `offsite.txt`
   as the 2nd result. On the 50k-paragraph corpus, being in the dense top 10 is a meaningful signal.
   `DENSE_RANK_LIMIT` will be tuned in the evaluation (milestone 7).
+
+### Measured AVERAGE_CHUNK_TOKENS for BM25 (milestone 4)
+`AVERAGE_CHUNK_TOKENS` in `bm25.py` was a guess (120). BM25 weights are computed when chunks are stored, so the value
+had to be right **before** indexing the 78,828 chunks. I wrote `eval/measure_chunk_tokens.py`. It chunks the corpus
+with the same settings as the indexer (read from `get_settings()`, so the two can't drift apart) and counts tokens with
+the same `tokenize` BM25 uses.
+
+- **Result:** mean **53.3** tokens per chunk (median 53, min 2, max 186; 78,828 chunks, 472 characters on average).
+  I set `AVERAGE_CHUNK_TOKENS = 53`. The old guess of 120 would have made every chunk look short and
+  under-penalised long ones.
+- **AI help:** Claude Code suggested the task and gave hints. Its code review caught a first value (87) that
+  didn't match the corpus, plus a missing import path and a missing argument default. I fixed the script myself.
