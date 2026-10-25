@@ -109,3 +109,43 @@ def test_llm_outage_becomes_503(qdrant_store, embedder):
 
 def test_supported_formats_are_listed(client):
     assert ".pdf" in client.get("/formats").json()["extensions"]
+
+
+def test_unsupported_file_type_is_415(client):
+    response = upload(client, "image.png", "not really an image")
+    assert response.status_code == 415
+    assert ".png" in response.json()["detail"]
+
+
+def test_too_large_upload_is_413(client, monkeypatch):
+    monkeypatch.setattr("casefile.api.app.MAX_UPLOAD_BYTES", 10)
+    response = upload(client, "big.txt", "x" * 11)
+    assert response.status_code == 413
+    assert client.get("/documents").json()["total"] == 0  # nothing was stored
+
+
+@pytest.mark.parametrize("method, path, sends_file", [
+    ("GET", "/documents/no-such-id", False),
+    ("PUT", "/documents/no-such-id", True),
+    ("DELETE", "/documents/no-such-id", False),
+    ("GET", "/sources/no-such-chunk", False),
+])
+def test_unknown_id_is_404(client, method, path, sends_file):
+    # PUT needs a file: without one FastAPI would answer 422 before our 404 check even runs.
+    files = {"file": ("hotel.txt", HOTEL_TEXT.encode(), "text/plain")} if sends_file else None
+    response = client.request(method, path, files=files)
+    assert response.status_code == 404
+
+
+def test_blank_question_is_422(client):
+    assert client.post("/ask", json={"question": "   "}).status_code == 422
+
+
+def test_file_with_only_spaces_is_422(client):
+    response = upload(client, "empty.txt", "     ")
+    assert response.status_code == 422
+    assert "No text could be extracted" in response.json()["detail"]
+
+
+def test_page_size_zero_is_422(client):
+    assert client.get("/documents", params={"limit": 0}).status_code == 422
