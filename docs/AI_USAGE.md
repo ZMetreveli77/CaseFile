@@ -136,6 +136,25 @@
     ambassador delegate": 3 LLM calls, 3.8 s.
   - In the spot check, no single-search mode had found the "Shirley Temple" paragraph.
 
+### Milestone 6: API (in progress)
+- **AI did:**
+  - Wrote the FastAPI app (`api/app.py`) with these endpoints:
+    - upload, paged list, get, replace (PUT) and delete documents
+    - `POST /ask`, `GET /sources/{chunk_id}`, `GET /health`, `GET /formats`
+  - Added error mapping: `LLMError` → 503, unsupported format → 415, file over 10 MB → 413, unknown id → 404,
+    unreadable file → 422.
+  - Added a write lock, because uploads and deletes share the duplicate index.
+  - Built the shared objects once at startup (`api/services.py`), and split `rag/setup.py` so the API and scripts
+    use the same wiring.
+  - Replaced `list_documents()` (all 66k at once) with cursor-based paging.
+  - Wrote 9 API tests (in-memory Qdrant + scripted fake LLM) and moved `FakeLLM` to `tests/fakes.py`.
+  - Checked against the real Qdrant Cloud + Gemini:
+    - `/health` reports 66,555 documents and 78,730 chunks.
+    - `/ask` answered the Big Stone Gap question correctly with both sources in 3.8 s.
+    - **Startup took 107 s**, mostly rebuilding the duplicate index from all stored chunks (my task H2).
+- **I am doing:** the error-case tests (E1), a manual end-to-end check (E2), the startup redesign (H2), and streaming
+  answers (H1).
+
 ## What I changed or verified independently
 
 ### Reranker fix v1: minimum-relevance cutoff
