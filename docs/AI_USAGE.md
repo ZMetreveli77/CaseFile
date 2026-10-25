@@ -99,6 +99,25 @@
 - **I wrote and ran the retrieval spot check, and wrote the dataset tests** (see "What I changed or verified
   independently").
 
+### Milestone 5: Agentic RAG (in progress)
+- **AI did:**
+  - Found that `gemini-2.5-flash` is no longer offered to new keys, and that the `google-genai` SDK pinned in
+    milestone 1 (0.5.0) was too old to even list models. Upgraded it to 2.33.0, which also needed pydantic 2.14.1.
+  - Tested current models with a real tool call. `gemini-3.8-flash` / `3.7-flash` worked but took 166–245 s under
+    free-tier load (503/504 errors at other times). `gemini-3.5-flash-lite` answered in 0.9 s, so it became the default
+    (`GEMINI_MODEL` in `.env` switches it). A background test without a timeout hung, so every request now has a
+    30 s timeout.
+  - Wrote:
+    - `rag/llm.py`: provider-neutral message types, `GeminiProvider`, and the error translation
+      (429/500/502/503/504 and network timeouts → `RetryableLLMError`, others → `LLMError`).
+    - `rag/tools.py`: `search_documents` / `read_document`, plus a per-question evidence log.
+    - `rag/agent.py`: the multi-step loop, the step limit, JSON answer parsing, and abstaining on an invalid format.
+    - The `rag/prompts.py` skeleton.
+    - Tests with a scripted fake LLM: `test_agent.py`, `test_tools.py`, `test_llm.py`.
+  - Caught its own bug: `read_document` logged truncated passages as evidence, so the LLM could have cited text it
+    never saw.
+- **I am writing:** the retry logic (`rag/retry.py`, task U6), the citation validator (U2) and the grounding rules (U1).
+
 ## What I changed or verified independently
 
 ### Reranker fix v1: minimum-relevance cutoff
