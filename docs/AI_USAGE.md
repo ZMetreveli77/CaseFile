@@ -19,6 +19,13 @@
   pytest argument error, I fixed how I was invoking it.
 - **I tracked the requirements.** I checked progress against the assignment and noticed that the
   "compare 2+ chunking strategies" requirement is only half done (implemented, not yet compared).
+- **I kept an interview study guide.** I asked for a study guide (kept outside the repository, as a PDF) that covers
+  every module, the design decisions, the bugs found, likely interview questions and the key numbers. I asked for it to
+  be updated with every code change, with a "new in this version" section, so I always study the current code. I use
+  it together with the grill-me skill to practise explaining the system without AI.
+- **I used tasks to build real understanding.** Instead of letting the AI write everything, I asked for tasks I could
+  do myself: the reranker fix, measurements, tests, the retry logic, the citation validator, the grounding rules and
+  the verification checks. They are logged below with the AI help each one had.
 
 ## Log by milestone
 
