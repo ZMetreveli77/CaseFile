@@ -31,7 +31,7 @@ Interview: I must explain and change the code live without AI, so every part sta
 - [ ] LLM error handling, and at least one tool-calling mechanism
 - [ ] Evaluation: 40+ questions, Recall@K, MRR, answer correctness, citation accuracy, 2+ configurations, error analysis
 - [ ] Python backend + working UI (upload, manage, ask, view sources)
-- [ ] 50,000+ records processed
+- [x] 50,000+ records processed (66,555 HotpotQA paragraphs → 78,730 chunks in Qdrant Cloud)
 - [ ] Public deployment, persistence across restarts, secrets protected, deployment description
 - [ ] Tests, modular code, documentation
 
