@@ -26,9 +26,9 @@ Interview: I must explain and change the code live without AI, so every part sta
 - [ ] 2+ chunking strategies, compared (both implemented; comparison happens in milestone 7)
 - [x] Embeddings + semantic search + hybrid search (semantic + keyword)
 - [x] At least one **own** ranking/search component (BM25 encoder, RRF fusion, reranker)
-- [ ] RAG with an LLM, multi-step reasoning, citations
-- [ ] Contradiction detection and abstention when evidence is insufficient
-- [ ] LLM error handling, and at least one tool-calling mechanism
+- [x] RAG with an LLM, multi-step reasoning, citations (agent solved 3/3 bridge questions, both paragraphs cited)
+- [ ] Contradiction detection and abstention when evidence is insufficient (abstention verified 3/3; conflict reporting implemented but not yet seen on a real contradiction: milestone 7)
+- [x] LLM error handling, and at least one tool-calling mechanism (retry/backoff, timeouts, 2 tools)
 - [ ] Evaluation: 40+ questions, Recall@K, MRR, answer correctness, citation accuracy, 2+ configurations, error analysis
 - [ ] Python backend + working UI (upload, manage, ask, view sources)
 - [x] 50,000+ records processed (66,555 HotpotQA paragraphs → 78,730 chunks in Qdrant Cloud)
