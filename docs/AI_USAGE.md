@@ -355,3 +355,16 @@ I then ran the full API flow in the browser (`/docs`):
 
 Afterwards the Qdrant Cloud corpus was back to exactly 66,555 documents and 78,730 chunks, with no chunks of the test
 upload left. (Page numbers only exist for PDFs, so that part of the check applied to the Georgian PDF above.)
+
+### API error-case tests (milestone 6, E1)
+I wrote 9 error-case tests at the end of `backend/tests/test_api.py`:
+- **415:** a `.png` upload; the message names the extension.
+- **413:** an upload over the size limit, made small with `monkeypatch`. The test also checks nothing was stored.
+- **404:** unknown ids for `GET`, `PUT`, `DELETE` `/documents/{id}` and `GET /sources/{chunk_id}`, as one parametrized test.
+  The PUT case sends a file on purpose: without one, FastAPI answers 422 before our 404 check runs.
+- **422:** a blank question, a file containing only spaces, and a page size of 0.
+
+All 123 tests pass. The one remaining pytest warning came from inside Starlette's TestClient (an old `anyio` name), not
+from our code. The AI added a filter for that exact warning only, so other warnings still show.
+
+**AI help:** Claude Code listed which status codes to test and gave the `monkeypatch` hint for 413. I wrote the tests.
