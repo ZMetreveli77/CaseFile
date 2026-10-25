@@ -154,14 +154,15 @@ class QdrantStore:
 
     # ---- Used by the API and the searcher ----
 
-    def list_documents(self) -> list[dict]:
-        documents, next_page = [], None
-        while True:
-            points, next_page = self.client.scroll(self.documents_collection, limit=SCROLL_PAGE_SIZE, offset=next_page,
-                                                   with_payload=qdrant.PayloadSelectorExclude(exclude=["text"]))
-            documents.extend(point.payload for point in points)
-            if next_page is None:
-                return documents
+    def list_documents_page(self, limit: int, cursor: str | None = None) -> tuple[list[dict], str | None]:
+        """One page of documents (without their text) and the cursor for the next page (None on the last page).
+        The corpus has 66k documents, so callers page through them instead of loading all at once."""
+        points, next_page = self.client.scroll(self.documents_collection, limit=limit, offset=cursor,
+                                               with_payload=qdrant.PayloadSelectorExclude(exclude=["text"]))
+        return [point.payload for point in points], (str(next_page) if next_page is not None else None)
+
+    def count_documents(self) -> int:
+        return self.client.count(self.documents_collection, exact=True).count
 
     def get_chunk(self, chunk_id: str) -> Chunk | None:
         points = self.client.retrieve(self.chunks_collection, [create_point_id(chunk_id)], with_payload=True)

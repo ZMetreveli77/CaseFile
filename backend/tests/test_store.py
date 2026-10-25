@@ -21,8 +21,22 @@ def test_upsert_get_find_and_list(qdrant_store):
     assert qdrant_store.find_by_hash(document.content_hash).doc_id == document.doc_id
     assert qdrant_store.find_by_hash("no-such-hash") is None
 
-    [listed] = qdrant_store.list_documents()
+    [listed], next_cursor = qdrant_store.list_documents_page(limit=10)
     assert listed["doc_id"] == document.doc_id and listed["chunk_count"] > 1 and "text" not in listed
+    assert next_cursor is None and qdrant_store.count_documents() == 1
+
+
+def test_document_pages_cover_everything_once(qdrant_store):
+    stored_ids = {store_text(qdrant_store, f"note{number}.txt", f"Note number {number} about topic {number}.").doc_id
+                  for number in range(5)}
+    seen_ids, cursor = [], None
+    while True:
+        page, cursor = qdrant_store.list_documents_page(limit=2, cursor=cursor)
+        assert len(page) <= 2
+        seen_ids += [document["doc_id"] for document in page]
+        if cursor is None:
+            break
+    assert sorted(seen_ids) == sorted(stored_ids)  # every document exactly once
 
 
 def test_iter_chunks_get_chunk_and_delete(qdrant_store):

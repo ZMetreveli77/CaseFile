@@ -6,23 +6,7 @@ from casefile.models import Chunk
 from casefile.rag.agent import INVALID_FORMAT_REASON, InvestigationAgent, extract_json_object
 from casefile.rag.llm import LLMError, LLMReply, ToolCall
 from casefile.rag.prompts import FINAL_ANSWER_REMINDER
-
-
-class FakeLLM:
-    """Replays scripted replies in order and records every request, so tests need no network and no API key."""
-
-    model_name = "fake"
-
-    def __init__(self, replies):
-        self.replies = list(replies)
-        self.requests = []  # (messages, tool names) per call
-
-    def generate(self, system_prompt, messages, tools):
-        self.requests.append((list(messages), [tool.name for tool in tools]))
-        reply = self.replies.pop(0)
-        if isinstance(reply, Exception):
-            raise reply
-        return reply
+from tests.fakes import FakeLLM
 
 
 class FakeToolExecutor:
