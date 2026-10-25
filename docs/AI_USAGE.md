@@ -143,3 +143,17 @@ the same `tokenize` BM25 uses.
   under-penalised long ones.
 - **AI help:** Claude Code suggested the task and gave hints. Its code review caught a first value (87) that
   didn't match the corpus, plus a missing import path and a missing argument default. I fixed the script myself.
+
+### Tests for the dataset builder (milestone 4)
+I wrote `backend/tests/test_hotpotqa.py`: 6 tests on small fake HotpotQA rows (no download needed). They cover:
+- sentence joining
+- one paragraph per title
+- first version kept, with differences reported once
+- stable order (reproducibility)
+- unique, ordered supporting titles
+- every supporting title present in the corpus
+
+- **Verified:**
+  - Breaking `join_sentences` on purpose makes 2 of the tests fail, so they catch real bugs.
+  - On the real data, all 7,405 questions have every supporting paragraph in the corpus (0 missing).
+- **AI help:** Claude Code proposed the list of tests and the `make_row` shape. I wrote the tests.
