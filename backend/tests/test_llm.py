@@ -89,9 +89,13 @@ def test_rate_limit_carries_the_providers_retry_delay():
     assert translate_gemini_error(no_hint).retry_after_seconds is None
 
 
-def test_retry_delay_is_capped():
-    huge = rate_limit_error([{"retryDelay": "3600s"}], "")
-    assert translate_gemini_error(huge).retry_after_seconds == MAX_RETRY_AFTER_SECONDS
+def test_a_wait_longer_than_the_cap_fails_at_once_instead_of_retrying():
+    daily_quota = rate_limit_error([{"retryDelay": "25575s"}], "Quota exceeded (per day). Please retry in 7h6m15s.")
+    translated = translate_gemini_error(daily_quota)
+    assert isinstance(translated, LLMError) and not isinstance(translated, RetryableLLMError)
+    assert "daily quota" in str(translated)
+    at_the_cap = rate_limit_error([{"retryDelay": f"{MAX_RETRY_AFTER_SECONDS:.0f}s"}], "")
+    assert translate_gemini_error(at_the_cap).retry_after_seconds == MAX_RETRY_AFTER_SECONDS  # still retried
 
 
 class FakeClock:

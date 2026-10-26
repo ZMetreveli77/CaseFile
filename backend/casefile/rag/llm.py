@@ -75,18 +75,19 @@ def find_retry_delay_seconds(error_json: Any, message: str) -> float | None:
     """How long the provider asked us to wait, e.g. after a 429 rate limit; None if it didn't say.
 
     Google's errors carry a structured hint ({"@type": ".../google.rpc.RetryInfo", "retryDelay": "49s"}) and repeat it
-    in the text ("Please retry in 49.6s."). The structured one is read first. Capped at MAX_RETRY_AFTER_SECONDS.
+    in the text ("Please retry in 49.6s."). The structured one is read first. Not capped here: the caller decides
+    what a very long wait means (see translate_gemini_error).
     """
     details = (error_json or {}).get("error", {}).get("details", []) if isinstance(error_json, dict) else []
     for detail in details if isinstance(details, list) else []:
         delay = detail.get("retryDelay") if isinstance(detail, dict) else None
         if isinstance(delay, str) and delay.endswith("s"):
             try:
-                return min(float(delay[:-1]), MAX_RETRY_AFTER_SECONDS)
+                return float(delay[:-1])
             except ValueError:
                 pass
     match = RETRY_DELAY_IN_MESSAGE.search(message)
-    return min(float(match.group(1)), MAX_RETRY_AFTER_SECONDS) if match else None
+    return float(match.group(1)) if match else None
 
 
 class RequestRateLimiter:
@@ -125,7 +126,13 @@ def translate_gemini_error(error: Exception) -> LLMError:
     if isinstance(error, gemini_errors.APIError):
         message = f"Gemini error {error.code}: {error.message}"
         if error.code in RETRYABLE_STATUS_CODES:
-            return RetryableLLMError(message, retry_after_seconds=find_retry_delay_seconds(error.details, message))
+            retry_after_seconds = find_retry_delay_seconds(error.details, message)
+            # A wait longer than MAX_RETRY_AFTER_SECONDS (e.g. a daily quota: "retry in 7h") can't be bridged by
+            # retrying, so fail at once with a clear error instead of retrying for minutes and then failing anyway.
+            if retry_after_seconds is not None and retry_after_seconds > MAX_RETRY_AFTER_SECONDS:
+                return LLMError(f"{message} (the provider asks to wait {retry_after_seconds / 3600:.1f} h, "
+                                "probably a daily quota; not retrying)")
+            return RetryableLLMError(message, retry_after_seconds=retry_after_seconds)
         return LLMError(message)
     if isinstance(error, (httpx.TimeoutException, httpx.NetworkError)):
         return RetryableLLMError(f"Network problem talking to Gemini: {error}")
