@@ -136,7 +136,7 @@
     ambassador delegate": 3 LLM calls, 3.8 s.
   - In the spot check, no single-search mode had found the "Shirley Temple" paragraph.
 
-### Milestone 6: API (in progress)
+### Milestone 6: API
 - **AI did:**
   - Wrote the FastAPI app (`api/app.py`) with these endpoints:
     - upload, paged list, get, replace (PUT) and delete documents
@@ -430,3 +430,47 @@ index from every stored chunk.
 - It checked payload index creation on Qdrant Cloud, the backfill state, and the 40-chunk random sample.
 
 I wrote the code, tests, measurement scripts and backfill script myself.
+
+### Streaming answers with Server-Sent Events (milestone 6, H1)
+I wrote the streaming feature:
+
+- **Agent progress events** (`rag/agent.py`):
+  - `answer(question, on_event=None)` reports `started`, then `tool_call` / `tool_result` for each tool use.
+  - `send_event` never lets a failing callback crash the agent, because progress is only a display.
+  - `describe_tool_result` turns a result into a JSON-safe summary (titles found, or the error).
+- **Event format** (`api/streaming.py`): `format_sse` writes `event: <type>`, `data: <one-line JSON>` and a blank
+  line.
+- **`POST /ask/stream`** (`api/app.py`):
+  - The blocking `agent.answer` runs in a worker thread, which passes events to the response through a `queue.Queue`.
+  - The final event is `answer` or `error`. Errors are turned into events inside the thread, because the 200 status
+    is already sent and the 503 handler can't apply. An end-of-stream marker is always sent in a `finally`.
+  - Anti-buffering headers (`Cache-Control: no-cache`, `X-Accel-Buffering: no`).
+  - A `: keep-alive` comment after 15 s of silence, so proxies don't drop slow streams.
+- **Tests:**
+  - event order and content
+  - `answer` and `citations` in the final event
+  - an LLM outage giving an `error` event with status 200 and no `answer`
+  - 422 for a blank question
+  - keep-alive comments that are not counted as events
+  - the SSE format, including that data stays on one line
+
+  All 142 tests pass. Removing the error event on purpose makes the error test fail.
+- **Checked live** (`curl -N` against the real server, Qdrant Cloud + Gemini):
+  - The Big Stone Gap question gave the right answer.
+  - A blank question returned 422.
+  - "Who won the 2030 FIFA World Cup?" streamed two searches and ended with `should_abstain: true` and a clear
+    reason.
+  - Timed against a real server, events arrived spread out: started 0.0 s, first search 6.4 s, results 7.8 s,
+    bridge search 13.6 s, answer "Greenwich Village" 19.2 s.
+  - FastAPI's TestClient delivers a streamed response all at once, so the tests check order and content, not timing.
+- **Known limitation:** if the browser disconnects, the worker thread still finishes the investigation (bounded by
+  the 5-step limit).
+
+**AI help:** Claude Code split the task into steps with hints, including:
+- the thread-and-queue pattern;
+- errors becoming events after the 200 status is sent;
+- the anti-buffering headers;
+- the heartbeat idea.
+
+Its review explained the TestClient buffering and the disconnect limitation, and it timed the stream against a real
+server. I wrote the code and tests myself.
