@@ -1,0 +1,2064 @@
+{
+  "split": "dev",
+  "questions": 20,
+  "modes": {
+    "dense": {
+      "overall": {
+        "recall@1": 0.5,
+        "recall@3": 0.7,
+        "recall@5": 0.75,
+        "recall@10": 0.75,
+        "all_found@1": 0.2,
+        "all_found@3": 0.6,
+        "all_found@5": 0.65,
+        "all_found@10": 0.65,
+        "reciprocal_rank": 0.81
+      },
+      "by_category": {
+        "bridge": {
+          "recall@1": 0.35,
+          "recall@3": 0.55,
+          "recall@5": 0.65,
+          "recall@10": 0.65,
+          "all_found@1": 0.0,
+          "all_found@3": 0.4,
+          "all_found@5": 0.5,
+          "all_found@10": 0.5,
+          "reciprocal_rank": 0.72
+        },
+        "comparison": {
+          "recall@1": 0.5,
+          "recall@3": 0.9,
+          "recall@5": 0.9,
+          "recall@10": 0.9,
+          "all_found@1": 0.0,
+          "all_found@3": 0.8,
+          "all_found@5": 0.8,
+          "all_found@10": 0.8,
+          "reciprocal_rank": 1.0
+        },
+        "simple": {
+          "recall@1": 0.8,
+          "recall@3": 0.8,
+          "recall@5": 0.8,
+          "recall@10": 0.8,
+          "all_found@1": 0.8,
+          "all_found@3": 0.8,
+          "all_found@5": 0.8,
+          "all_found@10": 0.8,
+          "reciprocal_rank": 0.8
+        }
+      },
+      "seconds": 5.4,
+      "questions": [
+        {
+          "id": "5ae351405542994393b9e67f",
+          "category": "bridge",
+          "question": "Jim Halsey guided the career of the musician who hosted what country variety show?",
+          "supporting_ranks": {
+            "Jim Halsey": 1,
+            "Roy Clark": 2
+          },
+          "retrieved_titles": [
+            "Jim Halsey",
+            "Roy Clark",
+            "Country Music Greats Radio Show",
+            "Glen Campbell",
+            "Grand Ole Opry",
+            "Keith Bilbrey",
+            "Renfro Valley Gatherin'",
+            "Randy Travis",
+            "Clarence White",
+            "Billy Dean"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8f0796554299458435d528",
+          "category": "bridge",
+          "question": "what air force based named in honor of Carl Benjamin \"Ben\" Eielson is located 26 miles southeast of Fairbanks, Alaska?",
+          "supporting_ranks": {
+            "Carl Ben Eielson": 1,
+            "Eielson Air Force Base": 2
+          },
+          "retrieved_titles": [
+            "Carl Ben Eielson",
+            "Eielson Air Force Base",
+            "168th Air Refueling Squadron",
+            "Exercise Red Flag",
+            "United States Air Force",
+            "249th Airlift Squadron",
+            "Naval Air Station Pensacola",
+            "United States Army Air Forces",
+            "VAQ-137",
+            "Naval Air Station Joint Reserve Base New Orleans"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ab2bc80554299194fa934d7",
+          "category": "bridge",
+          "question": "What is the name of the county that Cari Roccaro is from?",
+          "supporting_ranks": {
+            "Cari Roccaro": null,
+            "East Islip, New York": null
+          },
+          "retrieved_titles": [
+            "Springs, New York",
+            "Rock Springs, Wyoming",
+            "New Roc City",
+            "Bayport, New York",
+            "Catania",
+            "Boston, Lincolnshire",
+            "Rockland County, New York",
+            "Troy, Montana",
+            "Worcester, Massachusetts",
+            "Pompano Beach, Florida"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "5a73cf5e55429978a71e909f",
+          "category": "bridge",
+          "question": "After coaching the red raiders to several winning seasons, where does Mike Leach currently coach at?",
+          "supporting_ranks": {
+            "2012 Washington State Cougars football team": null,
+            "Mike Leach (American football coach)": 1
+          },
+          "retrieved_titles": [
+            "Mike Leach (American football coach)",
+            "Ruffin McNeill",
+            "2008 Texas Tech Red Raiders football team",
+            "2001 Texas Tech Red Raiders football team",
+            "2000 Texas Tech Red Raiders football team",
+            "2009 Texas Tech Red Raiders football team",
+            "2017 Oakland Raiders season",
+            "Texas Tech Red Raiders football",
+            "2003 Texas Tech Red Raiders football team",
+            "2005 Texas Tech Red Raiders football team"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a7b60605542995eb53be931",
+          "category": "bridge",
+          "question": "What is the year of the event which orrurred first, Beecher's Handmade Cheese was founded, or Pike Place Market opened?",
+          "supporting_ranks": {
+            "Beecher's Handmade Cheese": 1,
+            "Pike Place Market": 2
+          },
+          "retrieved_titles": [
+            "Beecher's Handmade Cheese",
+            "Pike Place Market",
+            "Pike Place Fish Market",
+            "Original Starbucks",
+            "Rachel (Gerber)",
+            "Alaska Trade Building",
+            "New Market and Head House",
+            "Butterworth Building",
+            "Joseph E. Grosberg",
+            "Heublein"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5abff0625542997ec76fd476",
+          "category": "bridge",
+          "question": "In what Mississippi county is the city that is located five miles west of the county seat of said county?",
+          "supporting_ranks": {
+            "Holly Ridge, Mississippi": null,
+            "Indianola, Mississippi": null
+          },
+          "retrieved_titles": [
+            "Brandon, Mississippi",
+            "Biloxi, Mississippi",
+            "Pass Christian, Mississippi",
+            "West Memphis, Arkansas",
+            "Quincy, Illinois",
+            "DeSoto County, Mississippi",
+            "Tupelo, Mississippi",
+            "Charleston, Missouri",
+            "Pontotoc, Mississippi",
+            "Carroll County, Mississippi"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "5a7b77d95542997c3ec971a5",
+          "category": "bridge",
+          "question": "The ninth The Desert Sessions LP was released by by what kind of band?",
+          "supporting_ranks": {
+            "Volume 9: I See You Hearin' Me": 5,
+            "Era Vulgaris (album)": null
+          },
+          "retrieved_titles": [
+            "Volume 3: Set Coordinates for the White Dwarf!!!",
+            "Volume 1: Instrumental Driving Music for Felons",
+            "Volume 4: Hard Walls and Little Trips",
+            "Volume 2: Status: Ships Commander Butchered",
+            "Volume 9: I See You Hearin' Me",
+            "List of Oasis band members",
+            "Volume 6: Black Anvil Ego",
+            "Oasis (band)",
+            "Rekords Rekords",
+            "Backspacer"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.2
+          }
+        },
+        {
+          "id": "5ae25c815542992decbdcccc",
+          "category": "bridge",
+          "question": "What trio was the songwriter of \"What Are We Doin' Lonesome\" from?",
+          "supporting_ranks": {
+            "What Are We Doin' Lonesome": 1,
+            "Larry Gatlin": null
+          },
+          "retrieved_titles": [
+            "What Are We Doin' Lonesome",
+            "Lonestar",
+            "High Lonesome (Randy Travis album)",
+            "Dave Peverett",
+            "Paul Burlison",
+            "Lonestar discography",
+            "702 (group)",
+            "Tom Petty",
+            "Roddy Hart",
+            "David Byrne"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a81d6cd55429903bc27b9e0",
+          "category": "bridge",
+          "question": "Cartman Finds Love is an episode from the sitcom created by whom?",
+          "supporting_ranks": {
+            "Cartman Finds Love": 1,
+            "South Park": 5
+          },
+          "retrieved_titles": [
+            "Cartman Finds Love",
+            "Cartman's Incredible Gift",
+            "Cartman's Mom Is a Dirty Slut",
+            "Eric Cartman",
+            "South Park",
+            "Parks and Recreation",
+            "Chickenlover",
+            "The Return of Jezebel James",
+            "American Housewife",
+            "Two and a Half Men"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8e07b25542995085b3738d",
+          "category": "bridge",
+          "question": "Skyplex has which roller coaster that will become the tallest in the world when it opens in 2020?",
+          "supporting_ranks": {
+            "Skyplex": 2,
+            "Skyscraper (roller coaster)": 1
+          },
+          "retrieved_titles": [
+            "Skyscraper (roller coaster)",
+            "Skyplex",
+            "Moonsault Scramble",
+            "Loch Ness Monster (roller coaster)",
+            "DC Rivals HyperCoaster",
+            "Wicked Twister",
+            "Tatsu",
+            "Fujiyama (roller coaster)",
+            "Montu (roller coaster)",
+            "Goliath (Six Flags Great America)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8091515542996402f6a563",
+          "category": "comparison",
+          "question": "Were Sound Team and Dead by Sunrise both formed before 2010? ",
+          "supporting_ranks": {
+            "Sound Team": 1,
+            "Dead by Sunrise": 2
+          },
+          "retrieved_titles": [
+            "Sound Team",
+            "Dead by Sunrise",
+            "Team Sleep",
+            "The Dead Weather",
+            "Halloween, Alaska",
+            "Sunrise (Day6 album)",
+            "List of Taking Back Sunday band members",
+            "Guns N' Roses",
+            "Sounds True",
+            "Sunrise Avenue"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a801e845542992097ad2fd9",
+          "category": "comparison",
+          "question": "Which magazine produces more print editions yearly, Nautilus or TV Guide?",
+          "supporting_ranks": {
+            "Nautilus (science magazine)": 1,
+            "TV Guide": 2
+          },
+          "retrieved_titles": [
+            "Nautilus (science magazine)",
+            "TV Guide",
+            "TV Guide (Canada)",
+            "List of TV Guide covers (2000s)",
+            "National Geographic (magazine)",
+            "List of TV Guide covers (1990s)",
+            "TV Guide Award",
+            "TV Choice",
+            "National Geographic Traveler",
+            "Home (magazine)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8e463a5542995a26add4b7",
+          "category": "comparison",
+          "question": "Havelock Ellis and Arnold Bennett were both what?",
+          "supporting_ranks": {
+            "Havelock Ellis": null,
+            "Arnold Bennett": 1
+          },
+          "retrieved_titles": [
+            "Arnold Bennett",
+            "Don Ellis",
+            "Benedict Arnold",
+            "Michael Bennett (theater)",
+            "The Curse of Downers Grove",
+            "Sidney Franklin (director)",
+            "Jay Bennett (author)",
+            "Harry Morgan",
+            "W. S. Van Dyke",
+            "Cops and Robbers (1973 film)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ac1a4ed5542994d76dcce90",
+          "category": "comparison",
+          "question": "Are William James and Bret Easton Ellis both screenwriters?",
+          "supporting_ranks": {
+            "William James": 2,
+            "Bret Easton Ellis": 1
+          },
+          "retrieved_titles": [
+            "Bret Easton Ellis",
+            "William James",
+            "James Poe",
+            "The Curse of Downers Grove",
+            "William Davies (screenwriter)",
+            "James Gunn",
+            "William James (railway promoter)",
+            "Henry James",
+            "William Goldman",
+            "Colin Campbell (director)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ab5eed65542997d4ad1f25c",
+          "category": "comparison",
+          "question": "Which is in the family Rutaceae, the Diplolaena or the Arenaria?",
+          "supporting_ranks": {
+            "Diplolaena": 1,
+            "Arenaria (plant)": 2
+          },
+          "retrieved_titles": [
+            "Diplolaena",
+            "Arenaria (plant)",
+            "Pimelea arenaria",
+            "Catinella arenaria",
+            "Turnstone",
+            "Diplazium",
+            "Crocosmia",
+            "Caladium",
+            "Phaedranassa",
+            "Bolax"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-01",
+          "category": "simple",
+          "question": "When did Den Helder Zuid railway station open?",
+          "supporting_ranks": {
+            "Den Helder Zuid railway station": 1
+          },
+          "retrieved_titles": [
+            "Den Helder Zuid railway station",
+            "Den Helder railway station",
+            "Den Dolder",
+            "Imbi Monorail station",
+            "Tun Sambanthan Monorail station",
+            "Maharajalela Monorail station",
+            "Piel railway station",
+            "Nanjing South Railway Station",
+            "South Brighton railway station, Adelaide",
+            "Mauthausen-Gusen concentration camp"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-02",
+          "category": "simple",
+          "question": "What was the population of Dhusha at the time of the 1991 Nepal census?",
+          "supporting_ranks": {
+            "Dhussa": 1
+          },
+          "retrieved_titles": [
+            "Dhussa",
+            "Biratnagar",
+            "Bhadrabas",
+            "Balamta",
+            "Amuwa Paschim",
+            "Pune district",
+            "2001 Bangladesh census",
+            "Ghorahi",
+            "Ludhiana",
+            "Dschang"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-03",
+          "category": "simple",
+          "question": "Which Pharaoh did the historical figure Imhotep serve as a counselor to?",
+          "supporting_ranks": {
+            "Imhotep (The Mummy)": null
+          },
+          "retrieved_titles": [
+            "Ahmose I",
+            "Seqenenre Tao",
+            "Ahmose-ankh",
+            "Cleopatra",
+            "Seti I",
+            "Meritaten",
+            "Hatshepsut",
+            "Treasurer (Ancient Egypt)",
+            "Ramesses II",
+            "Netjerkare Siptah"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "simple-08",
+          "category": "simple",
+          "question": "Who wrote the television episode \"Crossed\"?",
+          "supporting_ranks": {
+            "Crossed (The Walking Dead)": 1
+          },
+          "retrieved_titles": [
+            "Crossed (The Walking Dead)",
+            "The Front (The Simpsons)",
+            "Conduit (The X-Files)",
+            "The Simpsons Guy",
+            "Leave It to Beaver (Veronica Mars)",
+            "The Sue Sylvester Shuffle",
+            "Two and a Half Men",
+            "Luther (TV series)",
+            "Across the River to Motor City",
+            "Rewrite This Story"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-10",
+          "category": "simple",
+          "question": "Where is Whataburger based?",
+          "supporting_ranks": {
+            "Whataburger": 1
+          },
+          "retrieved_titles": [
+            "Whataburger",
+            "Bruster's Ice Cream",
+            "Panera Bread",
+            "Moe's Southwest Grill",
+            "Randall's Food Markets",
+            "Wendy's",
+            "KFC",
+            "Werther, North Rhine-Westphalia",
+            "Restaurant Brands International",
+            "GE Appliances"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        }
+      ]
+    },
+    "hybrid": {
+      "overall": {
+        "recall@1": 0.525,
+        "recall@3": 0.7,
+        "recall@5": 0.75,
+        "recall@10": 0.875,
+        "all_found@1": 0.2,
+        "all_found@3": 0.55,
+        "all_found@5": 0.6,
+        "all_found@10": 0.8,
+        "reciprocal_rank": 0.867
+      },
+      "by_category": {
+        "bridge": {
+          "recall@1": 0.4,
+          "recall@3": 0.6,
+          "recall@5": 0.7,
+          "recall@10": 0.85,
+          "all_found@1": 0.0,
+          "all_found@3": 0.4,
+          "all_found@5": 0.5,
+          "all_found@10": 0.7,
+          "reciprocal_rank": 0.834
+        },
+        "comparison": {
+          "recall@1": 0.5,
+          "recall@3": 0.8,
+          "recall@5": 0.8,
+          "recall@10": 1.0,
+          "all_found@1": 0.0,
+          "all_found@3": 0.6,
+          "all_found@5": 0.6,
+          "all_found@10": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "simple": {
+          "recall@1": 0.8,
+          "recall@3": 0.8,
+          "recall@5": 0.8,
+          "recall@10": 0.8,
+          "all_found@1": 0.8,
+          "all_found@3": 0.8,
+          "all_found@5": 0.8,
+          "all_found@10": 0.8,
+          "reciprocal_rank": 0.8
+        }
+      },
+      "seconds": 8.3,
+      "questions": [
+        {
+          "id": "5ae351405542994393b9e67f",
+          "category": "bridge",
+          "question": "Jim Halsey guided the career of the musician who hosted what country variety show?",
+          "supporting_ranks": {
+            "Jim Halsey": 1,
+            "Roy Clark": 3
+          },
+          "retrieved_titles": [
+            "Jim Halsey",
+            "Country Music Greats Radio Show",
+            "Roy Clark",
+            "Joe Buck (musician)",
+            "A Prairie Home Companion",
+            "Red Symons",
+            "Andy Williams",
+            "The David Lee Roth Show",
+            "Cannon and Ball's Casino",
+            "Royal Variety Performance"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8f0796554299458435d528",
+          "category": "bridge",
+          "question": "what air force based named in honor of Carl Benjamin \"Ben\" Eielson is located 26 miles southeast of Fairbanks, Alaska?",
+          "supporting_ranks": {
+            "Carl Ben Eielson": 1,
+            "Eielson Air Force Base": 2
+          },
+          "retrieved_titles": [
+            "Carl Ben Eielson",
+            "Eielson Air Force Base",
+            "168th Air Refueling Squadron",
+            "Exercise Red Flag",
+            "1950 British Columbia B-36 crash",
+            "Alaska Railroad",
+            "McConnell Air Force Base",
+            "343d Wing",
+            "249th Airlift Squadron",
+            "Robins Air Force Base"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ab2bc80554299194fa934d7",
+          "category": "bridge",
+          "question": "What is the name of the county that Cari Roccaro is from?",
+          "supporting_ranks": {
+            "Cari Roccaro": 5,
+            "East Islip, New York": null
+          },
+          "retrieved_titles": [
+            "Mineola, New York",
+            "Waterford, New York",
+            "Haverstraw, New York",
+            "Springs, New York",
+            "Cari Roccaro",
+            "Rock Springs, Wyoming",
+            "Manistee County, Michigan",
+            "New Roc City",
+            "Motley County, Texas",
+            "Bayport, New York"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.2
+          }
+        },
+        {
+          "id": "5a73cf5e55429978a71e909f",
+          "category": "bridge",
+          "question": "After coaching the red raiders to several winning seasons, where does Mike Leach currently coach at?",
+          "supporting_ranks": {
+            "2012 Washington State Cougars football team": null,
+            "Mike Leach (American football coach)": 1
+          },
+          "retrieved_titles": [
+            "Mike Leach (American football coach)",
+            "Ruffin McNeill",
+            "2008 Texas Tech Red Raiders football team",
+            "2000 Texas Tech Red Raiders football team",
+            "2009 Texas Tech Red Raiders football team",
+            "2001 Texas Tech Red Raiders football team",
+            "2003 Texas Tech Red Raiders football team",
+            "2005 Texas Tech Red Raiders football team",
+            "2004 Texas Tech Red Raiders football team",
+            "2002 Texas Tech Red Raiders football team"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a7b60605542995eb53be931",
+          "category": "bridge",
+          "question": "What is the year of the event which orrurred first, Beecher's Handmade Cheese was founded, or Pike Place Market opened?",
+          "supporting_ranks": {
+            "Beecher's Handmade Cheese": 1,
+            "Pike Place Market": 2
+          },
+          "retrieved_titles": [
+            "Beecher's Handmade Cheese",
+            "Pike Place Market",
+            "Pike Place Fish Market",
+            "Original Starbucks",
+            "Rachel (Gerber)",
+            "Butterworth Building",
+            "Alaska Trade Building",
+            "City Market (Raleigh, North Carolina)",
+            "2nd and Pike",
+            "Laura Chenel"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5abff0625542997ec76fd476",
+          "category": "bridge",
+          "question": "In what Mississippi county is the city that is located five miles west of the county seat of said county?",
+          "supporting_ranks": {
+            "Holly Ridge, Mississippi": 9,
+            "Indianola, Mississippi": 7
+          },
+          "retrieved_titles": [
+            "Brandon, Mississippi",
+            "Pontotoc, Mississippi",
+            "Helena–West Helena, Arkansas",
+            "Charleston, Missouri",
+            "Quincy, Illinois",
+            "Biloxi, Mississippi",
+            "Indianola, Mississippi",
+            "Tupelo, Mississippi",
+            "Holly Ridge, Mississippi",
+            "DeSoto County, Mississippi"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.14285714285714285
+          }
+        },
+        {
+          "id": "5a7b77d95542997c3ec971a5",
+          "category": "bridge",
+          "question": "The ninth The Desert Sessions LP was released by by what kind of band?",
+          "supporting_ranks": {
+            "Volume 9: I See You Hearin' Me": 1,
+            "Era Vulgaris (album)": null
+          },
+          "retrieved_titles": [
+            "Volume 9: I See You Hearin' Me",
+            "Volume 4: Hard Walls and Little Trips",
+            "Volume 1: Instrumental Driving Music for Felons",
+            "Rekords Rekords",
+            "Volume 3: Set Coordinates for the White Dwarf!!!",
+            "Volume 7: Gypsy Marches",
+            "Volume 10: I Heart Disco",
+            "Volume 2: Status: Ships Commander Butchered",
+            "Volume 6: Black Anvil Ego",
+            "Sons of the Desert (band)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ae25c815542992decbdcccc",
+          "category": "bridge",
+          "question": "What trio was the songwriter of \"What Are We Doin' Lonesome\" from?",
+          "supporting_ranks": {
+            "What Are We Doin' Lonesome": 1,
+            "Larry Gatlin": 7
+          },
+          "retrieved_titles": [
+            "What Are We Doin' Lonesome",
+            "Paul Burlison",
+            "Roddy Hart",
+            "Dave Peverett",
+            "702 (group)",
+            "Lonesome Pine Fiddlers",
+            "Larry Gatlin",
+            "Lionel Richie",
+            "Intro (R&amp;B group)",
+            "Ben Folds Five"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a81d6cd55429903bc27b9e0",
+          "category": "bridge",
+          "question": "Cartman Finds Love is an episode from the sitcom created by whom?",
+          "supporting_ranks": {
+            "Cartman Finds Love": 1,
+            "South Park": 5
+          },
+          "retrieved_titles": [
+            "Cartman Finds Love",
+            "Cartman's Incredible Gift",
+            "Eric Cartman",
+            "Cartman's Mom Is a Dirty Slut",
+            "South Park",
+            "Lucy and Superman",
+            "Chickenlover",
+            "Happily Divorced",
+            "American Housewife",
+            "Fat Camp (South Park)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8e07b25542995085b3738d",
+          "category": "bridge",
+          "question": "Skyplex has which roller coaster that will become the tallest in the world when it opens in 2020?",
+          "supporting_ranks": {
+            "Skyplex": 2,
+            "Skyscraper (roller coaster)": 1
+          },
+          "retrieved_titles": [
+            "Skyscraper (roller coaster)",
+            "Skyplex",
+            "Loch Ness Monster (roller coaster)",
+            "Wicked Twister",
+            "Moonsault Scramble",
+            "Cyclone (Revere Beach)",
+            "Tatsu",
+            "Fujiyama (roller coaster)",
+            "DC Rivals HyperCoaster",
+            "Montu (roller coaster)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8091515542996402f6a563",
+          "category": "comparison",
+          "question": "Were Sound Team and Dead by Sunrise both formed before 2010? ",
+          "supporting_ranks": {
+            "Sound Team": 2,
+            "Dead by Sunrise": 1
+          },
+          "retrieved_titles": [
+            "Dead by Sunrise",
+            "Sound Team",
+            "The Dead Weather",
+            "Sunrise Avenue",
+            "Chester Bennington",
+            "Capital Cities (band)",
+            "Feathers (American band)",
+            "Sunrise Avenue discography",
+            "Team Sleep",
+            "Nebraska–Oklahoma football rivalry"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a801e845542992097ad2fd9",
+          "category": "comparison",
+          "question": "Which magazine produces more print editions yearly, Nautilus or TV Guide?",
+          "supporting_ranks": {
+            "Nautilus (science magazine)": 1,
+            "TV Guide": 3
+          },
+          "retrieved_titles": [
+            "Nautilus (science magazine)",
+            "TV Guide (Canada)",
+            "TV Guide",
+            "List of TV Guide covers (2000s)",
+            "TV Guide Award",
+            "List of TV Guide covers (1990s)",
+            "TV Guide's 50 Greatest TV Shows of All Time",
+            "Animation Magazine",
+            "Ryan's Gig Guide",
+            "American Heritage (magazine)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8e463a5542995a26add4b7",
+          "category": "comparison",
+          "question": "Havelock Ellis and Arnold Bennett were both what?",
+          "supporting_ranks": {
+            "Havelock Ellis": 8,
+            "Arnold Bennett": 1
+          },
+          "retrieved_titles": [
+            "Arnold Bennett",
+            "The Curse of Downers Grove",
+            "The Great Adventure (1921 film)",
+            "Jay Bennett (author)",
+            "Jane Bennett (artist)",
+            "Edith Ellis",
+            "Don Ellis",
+            "Havelock Ellis",
+            "Benedict Arnold",
+            "Autoeroticism"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ac1a4ed5542994d76dcce90",
+          "category": "comparison",
+          "question": "Are William James and Bret Easton Ellis both screenwriters?",
+          "supporting_ranks": {
+            "William James": 10,
+            "Bret Easton Ellis": 1
+          },
+          "retrieved_titles": [
+            "Bret Easton Ellis",
+            "The Curse of Downers Grove",
+            "The Informers",
+            "The Informers (2008 film)",
+            "Imperial Bedrooms",
+            "The Rules of Attraction (film)",
+            "Henry James",
+            "A Letter from Death Row (film)",
+            "No Code of Conduct",
+            "William James"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ab5eed65542997d4ad1f25c",
+          "category": "comparison",
+          "question": "Which is in the family Rutaceae, the Diplolaena or the Arenaria?",
+          "supporting_ranks": {
+            "Diplolaena": 1,
+            "Arenaria (plant)": 2
+          },
+          "retrieved_titles": [
+            "Diplolaena",
+            "Arenaria (plant)",
+            "Catinella arenaria",
+            "Turnstone",
+            "Pimelea arenaria",
+            "Black turnstone",
+            "Zieria",
+            "Crowea",
+            "Tetradium",
+            "Papaveraceae"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-01",
+          "category": "simple",
+          "question": "When did Den Helder Zuid railway station open?",
+          "supporting_ranks": {
+            "Den Helder Zuid railway station": 1
+          },
+          "retrieved_titles": [
+            "Den Helder Zuid railway station",
+            "Den Helder railway station",
+            "Den Dolder",
+            "NOGAT Pipeline System",
+            "Nanjing South Railway Station",
+            "Findochty railway station",
+            "Dixon Fold railway station",
+            "Tanjong Pagar railway station",
+            "Kirkby Thore railway station",
+            "Kirkby Stephen East railway station"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-02",
+          "category": "simple",
+          "question": "What was the population of Dhusha at the time of the 1991 Nepal census?",
+          "supporting_ranks": {
+            "Dhussa": 1
+          },
+          "retrieved_titles": [
+            "Dhussa",
+            "Amuwa Paschim",
+            "Biratnagar",
+            "Bhadrabas",
+            "Ghansikuwa",
+            "2001 Bangladesh census",
+            "Ghorahi",
+            "Sundarpur, Mahottari",
+            "Bantawa language",
+            "Timnath, Colorado"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-03",
+          "category": "simple",
+          "question": "Which Pharaoh did the historical figure Imhotep serve as a counselor to?",
+          "supporting_ranks": {
+            "Imhotep (The Mummy)": null
+          },
+          "retrieved_titles": [
+            "Ahmose-ankh",
+            "Seqenenre Tao",
+            "Ahmose I",
+            "Meritaten",
+            "Ahmose (queen)",
+            "Thutmose III",
+            "Ramesses II",
+            "Cleopatra",
+            "Hatshepsut",
+            "Wadi es-Sebua"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "simple-08",
+          "category": "simple",
+          "question": "Who wrote the television episode \"Crossed\"?",
+          "supporting_ranks": {
+            "Crossed (The Walking Dead)": 1
+          },
+          "retrieved_titles": [
+            "Crossed (The Walking Dead)",
+            "Leave It to Beaver (Veronica Mars)",
+            "The Walking Dead (season 1)",
+            "The Quick and the Wed",
+            "Pilot (The Office)",
+            "Moving On (The Office)",
+            "You Made Me (Adventure Time)",
+            "The Front (The Simpsons)",
+            "The Strain (TV series)",
+            "Conduit (The X-Files)"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-10",
+          "category": "simple",
+          "question": "Where is Whataburger based?",
+          "supporting_ranks": {
+            "Whataburger": 1
+          },
+          "retrieved_titles": [
+            "Whataburger",
+            "Bruster's Ice Cream",
+            "Richardson Square Mall",
+            "Panera Bread",
+            "Stalky &amp; Co.",
+            "Moe's Southwest Grill",
+            "Toyota F engine",
+            "Randall's Food Markets",
+            "Lego Knights' Kingdom",
+            "Wendy's"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        }
+      ]
+    },
+    "hybrid_rerank": {
+      "overall": {
+        "recall@1": 0.475,
+        "recall@3": 0.7,
+        "recall@5": 0.75,
+        "recall@10": 0.875,
+        "all_found@1": 0.2,
+        "all_found@3": 0.5,
+        "all_found@5": 0.55,
+        "all_found@10": 0.75,
+        "reciprocal_rank": 0.835
+      },
+      "by_category": {
+        "bridge": {
+          "recall@1": 0.35,
+          "recall@3": 0.65,
+          "recall@5": 0.7,
+          "recall@10": 0.8,
+          "all_found@1": 0.0,
+          "all_found@3": 0.4,
+          "all_found@5": 0.4,
+          "all_found@10": 0.6,
+          "reciprocal_rank": 0.808
+        },
+        "comparison": {
+          "recall@1": 0.4,
+          "recall@3": 0.7,
+          "recall@5": 0.8,
+          "recall@10": 0.9,
+          "all_found@1": 0.0,
+          "all_found@3": 0.4,
+          "all_found@5": 0.6,
+          "all_found@10": 0.8,
+          "reciprocal_rank": 0.9
+        },
+        "simple": {
+          "recall@1": 0.8,
+          "recall@3": 0.8,
+          "recall@5": 0.8,
+          "recall@10": 1.0,
+          "all_found@1": 0.8,
+          "all_found@3": 0.8,
+          "all_found@5": 0.8,
+          "all_found@10": 1.0,
+          "reciprocal_rank": 0.822
+        }
+      },
+      "seconds": 6.5,
+      "questions": [
+        {
+          "id": "5ae351405542994393b9e67f",
+          "category": "bridge",
+          "question": "Jim Halsey guided the career of the musician who hosted what country variety show?",
+          "supporting_ranks": {
+            "Jim Halsey": 2,
+            "Roy Clark": 3
+          },
+          "retrieved_titles": [
+            "Country Music Greats Radio Show",
+            "Jim Halsey",
+            "Roy Clark",
+            "Joe Buck (musician)",
+            "A Prairie Home Companion",
+            "Andy Williams",
+            "Red Symons",
+            "Cannon and Ball's Casino",
+            "The David Lee Roth Show",
+            "Marcus Singletary"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.5
+          }
+        },
+        {
+          "id": "5a8f0796554299458435d528",
+          "category": "bridge",
+          "question": "what air force based named in honor of Carl Benjamin \"Ben\" Eielson is located 26 miles southeast of Fairbanks, Alaska?",
+          "supporting_ranks": {
+            "Carl Ben Eielson": 1,
+            "Eielson Air Force Base": 2
+          },
+          "retrieved_titles": [
+            "Carl Ben Eielson",
+            "Eielson Air Force Base",
+            "168th Air Refueling Squadron",
+            "1950 British Columbia B-36 crash",
+            "Exercise Red Flag",
+            "Alaska Railroad",
+            "McConnell Air Force Base",
+            "Naval Air Station Ellyson Field",
+            "Moose Creek, Alaska",
+            "343d Wing"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ab2bc80554299194fa934d7",
+          "category": "bridge",
+          "question": "What is the name of the county that Cari Roccaro is from?",
+          "supporting_ranks": {
+            "Cari Roccaro": 3,
+            "East Islip, New York": null
+          },
+          "retrieved_titles": [
+            "Mineola, New York",
+            "Waterford, New York",
+            "Cari Roccaro",
+            "Motley County, Texas",
+            "Orange County Airport (disambiguation)",
+            "Haverstraw, New York",
+            "Taichung County",
+            "Manistee County, Michigan",
+            "Springs, New York",
+            "Rock Springs, Wyoming"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.3333333333333333
+          }
+        },
+        {
+          "id": "5a73cf5e55429978a71e909f",
+          "category": "bridge",
+          "question": "After coaching the red raiders to several winning seasons, where does Mike Leach currently coach at?",
+          "supporting_ranks": {
+            "2012 Washington State Cougars football team": null,
+            "Mike Leach (American football coach)": 1
+          },
+          "retrieved_titles": [
+            "Mike Leach (American football coach)",
+            "Ruffin McNeill",
+            "2000 Texas Tech Red Raiders football team",
+            "Mike Siani",
+            "2008 Texas Tech Red Raiders football team",
+            "2009 Texas Tech Red Raiders football team",
+            "Kyle Shanahan",
+            "Texas Tech Red Raiders football",
+            "Skip Peete",
+            "2014 Texas Tech Red Raiders baseball team"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a7b60605542995eb53be931",
+          "category": "bridge",
+          "question": "What is the year of the event which orrurred first, Beecher's Handmade Cheese was founded, or Pike Place Market opened?",
+          "supporting_ranks": {
+            "Beecher's Handmade Cheese": 1,
+            "Pike Place Market": 2
+          },
+          "retrieved_titles": [
+            "Beecher's Handmade Cheese",
+            "Pike Place Market",
+            "Pike Place Fish Market",
+            "Butterworth Building",
+            "Original Starbucks",
+            "Rachel (Gerber)",
+            "Alaska Trade Building",
+            "City Market (Raleigh, North Carolina)",
+            "Laura Chenel",
+            "Left Bank Books"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5abff0625542997ec76fd476",
+          "category": "bridge",
+          "question": "In what Mississippi county is the city that is located five miles west of the county seat of said county?",
+          "supporting_ranks": {
+            "Holly Ridge, Mississippi": 4,
+            "Indianola, Mississippi": null
+          },
+          "retrieved_titles": [
+            "Pontotoc, Mississippi",
+            "Helena–West Helena, Arkansas",
+            "Brandon, Mississippi",
+            "Holly Ridge, Mississippi",
+            "Quincy, Illinois",
+            "Mississippi County Airport",
+            "Biloxi, Mississippi",
+            "Paulding, Mississippi",
+            "Tupelo, Mississippi",
+            "Charleston, Missouri"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.25
+          }
+        },
+        {
+          "id": "5a7b77d95542997c3ec971a5",
+          "category": "bridge",
+          "question": "The ninth The Desert Sessions LP was released by by what kind of band?",
+          "supporting_ranks": {
+            "Volume 9: I See You Hearin' Me": 1,
+            "Era Vulgaris (album)": null
+          },
+          "retrieved_titles": [
+            "Volume 9: I See You Hearin' Me",
+            "Volume 4: Hard Walls and Little Trips",
+            "Rekords Rekords",
+            "Volume 7: Gypsy Marches",
+            "Volume 10: I Heart Disco",
+            "Volume 1: Instrumental Driving Music for Felons",
+            "Sons of the Desert (band)",
+            "Volume 6: Black Anvil Ego",
+            "Volume 3: Set Coordinates for the White Dwarf!!!",
+            "Baby Come On Home"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ae25c815542992decbdcccc",
+          "category": "bridge",
+          "question": "What trio was the songwriter of \"What Are We Doin' Lonesome\" from?",
+          "supporting_ranks": {
+            "What Are We Doin' Lonesome": 1,
+            "Larry Gatlin": 8
+          },
+          "retrieved_titles": [
+            "What Are We Doin' Lonesome",
+            "Paul Burlison",
+            "Roddy Hart",
+            "702 (group)",
+            "Dave Peverett",
+            "Lonesome Pine Fiddlers",
+            "Lionel Richie",
+            "Larry Gatlin",
+            "Intro (R&amp;B group)",
+            "Ben Folds Five"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a81d6cd55429903bc27b9e0",
+          "category": "bridge",
+          "question": "Cartman Finds Love is an episode from the sitcom created by whom?",
+          "supporting_ranks": {
+            "Cartman Finds Love": 1,
+            "South Park": 7
+          },
+          "retrieved_titles": [
+            "Cartman Finds Love",
+            "Eric Cartman",
+            "Cartman's Incredible Gift",
+            "Lucy and Superman",
+            "Cartman's Mom Is a Dirty Slut",
+            "Happily Divorced",
+            "South Park",
+            "American Housewife",
+            "Chickenlover",
+            "Maid Marian and Her Merry Men"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8e07b25542995085b3738d",
+          "category": "bridge",
+          "question": "Skyplex has which roller coaster that will become the tallest in the world when it opens in 2020?",
+          "supporting_ranks": {
+            "Skyplex": 2,
+            "Skyscraper (roller coaster)": 1
+          },
+          "retrieved_titles": [
+            "Skyscraper (roller coaster)",
+            "Skyplex",
+            "Loch Ness Monster (roller coaster)",
+            "Moonsault Scramble",
+            "Cyclone (Revere Beach)",
+            "Wicked Twister",
+            "Tatsu",
+            "DC Rivals HyperCoaster",
+            "White Cyclone",
+            "Fujiyama (roller coaster)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8091515542996402f6a563",
+          "category": "comparison",
+          "question": "Were Sound Team and Dead by Sunrise both formed before 2010? ",
+          "supporting_ranks": {
+            "Sound Team": 2,
+            "Dead by Sunrise": 1
+          },
+          "retrieved_titles": [
+            "Dead by Sunrise",
+            "Sound Team",
+            "The Dead Weather",
+            "Sunrise Avenue",
+            "Chester Bennington",
+            "Capital Cities (band)",
+            "Feathers (American band)",
+            "Nebraska–Oklahoma football rivalry",
+            "Carnivores (band)",
+            "Sunrise Communications AG"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a801e845542992097ad2fd9",
+          "category": "comparison",
+          "question": "Which magazine produces more print editions yearly, Nautilus or TV Guide?",
+          "supporting_ranks": {
+            "Nautilus (science magazine)": 2,
+            "TV Guide": 5
+          },
+          "retrieved_titles": [
+            "TV Guide (Canada)",
+            "Nautilus (science magazine)",
+            "List of TV Guide covers (2000s)",
+            "TV Guide Award",
+            "TV Guide",
+            "TV Guide's 50 Greatest TV Shows of All Time",
+            "Animation Magazine",
+            "Ryan's Gig Guide",
+            "Cleo (magazine)",
+            "American Heritage (magazine)"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.5,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.5
+          }
+        },
+        {
+          "id": "5a8e463a5542995a26add4b7",
+          "category": "comparison",
+          "question": "Havelock Ellis and Arnold Bennett were both what?",
+          "supporting_ranks": {
+            "Havelock Ellis": 8,
+            "Arnold Bennett": 1
+          },
+          "retrieved_titles": [
+            "Arnold Bennett",
+            "The Curse of Downers Grove",
+            "The Great Adventure (1921 film)",
+            "Jay Bennett (author)",
+            "Jane Bennett (artist)",
+            "Autoeroticism",
+            "Edith Ellis",
+            "Havelock Ellis",
+            "The Grand Babylon Hotel",
+            "The Old Wives' Tale"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ac1a4ed5542994d76dcce90",
+          "category": "comparison",
+          "question": "Are William James and Bret Easton Ellis both screenwriters?",
+          "supporting_ranks": {
+            "William James": null,
+            "Bret Easton Ellis": 1
+          },
+          "retrieved_titles": [
+            "Bret Easton Ellis",
+            "The Curse of Downers Grove",
+            "The Informers (2008 film)",
+            "Imperial Bedrooms",
+            "The Informers",
+            "The Rules of Attraction (film)",
+            "Henry James",
+            "A Letter from Death Row (film)",
+            "Melbourne Underground Film Festival",
+            "Junk Mail (book)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ab5eed65542997d4ad1f25c",
+          "category": "comparison",
+          "question": "Which is in the family Rutaceae, the Diplolaena or the Arenaria?",
+          "supporting_ranks": {
+            "Diplolaena": 1,
+            "Arenaria (plant)": 3
+          },
+          "retrieved_titles": [
+            "Diplolaena",
+            "Catinella arenaria",
+            "Arenaria (plant)",
+            "Turnstone",
+            "Pimelea arenaria",
+            "Black turnstone",
+            "Zieria",
+            "Tetradium",
+            "Crowea",
+            "Commelinaceae"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-01",
+          "category": "simple",
+          "question": "When did Den Helder Zuid railway station open?",
+          "supporting_ranks": {
+            "Den Helder Zuid railway station": 1
+          },
+          "retrieved_titles": [
+            "Den Helder Zuid railway station",
+            "Den Dolder",
+            "Den Helder railway station",
+            "NOGAT Pipeline System",
+            "Nanjing South Railway Station",
+            "Findochty railway station",
+            "Dixon Fold railway station",
+            "Tanjong Pagar railway station",
+            "Shapingba Railway Station",
+            "Kirkby Thore railway station"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-02",
+          "category": "simple",
+          "question": "What was the population of Dhusha at the time of the 1991 Nepal census?",
+          "supporting_ranks": {
+            "Dhussa": 1
+          },
+          "retrieved_titles": [
+            "Dhussa",
+            "Amuwa Paschim",
+            "Bhadrabas",
+            "Biratnagar",
+            "2001 Bangladesh census",
+            "Ghansikuwa",
+            "Sundarpur, Mahottari",
+            "Ghorahi",
+            "Bantawa language",
+            "Matsari"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-03",
+          "category": "simple",
+          "question": "Which Pharaoh did the historical figure Imhotep serve as a counselor to?",
+          "supporting_ranks": {
+            "Imhotep (The Mummy)": 9
+          },
+          "retrieved_titles": [
+            "Ahmose-ankh",
+            "Seqenenre Tao",
+            "Meritaten",
+            "Ahmose I",
+            "Ramesses II",
+            "Thutmose III",
+            "Cleopatra",
+            "Hatshepsut",
+            "Imhotep (The Mummy)",
+            "Wadi es-Sebua"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.1111111111111111
+          }
+        },
+        {
+          "id": "simple-08",
+          "category": "simple",
+          "question": "Who wrote the television episode \"Crossed\"?",
+          "supporting_ranks": {
+            "Crossed (The Walking Dead)": 1
+          },
+          "retrieved_titles": [
+            "Crossed (The Walking Dead)",
+            "Leave It to Beaver (Veronica Mars)",
+            "The Walking Dead (season 1)",
+            "The Quick and the Wed",
+            "Pilot (The Office)",
+            "Matt Williams (TV producer)",
+            "The Strain (TV series)",
+            "You Made Me (Adventure Time)",
+            "Moving On (The Office)",
+            "John Frink"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-10",
+          "category": "simple",
+          "question": "Where is Whataburger based?",
+          "supporting_ranks": {
+            "Whataburger": 1
+          },
+          "retrieved_titles": [
+            "Whataburger",
+            "Stalky &amp; Co.",
+            "Toyota F engine",
+            "Richardson Square Mall",
+            "Bruster's Ice Cream",
+            "Lesotho Paramilitary Forces",
+            "Lego Knights' Kingdom",
+            "The Vampyr: A Soap Opera",
+            "Eagle Aviation France",
+            "Bank pool loan"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        }
+      ]
+    }
+  }
+}
