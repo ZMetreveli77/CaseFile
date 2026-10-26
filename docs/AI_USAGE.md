@@ -561,3 +561,14 @@ I noted two scoring weaknesses this surfaced:
 - It rebuilt the set and confirmed every question kept its dev/test split.
 
 I did the review and wrote the verdicts myself, with no other tool.
+- **AI did (step 3):**
+  - `rag/llm_cache.py` (`CachingLLM`): a disk cache keyed by a hash of the whole request. Re-runs replay for free;
+    Gemini's thought signatures are cached too.
+  - `evaluation/answer_eval.py`:
+    - a one-search baseline that uses the same prompt and format as the agent, but no tools;
+    - an LLM judge;
+    - per-category scoring with my metrics;
+    - abstention precision and recall.
+  - `eval/run_answer_eval.py` and `eval/compare_chunking.py`.
+  - 13 tests (180 in total).
+  - A 3-question trial; its numbers are too few to use. A second run made 0 real LLM calls.
