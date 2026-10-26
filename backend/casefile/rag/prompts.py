@@ -18,12 +18,15 @@ GROUNDING_RULES = """Rules:
 # The code in agent.py parses this format, so change both together.
 ANSWER_FORMAT = """When you are done searching, reply with ONLY this JSON object (no other text, no markdown):
 {
-  "answer": "short, direct answer to the question (or empty if you abstain)",
+  "answer": "ONLY the answer itself (empty if you abstain)",
   "claims": [{"text": "one fact supporting the answer", "citations": ["chunk_id", "..."]}],
   "conflicts": [{"description": "documents that disagree, and how", "citations": ["chunk_id", "..."]}],
   "should_abstain": false,
   "abstain_reason": "why the documents are not enough (empty if you answer)"
-}"""
+}
+The "answer" field holds only the answer: a name, place, number, date, or yes/no, never a sentence.
+Examples: "Greenwich Village", "1945", "Eli Roth", "yes". For a yes/no question write exactly "yes" or "no".
+Explanations and evidence belong in "claims", not in "answer"."""
 
 FINAL_ANSWER_REMINDER = ("You have used all your search steps. Do not call tools any more. Give your final answer now, "
                          "as the JSON object described in your instructions, using only what you have already found.")
