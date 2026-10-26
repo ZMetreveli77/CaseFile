@@ -1,8 +1,12 @@
 import random
 
-from casefile.evaluation.eval_set import (BRIDGE_COUNT, COMPARISON_COUNT, UNANSWERABLE_QUESTIONS, assign_splits,
-                                          build_unanswerable_items, find_spot_check_ids, pick_simple_paragraphs,
+from casefile.evaluation.eval_set import (BRIDGE_COUNT, COMPARISON_COUNT, FALSE_PREMISE_TITLES, UNANSWERABLE_QUESTIONS,
+                                          assign_splits, build_contradictory_items, build_unanswerable_items,
+                                          find_single_year_fact, find_spot_check_ids, find_used_titles,
+                                          pick_contradiction_paragraphs, pick_simple_paragraphs,
                                           sample_hotpot_questions)
+
+PADDING = " It is known for many other things that have nothing to do with dates." * 6  # reach the minimum length
 
 
 def make_questions(count_per_type=40):
@@ -43,3 +47,43 @@ def test_every_category_is_split_in_half():
     for category in ("a", "b"):
         splits = [item["split"] for item in items if item["category"] == category]
         assert splits.count("dev") == 5 and splits.count("test") == 5
+
+
+def make_paragraph(title, text):
+    return {"id": title, "title": title, "text": text + PADDING}
+
+
+def test_used_titles_include_supporting_titles_and_false_premise_paragraphs():
+    eval_items = [{"supporting_titles": ["Roy Clark", "Jim Halsey"]}, {"supporting_titles": []}]
+    used_titles = find_used_titles(eval_items)
+    assert {"Roy Clark", "Jim Halsey"} <= used_titles
+    assert FALSE_PREMISE_TITLES <= used_titles
+
+
+def test_a_year_fact_needs_exactly_one_year_in_the_first_sentence():
+    assert find_single_year_fact("GrocerKey was founded in 2015. It sells software.") == (
+        "2015", "GrocerKey was founded in 2015.")
+    assert find_single_year_fact("Born in 1950, she retired in 1999.") is None  # two different years
+    assert find_single_year_fact("A band from Ohio. It formed in 1990.") is None  # year not in the first sentence
+    assert find_single_year_fact("Population 19021 people.") is None  # not a year: no word boundary
+    assert find_single_year_fact("Nevil Shute (17 January 189912 January 1960) was a novelist.") is None  # glued dates
+
+
+def test_used_lists_and_year_titles_are_never_picked():
+    corpus = [make_paragraph("Used Paragraph", "Used Paragraph opened in 1990."),
+              make_paragraph("List of Things", "List of Things was made in 1991."),
+              make_paragraph("Kaadu (1952 film)", "Kaadu is a 1952 film."),
+              make_paragraph("Good Paragraph", "Good Paragraph was founded in 1993.")]
+    picked = pick_contradiction_paragraphs(corpus, 1, random.Random(0), excluded_titles={"Used Paragraph"})
+    assert [paragraph["title"] for paragraph in picked] == ["Good Paragraph"]
+    assert picked[0]["year"] == "1993"
+
+
+def test_contradictory_items_keep_both_values_and_both_titles():
+    documents = [{"contradicts": "The Horror Zine", "title": "The Horror Zine (genre magazine directory)",
+                  "question": "In which year was The Horror Zine first published?",
+                  "original_year": "2009", "altered_year": "2006"}]
+    [item] = build_contradictory_items(documents)
+    assert item["id"] == "contradictory-01" and item["category"] == "contradictory"
+    assert item["answer"] == "2009" and item["conflicting_answer"] == "2006"
+    assert item["supporting_titles"] == ["The Horror Zine", "The Horror Zine (genre magazine directory)"]

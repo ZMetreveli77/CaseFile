@@ -4,6 +4,7 @@ Everything is seeded, so building the set twice gives the same questions in the 
 "dev" half only and final numbers are reported on "test", so we never grade ourselves on what we tuned for.
 """
 import random
+import re
 
 EVAL_SEED = 2026
 BRIDGE_COUNT = 20  # multi-hop: find one fact, then use it to find the next
@@ -11,6 +12,13 @@ COMPARISON_COUNT = 10  # multi-hop: two named entities compared
 SIMPLE_COUNT = 10  # one paragraph is enough (generated once from a single paragraph, then checked by hand)
 SPOT_CHECK_FIRST_PER_TYPE = {"bridge": 3, "comparison": 2}  # used in eval/spot_check.py: kept out of the set
 SIMPLE_PARAGRAPH_CHARACTERS = (300, 800)  # long enough to hold a fact, short enough to be one chunk
+CONTRADICTION_COUNT = 10  # paragraphs that get a conflicting copy (task H2)
+CANDIDATES_PER_CONTRADICTION = 3  # pick more than needed: a person still chooses the final ones by hand
+YEAR_PATTERN = re.compile(r"\b(1[5-9]\d{2}|20[0-2]\d)\b")  # 1500-2029, as a whole word ("1902", not "19021")
+GLUED_NUMBERS = re.compile(r"\d{5,}")  # e.g. "(17 January 189912 January 1960)": a hidden second year, so skip it
+FIRST_SENTENCE_END = re.compile(r"(?<=[.!?])\s+")  # a sentence ends with . ! or ? followed by whitespace
+# Paragraphs the false-premise questions rely on: they must keep NOT supporting the false claim, so don't touch them.
+FALSE_PREMISE_TITLES = frozenset({"Shirley Temple", "Animorphs", "Adriana Trigiani", "Ed Wood"})
 
 # Questions the corpus cannot answer. Three kinds, so abstention is tested on more than obviously silly questions.
 UNANSWERABLE_QUESTIONS = [
@@ -74,3 +82,57 @@ def assign_splits(items: list[dict], random_generator: random.Random) -> list[di
         for position, item in enumerate(category_items):
             item["split"] = "dev" if position < len(category_items) // 2 else "test"
     return items
+
+
+def find_used_titles(eval_items: list[dict]) -> set[str]:
+    """Every paragraph the eval set depends on: its supporting titles plus the false-premise paragraphs.
+    Altering any of these would silently break a gold answer (or make a false premise true)."""
+    used_titles = {title for item in eval_items for title in item["supporting_titles"]}
+    return used_titles | FALSE_PREMISE_TITLES
+
+
+def find_single_year_fact(text: str) -> tuple[str, str] | None:
+    """(year, first sentence) if the paragraph has exactly ONE distinct year and it is in the first sentence.
+
+    One year only: then "the year" is unambiguous, and a conflicting copy changes exactly that fact. Digits glued
+    together (a corpus extraction bug, "189912 January 1960") can hide a second year, so those paragraphs are skipped.
+    First sentence: that is where Wikipedia states the paragraph's main fact (founded, born, released ...).
+    """
+    distinct_years = set(YEAR_PATTERN.findall(text))
+    if len(distinct_years) != 1 or GLUED_NUMBERS.search(text):
+        return None
+    [year] = distinct_years
+    first_sentence = FIRST_SENTENCE_END.split(text, maxsplit=1)[0]
+    return (year, first_sentence) if year in first_sentence else None
+
+
+def pick_contradiction_paragraphs(corpus: list[dict], count: int, random_generator: random.Random,
+                                  excluded_titles: set[str]) -> list[dict]:
+    """Seeded choice of paragraphs with one crisp year fact, never one the eval set already uses.
+
+    Also skipped: lists ("List of ...") and titles that contain the year themselves ("Kaadu (1952 film)"), because
+    changing the year in the text would then conflict with the title too.
+    """
+    shortest, longest = SIMPLE_PARAGRAPH_CHARACTERS
+    pool = []
+    for paragraph in corpus:
+        title, text = paragraph["title"], paragraph["text"]
+        is_usable = (title not in excluded_titles and shortest <= len(text) <= longest
+                     and not title.startswith("List of") and not YEAR_PATTERN.search(title))
+        year_fact = find_single_year_fact(text) if is_usable else None
+        if year_fact is not None:
+            year, first_sentence = year_fact
+            pool.append({"title": title, "year": year, "fact_sentence": first_sentence, "text": text})
+    return random_generator.sample(pool, count)
+
+
+def build_contradictory_items(conflicting_documents: list[dict]) -> list[dict]:
+    """One eval item per conflicting document: the gold answer is the ORIGINAL value, the altered one is kept too.
+
+    Both titles are supporting: a good answer finds both sources and reports that they disagree (grounding rule 5).
+    """
+    return [{"id": f"contradictory-{number:02d}", "category": "contradictory", "question": document["question"],
+             "answer": document["original_year"], "conflicting_answer": document["altered_year"],
+             "supporting_titles": [document["contradicts"], document["title"]],
+             "source": "hand-written conflicting document"}
+            for number, document in enumerate(conflicting_documents, start=1)]
