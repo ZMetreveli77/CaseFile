@@ -134,6 +134,13 @@ class GeminiProvider:
                 types.Part.from_function_response(name=message.tool_name, response=message.tool_result or {})])
         return types.Content(role="user", parts=[types.Part(text=message.text)])
 
+    def export_content(self, content) -> str:
+        """Gemini reply object -> JSON text, for the evaluation cache (keeps the hidden thought signatures)."""
+        return content.model_dump_json(exclude_none=True)
+
+    def restore_content(self, exported: str):
+        return self.types.Content.model_validate_json(exported)
+
     def convert_response(self, response) -> LLMReply:
         candidates = response.candidates or []
         if not candidates or candidates[0].content is None:
