@@ -2,8 +2,8 @@ import random
 
 from casefile.evaluation.eval_set import (BRIDGE_COUNT, COMPARISON_COUNT, FALSE_PREMISE_TITLES, UNANSWERABLE_QUESTIONS,
                                           assign_splits, build_contradictory_items, build_unanswerable_items,
-                                          find_single_year_fact, find_spot_check_ids, find_used_titles,
-                                          pick_contradiction_paragraphs, pick_simple_paragraphs,
+                                          find_contradiction_problems, find_single_year_fact, find_spot_check_ids,
+                                          find_used_titles, pick_contradiction_paragraphs, pick_simple_paragraphs,
                                           sample_hotpot_questions)
 
 PADDING = " It is known for many other things that have nothing to do with dates." * 6  # reach the minimum length
@@ -87,3 +87,38 @@ def test_contradictory_items_keep_both_values_and_both_titles():
     assert item["id"] == "contradictory-01" and item["category"] == "contradictory"
     assert item["answer"] == "2009" and item["conflicting_answer"] == "2006"
     assert item["supporting_titles"] == ["The Horror Zine", "The Horror Zine (genre magazine directory)"]
+
+
+# The real corpus paragraph. Changing only its year leaves it 0.91 similar (MinHash), above the 0.85 threshold.
+ORIGINAL_TEXT = ("Genesis Suite is a 1945 work for narrator, orchestra, and chorus. A musical interpretation of "
+                 "the first eleven chapters of the \"Book of Genesis\", the suite was a collaborative work by seven "
+                 "composers, some of whom wrote film music in Hollywood. The project was conceived by Nathaniel "
+                 "Shilkret, a noted conductor and composer of music for recording, radio and film. Shilkret wrote "
+                 "one of the seven pieces and invited the remaining composers to submit contributions as work-for-"
+                 "hire. Two giants of western twentieth-century music, Arnold Schoenberg and Igor Stravinsky "
+                 "wrote, respectively, the first and last parts. The Biblical text used in the spoken word "
+                 "narrative is the American King James Version. It was intended to be a crossover from art music "
+                 "to popular music.")
+GOOD_DOCUMENT = {"contradicts": "Genesis Suite", "title": "Genesis Suite (concert programme note)",
+                 "original_year": "1945", "altered_year": "1947",
+                 "text": "Programme note for tonight's performance. The Genesis Suite dates from 1947, an idea of "
+                         "conductor Nathaniel Shilkret, with movements by seven composers."}
+
+
+def test_a_good_conflicting_document_has_no_problems():
+    assert find_contradiction_problems([GOOD_DOCUMENT], {"Genesis Suite": ORIGINAL_TEXT}, used_titles=set()) == []
+
+
+def test_each_broken_rule_is_reported():
+    corpus = {"Genesis Suite": ORIGINAL_TEXT}
+    near_copy = {**GOOD_DOCUMENT, "text": ORIGINAL_TEXT.replace("1945", "1947")}  # the gotcha: only the year changed
+    keeps_original_year = {**GOOD_DOCUMENT, "text": GOOD_DOCUMENT["text"] + " Some say 1945."}
+    lacks_altered_year = {**GOOD_DOCUMENT, "text": "Programme note: the Genesis Suite, by seven composers."}
+    unknown_original = {**GOOD_DOCUMENT, "contradicts": "No Such Paragraph"}
+
+    assert "near-duplicate" in " ".join(find_contradiction_problems([near_copy], corpus, set()))
+    assert "original year 1945" in " ".join(find_contradiction_problems([keeps_original_year], corpus, set()))
+    assert "altered year 1947" in " ".join(find_contradiction_problems([lacks_altered_year], corpus, set()))
+    assert "not in the corpus" in " ".join(find_contradiction_problems([unknown_original], corpus, set()))
+    used_by_eval_set = find_contradiction_problems([GOOD_DOCUMENT], corpus, used_titles={"Genesis Suite"})
+    assert "is in the eval set" in " ".join(used_by_eval_set)

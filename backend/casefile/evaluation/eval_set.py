@@ -6,6 +6,8 @@ Everything is seeded, so building the set twice gives the same questions in the 
 import random
 import re
 
+from casefile.ingestion.dedup import DuplicateDetector
+
 EVAL_SEED = 2026
 BRIDGE_COUNT = 20  # multi-hop: find one fact, then use it to find the next
 COMPARISON_COUNT = 10  # multi-hop: two named entities compared
@@ -136,3 +138,36 @@ def build_contradictory_items(conflicting_documents: list[dict]) -> list[dict]:
              "supporting_titles": [document["contradicts"], document["title"]],
              "source": "hand-written conflicting document"}
             for number, document in enumerate(conflicting_documents, start=1)]
+
+
+def contains_year(text: str, year: str) -> bool:
+    """True if `year` appears as a whole word ("1849" in "in 1849.", but not inside "18490")."""
+    return re.search(rf"\b{re.escape(year)}\b", text) is not None
+
+
+def find_contradiction_problems(conflicting_documents: list[dict], corpus_text_by_title: dict[str, str],
+                                used_titles: set[str]) -> list[str]:
+    """Check the hand-written conflicting documents; returns one message per problem (empty list = all good).
+
+    These are the checks first done by hand, so a later edit to a document can't silently break the test set.
+    """
+    problems = []
+    for document in conflicting_documents:
+        original_title, new_title, text = document["contradicts"], document["title"], document["text"]
+        document_label = repr(new_title)
+        if original_title not in corpus_text_by_title:
+            problems.append(f"{document_label}: the original paragraph {original_title!r} is not in the corpus")
+            continue
+        if original_title in used_titles:
+            problems.append(f"{document_label}: {original_title!r} is in the eval set, so a gold answer would break")
+        if new_title in corpus_text_by_title:
+            problems.append(f"{document_label}: a corpus paragraph already has this title, so uploads would mix them")
+        if not contains_year(text, document["altered_year"]):
+            problems.append(f"{document_label}: the altered year {document['altered_year']} is not in the text")
+        if contains_year(text, document["original_year"]):
+            problems.append(f"{document_label}: the original year {document['original_year']} is still in the text")
+        duplicate_detector = DuplicateDetector()
+        duplicate_detector.add(original_title, corpus_text_by_title[original_title])
+        if duplicate_detector.find_duplicate(text) is not None:
+            problems.append(f"{document_label}: near-duplicate of {original_title!r}, so ingestion would skip it")
+    return problems
