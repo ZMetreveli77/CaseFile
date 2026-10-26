@@ -45,7 +45,8 @@ def build_in_memory_agent(settings: Settings, documents: list[tuple[str, str]]) 
     for file_name, text in documents:
         pipeline.ingest_file(file_name, text.encode())
     searcher = HybridSearcher(store, embedder, mode=SEARCH_MODE)
-    llm = GeminiProvider(settings.gemini_api_key, settings.gemini_model, settings.llm_timeout_seconds)
+    llm = GeminiProvider(settings.gemini_api_key, settings.gemini_model, settings.llm_timeout_seconds,
+                         requests_per_minute=settings.llm_requests_per_minute)
     return InvestigationAgent(llm, create_tool_executor=lambda: ToolExecutor(searcher, store))
 
 

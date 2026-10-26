@@ -18,7 +18,8 @@ def build_store(settings: Settings) -> tuple[QdrantStore, TextEmbedder]:
 def build_agent_for_store(settings: Settings, store: QdrantStore, embedder: TextEmbedder,
                           search_mode: str = "hybrid_rerank") -> InvestigationAgent:
     searcher = HybridSearcher(store, embedder, mode=search_mode)
-    llm = GeminiProvider(settings.gemini_api_key, settings.gemini_model, settings.llm_timeout_seconds)
+    llm = GeminiProvider(settings.gemini_api_key, settings.gemini_model, settings.llm_timeout_seconds,
+                         requests_per_minute=settings.llm_requests_per_minute)
     return InvestigationAgent(llm, create_tool_executor=lambda: ToolExecutor(searcher, store))
 
 

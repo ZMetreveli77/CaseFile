@@ -3,7 +3,8 @@ import pytest
 from google.genai import errors as gemini_errors
 from google.genai import types
 
-from casefile.rag.llm import (GeminiProvider, LLMError, LLMReply, Message, RetryableLLMError, ToolCall, ToolSpec,
+from casefile.rag.llm import (MAX_RETRY_AFTER_SECONDS, GeminiProvider, LLMError, LLMReply, Message, RequestRateLimiter,
+                              RetryableLLMError, ToolCall, ToolSpec,
                               translate_gemini_error)
 
 
@@ -71,3 +72,61 @@ def test_empty_response_is_a_clear_error(provider):
 def test_tool_specs_become_function_declarations(provider):
     spec = ToolSpec("search_documents", "Search.", {"type": "object", "properties": {"query": {"type": "string"}}})
     assert provider.convert_tools([spec]).function_declarations[0].name == "search_documents"
+
+
+def rate_limit_error(details, message):
+    return gemini_errors.APIError(429, {"error": {"code": 429, "message": message, "status": "RESOURCE_EXHAUSTED",
+                                                  "details": details}})
+
+
+def test_rate_limit_carries_the_providers_retry_delay():
+    structured = rate_limit_error([{"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "49s"}],
+                                  "Quota exceeded. Please retry in 49.6s.")
+    assert translate_gemini_error(structured).retry_after_seconds == 49.0  # the structured hint wins
+    text_only = rate_limit_error([], "Quota exceeded. Please retry in 12.5s.")
+    assert translate_gemini_error(text_only).retry_after_seconds == 12.5
+    no_hint = rate_limit_error([], "Quota exceeded.")
+    assert translate_gemini_error(no_hint).retry_after_seconds is None
+
+
+def test_retry_delay_is_capped():
+    huge = rate_limit_error([{"retryDelay": "3600s"}], "")
+    assert translate_gemini_error(huge).retry_after_seconds == MAX_RETRY_AFTER_SECONDS
+
+
+class FakeClock:
+    def __init__(self):
+        self.now = 0.0
+        self.sleeps = []
+
+    def time(self):
+        return self.now
+
+    def sleep(self, seconds):
+        self.sleeps.append(seconds)
+        self.now += seconds
+
+
+def test_rate_limiter_waits_only_when_the_minute_is_full():
+    clock = FakeClock()
+    limiter = RequestRateLimiter(requests_per_minute=3, clock=clock.time, sleep=clock.sleep)
+    for _ in range(3):
+        limiter.wait_for_turn()
+        clock.now += 1  # one request per second
+    assert clock.sleeps == []  # 3 requests in 3 s: within the limit
+    limiter.wait_for_turn()  # the 4th inside the same minute must wait until the 1st is a minute old
+    assert clock.sleeps == [pytest.approx(57.0)]
+
+
+def test_rate_limiter_does_not_wait_after_the_window_passed_and_zero_means_unlimited():
+    clock = FakeClock()
+    limiter = RequestRateLimiter(requests_per_minute=2, clock=clock.time, sleep=clock.sleep)
+    limiter.wait_for_turn()
+    limiter.wait_for_turn()
+    clock.now += 61
+    limiter.wait_for_turn()
+    assert clock.sleeps == []
+    unlimited = RequestRateLimiter(requests_per_minute=0, clock=clock.time, sleep=clock.sleep)
+    for _ in range(100):
+        unlimited.wait_for_turn()
+    assert clock.sleeps == []

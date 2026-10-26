@@ -55,7 +55,8 @@ def main() -> None:
     items = load_items(arguments.split)[:arguments.limit]
     store, embedder = build_store(settings)
     searcher = HybridSearcher(store, embedder, mode=arguments.mode)
-    llm = CachingLLM(GeminiProvider(settings.gemini_api_key, settings.gemini_model, settings.llm_timeout_seconds),
+    llm = CachingLLM(GeminiProvider(settings.gemini_api_key, settings.gemini_model, settings.llm_timeout_seconds,
+                         requests_per_minute=settings.llm_requests_per_minute),
                      CACHE_FOLDER)
     agent = InvestigationAgent(llm, create_tool_executor=lambda: ToolExecutor(searcher, store),
                                validate_citations=validate_citations)

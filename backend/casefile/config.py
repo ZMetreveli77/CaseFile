@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     llm_provider: str = "gemini"  # "gemini" | "groq"
     gemini_model: str = "gemini-3.5-flash-lite"  # fast and available on the free tier (Oct 2026)
     llm_timeout_seconds: int = 30  # a request that takes longer is treated as a temporary failure
+    llm_requests_per_minute: int = 14  # one under the Gemini free tier limit (15/min); 0 = no limit
     groq_model: str = "llama-3.3-70b-versatile"
 
     # Empty qdrant_url -> in-memory Qdrant (tests / quick local runs).

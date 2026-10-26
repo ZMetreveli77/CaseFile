@@ -1,10 +1,17 @@
 """LLM providers behind one interface. Provider-specific errors are translated into the two exceptions below,
 so the rest of the code (retries, the agent) never depends on one vendor's SDK."""
+import re
+import threading
+import time
+from collections import deque
 from dataclasses import dataclass, field
 from typing import Any, Callable, Protocol
 
 RETRYABLE_STATUS_CODES = frozenset({429, 500, 502, 503, 504})  # rate limit, server error, overloaded, timeout
 MILLISECONDS_PER_SECOND = 1000
+MAX_RETRY_AFTER_SECONDS = 120.0  # never trust a provider's "wait this long" hint beyond this (keeps the app responsive)
+RETRY_DELAY_IN_MESSAGE = re.compile(r"retry in ([\d.]+)\s*s", re.IGNORECASE)  # "Please retry in 49.6s."
+SECONDS_PER_MINUTE = 60.0
 
 
 class LLMError(Exception):
@@ -64,6 +71,52 @@ class LLMProvider(Protocol):
 
 # ---- Gemini ----
 
+def find_retry_delay_seconds(error_json: Any, message: str) -> float | None:
+    """How long the provider asked us to wait, e.g. after a 429 rate limit; None if it didn't say.
+
+    Google's errors carry a structured hint ({"@type": ".../google.rpc.RetryInfo", "retryDelay": "49s"}) and repeat it
+    in the text ("Please retry in 49.6s."). The structured one is read first. Capped at MAX_RETRY_AFTER_SECONDS.
+    """
+    details = (error_json or {}).get("error", {}).get("details", []) if isinstance(error_json, dict) else []
+    for detail in details if isinstance(details, list) else []:
+        delay = detail.get("retryDelay") if isinstance(detail, dict) else None
+        if isinstance(delay, str) and delay.endswith("s"):
+            try:
+                return min(float(delay[:-1]), MAX_RETRY_AFTER_SECONDS)
+            except ValueError:
+                pass
+    match = RETRY_DELAY_IN_MESSAGE.search(message)
+    return min(float(match.group(1)), MAX_RETRY_AFTER_SECONDS) if match else None
+
+
+class RequestRateLimiter:
+    """Keeps requests under a per-minute limit (Gemini's free tier allows 15/min), waiting when a send would exceed it.
+
+    Sliding window: remember when the recent requests were sent; if the window is full, sleep until the oldest one is
+    a minute old. Prevents most 429 errors instead of recovering from them. Thread-safe (the API serves in parallel).
+    """
+
+    def __init__(self, requests_per_minute: int, clock: Callable[[], float] = time.monotonic,
+                 sleep: Callable[[float], None] = time.sleep):
+        self.requests_per_minute = requests_per_minute
+        self.clock, self.sleep = clock, sleep
+        self.sent_times: deque[float] = deque()
+        self.lock = threading.Lock()
+
+    def wait_for_turn(self) -> None:
+        if self.requests_per_minute <= 0:  # 0 = no limit
+            return
+        with self.lock:
+            now = self.clock()
+            while self.sent_times and now - self.sent_times[0] >= SECONDS_PER_MINUTE:
+                self.sent_times.popleft()  # older than a minute: no longer counts
+            if len(self.sent_times) >= self.requests_per_minute:
+                self.sleep(SECONDS_PER_MINUTE - (now - self.sent_times[0]))
+                self.sent_times.popleft()
+                now = self.clock()
+            self.sent_times.append(now)
+
+
 def translate_gemini_error(error: Exception) -> LLMError:
     """Map a google-genai / network error to RetryableLLMError (temporary) or LLMError (permanent)."""
     from google.genai import errors as gemini_errors
@@ -72,7 +125,7 @@ def translate_gemini_error(error: Exception) -> LLMError:
     if isinstance(error, gemini_errors.APIError):
         message = f"Gemini error {error.code}: {error.message}"
         if error.code in RETRYABLE_STATUS_CODES:
-            return RetryableLLMError(message)
+            return RetryableLLMError(message, retry_after_seconds=find_retry_delay_seconds(error.details, message))
         return LLMError(message)
     if isinstance(error, (httpx.TimeoutException, httpx.NetworkError)):
         return RetryableLLMError(f"Network problem talking to Gemini: {error}")
@@ -81,7 +134,7 @@ def translate_gemini_error(error: Exception) -> LLMError:
 
 class GeminiProvider:
     def __init__(self, api_key: str, model_name: str, timeout_seconds: int,
-                 call_with_retries: Callable | None = None):
+                 call_with_retries: Callable | None = None, requests_per_minute: int = 0):
         if not api_key:
             raise LLMError("GEMINI_API_KEY is not set (add it to .env)")
         from google import genai
@@ -92,6 +145,7 @@ class GeminiProvider:
         self.client = genai.Client(api_key=api_key,
                                    http_options=types.HttpOptions(timeout=timeout_seconds * MILLISECONDS_PER_SECOND))
         self.call_with_retries = call_with_retries
+        self.rate_limiter = RequestRateLimiter(requests_per_minute)
 
     def generate(self, system_prompt: str, messages: list[Message], tools: list[ToolSpec]) -> LLMReply:
         config = self.types.GenerateContentConfig(
@@ -104,6 +158,7 @@ class GeminiProvider:
         contents = [self.convert_message(message) for message in messages]
 
         def send_request():
+            self.rate_limiter.wait_for_turn()  # inside the retried function, so retries are paced too
             try:
                 return self.client.models.generate_content(model=self.model_name, contents=contents, config=config)
             except Exception as error:

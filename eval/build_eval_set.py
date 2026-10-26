@@ -40,7 +40,8 @@ def write_jsonl(records: list[dict], path: Path) -> None:
 
 def generate_simple_questions(paragraphs: list[dict]) -> list[dict]:
     settings = get_settings()
-    llm = GeminiProvider(settings.gemini_api_key, settings.gemini_model, settings.llm_timeout_seconds)
+    llm = GeminiProvider(settings.gemini_api_key, settings.gemini_model, settings.llm_timeout_seconds,
+                         requests_per_minute=settings.llm_requests_per_minute)
     generated = []
     for number, paragraph in enumerate(paragraphs, start=1):
         reply = llm.generate(SIMPLE_QUESTION_PROMPT, [Message(role="user", text=f"Title: {paragraph['title']}\n\n"
