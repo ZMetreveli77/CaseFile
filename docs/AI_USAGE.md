@@ -663,3 +663,31 @@ I wrote `eval/tune_reranker.py`: a grid search over `COVERAGE_WEIGHT` × `MMR_LA
 unsupported sentence in my notes, which it reworded after isolating the two features with my results. At my request
 it applied the decision (`DEFAULT_SEARCH_MODE = "hybrid"` in `search.py`, used by `rag/setup.py`). I wrote the script,
 ran it and made the decision.
+
+### Final runs, fixes found on the test run, judge check and evaluation report (milestone 7)
+- **AI did (step 5):** ran the final evaluations.
+  - Retrieval on test: hybrid gets both paragraphs into the top 5 more often (0.80 vs 0.70), but dense ranks the first
+    hit higher (MRR 0.825 vs 0.747); no clear winner on test.
+  - Answers on test (first run): agent judge 0.65 vs one-search baseline 0.70, with 30% false abstentions.
+- **A bug found while analysing the test run:**
+  - **Symptom:** the model sometimes cited a document id instead of a chunk id, so my validator correctly removed the
+    citation and turned correct answers into abstentions.
+  - **Present on dev too** (the earlier "writer" miss), so it's a genuine defect.
+  - **AI fix, at my request:**
+    - which id to cite is now stated in the tool and answer format;
+    - my validator now resolves a document-id citation to that document's retrieved chunks (4 tests), while
+      never-retrieved documents stay invalid;
+    - one retry on an empty or invalid final reply.
+  - **Dev after the fixes:** judge 1.00 and 0 false abstentions.
+  - The first test run is kept and reported unchanged. A post-fix test run is pending: the free tier's daily limit
+    (500 requests) ran out.
+- **Other AI fixes:**
+  - When the provider asks to wait longer than the retry cap (a daily quota: "retry in 7h"), fail at once instead of
+    retrying for minutes.
+  - Abstention precision no longer counts refusals on contradictory questions as needless.
+- **Judge check (E2): done by Claude Code at my request, not by a human** (`eval/results/judge_check.md`).
+  - Agreement was 17/17 on the answers that aren't exact matches.
+  - No exact match was marked wrong.
+  - The judge is slightly lenient.
+- **Error analysis (A): written by Claude Code at my request** (`docs/EVALUATION.md`, section 6), from the results of
+  my and the AI's runs.
