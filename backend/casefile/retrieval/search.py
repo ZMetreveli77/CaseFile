@@ -7,12 +7,15 @@ from casefile.retrieval.rerank import MMR_LAMBDA, rerank_results
 from casefile.retrieval.store import QdrantStore
 
 SEARCH_MODES = ("dense", "hybrid", "hybrid_rerank")
+# Chosen by the reranker tuning on the dev split (eval/results/tuning_notes.md): no reranker setting beat plain hybrid
+# by more than one question, and the current reranker settings were one question worse, so the simpler mode wins.
+DEFAULT_SEARCH_MODE = "hybrid"
 CANDIDATES_PER_RESULT = 4  # fetch top_k * 4 from each search so fusion/rerank have room to re-order
 DEFAULT_TOP_K = 8
 
 
 class HybridSearcher:
-    def __init__(self, store: QdrantStore, embedder: TextEmbedder, mode: str = "hybrid_rerank",
+    def __init__(self, store: QdrantStore, embedder: TextEmbedder, mode: str = DEFAULT_SEARCH_MODE,
                  dense_weight: float = 1.0, sparse_weight: float = 1.0,
                  mmr_lambda: float = MMR_LAMBDA):
         if mode not in SEARCH_MODES:
