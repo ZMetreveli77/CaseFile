@@ -530,3 +530,34 @@ edge-case decision in the docstrings:
 **AI help:** Claude Code split the task into steps with suggested signatures and edge cases to decide. Its review
 found a duplicate import, and it ran the mutation check and the first retrieval evaluation with my metrics. I wrote
 the code and tests myself.
+
+### Checking the evaluation questions by hand (milestone 7, E1)
+I reviewed all 10 generated simple questions against their source paragraphs, and searched for all 10 unanswerable
+ones. My verdicts and reasons are in `eval/question_review.md`.
+
+**Simple questions** (10): 3 kept, 6 fixed, 1 replaced.
+- simple-02: named the district, to make the place unambiguous.
+- simple-03: replaced. It asked about the historical Imhotep, but its paragraph is about the film character, and the
+  answer is general knowledge the model could give without searching. The new question asks about the 2017 film.
+- simple-05: named The Simpsons.
+- simple-06: removed "primary", which the paragraph doesn't say.
+- simple-07: added the year and actors, because a 1958 film has the same title.
+- simple-08: named The Walking Dead.
+- simple-09: changed the gold answer from "six seasons" to "six".
+
+I noted two scoring weaknesses this surfaced:
+- "31 May 1980" vs "May 31, 1980" fails exact match but gets F1 1.0.
+- "6" vs "six" scores 0 on both, because word-based metrics don't match digits to words.
+
+**Unanswerable questions** (10): none could be answered from the search results.
+
+**AI help:**
+- Claude Code flagged three suspicious questions beforehand and wrote the print and search snippets I used.
+- It checked my rewritten questions against the paragraphs (all supported).
+- It applied two corrections at my request:
+  - simple-02's gold title had been changed by mistake to "Dhusha", a title that doesn't exist in the corpus, while
+    the reviewed wording hadn't been applied. Restored "Dhussa" and applied the wording.
+  - Two sentences in the review guessed at paragraphs that aren't in the corpus. Corrected after checking.
+- It rebuilt the set and confirmed every question kept its dev/test split.
+
+I did the review and wrote the verdicts myself, with no other tool.
