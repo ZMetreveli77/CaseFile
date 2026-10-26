@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from typing import Callable
 
 from casefile.rag.llm import LLMProvider, Message
-from casefile.rag.prompts import FINAL_ANSWER_REMINDER, build_system_prompt
+from casefile.rag.prompts import FINAL_ANSWER_REMINDER, FORMAT_REPAIR_REMINDER, build_system_prompt
 from casefile.rag.tools import AGENT_TOOLS, ToolExecutor
 
 MAX_TOOL_STEPS = 5  # rounds of tool use per question: enough for 2-hop questions, bounded cost on the free tier
@@ -122,7 +122,7 @@ class InvestigationAgent:
             llm_calls += 1
             messages.append(Message.from_reply(reply))
             if not reply.tool_calls:
-                return self.finish(question, reply.text, tool_executor, llm_calls)
+                return self.finish(question, messages, reply.text, tool_executor, llm_calls)
             for tool_call in reply.tool_calls:
                 send_event(on_event, {"type": "tool_call", "tool": tool_call.name,
                                       "arguments": dict(tool_call.arguments)})
@@ -134,14 +134,28 @@ class InvestigationAgent:
         messages.append(Message(role="user", text=FINAL_ANSWER_REMINDER))
         reply = self.llm.generate(self.system_prompt, messages, tools=[])
         llm_calls += 1
-        return self.finish(question, reply.text, tool_executor, llm_calls)
+        messages.append(Message.from_reply(reply))
+        return self.finish(question, messages, reply.text, tool_executor, llm_calls)
 
-    def finish(self, question: str, final_text: str, tool_executor: ToolExecutor, llm_calls: int) -> InvestigationAnswer:
+    def finish(self, question: str, messages: list[Message], final_text: str, tool_executor: ToolExecutor,
+               llm_calls: int) -> InvestigationAnswer:
         try:
             answer = parse_final_answer(question, final_text)
         except ValueError:
-            answer = InvestigationAnswer(question=question, should_abstain=True, abstain_reason=INVALID_FORMAT_REASON,
-                                         notes=[f"unparseable final reply: {final_text[:200]!r}"])
+            # One more try before giving up: the evaluation saw an empty final reply turn a question into an
+            # abstention. Empty assistant turns are left out, because the API can reject a message with no content.
+            repair_messages = [message for message in messages
+                               if message.role != "assistant" or message.text or message.tool_calls]
+            repair_messages.append(Message(role="user", text=FORMAT_REPAIR_REMINDER))
+            repair_reply = self.llm.generate(self.system_prompt, repair_messages, tools=[])
+            llm_calls += 1
+            try:
+                answer = parse_final_answer(question, repair_reply.text)
+                answer.notes.append("final reply was invalid on the first attempt and repaired by one retry")
+            except ValueError:
+                answer = InvestigationAnswer(
+                    question=question, should_abstain=True, abstain_reason=INVALID_FORMAT_REASON,
+                    notes=[f"unparseable final reply: {final_text[:200]!r}; after one retry: {repair_reply.text[:200]!r}"])
         answer.search_queries = list(tool_executor.search_queries)
         answer.retrieved_chunk_ids = list(tool_executor.retrieved_chunks)
         answer.source_titles = {chunk_id: chunk.title for chunk_id, chunk in tool_executor.retrieved_chunks.items()}

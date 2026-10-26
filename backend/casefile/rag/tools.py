@@ -11,8 +11,9 @@ MAX_DOCUMENT_CHARACTERS = 4000  # cap for read_document, so one long document ca
 SEARCH_DOCUMENTS = ToolSpec(
     name="search_documents",
     description=("Search the document collection (hybrid semantic + keyword search). Returns the most relevant "
-                 "passages with their chunk_id, title and text. Call it again with a new query when an answer needs "
-                 "a fact you have not found yet, e.g. an entity you learned about from a previous result."),
+                 "passages with their chunk_id, doc_id, title and text. Cite a passage by its chunk_id (it ends in "
+                 "\":<number>\"); the doc_id is only for read_document. Call it again with a new query when an answer "
+                 "needs a fact you have not found yet, e.g. an entity you learned about from a previous result."),
     parameters={"type": "object",
                 "properties": {"query": {"type": "string", "description": "What to look for, in your own words."}},
                 "required": ["query"]},

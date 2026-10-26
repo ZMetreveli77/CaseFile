@@ -5,7 +5,7 @@ import pytest
 from casefile.rag.agent import INVALID_FORMAT_REASON, InvestigationAgent, describe_tool_result, extract_json_object
 from casefile.models import Chunk
 from casefile.rag.llm import LLMError, LLMReply, ToolCall
-from casefile.rag.prompts import FINAL_ANSWER_REMINDER
+from casefile.rag.prompts import FINAL_ANSWER_REMINDER, FORMAT_REPAIR_REMINDER
 from tests.fakes import FakeLLM
 
 
@@ -79,11 +79,21 @@ def test_step_limit_forces_a_final_answer_without_tools():
     assert answer.answer == "best effort" and answer.llm_calls == 3
 
 
-def test_unparseable_final_reply_becomes_an_abstention():
-    agent, _ = make_agent([LLMReply(text="I think the answer is probably Paris.")])
+def test_unparseable_final_reply_twice_becomes_an_abstention():
+    agent, llm = make_agent([LLMReply(text="I think the answer is probably Paris."), LLMReply(text="Still Paris.")])
     answer = agent.answer("question")
     assert answer.should_abstain and answer.abstain_reason == INVALID_FORMAT_REASON
     assert answer.answer == "" and answer.claims == []
+    assert answer.llm_calls == 2 and llm.requests[1][1] == []  # one retry, without tools
+
+
+def test_an_empty_final_reply_is_repaired_by_one_retry():
+    agent, llm = make_agent([search("q"), LLMReply(text=""), final_json(answer="Paris")])
+    answer = agent.answer("question")
+    assert answer.answer == "Paris" and not answer.should_abstain and answer.llm_calls == 3
+    repair_messages, _ = llm.requests[-1]
+    assert repair_messages[-1].text == FORMAT_REPAIR_REMINDER
+    assert all(message.text or message.tool_calls for message in repair_messages if message.role == "assistant")
 
 
 def test_json_inside_markdown_fences_is_accepted():

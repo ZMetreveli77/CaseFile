@@ -26,10 +26,14 @@ ANSWER_FORMAT = """When you are done searching, reply with ONLY this JSON object
 }
 The "answer" field holds only the answer: a name, place, number, date, or yes/no, never a sentence.
 Examples: "Greenwich Village", "1945", "Eli Roth", "yes". For a yes/no question write exactly "yes" or "no".
-Explanations and evidence belong in "claims", not in "answer"."""
+Explanations and evidence belong in "claims", not in "answer".
+"citations" are chunk_id values exactly as shown in the tool results (they end in ":<number>"), never doc_id."""
 
 FINAL_ANSWER_REMINDER = ("You have used all your search steps. Do not call tools any more. Give your final answer now, "
                          "as the JSON object described in your instructions, using only what you have already found.")
+
+FORMAT_REPAIR_REMINDER = ("Your last reply was empty or not the required JSON object. Do not call tools. Reply now with "
+                          "ONLY the JSON object described in your instructions, using only what you have already found.")
 
 
 def build_system_prompt() -> str:
