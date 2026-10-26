@@ -1,0 +1,3927 @@
+{
+  "split": "test",
+  "mode": "hybrid",
+  "model": "gemini-3.5-flash-lite",
+  "configurations": {
+    "agent": {
+      "summary": {
+        "questions": 30,
+        "answer_accuracy_judge": 0.65,
+        "exact_match": 0.45,
+        "f1": 0.546,
+        "evidence_retrieved": 0.85,
+        "citation_precision": 1.0,
+        "citation_recall": 1.0,
+        "false_abstention_rate": 0.3,
+        "abstention_precision": 0.333,
+        "abstention_recall": 1.0,
+        "conflict_detection": 1.0,
+        "llm_calls_per_question": 3.167,
+        "searches_per_question": 2.3
+      },
+      "seconds": 435,
+      "by_category": {
+        "bridge": {
+          "questions": 10,
+          "answer_accuracy_judge": 0.6,
+          "exact_match": 0.3,
+          "f1": 0.492,
+          "evidence_retrieved": 0.7,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "false_abstention_rate": 0.4,
+          "abstention_precision": 0.0,
+          "abstention_recall": null,
+          "conflict_detection": null,
+          "llm_calls_per_question": 4.1,
+          "searches_per_question": 3.1
+        },
+        "comparison": {
+          "questions": 5,
+          "answer_accuracy_judge": 0.4,
+          "exact_match": 0.4,
+          "f1": 0.4,
+          "evidence_retrieved": 1.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "false_abstention_rate": 0.4,
+          "abstention_precision": 0.0,
+          "abstention_recall": null,
+          "conflict_detection": null,
+          "llm_calls_per_question": 2.8,
+          "searches_per_question": 2.6
+        },
+        "contradictory": {
+          "questions": 5,
+          "answer_accuracy_judge": null,
+          "exact_match": null,
+          "f1": null,
+          "evidence_retrieved": null,
+          "citation_precision": null,
+          "citation_recall": null,
+          "false_abstention_rate": null,
+          "abstention_precision": 0.0,
+          "abstention_recall": null,
+          "conflict_detection": 1.0,
+          "llm_calls_per_question": 2.2,
+          "searches_per_question": 1.2
+        },
+        "simple": {
+          "questions": 5,
+          "answer_accuracy_judge": 1.0,
+          "exact_match": 0.8,
+          "f1": 0.8,
+          "evidence_retrieved": 1.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "false_abstention_rate": 0.0,
+          "abstention_precision": null,
+          "abstention_recall": null,
+          "conflict_detection": null,
+          "llm_calls_per_question": 2.0,
+          "searches_per_question": 1.0
+        },
+        "unanswerable": {
+          "questions": 5,
+          "answer_accuracy_judge": null,
+          "exact_match": null,
+          "f1": null,
+          "evidence_retrieved": null,
+          "citation_precision": null,
+          "citation_recall": null,
+          "false_abstention_rate": null,
+          "abstention_precision": 1.0,
+          "abstention_recall": 1.0,
+          "conflict_detection": null,
+          "llm_calls_per_question": 3.8,
+          "searches_per_question": 2.8
+        }
+      },
+      "results": [
+        {
+          "id": "5a7b78c35542997c3ec971a9",
+          "category": "bridge",
+          "question": "What year was the voice actress of an animated television series premiered on Cartoon Network born?",
+          "gold": "1967",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 6,
+            "searches": 5,
+            "evidence_retrieved": false,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": null,
+            "correct": false,
+            "citation_precision": null,
+            "citation_recall": null
+          },
+          "answer": {
+            "question": "What year was the voice actress of an animated television series premiered on Cartoon Network born?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The documents mention several voice actresses of animated television series premiered on Cartoon Network (such as Deedee Magno and Michaela Dietz), but do not contain their birth years.",
+            "search_queries": [
+              "voice actress animated television series premiered on Cartoon Network born",
+              "Deedee Magno born",
+              "\"Deedee Magno\" born",
+              "\"Michaela Dietz\" born",
+              "\"Deedee Magno Hall\" born"
+            ],
+            "retrieved_chunk_ids": [
+              "eab89f39234e7b9b:0",
+              "f11190c00dc98388:0",
+              "aecb47c2bcab49a7:1",
+              "b43c7927c5958545:0",
+              "46ff86ba0414e2b3:0",
+              "2563b2716feb1ccd:0",
+              "ce2efcada4690cba:0",
+              "182a64bb9ff5727c:0",
+              "c86274403e97de34:0",
+              "12213134edfb5625:0",
+              "8f8e7a3085686eb7:0",
+              "b823983c4f1cad25:0",
+              "40aeadefe86f299f:2",
+              "fa707a0218948819:0",
+              "c874a0ccb372ace9:0",
+              "7b52224cc046782d:0",
+              "0e3f1537bc619898:0",
+              "d0a7331ae61c4d38:0",
+              "23f3ea5a7d08508d:0",
+              "4ba1cbe02a33c476:0",
+              "b76bdb0fe341f379:0",
+              "9c656298b4b785d3:0",
+              "95f9e1c591ca92ed:0"
+            ],
+            "source_titles": {
+              "eab89f39234e7b9b:0": "List of Dexter's Laboratory episodes",
+              "f11190c00dc98388:0": "Steven Universe",
+              "aecb47c2bcab49a7:1": "Wendy Testaburger",
+              "b43c7927c5958545:0": "Cory Doran",
+              "46ff86ba0414e2b3:0": "Teen Titans (season 1)",
+              "2563b2716feb1ccd:0": "Sheep in the Big City",
+              "ce2efcada4690cba:0": "Marissa Perry",
+              "182a64bb9ff5727c:0": "JoJo (singer)",
+              "c86274403e97de34:0": "Tinka Milinović",
+              "12213134edfb5625:0": "Elizabeth Jagger",
+              "8f8e7a3085686eb7:0": "Janine Gutierrez",
+              "b823983c4f1cad25:0": "Biddu",
+              "40aeadefe86f299f:2": "Equal Opportunity to Govern Amendment",
+              "fa707a0218948819:0": "Michaela von Habsburg",
+              "c874a0ccb372ace9:0": "Idina Menzel",
+              "7b52224cc046782d:0": "Viva Bianca",
+              "0e3f1537bc619898:0": "Azealia Banks",
+              "d0a7331ae61c4d38:0": "Michaela Schaffrath",
+              "23f3ea5a7d08508d:0": "Aaron Hall (singer)",
+              "4ba1cbe02a33c476:0": "Dave U. Hall",
+              "b76bdb0fe341f379:0": "Michelle Magorian",
+              "9c656298b4b785d3:0": "Andre Hall (actor)",
+              "95f9e1c591ca92ed:0": "Tony Hall, Baron Hall of Birkenhead"
+            },
+            "llm_calls": 6,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ae27b535542996483e649b6",
+          "category": "bridge",
+          "question": "The chorus of \"On the Radio\" contains references to the song \"November Rain\" whose band's lead singer is?",
+          "gold": "Axl Rose",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'Axl Rose' correctly identifies the lead singer of Guns N' Roses, the band behind 'November Rain'."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 3,
+            "searches": 2,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "The chorus of \"On the Radio\" contains references to the song \"November Rain\" whose band's lead singer is?",
+            "answer": "Axl Rose",
+            "claims": [
+              {
+                "text": "\"On the Radio\" is the first single from Regina Spektor's fourth album, \"Begin to Hope\". The chorus contains references to the song \"November Rain\" by Guns N' Roses.",
+                "citations": [
+                  "d88d778fc70054e7:0"
+                ]
+              },
+              {
+                "text": "\"November Rain\" is a power ballad by the American hard rock band Guns N' Roses. Written by the band's lead singer Axl Rose...",
+                "citations": [
+                  "13e9c2415466a60e:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "On the Radio chorus November Rain",
+              "Axl Rose Guns N' Roses lead singer"
+            ],
+            "retrieved_chunk_ids": [
+              "d88d778fc70054e7:0",
+              "80d39ba03360b130:0",
+              "13e9c2415466a60e:0",
+              "1ef824210d5e963d:1",
+              "842f360e3170b466:1",
+              "4719cf5dc0125959:0",
+              "ac1b16f5b6f8381c:0",
+              "9d038ad2848bac0a:0",
+              "6a6603f27b4b910d:0",
+              "4ca9f4d2c4f81252:0",
+              "919605ccf360fd71:0"
+            ],
+            "source_titles": {
+              "d88d778fc70054e7:0": "On the Radio (Regina Spektor song)",
+              "80d39ba03360b130:0": "The Rain Rain Rain Came Down Down Down",
+              "13e9c2415466a60e:0": "November Rain",
+              "1ef824210d5e963d:1": "Live in Buffalo: July 4th, 2004",
+              "842f360e3170b466:1": "Weather and Water",
+              "4719cf5dc0125959:0": "Brick (song)",
+              "ac1b16f5b6f8381c:0": "One in a Million (Guns N' Roses song)",
+              "9d038ad2848bac0a:0": "Guns N' Roses",
+              "6a6603f27b4b910d:0": "Chris Weber",
+              "4ca9f4d2c4f81252:0": "Hollywood Rose",
+              "919605ccf360fd71:0": "List of songs recorded by Guns N' Roses"
+            },
+            "llm_calls": 3,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ab5574b554299488d4d994e",
+          "category": "bridge",
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "gold": "The Social Network",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies 'The Social Network', which matches the gold answer."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 6,
+            "searches": 5,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+            "answer": "The Social Network",
+            "claims": [
+              {
+                "text": "Robin R. Bottin is known for collaborations with directors including David Fincher.",
+                "citations": [
+                  "883505ccbf41d3b9:0"
+                ]
+              },
+              {
+                "text": "David Fincher is an American director and producer who won a Golden Globe Award and a BAFTA Award for 'The Social Network' (and was nominated for the Academy Award for Best Director for it).",
+                "citations": [
+                  "11cb9bba8a425a44:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Robin R. Bottin collaboration director producer Academy Award Golden Globe BAFTA",
+              "\"David Fincher\" Academy Award Golden Globe BAFTA movie",
+              "\"The Social Network\" Academy Award wins",
+              "\"David Fincher\" Academy Award won film",
+              "Robin Bottin collaborator Academy Award Golden Globe BAFTA"
+            ],
+            "retrieved_chunk_ids": [
+              "11cb9bba8a425a44:0",
+              "a4454d298d32fb52:1",
+              "883505ccbf41d3b9:0",
+              "e583b2a50ef8ddae:1",
+              "180a47cec63ff750:0",
+              "a3304d2278100c70:0",
+              "3fa50b1e103db3d2:1",
+              "9e62104e6f7a6e77:1",
+              "3fa50b1e103db3d2:0",
+              "d87a8cad65da9ab9:0",
+              "93035fee85dd5b74:0",
+              "d16699ba698708cd:0",
+              "7bcaa8cfadce4caf:0",
+              "73d7721dd34284bb:1",
+              "50bbc6135be26ae9:1",
+              "d8842be6e4170ceb:0",
+              "8518a79a734302d8:1",
+              "013ee81181afa7cc:0",
+              "eb4ad392f37c8c8d:0",
+              "88b00fdb36bbbe56:0",
+              "8b178d1910b166c0:0"
+            ],
+            "source_titles": {
+              "11cb9bba8a425a44:0": "David Fincher",
+              "a4454d298d32fb52:1": "Damien Chazelle",
+              "883505ccbf41d3b9:0": "Rob Bottin",
+              "e583b2a50ef8ddae:1": "Wash West",
+              "180a47cec63ff750:0": "Al Pacino on stage and screen",
+              "a3304d2278100c70:0": "71st Golden Globe Awards",
+              "3fa50b1e103db3d2:1": "Cate Blanchett",
+              "9e62104e6f7a6e77:1": "Emily Blunt",
+              "3fa50b1e103db3d2:0": "Cate Blanchett",
+              "d87a8cad65da9ab9:0": "70th British Academy Film Awards",
+              "93035fee85dd5b74:0": "Geoffrey Rush",
+              "d16699ba698708cd:0": "Ceán Chaffin",
+              "7bcaa8cfadce4caf:0": "The Social Network",
+              "73d7721dd34284bb:1": "The Bridges of Madison County (film)",
+              "50bbc6135be26ae9:1": "List of accolades received by American Beauty",
+              "d8842be6e4170ceb:0": "Sidney Lumet",
+              "8518a79a734302d8:1": "List of Primetime Emmy Awards received by Netflix",
+              "013ee81181afa7cc:0": "Academy Award for Best Film Editing",
+              "eb4ad392f37c8c8d:0": "Angus Wall",
+              "88b00fdb36bbbe56:0": "Al Pacino",
+              "8b178d1910b166c0:0": "List of American films of 2004"
+            },
+            "llm_calls": 6,
+            "notes": []
+          }
+        },
+        {
+          "id": "5abf0bf95542997719eab63a",
+          "category": "bridge",
+          "question": "José Rubia Barcia  published a great number of books and articles on a Spanish poet, playwright, and what?",
+          "gold": "theatre director",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'theatre director' matches the gold answer."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 3,
+            "searches": 2,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "José Rubia Barcia  published a great number of books and articles on a Spanish poet, playwright, and what?",
+            "answer": "theatre director",
+            "claims": [
+              {
+                "text": "José Rubia Barcia published a great number of books and articles on writers of the 20th century including Federico García Lorca.",
+                "citations": [
+                  "411078dc0d2e04fd:0"
+                ]
+              },
+              {
+                "text": "Federico García Lorca was a Spanish poet, playwright, and theatre director.",
+                "citations": [
+                  "5ae4dabd97094925:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "José Rubia Barcia Spanish poet playwright",
+              "Federico García Lorca poet playwright"
+            ],
+            "retrieved_chunk_ids": [
+              "411078dc0d2e04fd:0",
+              "5ae4dabd97094925:0",
+              "0c1b153e42e4971f:0",
+              "21c8dd11bedfcc87:0",
+              "83b67c98f6d20a99:0",
+              "f51983bd45fe3894:0",
+              "e0d3653e320e8481:2",
+              "578f405ac9f33f9c:0",
+              "5d5778e09f586fec:0"
+            ],
+            "source_titles": {
+              "411078dc0d2e04fd:0": "José Rubia Barcia",
+              "5ae4dabd97094925:0": "Federico García Lorca",
+              "0c1b153e42e4971f:0": "Shakespeare (disambiguation)",
+              "21c8dd11bedfcc87:0": "Cuban literature",
+              "83b67c98f6d20a99:0": "Carlos Fernández Shaw",
+              "f51983bd45fe3894:0": "Shakespeare bibliography",
+              "e0d3653e320e8481:2": "List of Argentine operas",
+              "578f405ac9f33f9c:0": "William Shakespeare",
+              "5d5778e09f586fec:0": "Enrique García-Máiquez"
+            },
+            "llm_calls": 3,
+            "notes": []
+          }
+        },
+        {
+          "id": "5addcfd65542997dc790703e",
+          "category": "bridge",
+          "question": "Which company had a ten year contract with the anti-hero from Escape From New York played by Kurt Russel? ",
+          "gold": "contract with The Walt Disney Company",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies The Walt Disney Company, which had a ten-year contract with Kurt Russell."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 2,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.7499999999999999,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Which company had a ten year contract with the anti-hero from Escape From New York played by Kurt Russel? ",
+            "answer": "The Walt Disney Company",
+            "claims": [
+              {
+                "text": "Snake Plissken is the anti-hero protagonist of Escape from New York and is portrayed by Kurt Russell.",
+                "citations": [
+                  "edff3e99317108ba:0"
+                ]
+              },
+              {
+                "text": "In the late 1960s, Kurt Russell signed a ten-year contract with The Walt Disney Company.",
+                "citations": [
+                  "59bc74d96740d967:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Escape From New York Kurt Russell anti-hero ten year contract company"
+            ],
+            "retrieved_chunk_ids": [
+              "edff3e99317108ba:0",
+              "59bc74d96740d967:0",
+              "e312ff6c11cb4746:0",
+              "995b59562206a01e:1",
+              "028ca2f259a2555f:0",
+              "39fe743604b17a7e:1"
+            ],
+            "source_titles": {
+              "edff3e99317108ba:0": "Snake Plissken",
+              "59bc74d96740d967:0": "Kurt Russell",
+              "e312ff6c11cb4746:0": "Now You See Him, Now You Don't",
+              "995b59562206a01e:1": "UCW-Zero Heavyweight Championship",
+              "028ca2f259a2555f:0": "The Computer Wore Tennis Shoes",
+              "39fe743604b17a7e:1": "List of accolades received by The Hurt Locker"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        },
+        {
+          "id": "5a721bbc55429971e9dc9279",
+          "category": "bridge",
+          "question": "Which Grammy Nominated album was created by a band whose members include John Bowman?",
+          "gold": "Nature's Symphony in 432",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 6,
+            "searches": 5,
+            "evidence_retrieved": false,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": null,
+            "correct": false,
+            "citation_precision": null,
+            "citation_recall": null
+          },
+          "answer": {
+            "question": "Which Grammy Nominated album was created by a band whose members include John Bowman?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The model did not return a valid answer, so no answer is given.",
+            "search_queries": [
+              "John Bowman band Grammy Nominated album",
+              "John Bowman band",
+              "\"John Bowman\" musician band OR group OR album OR grammy",
+              "\"John Bowman\" band OR album OR grammy OR music",
+              "\"John Bowman\" bluegrass OR gospel OR band"
+            ],
+            "retrieved_chunk_ids": [
+              "6c5d63c5a57e5a56:0",
+              "53d4334e4354a517:1",
+              "063d2dc3738c0c1c:0",
+              "c80050f6a0946df4:1",
+              "72331d339bccec4e:0",
+              "e05cd254ec898342:1",
+              "f49a8e30f41ccece:0",
+              "255b3e7ff2b91d5d:0",
+              "516a6ef579a540c7:0",
+              "081bb60a28c97fef:0",
+              "e31b63b6d003ac0f:0",
+              "7f2a495f0989fd74:1",
+              "c1f2c56e179ec4f3:0",
+              "1c66c27e083f02b4:0",
+              "664e98f2a4552a62:0",
+              "992da1f8841ffb8f:0",
+              "0c48dbdc94c225af:0",
+              "583377654f36237e:0",
+              "e3cd93669ac0daff:0",
+              "240e7296f0b46d0b:0",
+              "be80ea51888812f9:0",
+              "3c4105370f5d940b:0",
+              "5fdd6a6122ac06f8:0",
+              "00fa3419de2b60b5:0",
+              "842f360e3170b466:1",
+              "d867549a07feec08:0"
+            ],
+            "source_titles": {
+              "6c5d63c5a57e5a56:0": "Sixpence None the Richer (album)",
+              "53d4334e4354a517:1": "Blunderbuss (album)",
+              "063d2dc3738c0c1c:0": "Elephant (album)",
+              "c80050f6a0946df4:1": "Paul Nelson (musician)",
+              "72331d339bccec4e:0": "The Foundation (Zac Brown Band album)",
+              "e05cd254ec898342:1": "Hello, I'm Johnny Cash",
+              "f49a8e30f41ccece:0": "John Kirby (musician)",
+              "255b3e7ff2b91d5d:0": "John Bowman (pioneer)",
+              "516a6ef579a540c7:0": "Polar Bear (British band)",
+              "081bb60a28c97fef:0": "Beyond Rangoon",
+              "e31b63b6d003ac0f:0": "Manchester Orchestra",
+              "7f2a495f0989fd74:1": "Bu Laia",
+              "c1f2c56e179ec4f3:0": "Kerry Marx",
+              "1c66c27e083f02b4:0": "Bassist",
+              "664e98f2a4552a62:0": "Tool (band)",
+              "992da1f8841ffb8f:0": "Armen Chakmakian",
+              "0c48dbdc94c225af:0": "Jody Porter",
+              "583377654f36237e:0": "Johnnie Ray",
+              "e3cd93669ac0daff:0": "HazeBanga",
+              "240e7296f0b46d0b:0": "Mary Ramsey",
+              "be80ea51888812f9:0": "Bluegrass Cardinals",
+              "3c4105370f5d940b:0": "The Isaacs",
+              "5fdd6a6122ac06f8:0": "Johnson Mountain Boys",
+              "00fa3419de2b60b5:0": "Greensky Bluegrass",
+              "842f360e3170b466:1": "Weather and Water",
+              "d867549a07feec08:0": "Union Station (band)"
+            },
+            "llm_calls": 6,
+            "notes": [
+              "unparseable final reply: ''"
+            ]
+          }
+        },
+        {
+          "id": "5ab48ec25542991779162cdc",
+          "category": "bridge",
+          "question": "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?",
+          "gold": "Spurs",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 3,
+            "searches": 2,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": null,
+            "correct": false,
+            "citation_precision": null,
+            "citation_recall": null
+          },
+          "answer": {
+            "question": "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "None of the answer's claims cite evidence that was actually retrieved.",
+            "search_queries": [
+              "Leonard Francis Tottenham Hotspur",
+              "Leonard Francis footballer"
+            ],
+            "retrieved_chunk_ids": [
+              "b6bd358adfc674b7:0",
+              "c009830131424f8c:0",
+              "79a954482eea24c1:0",
+              "8ad9fec8fa354a2f:0",
+              "fe47c45d4e3d8c1e:0",
+              "ab6faff0f1561119:0",
+              "bf09cadf6db3aefc:0",
+              "2b6eb5f16d20415b:0",
+              "94e9a60928c53e92:0",
+              "d7cb7ff113055e24:0",
+              "ff0d1a8f897efb63:1"
+            ],
+            "source_titles": {
+              "b6bd358adfc674b7:0": "Len Worley",
+              "c009830131424f8c:0": "History of Tottenham Hotspur F.C.",
+              "79a954482eea24c1:0": "Tottenham Hotspur L.F.C.",
+              "8ad9fec8fa354a2f:0": "Tottenham Hotspur F.C.",
+              "fe47c45d4e3d8c1e:0": "Mauricio Pochettino",
+              "ab6faff0f1561119:0": "Dele Alli",
+              "bf09cadf6db3aefc:0": "Sean Francis (footballer)",
+              "2b6eb5f16d20415b:0": "Len Marlow",
+              "94e9a60928c53e92:0": "Thorgan Hazard",
+              "d7cb7ff113055e24:0": "Eddie Howe",
+              "ff0d1a8f897efb63:1": "1967 FA Charity Shield"
+            },
+            "llm_calls": 3,
+            "notes": [
+              "removed citation 8ad9fec8fa354a2f: not retrieved",
+              "removed claim 'Tottenham Hotspur Football Club, commonly referred to simply as Tottenham or Spurs, is an English football club': no valid citation"
+            ]
+          }
+        },
+        {
+          "id": "5abd83775542993062266cb7",
+          "category": "bridge",
+          "question": "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?",
+          "gold": "The Snowman",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 6,
+            "searches": 5,
+            "evidence_retrieved": false,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": null,
+            "correct": false,
+            "citation_precision": null,
+            "citation_recall": null
+          },
+          "answer": {
+            "question": "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The documents mention that 'Walking in the Air' from the 1982 animated film 'The Snowman' was performed by choirboy Peter Auty, but do not contain information about an English operatic tenor performing it for that film.",
+            "search_queries": [
+              "Walking in the Air 1982 animated film tenor",
+              "\"Walking in the Air\" operatic tenor OR tenor 1982 animated film OR \"The Snowman\"",
+              "\"Walking in the Air\" tenor OR \"The Snowman\" cover OR version tenor",
+              "\"The Snowman\" \"tenor\" OR \"Walking in the Air\" tenor",
+              "\"The Snowman\" \"operatic tenor\" OR \"tenor\" \"Walking in the Air\""
+            ],
+            "retrieved_chunk_ids": [
+              "593daabb403390a9:0",
+              "07b15e2cec0c4307:0",
+              "c6f50d4dd92f823c:0",
+              "629ed30f1487be5a:1",
+              "aa269ad5266aa0ca:0",
+              "16592df8768358aa:0",
+              "9fff47e85aeff251:0",
+              "34bb451f5f0d6784:0",
+              "3df6368d1fdbc282:0",
+              "a243b0cb7f806335:0",
+              "f0c4f5fed480a2c8:1",
+              "cade13ebe091333c:1",
+              "c71f8fc9635aaa7c:0",
+              "0888e78dccdf8283:0",
+              "c50f592b5ba0db5e:0",
+              "63427d7fe1488c62:0",
+              "93478cac5f72fef1:2",
+              "99bc2533d36b84bd:0"
+            ],
+            "source_titles": {
+              "593daabb403390a9:0": "Walking in the Air",
+              "07b15e2cec0c4307:0": "La Traviata (1983 film)",
+              "c6f50d4dd92f823c:0": "Cavalleria rusticana (1982 film)",
+              "629ed30f1487be5a:1": "Dog Tales (1958 film)",
+              "aa269ad5266aa0ca:0": "Walking Tall Part 2",
+              "16592df8768358aa:0": "Step in Time",
+              "9fff47e85aeff251:0": "David Hillman",
+              "34bb451f5f0d6784:0": "Nicholas Sharratt",
+              "3df6368d1fdbc282:0": "The Hunchback of Notre Dame (1996 film)",
+              "a243b0cb7f806335:0": "David Rendall",
+              "f0c4f5fed480a2c8:1": "Fantasia on Christmas Carols",
+              "cade13ebe091333c:1": "NBA 2K16",
+              "c71f8fc9635aaa7c:0": "Anthem (Chess song)",
+              "0888e78dccdf8283:0": "Trinity (My Dying Bride album)",
+              "c50f592b5ba0db5e:0": "Plácido Domingo discography",
+              "63427d7fe1488c62:0": "Repertoire of Plácido Domingo",
+              "93478cac5f72fef1:2": "James Westman",
+              "99bc2533d36b84bd:0": "Charles Craig (tenor)"
+            },
+            "llm_calls": 6,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ae0361155429925eb1afc2c",
+          "category": "bridge",
+          "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+          "gold": "Charles Eugène",
+          "judge": {
+            "correct": true,
+            "reason": "Charles Nungesser was the pilot of L'Oiseau Blanc (along with François Coli). Charles Eugène refers to Charles Eugène Nungesser."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 3,
+            "searches": 2,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.5,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+            "answer": "Charles Nungesser",
+            "claims": [
+              {
+                "text": "Charles Eugène Jules Marie Nungesser was a French ace pilot and adventurer, best remembered as a rival of Charles Lindbergh.",
+                "citations": [
+                  "ad9cbf0656d27c89:0"
+                ]
+              },
+              {
+                "text": "The aircraft was flown by French World War I aviation heroes, Charles Nungesser and François Coli.",
+                "citations": [
+                  "100fd0029e8667dd:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "L'Oiseau Blanc pilot adventurer",
+              "Charles Nungesser adventurer ace"
+            ],
+            "retrieved_chunk_ids": [
+              "6620168ec959c0fe:0",
+              "100fd0029e8667dd:0",
+              "cb85c4a20e816f68:0",
+              "25845669686ec7f8:1",
+              "3d51ad41dad0ec35:0",
+              "f1d64366d986e841:0",
+              "ad9cbf0656d27c89:0",
+              "7e1789f35d96e79a:1",
+              "c9641198075e8451:0",
+              "5a73be2a04b33bce:0",
+              "caeba57f0047cc48:0"
+            ],
+            "source_titles": {
+              "6620168ec959c0fe:0": "François Coli",
+              "100fd0029e8667dd:0": "L'Oiseau Blanc",
+              "cb85c4a20e816f68:0": "Levasseur PL.8",
+              "25845669686ec7f8:1": "L'Oiseau bleu (Metzinger)",
+              "3d51ad41dad0ec35:0": "Montgolfier brothers",
+              "f1d64366d986e841:0": "François Laurent d'Arlandes",
+              "ad9cbf0656d27c89:0": "Charles Nungesser",
+              "7e1789f35d96e79a:1": "Wooster and Davis",
+              "c9641198075e8451:0": "Charles J. Biddle (aviator)",
+              "5a73be2a04b33bce:0": "Ernest Charles Hoy",
+              "caeba57f0047cc48:0": "Gervais Raoul Lufbery"
+            },
+            "llm_calls": 3,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ab67bf255429954757d32f5",
+          "category": "bridge",
+          "question": "PISCES was developed by the company that is headquartered in what city?",
+          "gold": "McLean, Virginia",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'McLean' correctly identifies the city where the company (Booz Allen Hamilton, which developed PISCES) is headquartered, matching the gold standard of 'McLean, Virginia'."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 3,
+            "searches": 2,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.6666666666666666,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "PISCES was developed by the company that is headquartered in what city?",
+            "answer": "McLean",
+            "claims": [
+              {
+                "text": "PISCES was developed by Booz Allen Hamilton Inc.",
+                "citations": [
+                  "c6f094279db87c89:0"
+                ]
+              },
+              {
+                "text": "Booz Allen Hamilton Inc. is headquartered in McLean, Virginia",
+                "citations": [
+                  "552167a95dd95f0e:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "PISCES developed by company headquartered city",
+              "Booz Allen Hamilton headquartered city"
+            ],
+            "retrieved_chunk_ids": [
+              "c6f094279db87c89:0",
+              "4752482b14eb5e81:0",
+              "dacb7e0c737cdc99:1",
+              "018080d2db1c0d7e:0",
+              "4e078a041d48ea53:0",
+              "e03e2d73e5a0ced6:0",
+              "552167a95dd95f0e:0",
+              "0c254fbcc8073047:0",
+              "b48e17f266188b90:0",
+              "ec650fcc56bcafb5:0",
+              "8dd4c58303b6e642:1"
+            ],
+            "source_titles": {
+              "c6f094279db87c89:0": "PISCES",
+              "4752482b14eb5e81:0": "SpaceX",
+              "dacb7e0c737cdc99:1": "Fonciere des Regions",
+              "018080d2db1c0d7e:0": "Maritime Broadband",
+              "4e078a041d48ea53:0": "Chelsio Communications",
+              "e03e2d73e5a0ced6:0": "Guidance Software",
+              "552167a95dd95f0e:0": "Booz Allen Hamilton",
+              "0c254fbcc8073047:0": "Hamilton Brothers Building",
+              "b48e17f266188b90:0": "Cincinnati",
+              "ec650fcc56bcafb5:0": "Fort Wayne, Indiana",
+              "8dd4c58303b6e642:1": "Finn Wentworth"
+            },
+            "llm_calls": 3,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ae3790f5542992e3233c415",
+          "category": "comparison",
+          "question": "Are Leopold Lummerstorfer and Valeria Sarmiento both authors?",
+          "gold": "no",
+          "judge": {
+            "correct": false,
+            "reason": "The predicted answer says 'yes', but the gold answer is 'no'. Both are film directors/filmmakers rather than authors."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 3,
+            "searches": 2,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": false,
+            "correct": false,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Are Leopold Lummerstorfer and Valeria Sarmiento both authors?",
+            "answer": "yes",
+            "claims": [
+              {
+                "text": "Leopold Lummerstorfer is an Austrian film director, author and producer.",
+                "citations": [
+                  "b996e58310e1ae5e:0"
+                ]
+              },
+              {
+                "text": "Valeria Sarmiento is a Chilean film editor, director and screenwriter, and has also worked as a writer.",
+                "citations": [
+                  "6bbc2cf69a53f974:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Leopold Lummerstorfer",
+              "Valeria Sarmiento"
+            ],
+            "retrieved_chunk_ids": [
+              "b996e58310e1ae5e:0",
+              "b9bcacbfd8e20a15:0",
+              "4a087147256c5535:0",
+              "5c99089d1a4c239f:0",
+              "3f0746b2c2093056:0",
+              "0ffab917d63ff5bf:0",
+              "6bbc2cf69a53f974:0",
+              "354f95b71ab3d064:0",
+              "056771552f58f39c:0",
+              "a586d233551bf2b2:0",
+              "35e0c13c8738c1b0:0",
+              "6897e1cbd46cbac1:0"
+            ],
+            "source_titles": {
+              "b996e58310e1ae5e:0": "Leopold Lummerstorfer",
+              "b9bcacbfd8e20a15:0": "Archduke Leopold Salvator of Austria",
+              "4a087147256c5535:0": "Archduke Friedrich of Austria (1821–1847)",
+              "5c99089d1a4c239f:0": "Leopold von Sacher-Masoch",
+              "3f0746b2c2093056:0": "Philippe of Belgium",
+              "0ffab917d63ff5bf:0": "Prince Leopold, Duke of Albany",
+              "6bbc2cf69a53f974:0": "Valeria Sarmiento",
+              "354f95b71ab3d064:0": "Valeria Bondarenko",
+              "056771552f58f39c:0": "Amelia Lópes O'Neill",
+              "a586d233551bf2b2:0": "Lines of Wellington",
+              "35e0c13c8738c1b0:0": "Rubén Darío",
+              "6897e1cbd46cbac1:0": "Iris Fontbona"
+            },
+            "llm_calls": 3,
+            "notes": []
+          }
+        },
+        {
+          "id": "5a8e276b5542995a26add468",
+          "category": "comparison",
+          "question": "Which band formed first, Swervedriver or Incubus?",
+          "gold": "Swervedriver",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies that Swervedriver formed first."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 3,
+            "searches": 2,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Which band formed first, Swervedriver or Incubus?",
+            "answer": "Swervedriver",
+            "claims": [
+              {
+                "text": "Swervedriver were an English alternative rock band formed in Oxford in 1989.",
+                "citations": [
+                  "8c558bd5eac2da8c:0"
+                ]
+              },
+              {
+                "text": "Incubus is an American rock band from Calabasas, California. The band was formed in 1991",
+                "citations": [
+                  "a9e2e5ee48ec76be:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Swervedriver formed incubation formation year band",
+              "Incubus band formed year"
+            ],
+            "retrieved_chunk_ids": [
+              "8c558bd5eac2da8c:0",
+              "ec5bd8b1441260a2:0",
+              "79c6a385b783fe3d:1",
+              "f78e7923457fc332:0",
+              "aa31dd4dcc6c0863:0",
+              "60c0c3d801e289a6:0",
+              "a9e2e5ee48ec76be:0",
+              "bec2f1e8cae78b6d:0",
+              "4890f4a8dc297d76:0",
+              "beb79c234b78ef09:0",
+              "2cb6ad86350ccefe:1"
+            ],
+            "source_titles": {
+              "8c558bd5eac2da8c:0": "Swervedriver",
+              "ec5bd8b1441260a2:0": "Giants of Science",
+              "79c6a385b783fe3d:1": "SWMRS",
+              "f78e7923457fc332:0": "Sanctuary (band)",
+              "aa31dd4dcc6c0863:0": "Greek Fire (band)",
+              "60c0c3d801e289a6:0": "Time Lapse Consortium",
+              "a9e2e5ee48ec76be:0": "Incubus (band)",
+              "bec2f1e8cae78b6d:0": "List of the Smashing Pumpkins band members",
+              "4890f4a8dc297d76:0": "Kilburn and the High Roads",
+              "beb79c234b78ef09:0": "The Smashing Pumpkins",
+              "2cb6ad86350ccefe:1": "Wake Me Up (Avicii song)"
+            },
+            "llm_calls": 3,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ac3bd0c554299204fd21e21",
+          "category": "comparison",
+          "question": "Sam Mendes and Ruby Yang share what profession?",
+          "gold": "filmmaker.",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 3,
+            "searches": 4,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": null,
+            "correct": false,
+            "citation_precision": null,
+            "citation_recall": null
+          },
+          "answer": {
+            "question": "Sam Mendes and Ruby Yang share what profession?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "None of the answer's claims cite evidence that was actually retrieved.",
+            "search_queries": [
+              "Sam Mendes profession",
+              "Ruby Yang profession",
+              "Sam Mendes director film director",
+              "Ruby Yang filmmaker director"
+            ],
+            "retrieved_chunk_ids": [
+              "50bbc6135be26ae9:0",
+              "994d80b2b1ef56e4:0",
+              "b2f1a2de74ad2b91:0",
+              "68588a0127083a50:0",
+              "3c185ec837efa976:0",
+              "62afe51fccde0a51:0",
+              "168de342501307d8:0",
+              "b4a28d504a162edf:0",
+              "59fbc6457d20c7e2:0",
+              "0ff2bac62cbdb32f:0",
+              "a6b1a4d9588d94a2:0",
+              "e9efbebc4ebf9694:0",
+              "b5954c277d44346f:0",
+              "50bbc6135be26ae9:1",
+              "dc990084eebb1642:0",
+              "a1493f2670e8173d:1"
+            ],
+            "source_titles": {
+              "50bbc6135be26ae9:0": "List of accolades received by American Beauty",
+              "994d80b2b1ef56e4:0": "Universidade Cândido Mendes",
+              "b2f1a2de74ad2b91:0": "American Beauty (1999 film)",
+              "68588a0127083a50:0": "Sam Mendes",
+              "3c185ec837efa976:0": "Neal Street Productions",
+              "62afe51fccde0a51:0": "73rd Venice International Film Festival",
+              "168de342501307d8:0": "Ruby Yang",
+              "b4a28d504a162edf:0": "My Voice, My Life",
+              "59fbc6457d20c7e2:0": "The Blood of Yingzhou District",
+              "0ff2bac62cbdb32f:0": "Ruby Buckton",
+              "a6b1a4d9588d94a2:0": "The Warriors of Qiugang",
+              "e9efbebc4ebf9694:0": "Yang Seung-ho",
+              "b5954c277d44346f:0": "Sam Taylor (director)",
+              "50bbc6135be26ae9:1": "List of accolades received by American Beauty",
+              "dc990084eebb1642:0": "Ruby (1977 film)",
+              "a1493f2670e8173d:1": "Beautiful Young Minds"
+            },
+            "llm_calls": 3,
+            "notes": [
+              "removed citation 68588a0127083a50: not retrieved",
+              "removed claim 'Sam Mendes is an English stage and film director.': no valid citation",
+              "removed citation 168de342501307d8: not retrieved",
+              "removed citation b4a28d504a162edf: not retrieved",
+              "removed citation 59fbc6457d20c7e2: not retrieved",
+              "removed claim 'Ruby Yang is a Chinese American filmmaker who directs films such as My Voice, My Life and The Blood of Yingzhou District.': no valid citation"
+            ]
+          }
+        },
+        {
+          "id": "5a7332935542991f9a20c67d",
+          "category": "comparison",
+          "question": "Which board game was published most recently, Pirate's Cove or Catan?",
+          "gold": "Pirate's Cove",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'Pirate's Cove' correctly identifies that Pirate's Cove was published in 2002, which is more recent than Catan (originally published as The Settlers of Catan in 1995)."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 2,
+            "searches": 2,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Which board game was published most recently, Pirate's Cove or Catan?",
+            "answer": "Pirate's Cove",
+            "claims": [
+              {
+                "text": "Pirate's Cove was originally published in Germany in 2002.",
+                "citations": [
+                  "5e6064c26c2b9e75:0"
+                ]
+              },
+              {
+                "text": "The Settlers of Catan (also known as Catan) was first published in 1995 in Germany.",
+                "citations": [
+                  "ffe8ef165b22aef2:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Pirate's Cove publication date OR year",
+              "Catan publication date OR year"
+            ],
+            "retrieved_chunk_ids": [
+              "5e6064c26c2b9e75:0",
+              "24a205c0f7980b52:0",
+              "d74a016d154e1c9f:1",
+              "af8cd644c0af5541:0",
+              "913c5226556f48e4:0",
+              "852ade6577178ac9:0",
+              "9712a281d953c00f:0",
+              "97d5c2ed5990756b:0",
+              "71b1c51caf0e2316:0",
+              "ddcc5d14ea04266f:0",
+              "ffe8ef165b22aef2:0"
+            ],
+            "source_titles": {
+              "5e6064c26c2b9e75:0": "Pirate's Cove",
+              "24a205c0f7980b52:0": "Emerald Cove",
+              "d74a016d154e1c9f:1": "High School Musical (book series)",
+              "af8cd644c0af5541:0": "Pirate and Traveler",
+              "913c5226556f48e4:0": "Queen (magazine)",
+              "852ade6577178ac9:0": "The Sea Hunters: True Adventures with Famous Shipwrecks",
+              "9712a281d953c00f:0": "The Rivals for Catan",
+              "97d5c2ed5990756b:0": "Catan Dice Game",
+              "71b1c51caf0e2316:0": "Struggle for Rome (board game)",
+              "ddcc5d14ea04266f:0": "Catan Card Game",
+              "ffe8ef165b22aef2:0": "Catan"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        },
+        {
+          "id": "5a7df7115542990b8f503b0f",
+          "category": "comparison",
+          "question": "Who was born first out of Todd Field and Aaron Katz?",
+          "gold": "William Todd Field",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 3,
+            "searches": 3,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": null,
+            "correct": false,
+            "citation_precision": null,
+            "citation_recall": null
+          },
+          "answer": {
+            "question": "Who was born first out of Todd Field and Aaron Katz?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "None of the answer's claims cite evidence that was actually retrieved.",
+            "search_queries": [
+              "Todd Field birth date",
+              "Aaron Katz birth date",
+              "\"Todd Field\" filmmaker OR director OR born"
+            ],
+            "retrieved_chunk_ids": [
+              "d4f4779af0be1e55:0",
+              "f075afbf138cb457:0",
+              "de2aa9a977b17243:0",
+              "ee57a59a307ec0a1:0",
+              "4c1396a51b496e73:0",
+              "cbf2e50a479d67a8:0",
+              "7a25f1d0e4c7eaca:0",
+              "7958e3db68439499:0",
+              "7b6c3119d7ccecb9:0",
+              "63493952644d4e67:0",
+              "3334b43678889d06:0",
+              "a217379f8d8904b9:0",
+              "72ad74d160bbf24d:0",
+              "508e4056ef7bb46b:0",
+              "28f0ab4a7086235a:0",
+              "74ea35f9f36c3071:0",
+              "d4c8940701d6ddfb:0",
+              "56817a199fc3b14a:0"
+            ],
+            "source_titles": {
+              "d4f4779af0be1e55:0": "Todd Mission, Texas",
+              "f075afbf138cb457:0": "Long Prairie Municipal Airport",
+              "de2aa9a977b17243:0": "Chris Todd (American football)",
+              "ee57a59a307ec0a1:0": "Thomas D. Singleton",
+              "4c1396a51b496e73:0": "Todd Anderson",
+              "cbf2e50a479d67a8:0": "Hippolytus (archbishop of Gniezno)",
+              "7a25f1d0e4c7eaca:0": "Aaron Katz (filmmaker)",
+              "7958e3db68439499:0": "Dance Party USA (film)",
+              "7b6c3119d7ccecb9:0": "Cold Weather",
+              "63493952644d4e67:0": "Quiet City (film)",
+              "3334b43678889d06:0": "Mike Katz",
+              "a217379f8d8904b9:0": "Diamonds (1999 film)",
+              "72ad74d160bbf24d:0": "Todd Field",
+              "508e4056ef7bb46b:0": "Too Romantic",
+              "28f0ab4a7086235a:0": "Todd Fisher",
+              "74ea35f9f36c3071:0": "In the Bedroom",
+              "d4c8940701d6ddfb:0": "Delivering (film)",
+              "56817a199fc3b14a:0": "Todd Haynes"
+            },
+            "llm_calls": 3,
+            "notes": []
+          }
+        },
+        {
+          "id": "simple-04",
+          "category": "simple",
+          "question": "Who wrote and directed the 2007 American horror film Hostel: Part II?",
+          "gold": "Eli Roth",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'Eli Roth' correctly identifies the writer and director of the 2007 film Hostel: Part II, matching the gold standard."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 2,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Who wrote and directed the 2007 American horror film Hostel: Part II?",
+            "answer": "Eli Roth",
+            "claims": [
+              {
+                "text": "Hostel: Part II is a 2007 American horror film written and directed by Eli Roth",
+                "citations": [
+                  "6b2dd0d50bb62b21:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Hostel Part II 2007 American horror film writer director"
+            ],
+            "retrieved_chunk_ids": [
+              "6b2dd0d50bb62b21:0",
+              "acf795f1414c07dd:0",
+              "d6a0307053cf93ac:0",
+              "5b74943c13e2619b:0",
+              "eb4064ac593d6dd0:0",
+              "df0892c7a9efba5b:0"
+            ],
+            "source_titles": {
+              "6b2dd0d50bb62b21:0": "Hostel: Part II",
+              "acf795f1414c07dd:0": "Hostel (2005 film)",
+              "d6a0307053cf93ac:0": "Eli Roth",
+              "5b74943c13e2619b:0": "Hostel: Part III",
+              "eb4064ac593d6dd0:0": "Unearthed (film)",
+              "df0892c7a9efba5b:0": "John Carpenter"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        },
+        {
+          "id": "simple-05",
+          "category": "simple",
+          "question": "Who created The Simpsons character Hans Moleman?",
+          "gold": "Matt Groening",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies Matt Groening as the creator of the character Hans Moleman, matching the gold standard."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 2,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Who created The Simpsons character Hans Moleman?",
+            "answer": "Matt Groening",
+            "claims": [
+              {
+                "text": "Hans Moleman was created by series creator Matt Groening.",
+                "citations": [
+                  "68b8e8c074b6c659:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Hans Moleman creator creator character The Simpsons"
+            ],
+            "retrieved_chunk_ids": [
+              "68b8e8c074b6c659:0",
+              "78a0f692cf770178:0",
+              "21252fa911d04e7e:0",
+              "5b799edf8036721c:0",
+              "3341e20905c3096c:1",
+              "958251f32e98dcd9:0"
+            ],
+            "source_titles": {
+              "68b8e8c074b6c659:0": "Hans Moleman",
+              "78a0f692cf770178:0": "Dan Castellaneta",
+              "21252fa911d04e7e:0": "The Simpsons Theme",
+              "5b799edf8036721c:0": "Matt Groening",
+              "3341e20905c3096c:1": "List of The Simpsons comics",
+              "958251f32e98dcd9:0": "List of recurring The Simpsons characters"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        },
+        {
+          "id": "simple-06",
+          "category": "simple",
+          "question": "What has been the inspiration for both Roberta Allen's writing and her art?",
+          "gold": "Language",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer matches the gold answer."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 2,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "What has been the inspiration for both Roberta Allen's writing and her art?",
+            "answer": "Language",
+            "claims": [
+              {
+                "text": "Language has been the inspiration for both Roberta Allen's writing and her art.",
+                "citations": [
+                  "0c5152301cb184a2:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Roberta Allen writing art inspiration"
+            ],
+            "retrieved_chunk_ids": [
+              "0c5152301cb184a2:0",
+              "9de43ac3345fee37:0",
+              "a87d98195def26ee:3",
+              "7c21d507b5f2139d:0",
+              "771e9bbe08049f10:0",
+              "5616467f72ea9839:0"
+            ],
+            "source_titles": {
+              "0c5152301cb184a2:0": "Roberta Allen",
+              "9de43ac3345fee37:0": "Donald Allen",
+              "a87d98195def26ee:3": "Alembic (magazine)",
+              "7c21d507b5f2139d:0": "Roberta Romano",
+              "771e9bbe08049f10:0": "2011 Barcelona Ladies Open – Doubles",
+              "5616467f72ea9839:0": "Murder of Grace Brown"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        },
+        {
+          "id": "simple-07",
+          "category": "simple",
+          "question": "Who directed the 1994 film Cool and the Crazy, starring Jared Leto and Alicia Silverstone?",
+          "gold": "Ralph Bakshi",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies Ralph Bakshi as the director of the 1994 film Cool and the Crazy, matching the gold standard."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 2,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Who directed the 1994 film Cool and the Crazy, starring Jared Leto and Alicia Silverstone?",
+            "answer": "Ralph Bakshi",
+            "claims": [
+              {
+                "text": "Cool and the Crazy is a 1994 American drama film written and directed by Ralph Bakshi and starring Jared Leto and Alicia Silverstone.",
+                "citations": [
+                  "78c7eee4c0ed6f7d:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Cool and the Crazy 1994 Jared Leto Alicia Silverstone director"
+            ],
+            "retrieved_chunk_ids": [
+              "78c7eee4c0ed6f7d:0",
+              "9da5891b75de8547:0",
+              "af5a5b5533a4d8b2:0",
+              "2d2aabfdd5a8d1d1:1",
+              "872b81bf9be72e01:0",
+              "9da5891b75de8547:1"
+            ],
+            "source_titles": {
+              "78c7eee4c0ed6f7d:0": "Cool and the Crazy",
+              "9da5891b75de8547:0": "Alicia Silverstone",
+              "af5a5b5533a4d8b2:0": "Requiem for a Dream",
+              "2d2aabfdd5a8d1d1:1": "Hard Candy (cosmetics)",
+              "872b81bf9be72e01:0": "Knut Erik Jensen",
+              "9da5891b75de8547:1": "Alicia Silverstone"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        },
+        {
+          "id": "simple-09",
+          "category": "simple",
+          "question": "How many seasons did The Nanny air on CBS?",
+          "gold": "six",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer '6' is numerically equivalent to the gold answer 'six'."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 2,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "How many seasons did The Nanny air on CBS?",
+            "answer": "6",
+            "claims": [
+              {
+                "text": "\"The Nanny\" is an American television sitcom that aired for six seasons on CBS from 1993 to 1999.",
+                "citations": [
+                  "1dc6f2251c5cd29e:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "The Nanny CBS seasons"
+            ],
+            "retrieved_chunk_ids": [
+              "1dc6f2251c5cd29e:0",
+              "942883c0f866f9ae:0",
+              "137a40d30f0a9912:0",
+              "7654cbc0d9746a05:0",
+              "152ebea101859779:0",
+              "05717257b93aa8d3:1"
+            ],
+            "source_titles": {
+              "1dc6f2251c5cd29e:0": "List of The Nanny episodes",
+              "942883c0f866f9ae:0": "The Nanny (season 1)",
+              "137a40d30f0a9912:0": "Lauren Lane",
+              "7654cbc0d9746a05:0": "David Doremus",
+              "152ebea101859779:0": "How I Met Your Mother (season 9)",
+              "05717257b93aa8d3:1": "Richard Denning"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        },
+        {
+          "id": "unanswerable-02",
+          "category": "unanswerable",
+          "question": "Which film won the Academy Award for Best Picture in 2029?",
+          "gold": null,
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 4,
+            "searches": 3,
+            "correct": true
+          },
+          "answer": {
+            "question": "Which film won the Academy Award for Best Picture in 2029?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The document collection does not contain information about the Academy Award for Best Picture in 2029.",
+            "search_queries": [
+              "Academy Award for Best Picture 2029",
+              "Best Picture 2029",
+              "Academy Award Best Picture 2029"
+            ],
+            "retrieved_chunk_ids": [
+              "013ee81181afa7cc:0",
+              "8b178d1910b166c0:0",
+              "a83d5e698a91ccec:0",
+              "635661ebcc62acac:0",
+              "382f75025097b797:0",
+              "73d7721dd34284bb:1",
+              "ba5d52fb7628b66e:1",
+              "99d0eb6de3eb2e1e:1",
+              "052f75355a18112b:1",
+              "ea95f618758317d9:2",
+              "016bd1b85d35fa05:0",
+              "08fbac3268b7ebfd:0",
+              "5fddf2d19a693467:0"
+            ],
+            "source_titles": {
+              "013ee81181afa7cc:0": "Academy Award for Best Film Editing",
+              "8b178d1910b166c0:0": "List of American films of 2004",
+              "a83d5e698a91ccec:0": "List of Academy Award Best Actress winners by age",
+              "635661ebcc62acac:0": "List of Best Supporting Actress winners by age",
+              "382f75025097b797:0": "List of Best Supporting Actor winners by age",
+              "73d7721dd34284bb:1": "The Bridges of Madison County (film)",
+              "ba5d52fb7628b66e:1": "The Grandmaster (film)",
+              "99d0eb6de3eb2e1e:1": "DragonBlade: The Legend of Lang",
+              "052f75355a18112b:1": "Cantinflas",
+              "ea95f618758317d9:2": "MTV Africa Music Awards 2014",
+              "016bd1b85d35fa05:0": "North Carolina Highway 2A",
+              "08fbac3268b7ebfd:0": "The Lion King (2019 film)",
+              "5fddf2d19a693467:0": "Emile Sherman"
+            },
+            "llm_calls": 4,
+            "notes": []
+          }
+        },
+        {
+          "id": "unanswerable-03",
+          "category": "unanswerable",
+          "question": "Who was elected President of France in 2032?",
+          "gold": null,
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 3,
+            "searches": 2,
+            "correct": true
+          },
+          "answer": {
+            "question": "Who was elected President of France in 2032?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The provided documents do not contain any information about the 2032 presidential election in France or who was elected President in 2032.",
+            "search_queries": [
+              "President of France in 2032",
+              "2032 President of France"
+            ],
+            "retrieved_chunk_ids": [
+              "67e6d66684cfd959:0",
+              "c292306ed35185df:1",
+              "2e6b7078f5a2b59b:1",
+              "88ed2bb7a7f6028b:0",
+              "a8fb1d3f42dd5ffc:0",
+              "3b01286554558d15:0"
+            ],
+            "source_titles": {
+              "67e6d66684cfd959:0": "Napoleon III",
+              "c292306ed35185df:1": "François Hollande presidential campaign, 2012",
+              "2e6b7078f5a2b59b:1": "Government of France",
+              "88ed2bb7a7f6028b:0": "Marine Le Pen",
+              "a8fb1d3f42dd5ffc:0": "Dwight D. Eisenhower",
+              "3b01286554558d15:0": "Jean-de-Dieu Soult"
+            },
+            "llm_calls": 3,
+            "notes": []
+          }
+        },
+        {
+          "id": "unanswerable-04",
+          "category": "unanswerable",
+          "question": "In which year did the city of Zorvania host the Winter Olympics?",
+          "gold": null,
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 3,
+            "searches": 2,
+            "correct": true
+          },
+          "answer": {
+            "question": "In which year did the city of Zorvania host the Winter Olympics?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The provided documents do not contain any information about a city named Zorvania hosting the Winter Olympics.",
+            "search_queries": [
+              "Zorvania Winter Olympics year",
+              "Zorvania"
+            ],
+            "retrieved_chunk_ids": [
+              "3cddd3787010e0c5:1",
+              "3cddd3787010e0c5:0",
+              "292fb905ddb0321a:0",
+              "43be07caf8cc9cf3:0",
+              "2256f6ffad74f809:1",
+              "2256f6ffad74f809:0",
+              "aee2d73f20aa201e:0",
+              "36d3d4dcabfb963b:0",
+              "5a4e2c82570a04e0:0",
+              "a44907ec860c0125:0",
+              "6697c44994361971:0",
+              "0218c4c71d6b58a1:0"
+            ],
+            "source_titles": {
+              "3cddd3787010e0c5:1": "1994 Winter Olympics",
+              "3cddd3787010e0c5:0": "1994 Winter Olympics",
+              "292fb905ddb0321a:0": "2014 Winter Olympics torch relay",
+              "43be07caf8cc9cf3:0": "2012 Winter Youth Olympics",
+              "2256f6ffad74f809:1": "2014 Winter Olympics medal table",
+              "2256f6ffad74f809:0": "2014 Winter Olympics medal table",
+              "aee2d73f20aa201e:0": "Zieria",
+              "36d3d4dcabfb963b:0": "Zea perennis",
+              "5a4e2c82570a04e0:0": "Mesopotamia, Argentina",
+              "a44907ec860c0125:0": "Isotopes of zirconium",
+              "6697c44994361971:0": "Dracula (plant)",
+              "0218c4c71d6b58a1:0": "Craterocapsa"
+            },
+            "llm_calls": 3,
+            "notes": []
+          }
+        },
+        {
+          "id": "unanswerable-05",
+          "category": "unanswerable",
+          "question": "Who founded the Kestrelmoor Institute of Applied Linguistics?",
+          "gold": null,
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 4,
+            "searches": 3,
+            "correct": true
+          },
+          "answer": {
+            "question": "Who founded the Kestrelmoor Institute of Applied Linguistics?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The documents do not contain any information about the Kestrelmoor Institute of Applied Linguistics or its founder.",
+            "search_queries": [
+              "Kestrelmoor Institute of Applied Linguistics founder founded",
+              "Kestrelmoor Institute",
+              "Kestrelmoor"
+            ],
+            "retrieved_chunk_ids": [
+              "d7304348923cfbb3:2",
+              "95f33523267c6ef7:0",
+              "76b4fabe43a98658:0",
+              "539c3dfd28872611:0",
+              "729290711e38fa60:0",
+              "69674ffb8269d6bc:0",
+              "d6fdcfc5c7ab4d85:1",
+              "17d140b4833b72ba:0",
+              "32ac79b7e2789b21:0",
+              "b0b8a987001cb91e:0",
+              "d22f7738903d7937:0",
+              "7ec7ee77377e1d3a:0",
+              "759209ac69fe0c1b:0",
+              "1471ea92af2ccaf7:0",
+              "8e8ff949cf86e785:0",
+              "ecc7da55f3beba98:1",
+              "ecc7da55f3beba98:0"
+            ],
+            "source_titles": {
+              "d7304348923cfbb3:2": "Lucille Watahomigie",
+              "95f33523267c6ef7:0": "Harold E. Palmer",
+              "76b4fabe43a98658:0": "Noam Chomsky",
+              "539c3dfd28872611:0": "University of St Andrews",
+              "729290711e38fa60:0": "Ping Li",
+              "69674ffb8269d6bc:0": "King's College London",
+              "d6fdcfc5c7ab4d85:1": "University of Georgia College of Engineering",
+              "17d140b4833b72ba:0": "Kettering University",
+              "32ac79b7e2789b21:0": "Robert P. Murphy",
+              "b0b8a987001cb91e:0": "Kripalu Center",
+              "d22f7738903d7937:0": "Education in Hyderabad",
+              "7ec7ee77377e1d3a:0": "Kelsall",
+              "759209ac69fe0c1b:0": "Alston Moor",
+              "1471ea92af2ccaf7:0": "Keadby Bridge",
+              "8e8ff949cf86e785:0": "Castle Bytham",
+              "ecc7da55f3beba98:1": "Kiehnmoor",
+              "ecc7da55f3beba98:0": "Kiehnmoor"
+            },
+            "llm_calls": 4,
+            "notes": []
+          }
+        },
+        {
+          "id": "unanswerable-09",
+          "category": "unanswerable",
+          "question": "How many goals did Ed Wood score for the United States national football team?",
+          "gold": null,
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 5,
+            "searches": 4,
+            "correct": true
+          },
+          "answer": {
+            "question": "How many goals did Ed Wood score for the United States national football team?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "There is no information in the documents indicating that Ed Wood ever played for the United States national football team or scored any goals for them.",
+            "search_queries": [
+              "Ed Wood United States national football team goals",
+              "\"Ed Wood\" soccer OR football OR goals",
+              "\"Ed Wood\" \"soccer\" OR \"football\" OR \"United States\"",
+              "\"Ed Wood\" national football team OR soccer"
+            ],
+            "retrieved_chunk_ids": [
+              "f6d9e40dff68a37f:0",
+              "a7df440b54a302ad:0",
+              "eb8a620e6772ed99:0",
+              "4ab5954128eb17de:0",
+              "c7998faa8b6d30ee:0",
+              "b430ae58c773c28d:0",
+              "793dc126bfc1832b:0",
+              "d1cfdf1811d4c398:0",
+              "60013d47f3ff1bfb:0",
+              "1e8edd0cd810974e:0",
+              "eda422d0b8a3dfa8:0",
+              "ec8f5166c4081659:1",
+              "8adca38712fcab96:0",
+              "ec8f5166c4081659:0",
+              "68b44d1ff4e77588:0",
+              "991d1a7b06dafcf2:0",
+              "6061b284e2bf8e1d:0",
+              "8ca3fcf34601f486:0"
+            ],
+            "source_titles": {
+              "f6d9e40dff68a37f:0": "Jim Wood (American football)",
+              "a7df440b54a302ad:0": "Woodson, Arkansas",
+              "eb8a620e6772ed99:0": "Shawn Wooden",
+              "4ab5954128eb17de:0": "Kasper Lorentzen",
+              "c7998faa8b6d30ee:0": "Sebastian Janikowski",
+              "b430ae58c773c28d:0": "Sandjar Ahmadi",
+              "793dc126bfc1832b:0": "Indoor soccer",
+              "d1cfdf1811d4c398:0": "Defender (association football)",
+              "60013d47f3ff1bfb:0": "2009–10 Premier League",
+              "1e8edd0cd810974e:0": "Step over",
+              "eda422d0b8a3dfa8:0": "Ed Wood (film)",
+              "ec8f5166c4081659:1": "Sports in the United States",
+              "8adca38712fcab96:0": "United States men's national under-23 soccer team",
+              "ec8f5166c4081659:0": "Sports in the United States",
+              "68b44d1ff4e77588:0": "History of soccer in the United States",
+              "991d1a7b06dafcf2:0": "Wake Forest Demon Deacons men's soccer",
+              "6061b284e2bf8e1d:0": "Australia women's national soccer team",
+              "8ca3fcf34601f486:0": "List of Perth Glory FC players"
+            },
+            "llm_calls": 5,
+            "notes": []
+          }
+        },
+        {
+          "id": "contradictory-02",
+          "category": "contradictory",
+          "question": "Since which year has the ICON science fiction convention been held in the Cedar Rapids and Iowa City area?",
+          "gold": "1975",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer matches the gold answer, both stating the year 1975."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 3,
+            "searches": 2,
+            "conflict_reported": true
+          },
+          "answer": {
+            "question": "Since which year has the ICON science fiction convention been held in the Cedar Rapids and Iowa City area?",
+            "answer": "1975",
+            "claims": [
+              {
+                "text": "ICON is an annual science fiction convention held in the Cedar Rapids/ Iowa City area of Iowa since 1975.",
+                "citations": [
+                  "581cc79262d22476:0"
+                ]
+              }
+            ],
+            "conflicts": [
+              {
+                "description": "One document states the convention has been held since 1975, while a fan wiki entry states the very first ICON took place in 1979.",
+                "citations": [
+                  "581cc79262d22476:0",
+                  "6f0e6ade49fcad23:0"
+                ]
+              }
+            ],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "ICON science fiction convention Cedar Rapids Iowa City since year",
+              "ICON 1975 1979 Iowa science fiction convention conflict"
+            ],
+            "retrieved_chunk_ids": [
+              "581cc79262d22476:0",
+              "6f0e6ade49fcad23:0",
+              "b7810f4e3aa09d3d:1",
+              "ae8ffecd7cf9b1b1:0",
+              "b7810f4e3aa09d3d:0",
+              "17c275473c80dcfd:0",
+              "8aa4909e2c598d77:0"
+            ],
+            "source_titles": {
+              "581cc79262d22476:0": "Icon (Iowa science fiction convention)",
+              "6f0e6ade49fcad23:0": "ICON convention (fan wiki)",
+              "b7810f4e3aa09d3d:1": "I-CON",
+              "ae8ffecd7cf9b1b1:0": "Grant Vocational High School",
+              "b7810f4e3aa09d3d:0": "I-CON",
+              "17c275473c80dcfd:0": "Trinoc*coN",
+              "8aa4909e2c598d77:0": "InConJunction"
+            },
+            "llm_calls": 3,
+            "notes": []
+          }
+        },
+        {
+          "id": "contradictory-03",
+          "category": "contradictory",
+          "question": "In which year was the anthology Avant-Pop: Fiction for a Daydream Nation, edited by Larry McCaffery, published?",
+          "gold": "1992",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 2,
+            "searches": 1,
+            "conflict_reported": true
+          },
+          "answer": {
+            "question": "In which year was the anthology Avant-Pop: Fiction for a Daydream Nation, edited by Larry McCaffery, published?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [
+              {
+                "description": "Document 88c4f00c7aac1e71 states that Avant-Pop: Fiction for a Daydream Nation was published in 1992, whereas document 04a1a402267baf72 states that the first edition was published in 1994.",
+                "citations": [
+                  "88c4f00c7aac1e71:0",
+                  "04a1a402267baf72:0"
+                ]
+              }
+            ],
+            "should_abstain": true,
+            "abstain_reason": "The documents conflict on the publication year (1992 vs 1994).",
+            "search_queries": [
+              "Avant-Pop Fiction for a Daydream Nation Larry McCaffery"
+            ],
+            "retrieved_chunk_ids": [
+              "88c4f00c7aac1e71:0",
+              "04a1a402267baf72:0",
+              "d84c02e6276bdf4e:0",
+              "e5db42f23cffd75a:0",
+              "adfe1571ece255b4:0",
+              "2c65d6513eb29f06:0"
+            ],
+            "source_titles": {
+              "88c4f00c7aac1e71:0": "Avant-Pop: Fiction for a Daydream Nation",
+              "04a1a402267baf72:0": "Avant-Pop anthology (bookseller catalogue entry)",
+              "d84c02e6276bdf4e:0": "Fiction International",
+              "e5db42f23cffd75a:0": "Alexander Theroux",
+              "adfe1571ece255b4:0": "Larry Eisenberg",
+              "2c65d6513eb29f06:0": "Roman à clef"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        },
+        {
+          "id": "contradictory-07",
+          "category": "contradictory",
+          "question": "In which year was the TRANSFER gallery in Brooklyn created?",
+          "gold": "2013",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 2,
+            "searches": 1,
+            "conflict_reported": true
+          },
+          "answer": {
+            "question": "In which year was the TRANSFER gallery in Brooklyn created?",
+            "answer": "",
+            "claims": [
+              {
+                "text": "TRANSFER is a gallery that was created in 2013 and is located in Brooklyn, New York.",
+                "citations": [
+                  "e33b8f14eb5469c2:0"
+                ]
+              },
+              {
+                "text": "TRANSFER is an exhibition space for internet-based artists, opened in 2015 by curator Kelani Nichole...",
+                "citations": [
+                  "c4c05fcbffd9b4a4:0"
+                ]
+              }
+            ],
+            "conflicts": [
+              {
+                "description": "Document e33b8f14eb5469c2 states that the TRANSFER gallery was created in 2013, while document c4c05fcbffd9b4a4 states that it was opened in 2015.",
+                "citations": [
+                  "e33b8f14eb5469c2:0",
+                  "c4c05fcbffd9b4a4:0"
+                ]
+              }
+            ],
+            "should_abstain": true,
+            "abstain_reason": "The documents conflict on the founding year of the TRANSFER gallery, giving both 2013 and 2015.",
+            "search_queries": [
+              "TRANSFER gallery Brooklyn created year founded"
+            ],
+            "retrieved_chunk_ids": [
+              "e33b8f14eb5469c2:0",
+              "f09eec5d78799071:0",
+              "c4c05fcbffd9b4a4:0",
+              "a65d1d14e3278b2b:0",
+              "ca416037f11a5969:0",
+              "0a248208647e1791:0"
+            ],
+            "source_titles": {
+              "e33b8f14eb5469c2:0": "TRANSFER Gallery",
+              "f09eec5d78799071:0": "Brooklyn Heights",
+              "c4c05fcbffd9b4a4:0": "TRANSFER Gallery (Brooklyn arts listings)",
+              "a65d1d14e3278b2b:0": "Matthew Marks Gallery",
+              "ca416037f11a5969:0": "Magda Sawon",
+              "0a248208647e1791:0": "Studio Museum in Harlem"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        },
+        {
+          "id": "contradictory-09",
+          "category": "contradictory",
+          "question": "In which year was the American musician and former actor Jared Rushton born?",
+          "gold": "1974",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 2,
+            "searches": 1,
+            "conflict_reported": true
+          },
+          "answer": {
+            "question": "In which year was the American musician and former actor Jared Rushton born?",
+            "answer": "",
+            "claims": [
+              {
+                "text": "Jared Rushton was born on March 3, 1972 according to the 1980s child stars fan page.",
+                "citations": [
+                  "8a1387e8139597ad:0"
+                ]
+              },
+              {
+                "text": "Jared Michael Rushton was born on March 3, 1974 according to his biography document.",
+                "citations": [
+                  "2712af39184f80df:0"
+                ]
+              }
+            ],
+            "conflicts": [
+              {
+                "description": "Document 8a1387e8139597ad states Jared Rushton was born in 1972, while document 2712af39184f80df states he was born in 1974.",
+                "citations": [
+                  "8a1387e8139597ad:0",
+                  "2712af39184f80df:0"
+                ]
+              }
+            ],
+            "should_abstain": true,
+            "abstain_reason": "The documents conflict on Jared Rushton's birth year, giving both 1972 and 1974.",
+            "search_queries": [
+              "Jared Rushton born year"
+            ],
+            "retrieved_chunk_ids": [
+              "8a1387e8139597ad:0",
+              "2712af39184f80df:0",
+              "2e5408a55270addd:0",
+              "c57b72e2894551e1:0",
+              "bf332dc8b4b42eab:0",
+              "7a2f687d6a1a9800:0"
+            ],
+            "source_titles": {
+              "8a1387e8139597ad:0": "Jared Rushton (child actors fan page)",
+              "2712af39184f80df:0": "Jared Rushton",
+              "2e5408a55270addd:0": "Jared Rosholt",
+              "c57b72e2894551e1:0": "Jared Lane",
+              "bf332dc8b4b42eab:0": "Jared Jeffries",
+              "7a2f687d6a1a9800:0": "Jake Rosholt"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        },
+        {
+          "id": "contradictory-10",
+          "category": "contradictory",
+          "question": "In which year was the documentary film Traceroute, directed by Johannes Grenzfurthner, released?",
+          "gold": "2016",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 2,
+            "searches": 1,
+            "conflict_reported": true
+          },
+          "answer": {
+            "question": "In which year was the documentary film Traceroute, directed by Johannes Grenzfurthner, released?",
+            "answer": "",
+            "claims": [
+              {
+                "text": "Traceroute is a 2014 documentary by Austrian artist and director Johannes Grenzfurthner.",
+                "citations": [
+                  "5a05cc6b5bc2959c:0"
+                ]
+              },
+              {
+                "text": "Traceroute is a 2016 Austrian/American documentary film directed by Johannes Grenzfurthner.",
+                "citations": [
+                  "92a00210b12968f7:0"
+                ]
+              }
+            ],
+            "conflicts": [
+              {
+                "description": "Document 5a05cc6b5bc2959c states that Traceroute was released in 2014, whereas document 92a00210b12968f7 states that it is a 2016 film.",
+                "citations": [
+                  "5a05cc6b5bc2959c:0",
+                  "92a00210b12968f7:0"
+                ]
+              }
+            ],
+            "should_abstain": true,
+            "abstain_reason": "The documents disagree on the release year of Traceroute (citing 2014 in one place and 2016 in another).",
+            "search_queries": [
+              "Traceroute Johannes Grenzfurthner released year"
+            ],
+            "retrieved_chunk_ids": [
+              "5a05cc6b5bc2959c:0",
+              "92a00210b12968f7:0",
+              "c52c4d4a04758a5c:0",
+              "312396336173db4e:1",
+              "b68d1035ca7069ca:1",
+              "c80798214f8419f0:0"
+            ],
+            "source_titles": {
+              "5a05cc6b5bc2959c:0": "Traceroute (film festival catalogue)",
+              "92a00210b12968f7:0": "Traceroute (film)",
+              "c52c4d4a04758a5c:0": "Johannes Grenzfurthner",
+              "312396336173db4e:1": "Gassenhauer",
+              "b68d1035ca7069ca:1": "Night Striker",
+              "c80798214f8419f0:0": "Soviet Unterzoegersdorf"
+            },
+            "llm_calls": 2,
+            "notes": []
+          }
+        }
+      ]
+    },
+    "single_search": {
+      "summary": {
+        "questions": 30,
+        "answer_accuracy_judge": 0.7,
+        "exact_match": 0.5,
+        "f1": 0.628,
+        "evidence_retrieved": 0.8,
+        "citation_precision": 0.969,
+        "citation_recall": 1.0,
+        "false_abstention_rate": 0.2,
+        "abstention_precision": 0.455,
+        "abstention_recall": 1.0,
+        "conflict_detection": 1.0,
+        "llm_calls_per_question": 1.0,
+        "searches_per_question": 1.0
+      },
+      "seconds": 173,
+      "by_category": {
+        "bridge": {
+          "questions": 10,
+          "answer_accuracy_judge": 0.6,
+          "exact_match": 0.3,
+          "f1": 0.475,
+          "evidence_retrieved": 0.6,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "false_abstention_rate": 0.4,
+          "abstention_precision": 0.0,
+          "abstention_recall": null,
+          "conflict_detection": null,
+          "llm_calls_per_question": 1.0,
+          "searches_per_question": 1.0
+        },
+        "comparison": {
+          "questions": 5,
+          "answer_accuracy_judge": 0.6,
+          "exact_match": 0.4,
+          "f1": 0.56,
+          "evidence_retrieved": 1.0,
+          "citation_precision": 0.9,
+          "citation_recall": 1.0,
+          "false_abstention_rate": 0.0,
+          "abstention_precision": null,
+          "abstention_recall": null,
+          "conflict_detection": null,
+          "llm_calls_per_question": 1.0,
+          "searches_per_question": 1.0
+        },
+        "contradictory": {
+          "questions": 5,
+          "answer_accuracy_judge": null,
+          "exact_match": null,
+          "f1": null,
+          "evidence_retrieved": null,
+          "citation_precision": null,
+          "citation_recall": null,
+          "false_abstention_rate": null,
+          "abstention_precision": 0.0,
+          "abstention_recall": null,
+          "conflict_detection": 1.0,
+          "llm_calls_per_question": 1.0,
+          "searches_per_question": 1.0
+        },
+        "simple": {
+          "questions": 5,
+          "answer_accuracy_judge": 1.0,
+          "exact_match": 1.0,
+          "f1": 1.0,
+          "evidence_retrieved": 1.0,
+          "citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "false_abstention_rate": 0.0,
+          "abstention_precision": null,
+          "abstention_recall": null,
+          "conflict_detection": null,
+          "llm_calls_per_question": 1.0,
+          "searches_per_question": 1.0
+        },
+        "unanswerable": {
+          "questions": 5,
+          "answer_accuracy_judge": null,
+          "exact_match": null,
+          "f1": null,
+          "evidence_retrieved": null,
+          "citation_precision": null,
+          "citation_recall": null,
+          "false_abstention_rate": null,
+          "abstention_precision": 1.0,
+          "abstention_recall": 1.0,
+          "conflict_detection": null,
+          "llm_calls_per_question": 1.0,
+          "searches_per_question": 1.0
+        }
+      },
+      "results": [
+        {
+          "id": "5a7b78c35542997c3ec971a9",
+          "category": "bridge",
+          "question": "What year was the voice actress of an animated television series premiered on Cartoon Network born?",
+          "gold": "1967",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": false,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": null,
+            "correct": false,
+            "citation_precision": null,
+            "citation_recall": null
+          },
+          "answer": {
+            "question": "What year was the voice actress of an animated television series premiered on Cartoon Network born?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The provided documents do not contain the birth year of any of the voice actresses mentioned (such as Allison Moore, Kathryn Cressida, Deedee Magno, or Hynden Walch).",
+            "search_queries": [
+              "What year was the voice actress of an animated television series premiered on Cartoon Network born?"
+            ],
+            "retrieved_chunk_ids": [
+              "eab89f39234e7b9b:0",
+              "f11190c00dc98388:0",
+              "e89c2bc1cd9c6f03:0",
+              "b43c7927c5958545:0",
+              "aae53d20537e7191:0",
+              "2563b2716feb1ccd:0"
+            ],
+            "source_titles": {
+              "eab89f39234e7b9b:0": "List of Dexter's Laboratory episodes",
+              "f11190c00dc98388:0": "Steven Universe",
+              "e89c2bc1cd9c6f03:0": "List of Teen Titans episodes",
+              "b43c7927c5958545:0": "Cory Doran",
+              "aae53d20537e7191:0": "Adventure Time",
+              "2563b2716feb1ccd:0": "Sheep in the Big City"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ae27b535542996483e649b6",
+          "category": "bridge",
+          "question": "The chorus of \"On the Radio\" contains references to the song \"November Rain\" whose band's lead singer is?",
+          "gold": "Axl Rose",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'Axl Rose' correctly identifies the lead singer of Guns N' Roses, the band behind 'November Rain'."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "The chorus of \"On the Radio\" contains references to the song \"November Rain\" whose band's lead singer is?",
+            "answer": "Axl Rose",
+            "claims": [
+              {
+                "text": "The chorus of \"On the Radio\" contains references to the song \"November Rain\" by Guns N' Roses.",
+                "citations": [
+                  "d88d778fc70054e7:0"
+                ]
+              },
+              {
+                "text": "\"November Rain\" was written by Guns N' Roses' lead singer Axl Rose.",
+                "citations": [
+                  "13e9c2415466a60e:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "The chorus of \"On the Radio\" contains references to the song \"November Rain\" whose band's lead singer is?"
+            ],
+            "retrieved_chunk_ids": [
+              "d88d778fc70054e7:0",
+              "13e9c2415466a60e:0",
+              "2659e49e3af109ff:0",
+              "686cfe74a2e21c05:0",
+              "a6be15d952ee1686:0",
+              "2fdeb916b7b10e9f:0"
+            ],
+            "source_titles": {
+              "d88d778fc70054e7:0": "On the Radio (Regina Spektor song)",
+              "13e9c2415466a60e:0": "November Rain",
+              "2659e49e3af109ff:0": "Robert Plant",
+              "686cfe74a2e21c05:0": "Lead vocalist",
+              "a6be15d952ee1686:0": "The Dead Weather",
+              "2fdeb916b7b10e9f:0": "Marvin &amp; Chardonnay"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ab5574b554299488d4d994e",
+          "category": "bridge",
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "gold": "The Social Network",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies 'The Social Network', which matches the gold answer."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+            "answer": "The Social Network",
+            "claims": [
+              {
+                "text": "Robin R. Bottin collaborated with American director and producer David Fincher.",
+                "citations": [
+                  "883505ccbf41d3b9:0"
+                ]
+              },
+              {
+                "text": "David Fincher won the Golden Globe Award for Best Director and the BAFTA Award for Best Direction for \"The Social Network\".",
+                "citations": [
+                  "11cb9bba8a425a44:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?"
+            ],
+            "retrieved_chunk_ids": [
+              "11cb9bba8a425a44:0",
+              "883505ccbf41d3b9:0",
+              "6af790d4154112da:0",
+              "3c3ea868860d240d:0",
+              "3d489692a79d78c3:0",
+              "3c9679edc9669c80:0"
+            ],
+            "source_titles": {
+              "11cb9bba8a425a44:0": "David Fincher",
+              "883505ccbf41d3b9:0": "Rob Bottin",
+              "6af790d4154112da:0": "Tom Cruise",
+              "3c3ea868860d240d:0": "Christopher Nolan",
+              "3d489692a79d78c3:0": "Danny Boyle",
+              "3c9679edc9669c80:0": "Stanley Kubrick"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5abf0bf95542997719eab63a",
+          "category": "bridge",
+          "question": "José Rubia Barcia  published a great number of books and articles on a Spanish poet, playwright, and what?",
+          "gold": "theatre director",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'theatre director' matches the gold answer."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "José Rubia Barcia  published a great number of books and articles on a Spanish poet, playwright, and what?",
+            "answer": "theatre director",
+            "claims": [
+              {
+                "text": "José Rubia Barcia published a great number of books and articles on Federico García Lorca.",
+                "citations": [
+                  "411078dc0d2e04fd:0"
+                ]
+              },
+              {
+                "text": "Federico García Lorca was a Spanish poet, playwright, and theatre director.",
+                "citations": [
+                  "5ae4dabd97094925:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "José Rubia Barcia  published a great number of books and articles on a Spanish poet, playwright, and what?"
+            ],
+            "retrieved_chunk_ids": [
+              "411078dc0d2e04fd:0",
+              "5ae4dabd97094925:0",
+              "83b67c98f6d20a99:0",
+              "27bd0022dac8b392:0",
+              "21c8dd11bedfcc87:0",
+              "0c1b153e42e4971f:0"
+            ],
+            "source_titles": {
+              "411078dc0d2e04fd:0": "José Rubia Barcia",
+              "5ae4dabd97094925:0": "Federico García Lorca",
+              "83b67c98f6d20a99:0": "Carlos Fernández Shaw",
+              "27bd0022dac8b392:0": "David Fernández Rivera",
+              "21c8dd11bedfcc87:0": "Cuban literature",
+              "0c1b153e42e4971f:0": "Shakespeare (disambiguation)"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5addcfd65542997dc790703e",
+          "category": "bridge",
+          "question": "Which company had a ten year contract with the anti-hero from Escape From New York played by Kurt Russel? ",
+          "gold": "contract with The Walt Disney Company",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies The Walt Disney Company, which had a ten-year contract with Kurt Russell."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.7499999999999999,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Which company had a ten year contract with the anti-hero from Escape From New York played by Kurt Russel? ",
+            "answer": "The Walt Disney Company",
+            "claims": [
+              {
+                "text": "Snake Plissken is the anti-hero from Escape From New York played by Kurt Russell.",
+                "citations": [
+                  "edff3e99317108ba:0"
+                ]
+              },
+              {
+                "text": "Kurt Russell signed a ten-year contract with The Walt Disney Company in the late 1960s.",
+                "citations": [
+                  "59bc74d96740d967:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Which company had a ten year contract with the anti-hero from Escape From New York played by Kurt Russel? "
+            ],
+            "retrieved_chunk_ids": [
+              "edff3e99317108ba:0",
+              "59bc74d96740d967:0",
+              "be810e0f1ec6b932:0",
+              "d405aacde9970019:0",
+              "a39e3e7cf54fb39b:1",
+              "b2939fd3ad1b171c:0"
+            ],
+            "source_titles": {
+              "edff3e99317108ba:0": "Snake Plissken",
+              "59bc74d96740d967:0": "Kurt Russell",
+              "be810e0f1ec6b932:0": "Thomas Tull",
+              "d405aacde9970019:0": "Beecher's Handmade Cheese",
+              "a39e3e7cf54fb39b:1": "The Next Step (Kurt Rosenwinkel album)",
+              "b2939fd3ad1b171c:0": "Universal Pictures"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5a721bbc55429971e9dc9279",
+          "category": "bridge",
+          "question": "Which Grammy Nominated album was created by a band whose members include John Bowman?",
+          "gold": "Nature's Symphony in 432",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": false,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": null,
+            "correct": false,
+            "citation_precision": null,
+            "citation_recall": null
+          },
+          "answer": {
+            "question": "Which Grammy Nominated album was created by a band whose members include John Bowman?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "No document in the collection mentions a band whose members include John Bowman or a Grammy Nominated album created by such a band.",
+            "search_queries": [
+              "Which Grammy Nominated album was created by a band whose members include John Bowman?"
+            ],
+            "retrieved_chunk_ids": [
+              "b9da79ae52ad50b2:0",
+              "063d2dc3738c0c1c:0",
+              "e92d3deb946b7a1a:0",
+              "664e98f2a4552a62:0",
+              "53d4334e4354a517:1",
+              "d2a73f2440339799:0"
+            ],
+            "source_titles": {
+              "b9da79ae52ad50b2:0": "Fascination (album)",
+              "063d2dc3738c0c1c:0": "Elephant (album)",
+              "e92d3deb946b7a1a:0": "Wynona's Big Brown Beaver",
+              "664e98f2a4552a62:0": "Tool (band)",
+              "53d4334e4354a517:1": "Blunderbuss (album)",
+              "d2a73f2440339799:0": "Eagles (band)"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ab48ec25542991779162cdc",
+          "category": "bridge",
+          "question": "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?",
+          "gold": "Spurs",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer includes 'Spurs', which is the gold standard answer."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.5,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?",
+            "answer": "Tottenham or Spurs",
+            "claims": [
+              {
+                "text": "Tottenham Hotspur Football Club, commonly referred to simply as Tottenham or Spurs, is an English football club located in Tottenham, Haringey, London",
+                "citations": [
+                  "8ad9fec8fa354a2f:0"
+                ]
+              },
+              {
+                "text": "Leonard Francis \"Len\" Worley is a former amateur footballer who played for Tottenham Hotspur",
+                "citations": [
+                  "b6bd358adfc674b7:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?"
+            ],
+            "retrieved_chunk_ids": [
+              "c009830131424f8c:0",
+              "8ad9fec8fa354a2f:0",
+              "79a954482eea24c1:0",
+              "b6bd358adfc674b7:0",
+              "4947f4823865734b:0",
+              "1669992bed907c94:0"
+            ],
+            "source_titles": {
+              "c009830131424f8c:0": "History of Tottenham Hotspur F.C.",
+              "8ad9fec8fa354a2f:0": "Tottenham Hotspur F.C.",
+              "79a954482eea24c1:0": "Tottenham Hotspur L.F.C.",
+              "b6bd358adfc674b7:0": "Len Worley",
+              "4947f4823865734b:0": "List of Arsenal F.C. records and statistics",
+              "1669992bed907c94:0": "Arsenal F.C. league record by opponent"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5abd83775542993062266cb7",
+          "category": "bridge",
+          "question": "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?",
+          "gold": "The Snowman",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": false,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": null,
+            "correct": false,
+            "citation_precision": null,
+            "citation_recall": null
+          },
+          "answer": {
+            "question": "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "No document mentions an English operatic tenor performing 'Walking in the Air' for the 1982 animated film; the film's song was performed by choirboy Peter Auty, while the provided documents for English operatic tenors (Charles Craig, Anthony Rolfe Johnson, Nicholas Sharratt) do not mention this performance.",
+            "search_queries": [
+              "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?"
+            ],
+            "retrieved_chunk_ids": [
+              "593daabb403390a9:0",
+              "99bc2533d36b84bd:0",
+              "b33bf5500f220040:0",
+              "63c53eaedbb4e323:0",
+              "07b15e2cec0c4307:0",
+              "34bb451f5f0d6784:0"
+            ],
+            "source_titles": {
+              "593daabb403390a9:0": "Walking in the Air",
+              "99bc2533d36b84bd:0": "Charles Craig (tenor)",
+              "b33bf5500f220040:0": "Anthony Rolfe Johnson",
+              "63c53eaedbb4e323:0": "Plácido Domingo",
+              "07b15e2cec0c4307:0": "La Traviata (1983 film)",
+              "34bb451f5f0d6784:0": "Nicholas Sharratt"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ae0361155429925eb1afc2c",
+          "category": "bridge",
+          "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+          "gold": "Charles Eugène",
+          "judge": {
+            "correct": true,
+            "reason": "Charles Nungesser was the pilot of L'Oiseau Blanc (along with François Coli). Charles Eugène refers to Charles Eugène Nungesser."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.5,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+            "answer": "Charles Nungesser",
+            "claims": [
+              {
+                "text": "Charles Nungesser was a French ace pilot and adventurer.",
+                "citations": [
+                  "ad9cbf0656d27c89:0"
+                ]
+              },
+              {
+                "text": "The aircraft L'Oiseau Blanc was flown by Charles Nungesser and François Coli.",
+                "citations": [
+                  "100fd0029e8667dd:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Which  French ace pilot and adventurer fly L'Oiseau Blanc"
+            ],
+            "retrieved_chunk_ids": [
+              "6620168ec959c0fe:0",
+              "100fd0029e8667dd:0",
+              "ad9cbf0656d27c89:0",
+              "caeba57f0047cc48:0",
+              "7e1789f35d96e79a:1",
+              "cb85c4a20e816f68:0"
+            ],
+            "source_titles": {
+              "6620168ec959c0fe:0": "François Coli",
+              "100fd0029e8667dd:0": "L'Oiseau Blanc",
+              "ad9cbf0656d27c89:0": "Charles Nungesser",
+              "caeba57f0047cc48:0": "Gervais Raoul Lufbery",
+              "7e1789f35d96e79a:1": "Wooster and Davis",
+              "cb85c4a20e816f68:0": "Levasseur PL.8"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ab67bf255429954757d32f5",
+          "category": "bridge",
+          "question": "PISCES was developed by the company that is headquartered in what city?",
+          "gold": "McLean, Virginia",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": false,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": null,
+            "correct": false,
+            "citation_precision": null,
+            "citation_recall": null
+          },
+          "answer": {
+            "question": "PISCES was developed by the company that is headquartered in what city?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The documents state that PISCES was developed by Booz Allen Hamilton Inc., but the collection does not contain a document about Booz Allen Hamilton Inc. specifying the city where it is headquartered.",
+            "search_queries": [
+              "PISCES was developed by the company that is headquartered in what city?"
+            ],
+            "retrieved_chunk_ids": [
+              "4752482b14eb5e81:0",
+              "209c4159f82891e9:0",
+              "c6f094279db87c89:0",
+              "4e078a041d48ea53:0",
+              "018080d2db1c0d7e:0",
+              "fb9a2716de6170f2:0"
+            ],
+            "source_titles": {
+              "4752482b14eb5e81:0": "SpaceX",
+              "209c4159f82891e9:0": "Intel",
+              "c6f094279db87c89:0": "PISCES",
+              "4e078a041d48ea53:0": "Chelsio Communications",
+              "018080d2db1c0d7e:0": "Maritime Broadband",
+              "fb9a2716de6170f2:0": "Cisco Systems"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ae3790f5542992e3233c415",
+          "category": "comparison",
+          "question": "Are Leopold Lummerstorfer and Valeria Sarmiento both authors?",
+          "gold": "no",
+          "judge": {
+            "correct": false,
+            "reason": "The predicted answer says 'yes', but the gold answer is 'no'. Both are film directors/filmmakers rather than authors."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": false,
+            "correct": false,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Are Leopold Lummerstorfer and Valeria Sarmiento both authors?",
+            "answer": "yes",
+            "claims": [
+              {
+                "text": "Leopold Lummerstorfer is an Austrian film director, author and producer.",
+                "citations": [
+                  "b996e58310e1ae5e:0"
+                ]
+              },
+              {
+                "text": "Valeria Sarmiento is a Chilean film editor, director and screenwriter who has also worked as a writer.",
+                "citations": [
+                  "6bbc2cf69a53f974:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Are Leopold Lummerstorfer and Valeria Sarmiento both authors?"
+            ],
+            "retrieved_chunk_ids": [
+              "b996e58310e1ae5e:0",
+              "6bbc2cf69a53f974:0",
+              "b9bcacbfd8e20a15:0",
+              "056771552f58f39c:0",
+              "5c99089d1a4c239f:0",
+              "a586d233551bf2b2:0"
+            ],
+            "source_titles": {
+              "b996e58310e1ae5e:0": "Leopold Lummerstorfer",
+              "6bbc2cf69a53f974:0": "Valeria Sarmiento",
+              "b9bcacbfd8e20a15:0": "Archduke Leopold Salvator of Austria",
+              "056771552f58f39c:0": "Amelia Lópes O'Neill",
+              "5c99089d1a4c239f:0": "Leopold von Sacher-Masoch",
+              "a586d233551bf2b2:0": "Lines of Wellington"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5a8e276b5542995a26add468",
+          "category": "comparison",
+          "question": "Which band formed first, Swervedriver or Incubus?",
+          "gold": "Swervedriver",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies that Swervedriver formed first."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Which band formed first, Swervedriver or Incubus?",
+            "answer": "Swervedriver",
+            "claims": [
+              {
+                "text": "Swervedriver was formed in 1989.",
+                "citations": [
+                  "8c558bd5eac2da8c:0"
+                ]
+              },
+              {
+                "text": "Incubus was formed in 1991.",
+                "citations": [
+                  "a9e2e5ee48ec76be:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Which band formed first, Swervedriver or Incubus?"
+            ],
+            "retrieved_chunk_ids": [
+              "60c0c3d801e289a6:0",
+              "8c558bd5eac2da8c:0",
+              "a9e2e5ee48ec76be:0",
+              "bec2f1e8cae78b6d:0",
+              "ec5bd8b1441260a2:0",
+              "f78e7923457fc332:0"
+            ],
+            "source_titles": {
+              "60c0c3d801e289a6:0": "Time Lapse Consortium",
+              "8c558bd5eac2da8c:0": "Swervedriver",
+              "a9e2e5ee48ec76be:0": "Incubus (band)",
+              "bec2f1e8cae78b6d:0": "List of the Smashing Pumpkins band members",
+              "ec5bd8b1441260a2:0": "Giants of Science",
+              "f78e7923457fc332:0": "Sanctuary (band)"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5ac3bd0c554299204fd21e21",
+          "category": "comparison",
+          "question": "Sam Mendes and Ruby Yang share what profession?",
+          "gold": "filmmaker.",
+          "judge": {
+            "correct": true,
+            "reason": "Both predicted and gold answers indicate the profession is 'filmmaker'."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Sam Mendes and Ruby Yang share what profession?",
+            "answer": "filmmaker",
+            "claims": [
+              {
+                "text": "Ruby Yang is a filmmaker.",
+                "citations": [
+                  "168de342501307d8:0"
+                ]
+              },
+              {
+                "text": "Sam Mendes is an English stage and film director.",
+                "citations": [
+                  "68588a0127083a50:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Sam Mendes and Ruby Yang share what profession?"
+            ],
+            "retrieved_chunk_ids": [
+              "168de342501307d8:0",
+              "50bbc6135be26ae9:0",
+              "68588a0127083a50:0",
+              "3c185ec837efa976:0",
+              "837e5284f18dc109:0",
+              "59fbc6457d20c7e2:0"
+            ],
+            "source_titles": {
+              "168de342501307d8:0": "Ruby Yang",
+              "50bbc6135be26ae9:0": "List of accolades received by American Beauty",
+              "68588a0127083a50:0": "Sam Mendes",
+              "3c185ec837efa976:0": "Neal Street Productions",
+              "837e5284f18dc109:0": "Iron &amp; Wine",
+              "59fbc6457d20c7e2:0": "The Blood of Yingzhou District"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5a7332935542991f9a20c67d",
+          "category": "comparison",
+          "question": "Which board game was published most recently, Pirate's Cove or Catan?",
+          "gold": "Pirate's Cove",
+          "judge": {
+            "correct": false,
+            "reason": "Pirate's Cove was published in 2002, while Catan (The Settlers of Catan) was published in 1995. Therefore, Pirate's Cove was published more recently, but the predicted answer was Catan."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.0,
+            "judge_correct": false,
+            "correct": false,
+            "citation_precision": 0.5,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Which board game was published most recently, Pirate's Cove or Catan?",
+            "answer": "Catan",
+            "claims": [
+              {
+                "text": "The Settlers of Catan (Catan) was first published in 1995.",
+                "citations": [
+                  "ffe8ef165b22aef2:0"
+                ]
+              },
+              {
+                "text": "Catan Dice Game was published in 2007.",
+                "citations": [
+                  "97d5c2ed5990756b:0"
+                ]
+              },
+              {
+                "text": "The Rivals for Catan was released in 2010.",
+                "citations": [
+                  "9712a281d953c00f:0"
+                ]
+              },
+              {
+                "text": "Pirate's Cove was originally published in 2002 and republished in 2003.",
+                "citations": [
+                  "5e6064c26c2b9e75:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Which board game was published most recently, Pirate's Cove or Catan?"
+            ],
+            "retrieved_chunk_ids": [
+              "dbb3d2c9659ec14b:0",
+              "97d5c2ed5990756b:0",
+              "5e6064c26c2b9e75:0",
+              "ffe8ef165b22aef2:0",
+              "802dfb12200eebc8:0",
+              "9712a281d953c00f:0"
+            ],
+            "source_titles": {
+              "dbb3d2c9659ec14b:0": "Catan: Seafarers",
+              "97d5c2ed5990756b:0": "Catan Dice Game",
+              "5e6064c26c2b9e75:0": "Pirate's Cove",
+              "ffe8ef165b22aef2:0": "Catan",
+              "802dfb12200eebc8:0": "The Kids of Catan",
+              "9712a281d953c00f:0": "The Rivals for Catan"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "5a7df7115542990b8f503b0f",
+          "category": "comparison",
+          "question": "Who was born first out of Todd Field and Aaron Katz?",
+          "gold": "William Todd Field",
+          "judge": {
+            "correct": true,
+            "reason": "Todd Field and William Todd Field are the same person, and he was born in 1964, whereas Aaron Katz was born later (1981)."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": false,
+            "f1": 0.8,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Who was born first out of Todd Field and Aaron Katz?",
+            "answer": "Todd Field",
+            "claims": [
+              {
+                "text": "Todd Field was born on February 24, 1964.",
+                "citations": [
+                  "72ad74d160bbf24d:0"
+                ]
+              },
+              {
+                "text": "Aaron Katz was born on October 29, 1981.",
+                "citations": [
+                  "7a25f1d0e4c7eaca:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Who was born first out of Todd Field and Aaron Katz?"
+            ],
+            "retrieved_chunk_ids": [
+              "7a25f1d0e4c7eaca:0",
+              "7b6c3119d7ccecb9:0",
+              "72ad74d160bbf24d:0",
+              "7958e3db68439499:0",
+              "508e4056ef7bb46b:0",
+              "3334b43678889d06:0"
+            ],
+            "source_titles": {
+              "7a25f1d0e4c7eaca:0": "Aaron Katz (filmmaker)",
+              "7b6c3119d7ccecb9:0": "Cold Weather",
+              "72ad74d160bbf24d:0": "Todd Field",
+              "7958e3db68439499:0": "Dance Party USA (film)",
+              "508e4056ef7bb46b:0": "Too Romantic",
+              "3334b43678889d06:0": "Mike Katz"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "simple-04",
+          "category": "simple",
+          "question": "Who wrote and directed the 2007 American horror film Hostel: Part II?",
+          "gold": "Eli Roth",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'Eli Roth' correctly identifies the writer and director of the 2007 film Hostel: Part II, matching the gold standard."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Who wrote and directed the 2007 American horror film Hostel: Part II?",
+            "answer": "Eli Roth",
+            "claims": [
+              {
+                "text": "Hostel: Part II is a 2007 American horror film written and directed by Eli Roth.",
+                "citations": [
+                  "6b2dd0d50bb62b21:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Who wrote and directed the 2007 American horror film Hostel: Part II?"
+            ],
+            "retrieved_chunk_ids": [
+              "6b2dd0d50bb62b21:0",
+              "acf795f1414c07dd:0",
+              "5b74943c13e2619b:0",
+              "eb4064ac593d6dd0:0",
+              "d6a0307053cf93ac:0",
+              "3c82bfad2511a419:0"
+            ],
+            "source_titles": {
+              "6b2dd0d50bb62b21:0": "Hostel: Part II",
+              "acf795f1414c07dd:0": "Hostel (2005 film)",
+              "5b74943c13e2619b:0": "Hostel: Part III",
+              "eb4064ac593d6dd0:0": "Unearthed (film)",
+              "d6a0307053cf93ac:0": "Eli Roth",
+              "3c82bfad2511a419:0": "Contracted: Phase II"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "simple-05",
+          "category": "simple",
+          "question": "Who created The Simpsons character Hans Moleman?",
+          "gold": "Matt Groening",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies Matt Groening as the creator of the character Hans Moleman, matching the gold standard."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Who created The Simpsons character Hans Moleman?",
+            "answer": "Matt Groening",
+            "claims": [
+              {
+                "text": "Hans Moleman was created by series creator Matt Groening.",
+                "citations": [
+                  "68b8e8c074b6c659:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Who created The Simpsons character Hans Moleman?"
+            ],
+            "retrieved_chunk_ids": [
+              "68b8e8c074b6c659:0",
+              "78a0f692cf770178:0",
+              "e84d8d5db032bf93:0",
+              "c2d8bf77c014e707:0",
+              "5ff86f85f21af449:0",
+              "a7c9b8d2da448d64:0"
+            ],
+            "source_titles": {
+              "68b8e8c074b6c659:0": "Hans Moleman",
+              "78a0f692cf770178:0": "Dan Castellaneta",
+              "e84d8d5db032bf93:0": "Homer Simpson",
+              "c2d8bf77c014e707:0": "Milhouse Van Houten",
+              "5ff86f85f21af449:0": "Marge Simpson",
+              "a7c9b8d2da448d64:0": "Kent Brockman"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "simple-06",
+          "category": "simple",
+          "question": "What has been the inspiration for both Roberta Allen's writing and her art?",
+          "gold": "Language",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer matches the gold answer."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "What has been the inspiration for both Roberta Allen's writing and her art?",
+            "answer": "Language",
+            "claims": [
+              {
+                "text": "Language has been the inspiration for both Roberta Allen's writing and her art.",
+                "citations": [
+                  "0c5152301cb184a2:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "What has been the inspiration for both Roberta Allen's writing and her art?"
+            ],
+            "retrieved_chunk_ids": [
+              "0c5152301cb184a2:0",
+              "53f9c0c965445236:0",
+              "16d5a6fc6d0f178d:0",
+              "771e9bbe08049f10:0",
+              "3bcd21b6bd39e420:0",
+              "7c21d507b5f2139d:0"
+            ],
+            "source_titles": {
+              "0c5152301cb184a2:0": "Roberta Allen",
+              "53f9c0c965445236:0": "Bernadette Mayer",
+              "16d5a6fc6d0f178d:0": "Maurice Denis",
+              "771e9bbe08049f10:0": "2011 Barcelona Ladies Open – Doubles",
+              "3bcd21b6bd39e420:0": "Anaïs Nin",
+              "7c21d507b5f2139d:0": "Roberta Romano"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "simple-07",
+          "category": "simple",
+          "question": "Who directed the 1994 film Cool and the Crazy, starring Jared Leto and Alicia Silverstone?",
+          "gold": "Ralph Bakshi",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies Ralph Bakshi as the director of the 1994 film Cool and the Crazy, matching the gold standard."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "Who directed the 1994 film Cool and the Crazy, starring Jared Leto and Alicia Silverstone?",
+            "answer": "Ralph Bakshi",
+            "claims": [
+              {
+                "text": "Cool and the Crazy is a 1994 American drama film written and directed by Ralph Bakshi and starring Jared Leto and Alicia Silverstone.",
+                "citations": [
+                  "78c7eee4c0ed6f7d:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Who directed the 1994 film Cool and the Crazy, starring Jared Leto and Alicia Silverstone?"
+            ],
+            "retrieved_chunk_ids": [
+              "78c7eee4c0ed6f7d:0",
+              "9da5891b75de8547:0",
+              "872b81bf9be72e01:0",
+              "af5a5b5533a4d8b2:0",
+              "32a0da6265307f27:0",
+              "a7affa951b69334e:0"
+            ],
+            "source_titles": {
+              "78c7eee4c0ed6f7d:0": "Cool and the Crazy",
+              "9da5891b75de8547:0": "Alicia Silverstone",
+              "872b81bf9be72e01:0": "Knut Erik Jensen",
+              "af5a5b5533a4d8b2:0": "Requiem for a Dream",
+              "32a0da6265307f27:0": "As Cool as I Am (film)",
+              "a7affa951b69334e:0": "Wildlife Vet"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "simple-09",
+          "category": "simple",
+          "question": "How many seasons did The Nanny air on CBS?",
+          "gold": "six",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'six' matches the gold answer 'six'."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
+          },
+          "answer": {
+            "question": "How many seasons did The Nanny air on CBS?",
+            "answer": "six",
+            "claims": [
+              {
+                "text": "The Nanny is an American television sitcom that aired for six seasons on CBS from 1993 to 1999.",
+                "citations": [
+                  "1dc6f2251c5cd29e:0"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "How many seasons did The Nanny air on CBS?"
+            ],
+            "retrieved_chunk_ids": [
+              "1dc6f2251c5cd29e:0",
+              "942883c0f866f9ae:0",
+              "049d81d34a76e4d6:1",
+              "88cca45ffeaa248e:1",
+              "7654cbc0d9746a05:0",
+              "12f53363814de649:0"
+            ],
+            "source_titles": {
+              "1dc6f2251c5cd29e:0": "List of The Nanny episodes",
+              "942883c0f866f9ae:0": "The Nanny (season 1)",
+              "049d81d34a76e4d6:1": "Horseland (TV series)",
+              "88cca45ffeaa248e:1": "Early Edition",
+              "7654cbc0d9746a05:0": "David Doremus",
+              "12f53363814de649:0": "One Day at a Time"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "unanswerable-02",
+          "category": "unanswerable",
+          "question": "Which film won the Academy Award for Best Picture in 2029?",
+          "gold": null,
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "correct": true
+          },
+          "answer": {
+            "question": "Which film won the Academy Award for Best Picture in 2029?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The provided documents do not contain information about which film won the Academy Award for Best Picture in 2029.",
+            "search_queries": [
+              "Which film won the Academy Award for Best Picture in 2029?"
+            ],
+            "retrieved_chunk_ids": [
+              "73d7721dd34284bb:1",
+              "8b178d1910b166c0:0",
+              "7b11b14811e595eb:0",
+              "013ee81181afa7cc:0",
+              "08fbac3268b7ebfd:0",
+              "7cfde6391f25d5c4:0"
+            ],
+            "source_titles": {
+              "73d7721dd34284bb:1": "The Bridges of Madison County (film)",
+              "8b178d1910b166c0:0": "List of American films of 2004",
+              "7b11b14811e595eb:0": "Aladdin (2019 film)",
+              "013ee81181afa7cc:0": "Academy Award for Best Film Editing",
+              "08fbac3268b7ebfd:0": "The Lion King (2019 film)",
+              "7cfde6391f25d5c4:0": "Michel Hazanavicius"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "unanswerable-03",
+          "category": "unanswerable",
+          "question": "Who was elected President of France in 2032?",
+          "gold": null,
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "correct": true
+          },
+          "answer": {
+            "question": "Who was elected President of France in 2032?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The provided documents do not contain information about the President of France elected in 2032.",
+            "search_queries": [
+              "Who was elected President of France in 2032?"
+            ],
+            "retrieved_chunk_ids": [
+              "67e6d66684cfd959:0",
+              "fba4bb6215ab78f1:0",
+              "c292306ed35185df:1",
+              "0147d415a952efb7:0",
+              "48bdc4f26e1614f5:0",
+              "28715f5ba46788f5:0"
+            ],
+            "source_titles": {
+              "67e6d66684cfd959:0": "Napoleon III",
+              "fba4bb6215ab78f1:0": "William Short (American ambassador)",
+              "c292306ed35185df:1": "François Hollande presidential campaign, 2012",
+              "0147d415a952efb7:0": "James A. Garfield",
+              "48bdc4f26e1614f5:0": "Umberto II of Italy",
+              "28715f5ba46788f5:0": "Aquino–Binay Campaign, 2010"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "unanswerable-04",
+          "category": "unanswerable",
+          "question": "In which year did the city of Zorvania host the Winter Olympics?",
+          "gold": null,
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "correct": true
+          },
+          "answer": {
+            "question": "In which year did the city of Zorvania host the Winter Olympics?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The provided documents do not contain any information about a city named Zorvania hosting the Winter Olympics.",
+            "search_queries": [
+              "In which year did the city of Zorvania host the Winter Olympics?"
+            ],
+            "retrieved_chunk_ids": [
+              "3cddd3787010e0c5:0",
+              "a64ac515a0949664:0",
+              "43be07caf8cc9cf3:0",
+              "8cafb97903117552:0",
+              "3cddd3787010e0c5:1",
+              "2b38c5a06b0778a8:0"
+            ],
+            "source_titles": {
+              "3cddd3787010e0c5:0": "1994 Winter Olympics",
+              "a64ac515a0949664:0": "2014 Winter Olympics",
+              "43be07caf8cc9cf3:0": "2012 Winter Youth Olympics",
+              "8cafb97903117552:0": "Summer Olympic Games",
+              "3cddd3787010e0c5:1": "1994 Winter Olympics",
+              "2b38c5a06b0778a8:0": "Sochi bid for the 2014 Winter Olympics"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "unanswerable-05",
+          "category": "unanswerable",
+          "question": "Who founded the Kestrelmoor Institute of Applied Linguistics?",
+          "gold": null,
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "correct": true
+          },
+          "answer": {
+            "question": "Who founded the Kestrelmoor Institute of Applied Linguistics?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The provided documents do not contain any information about the Kestrelmoor Institute of Applied Linguistics or its founder.",
+            "search_queries": [
+              "Who founded the Kestrelmoor Institute of Applied Linguistics?"
+            ],
+            "retrieved_chunk_ids": [
+              "95f33523267c6ef7:0",
+              "76b4fabe43a98658:0",
+              "d7304348923cfbb3:2",
+              "f9ced2f1aac7c2e8:0",
+              "729290711e38fa60:0",
+              "539c3dfd28872611:0"
+            ],
+            "source_titles": {
+              "95f33523267c6ef7:0": "Harold E. Palmer",
+              "76b4fabe43a98658:0": "Noam Chomsky",
+              "d7304348923cfbb3:2": "Lucille Watahomigie",
+              "f9ced2f1aac7c2e8:0": "Thomas Reid",
+              "729290711e38fa60:0": "Ping Li",
+              "539c3dfd28872611:0": "University of St Andrews"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "unanswerable-09",
+          "category": "unanswerable",
+          "question": "How many goals did Ed Wood score for the United States national football team?",
+          "gold": null,
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "correct": true
+          },
+          "answer": {
+            "question": "How many goals did Ed Wood score for the United States national football team?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [],
+            "should_abstain": true,
+            "abstain_reason": "The provided documents do not contain any information about Ed Wood scoring goals for the United States national football team.",
+            "search_queries": [
+              "How many goals did Ed Wood score for the United States national football team?"
+            ],
+            "retrieved_chunk_ids": [
+              "8adca38712fcab96:0",
+              "f6d9e40dff68a37f:0",
+              "a7df440b54a302ad:0",
+              "567113097bcc22d4:0",
+              "b8cfa70af6cb55bd:0",
+              "eb8a620e6772ed99:0"
+            ],
+            "source_titles": {
+              "8adca38712fcab96:0": "United States men's national under-23 soccer team",
+              "f6d9e40dff68a37f:0": "Jim Wood (American football)",
+              "a7df440b54a302ad:0": "Woodson, Arkansas",
+              "567113097bcc22d4:0": "Ed Brown (end)",
+              "b8cfa70af6cb55bd:0": "Theo Brokmann",
+              "eb8a620e6772ed99:0": "Shawn Wooden"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "contradictory-02",
+          "category": "contradictory",
+          "question": "Since which year has the ICON science fiction convention been held in the Cedar Rapids and Iowa City area?",
+          "gold": "1975",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer matches the gold answer, both stating the year 1975."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "conflict_reported": true
+          },
+          "answer": {
+            "question": "Since which year has the ICON science fiction convention been held in the Cedar Rapids and Iowa City area?",
+            "answer": "1975",
+            "claims": [
+              {
+                "text": "ICON is an annual science fiction convention held in the Cedar Rapids/ Iowa City area of Iowa since 1975",
+                "citations": [
+                  "581cc79262d22476:0"
+                ]
+              }
+            ],
+            "conflicts": [
+              {
+                "description": "Document 581cc79262d22476 states ICON has been held since 1975, whereas document 6f0e6ade49fcad23 states the very first ICON took place in 1979.",
+                "citations": [
+                  "581cc79262d22476:0",
+                  "6f0e6ade49fcad23:0"
+                ]
+              }
+            ],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "Since which year has the ICON science fiction convention been held in the Cedar Rapids and Iowa City area?"
+            ],
+            "retrieved_chunk_ids": [
+              "581cc79262d22476:0",
+              "6f0e6ade49fcad23:0",
+              "b7810f4e3aa09d3d:1",
+              "a4c37806fc19fabc:0",
+              "ae8ffecd7cf9b1b1:0",
+              "17c275473c80dcfd:0"
+            ],
+            "source_titles": {
+              "581cc79262d22476:0": "Icon (Iowa science fiction convention)",
+              "6f0e6ade49fcad23:0": "ICON convention (fan wiki)",
+              "b7810f4e3aa09d3d:1": "I-CON",
+              "a4c37806fc19fabc:0": "Readercon",
+              "ae8ffecd7cf9b1b1:0": "Grant Vocational High School",
+              "17c275473c80dcfd:0": "Trinoc*coN"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "contradictory-03",
+          "category": "contradictory",
+          "question": "In which year was the anthology Avant-Pop: Fiction for a Daydream Nation, edited by Larry McCaffery, published?",
+          "gold": "1992",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "conflict_reported": true
+          },
+          "answer": {
+            "question": "In which year was the anthology Avant-Pop: Fiction for a Daydream Nation, edited by Larry McCaffery, published?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [
+              {
+                "description": "The documents disagree on the publication year of Avant-Pop: Fiction for a Daydream Nation: one states it was published in 1992, while another states the first edition was published in 1994.",
+                "citations": [
+                  "88c4f00c7aac1e71:0",
+                  "04a1a402267baf72:0"
+                ]
+              }
+            ],
+            "should_abstain": true,
+            "abstain_reason": "The provided documents conflict regarding the publication year of the anthology (1992 vs 1994).",
+            "search_queries": [
+              "In which year was the anthology Avant-Pop: Fiction for a Daydream Nation, edited by Larry McCaffery, published?"
+            ],
+            "retrieved_chunk_ids": [
+              "88c4f00c7aac1e71:0",
+              "04a1a402267baf72:0",
+              "d84c02e6276bdf4e:0",
+              "adfe1571ece255b4:0",
+              "17e09a22337ff49a:0",
+              "f8448d7eae1821a7:0"
+            ],
+            "source_titles": {
+              "88c4f00c7aac1e71:0": "Avant-Pop: Fiction for a Daydream Nation",
+              "04a1a402267baf72:0": "Avant-Pop anthology (bookseller catalogue entry)",
+              "d84c02e6276bdf4e:0": "Fiction International",
+              "adfe1571ece255b4:0": "Larry Eisenberg",
+              "17e09a22337ff49a:0": "Wandering Stars",
+              "f8448d7eae1821a7:0": "Memoir (John McGahern book)"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "contradictory-07",
+          "category": "contradictory",
+          "question": "In which year was the TRANSFER gallery in Brooklyn created?",
+          "gold": "2013",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies the year 2013 as requested by the gold standard."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "conflict_reported": true
+          },
+          "answer": {
+            "question": "In which year was the TRANSFER gallery in Brooklyn created?",
+            "answer": "2013",
+            "claims": [
+              {
+                "text": "TRANSFER is a gallery that was created in 2013 and is located in Brooklyn, New York.",
+                "citations": [
+                  "e33b8f14eb5469c2:0"
+                ]
+              }
+            ],
+            "conflicts": [
+              {
+                "description": "Document e33b8f14eb5469c2 states that TRANSFER was created in 2013, whereas document c4c05fcbffd9b4a4 states that it opened in 2015.",
+                "citations": [
+                  "e33b8f14eb5469c2:0",
+                  "c4c05fcbffd9b4a4:0"
+                ]
+              }
+            ],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "In which year was the TRANSFER gallery in Brooklyn created?"
+            ],
+            "retrieved_chunk_ids": [
+              "e33b8f14eb5469c2:0",
+              "c4c05fcbffd9b4a4:0",
+              "f09eec5d78799071:0",
+              "4cd5d9015e0ec007:0",
+              "0a248208647e1791:0",
+              "f19793d2f4e706b9:0"
+            ],
+            "source_titles": {
+              "e33b8f14eb5469c2:0": "TRANSFER Gallery",
+              "c4c05fcbffd9b4a4:0": "TRANSFER Gallery (Brooklyn arts listings)",
+              "f09eec5d78799071:0": "Brooklyn Heights",
+              "4cd5d9015e0ec007:0": "Bruce Silverstein Gallery",
+              "0a248208647e1791:0": "Studio Museum in Harlem",
+              "f19793d2f4e706b9:0": "MacKenzie Art Gallery"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "contradictory-09",
+          "category": "contradictory",
+          "question": "In which year was the American musician and former actor Jared Rushton born?",
+          "gold": "1974",
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer matches the gold answer (1974)."
+          },
+          "scores": {
+            "abstained": false,
+            "llm_calls": 1,
+            "searches": 1,
+            "conflict_reported": true
+          },
+          "answer": {
+            "question": "In which year was the American musician and former actor Jared Rushton born?",
+            "answer": "1974",
+            "claims": [
+              {
+                "text": "Jared Michael Rushton was born on March 3, 1974.",
+                "citations": [
+                  "2712af39184f80df:0"
+                ]
+              }
+            ],
+            "conflicts": [
+              {
+                "description": "Document 2712af39184f80df states Jared Rushton was born on March 3, 1974, whereas document 8a1387e8139597ad states he was born on March 3, 1972.",
+                "citations": [
+                  "2712af39184f80df:0",
+                  "8a1387e8139597ad:0"
+                ]
+              }
+            ],
+            "should_abstain": false,
+            "abstain_reason": "",
+            "search_queries": [
+              "In which year was the American musician and former actor Jared Rushton born?"
+            ],
+            "retrieved_chunk_ids": [
+              "2712af39184f80df:0",
+              "8a1387e8139597ad:0",
+              "fa0c318597a043ff:0",
+              "7010829a360a4e4f:0",
+              "62ce7b21f0503049:0",
+              "88263f27750dfe4b:0"
+            ],
+            "source_titles": {
+              "2712af39184f80df:0": "Jared Rushton",
+              "8a1387e8139597ad:0": "Jared Rushton (child actors fan page)",
+              "fa0c318597a043ff:0": "Jared Faber",
+              "7010829a360a4e4f:0": "Luke Goss",
+              "62ce7b21f0503049:0": "Billy Idol",
+              "88263f27750dfe4b:0": "Barry Orton"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        },
+        {
+          "id": "contradictory-10",
+          "category": "contradictory",
+          "question": "In which year was the documentary film Traceroute, directed by Johannes Grenzfurthner, released?",
+          "gold": "2016",
+          "judge": null,
+          "scores": {
+            "abstained": true,
+            "llm_calls": 1,
+            "searches": 1,
+            "conflict_reported": true
+          },
+          "answer": {
+            "question": "In which year was the documentary film Traceroute, directed by Johannes Grenzfurthner, released?",
+            "answer": "",
+            "claims": [],
+            "conflicts": [
+              {
+                "description": "Document 92a00210b12968f7:0 states that Traceroute is a 2016 documentary film, while document 5a05cc6b5bc2959c:0 describes it as a 2014 documentary.",
+                "citations": [
+                  "92a00210b12968f7:0",
+                  "5a05cc6b5bc2959c:0"
+                ]
+              }
+            ],
+            "should_abstain": true,
+            "abstain_reason": "The provided documents conflict on the release year of Traceroute, listing it as both 2016 and 2014.",
+            "search_queries": [
+              "In which year was the documentary film Traceroute, directed by Johannes Grenzfurthner, released?"
+            ],
+            "retrieved_chunk_ids": [
+              "92a00210b12968f7:0",
+              "5a05cc6b5bc2959c:0",
+              "c52c4d4a04758a5c:0",
+              "1d41525033f4d681:0",
+              "10966bedb958318c:0",
+              "7a79b3cb9abf674c:0"
+            ],
+            "source_titles": {
+              "92a00210b12968f7:0": "Traceroute (film)",
+              "5a05cc6b5bc2959c:0": "Traceroute (film festival catalogue)",
+              "c52c4d4a04758a5c:0": "Johannes Grenzfurthner",
+              "1d41525033f4d681:0": "Mediastan",
+              "10966bedb958318c:0": "Chasing Coral",
+              "7a79b3cb9abf674c:0": "Grizzly Man"
+            },
+            "llm_calls": 1,
+            "notes": []
+          }
+        }
+      ]
+    }
+  }
+}

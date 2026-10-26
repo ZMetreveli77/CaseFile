@@ -1,0 +1,2064 @@
+{
+  "split": "test",
+  "questions": 20,
+  "modes": {
+    "dense": {
+      "overall": {
+        "recall@1": 0.525,
+        "recall@3": 0.75,
+        "recall@5": 0.775,
+        "recall@10": 0.825,
+        "all_found@1": 0.25,
+        "all_found@3": 0.65,
+        "all_found@5": 0.7,
+        "all_found@10": 0.8,
+        "reciprocal_rank": 0.825
+      },
+      "by_category": {
+        "bridge": {
+          "recall@1": 0.3,
+          "recall@3": 0.5,
+          "recall@5": 0.55,
+          "recall@10": 0.65,
+          "all_found@1": 0.0,
+          "all_found@3": 0.3,
+          "all_found@5": 0.4,
+          "all_found@10": 0.6,
+          "reciprocal_rank": 0.65
+        },
+        "comparison": {
+          "recall@1": 0.5,
+          "recall@3": 1.0,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "all_found@1": 0.0,
+          "all_found@3": 1.0,
+          "all_found@5": 1.0,
+          "all_found@10": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "simple": {
+          "recall@1": 1.0,
+          "recall@3": 1.0,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "all_found@1": 1.0,
+          "all_found@3": 1.0,
+          "all_found@5": 1.0,
+          "all_found@10": 1.0,
+          "reciprocal_rank": 1.0
+        }
+      },
+      "seconds": 3.8,
+      "questions": [
+        {
+          "id": "5a7b78c35542997c3ec971a9",
+          "category": "bridge",
+          "question": "What year was the voice actress of an animated television series premiered on Cartoon Network born?",
+          "supporting_ranks": {
+            "Lara Jill Miller": null,
+            "The Life and Times of Juniper Lee": null
+          },
+          "retrieved_titles": [
+            "List of Teen Titans episodes",
+            "Adventure Time",
+            "Steven Universe",
+            "List of Dexter's Laboratory episodes",
+            "Janet Waldo",
+            "Cartoon Network",
+            "Teen Titans (season 4)",
+            "Teen Titans (season 1)",
+            "Rebecca Forstadt",
+            "Lucy, the Daughter of the Devil"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "5ae27b535542996483e649b6",
+          "category": "bridge",
+          "question": "The chorus of \"On the Radio\" contains references to the song \"November Rain\" whose band's lead singer is?",
+          "supporting_ranks": {
+            "On the Radio (Regina Spektor song)": 1,
+            "November Rain": 2
+          },
+          "retrieved_titles": [
+            "On the Radio (Regina Spektor song)",
+            "November Rain",
+            "Robert Plant",
+            "The Dead Weather",
+            "Metro Station (band)",
+            "Marcus Mumford",
+            "The Darkness (band)",
+            "Weather and Water",
+            "Trace Cyrus",
+            "Bad Religion"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ab5574b554299488d4d994e",
+          "category": "bridge",
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "supporting_ranks": {
+            "Rob Bottin": 1,
+            "David Fincher": 10
+          },
+          "retrieved_titles": [
+            "Rob Bottin",
+            "Christopher Nolan",
+            "Stanley Kubrick",
+            "Stephen Rosenbaum",
+            "Michael Kanin",
+            "Peter Dinklage",
+            "Alan J. Pakula",
+            "Robert Mulligan",
+            "George Clooney",
+            "David Fincher"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5abf0bf95542997719eab63a",
+          "category": "bridge",
+          "question": "José Rubia Barcia  published a great number of books and articles on a Spanish poet, playwright, and what?",
+          "supporting_ranks": {
+            "José Rubia Barcia": 1,
+            "Federico García Lorca": 2
+          },
+          "retrieved_titles": [
+            "José Rubia Barcia",
+            "Federico García Lorca",
+            "Miguel de Cervantes",
+            "Cuban literature",
+            "William Shakespeare",
+            "Guillermo Cabrera Infante",
+            "Shakespeare (disambiguation)",
+            "Rosario Castellanos",
+            "Gabriel García Márquez",
+            "Luigi Pirandello"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5addcfd65542997dc790703e",
+          "category": "bridge",
+          "question": "Which company had a ten year contract with the anti-hero from Escape From New York played by Kurt Russel? ",
+          "supporting_ranks": {
+            "Snake Plissken": 1,
+            "Kurt Russell": 3
+          },
+          "retrieved_titles": [
+            "Snake Plissken",
+            "Thomas Tull",
+            "Kurt Russell",
+            "Universal Pictures",
+            "Thor: God of Thunder",
+            "Marvel Entertainment",
+            "Legendary Entertainment",
+            "AOL",
+            "Ender's Game (film)",
+            "21st Century Fox"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a721bbc55429971e9dc9279",
+          "category": "bridge",
+          "question": "Which Grammy Nominated album was created by a band whose members include John Bowman?",
+          "supporting_ranks": {
+            "Nature's Symphony in 432": null,
+            "The Isaacs": null
+          },
+          "retrieved_titles": [
+            "Elephant (album)",
+            "Tool (band)",
+            "Eagles (band)",
+            "Fleetwood Mac",
+            "Franz Ferdinand (band)",
+            "Goo Goo Dolls",
+            "Guns N' Roses",
+            "Filter (band)",
+            "Vance Powell",
+            "Cake (band)"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "5ab48ec25542991779162cdc",
+          "category": "bridge",
+          "question": "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?",
+          "supporting_ranks": {
+            "Len Worley": 8,
+            "Tottenham Hotspur F.C.": 2
+          },
+          "retrieved_titles": [
+            "History of Tottenham Hotspur F.C.",
+            "Tottenham Hotspur F.C.",
+            "List of Arsenal F.C. managers",
+            "List of Arsenal F.C. records and statistics",
+            "Arsenal F.C. league record by opponent",
+            "Tottenham Hotspur L.F.C.",
+            "Arsenal F.C.",
+            "Len Worley",
+            "List of Arsenal F.C. players (1–24 appearances)",
+            "Fulham F.C."
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.5
+          }
+        },
+        {
+          "id": "5abd83775542993062266cb7",
+          "category": "bridge",
+          "question": "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?",
+          "supporting_ranks": {
+            "Walking in the Air": 1,
+            "Peter Auty": null
+          },
+          "retrieved_titles": [
+            "Walking in the Air",
+            "La Traviata (1983 film)",
+            "Step in Time",
+            "The Plague Dogs (film)",
+            "Simon Gilbert (tenor)",
+            "Cavalleria rusticana (1982 film)",
+            "The Shaggy Dog (1959 film)",
+            "Up (2009 film)",
+            "The Hunchback of Notre Dame (1996 film)",
+            "Mehrdad Raissi Ardali"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ae0361155429925eb1afc2c",
+          "category": "bridge",
+          "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+          "supporting_ranks": {
+            "L'Oiseau Blanc": 1,
+            "Charles Nungesser": 5
+          },
+          "retrieved_titles": [
+            "L'Oiseau Blanc",
+            "François Coli",
+            "Gervais Raoul Lufbery",
+            "Georges Madon",
+            "Charles Nungesser",
+            "Wooster and Davis",
+            "Levasseur PL.8",
+            "Montgolfier brothers",
+            "François Laurent d'Arlandes",
+            "Jean-François Pilâtre de Rozier"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ab67bf255429954757d32f5",
+          "category": "bridge",
+          "question": "PISCES was developed by the company that is headquartered in what city?",
+          "supporting_ranks": {
+            "PISCES": null,
+            "Booz Allen Hamilton": null
+          },
+          "retrieved_titles": [
+            "Intel",
+            "Chelsio Communications",
+            "Cisco Systems",
+            "Apple Inc.",
+            "PAX Technology",
+            "SpaceX",
+            "Marks &amp; Spencer",
+            "EBay",
+            "Cognos",
+            "Parker Hannifin"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "5ae3790f5542992e3233c415",
+          "category": "comparison",
+          "question": "Are Leopold Lummerstorfer and Valeria Sarmiento both authors?",
+          "supporting_ranks": {
+            "Leopold Lummerstorfer": 1,
+            "Valeria Sarmiento": 2
+          },
+          "retrieved_titles": [
+            "Leopold Lummerstorfer",
+            "Valeria Sarmiento",
+            "Leopold von Sacher-Masoch",
+            "Miguel de Cervantes",
+            "Federico García Lorca",
+            "Jean-Paul Sartre",
+            "Gabriel García Márquez",
+            "Bibliography of works on Che Guevara",
+            "Félix Sardà y Salvany",
+            "Greg Sarris"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8e276b5542995a26add468",
+          "category": "comparison",
+          "question": "Which band formed first, Swervedriver or Incubus?",
+          "supporting_ranks": {
+            "Swervedriver": 1,
+            "Incubus (band)": 2
+          },
+          "retrieved_titles": [
+            "Swervedriver",
+            "Incubus (band)",
+            "Time Lapse Consortium",
+            "Sanctuary (band)",
+            "Drive North",
+            "X Ambassadors",
+            "The Smashing Pumpkins",
+            "Janus (American band)",
+            "SWMRS",
+            "Mastodon (band)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ac3bd0c554299204fd21e21",
+          "category": "comparison",
+          "question": "Sam Mendes and Ruby Yang share what profession?",
+          "supporting_ranks": {
+            "Sam Mendes": 2,
+            "Ruby Yang": 1
+          },
+          "retrieved_titles": [
+            "Ruby Yang",
+            "Sam Mendes",
+            "Iron &amp; Wine",
+            "List of accolades received by American Beauty",
+            "Snow Angels (film)",
+            "Marcus Mumford",
+            "Chen (singer)",
+            "Sampha",
+            "Jiang Wen",
+            "Donnie Yen"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a7332935542991f9a20c67d",
+          "category": "comparison",
+          "question": "Which board game was published most recently, Pirate's Cove or Catan?",
+          "supporting_ranks": {
+            "Pirate's Cove": 3,
+            "Catan": 1
+          },
+          "retrieved_titles": [
+            "Catan",
+            "Catan: Seafarers",
+            "Pirate's Cove",
+            "Catan Dice Game",
+            "Catan Card Game",
+            "Catan: Cities &amp; Knights",
+            "The Kids of Catan",
+            "The Rivals for Catan",
+            "Struggle for Rome (board game)",
+            "Cartagena (board game)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a7df7115542990b8f503b0f",
+          "category": "comparison",
+          "question": "Who was born first out of Todd Field and Aaron Katz?",
+          "supporting_ranks": {
+            "Todd Field": 2,
+            "Aaron Katz (filmmaker)": 1
+          },
+          "retrieved_titles": [
+            "Aaron Katz (filmmaker)",
+            "Todd Field",
+            "Cold Weather",
+            "Aaron Sorkin",
+            "Mike Katz",
+            "Too Romantic",
+            "Dance Party USA (film)",
+            "Aaron Hall (singer)",
+            "Gini Koch",
+            "Todd Haynes"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-04",
+          "category": "simple",
+          "question": "Who wrote and directed the 2007 American horror film Hostel: Part II?",
+          "supporting_ranks": {
+            "Hostel: Part II": 1
+          },
+          "retrieved_titles": [
+            "Hostel: Part II",
+            "Hostel (2005 film)",
+            "Hostel: Part III",
+            "Unearthed (film)",
+            "Eli Roth",
+            "The Mummy (1999 film)",
+            "The Grudge 2",
+            "Dead Silence",
+            "Diary of a Cannibal",
+            "Contracted: Phase II"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-05",
+          "category": "simple",
+          "question": "Who created The Simpsons character Hans Moleman?",
+          "supporting_ranks": {
+            "Hans Moleman": 1
+          },
+          "retrieved_titles": [
+            "Hans Moleman",
+            "Homer Simpson",
+            "Marge Simpson",
+            "Dan Castellaneta",
+            "Bart Simpson",
+            "Aaron Fechter",
+            "Krusty the Clown",
+            "Maggie Simpson",
+            "Waylon Smithers",
+            "Kent Brockman"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-06",
+          "category": "simple",
+          "question": "What has been the inspiration for both Roberta Allen's writing and her art?",
+          "supporting_ranks": {
+            "Roberta Allen": 1
+          },
+          "retrieved_titles": [
+            "Roberta Allen",
+            "Maurice Denis",
+            "Anaïs Nin",
+            "Murder of Grace Brown",
+            "Theodore W. Allen",
+            "Maya Angelou",
+            "Gabriela Mistral",
+            "James Joyce",
+            "Meša Selimović",
+            "Jean Cocteau"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-07",
+          "category": "simple",
+          "question": "Who directed the 1994 film Cool and the Crazy, starring Jared Leto and Alicia Silverstone?",
+          "supporting_ranks": {
+            "Cool and the Crazy": 1
+          },
+          "retrieved_titles": [
+            "Cool and the Crazy",
+            "Alicia Silverstone",
+            "As Cool as I Am (film)",
+            "Knut Erik Jensen",
+            "The Shadow (1994 film)",
+            "Matt Damon filmography",
+            "Christopher Nolan",
+            "The Mask (film)",
+            "Black Swan (film)",
+            "Diamonds (1999 film)"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-09",
+          "category": "simple",
+          "question": "How many seasons did The Nanny air on CBS?",
+          "supporting_ranks": {
+            "List of The Nanny episodes": 1
+          },
+          "retrieved_titles": [
+            "List of The Nanny episodes",
+            "The Nanny (season 1)",
+            "One Day at a Time",
+            "How I Met Your Mother (season 9)",
+            "Wolfblood",
+            "List of Undercover Boss (U.S. TV series) episodes",
+            "19 Kids and Counting",
+            "Julia Benjamin",
+            "Horseland (TV series)",
+            "Dora the Explorer"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        }
+      ]
+    },
+    "hybrid": {
+      "overall": {
+        "recall@1": 0.45,
+        "recall@3": 0.775,
+        "recall@5": 0.825,
+        "recall@10": 0.85,
+        "all_found@1": 0.25,
+        "all_found@3": 0.7,
+        "all_found@5": 0.8,
+        "all_found@10": 0.8,
+        "reciprocal_rank": 0.747
+      },
+      "by_category": {
+        "bridge": {
+          "recall@1": 0.25,
+          "recall@3": 0.6,
+          "recall@5": 0.65,
+          "recall@10": 0.7,
+          "all_found@1": 0.0,
+          "all_found@3": 0.5,
+          "all_found@5": 0.6,
+          "all_found@10": 0.6,
+          "reciprocal_rank": 0.611
+        },
+        "comparison": {
+          "recall@1": 0.3,
+          "recall@3": 0.9,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "all_found@1": 0.0,
+          "all_found@3": 0.8,
+          "all_found@5": 1.0,
+          "all_found@10": 1.0,
+          "reciprocal_rank": 0.767
+        },
+        "simple": {
+          "recall@1": 1.0,
+          "recall@3": 1.0,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "all_found@1": 1.0,
+          "all_found@3": 1.0,
+          "all_found@5": 1.0,
+          "all_found@10": 1.0,
+          "reciprocal_rank": 1.0
+        }
+      },
+      "seconds": 4.6,
+      "questions": [
+        {
+          "id": "5a7b78c35542997c3ec971a9",
+          "category": "bridge",
+          "question": "What year was the voice actress of an animated television series premiered on Cartoon Network born?",
+          "supporting_ranks": {
+            "Lara Jill Miller": null,
+            "The Life and Times of Juniper Lee": null
+          },
+          "retrieved_titles": [
+            "List of Dexter's Laboratory episodes",
+            "Steven Universe",
+            "Krypto the Superdog",
+            "Teen Titans (season 4)",
+            "Teen Titans (season 1)",
+            "Yeardley Smith",
+            "Courage the Cowardly Dog",
+            "Lucy, the Daughter of the Devil",
+            "Young Justice (TV series)",
+            "List of Adventure Time episodes"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "5ae27b535542996483e649b6",
+          "category": "bridge",
+          "question": "The chorus of \"On the Radio\" contains references to the song \"November Rain\" whose band's lead singer is?",
+          "supporting_ranks": {
+            "On the Radio (Regina Spektor song)": 1,
+            "November Rain": 2
+          },
+          "retrieved_titles": [
+            "On the Radio (Regina Spektor song)",
+            "November Rain",
+            "Carolina Rain",
+            "Robert Plant",
+            "Lead vocalist",
+            "The Dead Weather",
+            "Marvin &amp; Chardonnay",
+            "Metro Station (band)",
+            "Heard 'Em Say",
+            "Smashing Young Man"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ab5574b554299488d4d994e",
+          "category": "bridge",
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "supporting_ranks": {
+            "Rob Bottin": 2,
+            "David Fincher": 1
+          },
+          "retrieved_titles": [
+            "David Fincher",
+            "Rob Bottin",
+            "Tom Cruise",
+            "George Clooney",
+            "Danny Boyle",
+            "Sam Mendes",
+            "Peter Dinklage",
+            "Al Pacino on stage and screen",
+            "Damien Chazelle",
+            "Michel Hazanavicius"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5abf0bf95542997719eab63a",
+          "category": "bridge",
+          "question": "José Rubia Barcia  published a great number of books and articles on a Spanish poet, playwright, and what?",
+          "supporting_ranks": {
+            "José Rubia Barcia": 1,
+            "Federico García Lorca": 2
+          },
+          "retrieved_titles": [
+            "José Rubia Barcia",
+            "Federico García Lorca",
+            "Carlos Fernández Shaw",
+            "David Fernández Rivera",
+            "Cuban literature",
+            "Shakespeare (disambiguation)",
+            "Vicente Medina",
+            "José Echegaray",
+            "Shakespeare bibliography",
+            "List of Argentine operas"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5addcfd65542997dc790703e",
+          "category": "bridge",
+          "question": "Which company had a ten year contract with the anti-hero from Escape From New York played by Kurt Russel? ",
+          "supporting_ranks": {
+            "Snake Plissken": 1,
+            "Kurt Russell": 2
+          },
+          "retrieved_titles": [
+            "Snake Plissken",
+            "Kurt Russell",
+            "Donald Pleasence",
+            "Thomas Tull",
+            "Beecher's Handmade Cheese",
+            "The Next Step (Kurt Rosenwinkel album)",
+            "Universal Pictures",
+            "Bill Pounds",
+            "Thor: God of Thunder",
+            "Marvel Entertainment"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a721bbc55429971e9dc9279",
+          "category": "bridge",
+          "question": "Which Grammy Nominated album was created by a band whose members include John Bowman?",
+          "supporting_ranks": {
+            "Nature's Symphony in 432": null,
+            "The Isaacs": null
+          },
+          "retrieved_titles": [
+            "Fascination (album)",
+            "Franz Ferdinand (band)",
+            "Carl Carlton (German musician)",
+            "Red Hot Chili Peppers",
+            "Kerry Marx",
+            "Elephant (album)",
+            "Wynona's Big Brown Beaver",
+            "Tool (band)",
+            "Blunderbuss (album)",
+            "Eagles (band)"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "5ab48ec25542991779162cdc",
+          "category": "bridge",
+          "question": "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?",
+          "supporting_ranks": {
+            "Len Worley": 4,
+            "Tottenham Hotspur F.C.": 2
+          },
+          "retrieved_titles": [
+            "History of Tottenham Hotspur F.C.",
+            "Tottenham Hotspur F.C.",
+            "Tottenham Hotspur L.F.C.",
+            "Len Worley",
+            "List of Arsenal F.C. records and statistics",
+            "Arsenal F.C. league record by opponent",
+            "List of Arsenal F.C. managers",
+            "Mauricio Pochettino",
+            "List of Arsenal F.C. players (1–24 appearances)",
+            "Wembley Stadium"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.5,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.5
+          }
+        },
+        {
+          "id": "5abd83775542993062266cb7",
+          "category": "bridge",
+          "question": "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?",
+          "supporting_ranks": {
+            "Walking in the Air": 1,
+            "Peter Auty": null
+          },
+          "retrieved_titles": [
+            "Walking in the Air",
+            "Charles Craig (tenor)",
+            "Anthony Rolfe Johnson",
+            "The Plague Dogs (film)",
+            "La Traviata (1983 film)",
+            "Cavalleria rusticana (1982 film)",
+            "Plácido Domingo",
+            "John Mitchinson (tenor)",
+            "David Hillman",
+            "A Man Has Dreams"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ae0361155429925eb1afc2c",
+          "category": "bridge",
+          "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+          "supporting_ranks": {
+            "L'Oiseau Blanc": 2,
+            "Charles Nungesser": 3
+          },
+          "retrieved_titles": [
+            "François Coli",
+            "L'Oiseau Blanc",
+            "Charles Nungesser",
+            "Gervais Raoul Lufbery",
+            "Wooster and Davis",
+            "Levasseur PL.8",
+            "Georges Madon",
+            "Paul Sauvage (aviator)",
+            "Manfred Meurer",
+            "Pascal Mazzotti"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.5
+          }
+        },
+        {
+          "id": "5ab67bf255429954757d32f5",
+          "category": "bridge",
+          "question": "PISCES was developed by the company that is headquartered in what city?",
+          "supporting_ranks": {
+            "PISCES": 9,
+            "Booz Allen Hamilton": null
+          },
+          "retrieved_titles": [
+            "SpaceX",
+            "OncoMed",
+            "Kansas City Southern (company)",
+            "Equinix",
+            "Stevanato Group",
+            "Sprint Corporation",
+            "Dow Chemical Company",
+            "Intel",
+            "PISCES",
+            "Chelsio Communications"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.1111111111111111
+          }
+        },
+        {
+          "id": "5ae3790f5542992e3233c415",
+          "category": "comparison",
+          "question": "Are Leopold Lummerstorfer and Valeria Sarmiento both authors?",
+          "supporting_ranks": {
+            "Leopold Lummerstorfer": 1,
+            "Valeria Sarmiento": 2
+          },
+          "retrieved_titles": [
+            "Leopold Lummerstorfer",
+            "Valeria Sarmiento",
+            "Leopold von Sacher-Masoch",
+            "Archduke Leopold Salvator of Austria",
+            "Lines of Wellington",
+            "Rubén Darío",
+            "Amelia Lópes O'Neill",
+            "Miguel de Cervantes",
+            "Niolamia",
+            "Federico García Lorca"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8e276b5542995a26add468",
+          "category": "comparison",
+          "question": "Which band formed first, Swervedriver or Incubus?",
+          "supporting_ranks": {
+            "Swervedriver": 2,
+            "Incubus (band)": 3
+          },
+          "retrieved_titles": [
+            "Time Lapse Consortium",
+            "Swervedriver",
+            "Incubus (band)",
+            "List of the Smashing Pumpkins band members",
+            "Revelations (Audioslave album)",
+            "Casino (band)",
+            "List of Slipknot concert tours",
+            "Giants of Science",
+            "Sanctuary (band)",
+            "Drive North"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.5
+          }
+        },
+        {
+          "id": "5ac3bd0c554299204fd21e21",
+          "category": "comparison",
+          "question": "Sam Mendes and Ruby Yang share what profession?",
+          "supporting_ranks": {
+            "Sam Mendes": 3,
+            "Ruby Yang": 1
+          },
+          "retrieved_titles": [
+            "Ruby Yang",
+            "List of accolades received by American Beauty",
+            "Sam Mendes",
+            "American Beauty (1999 film)",
+            "Ruby (1977 film)",
+            "Yang Yo-seob",
+            "Neal Street Productions",
+            "Iron &amp; Wine",
+            "The Blood of Yingzhou District",
+            "My Voice, My Life"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a7332935542991f9a20c67d",
+          "category": "comparison",
+          "question": "Which board game was published most recently, Pirate's Cove or Catan?",
+          "supporting_ranks": {
+            "Pirate's Cove": 3,
+            "Catan": 4
+          },
+          "retrieved_titles": [
+            "Catan: Seafarers",
+            "Catan Dice Game",
+            "Pirate's Cove",
+            "Catan",
+            "The Kids of Catan",
+            "The Rivals for Catan",
+            "Catan Card Game",
+            "Struggle for Rome (board game)",
+            "Catan: Cities &amp; Knights",
+            "Elasund"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.5,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          }
+        },
+        {
+          "id": "5a7df7115542990b8f503b0f",
+          "category": "comparison",
+          "question": "Who was born first out of Todd Field and Aaron Katz?",
+          "supporting_ranks": {
+            "Todd Field": 3,
+            "Aaron Katz (filmmaker)": 1
+          },
+          "retrieved_titles": [
+            "Aaron Katz (filmmaker)",
+            "Cold Weather",
+            "Todd Field",
+            "Dance Party USA (film)",
+            "Too Romantic",
+            "Mike Katz",
+            "In the Bedroom",
+            "Quiet City (film)",
+            "Little Children (film)",
+            "When I Was a Boy (film)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-04",
+          "category": "simple",
+          "question": "Who wrote and directed the 2007 American horror film Hostel: Part II?",
+          "supporting_ranks": {
+            "Hostel: Part II": 1
+          },
+          "retrieved_titles": [
+            "Hostel: Part II",
+            "Hostel (2005 film)",
+            "Hostel: Part III",
+            "Unearthed (film)",
+            "Eli Roth",
+            "Contracted: Phase II",
+            "Dead Silence",
+            "The Hills Have Eyes 2",
+            "Disturbia (film)",
+            "Planet Terror"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-05",
+          "category": "simple",
+          "question": "Who created The Simpsons character Hans Moleman?",
+          "supporting_ranks": {
+            "Hans Moleman": 1
+          },
+          "retrieved_titles": [
+            "Hans Moleman",
+            "Dan Castellaneta",
+            "Homer Simpson",
+            "Milhouse Van Houten",
+            "Marge Simpson",
+            "Kent Brockman",
+            "Waylon Smithers",
+            "Maggie Simpson",
+            "The Simpsons shorts",
+            "Grampa Simpson"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-06",
+          "category": "simple",
+          "question": "What has been the inspiration for both Roberta Allen's writing and her art?",
+          "supporting_ranks": {
+            "Roberta Allen": 1
+          },
+          "retrieved_titles": [
+            "Roberta Allen",
+            "Bernadette Mayer",
+            "Donald Allen",
+            "Grace Aguilar",
+            "An Na",
+            "Maurice Denis",
+            "2011 Barcelona Ladies Open – Doubles",
+            "Anaïs Nin",
+            "Roberta Romano",
+            "Murder of Grace Brown"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-07",
+          "category": "simple",
+          "question": "Who directed the 1994 film Cool and the Crazy, starring Jared Leto and Alicia Silverstone?",
+          "supporting_ranks": {
+            "Cool and the Crazy": 1
+          },
+          "retrieved_titles": [
+            "Cool and the Crazy",
+            "Alicia Silverstone",
+            "Knut Erik Jensen",
+            "As Cool as I Am (film)",
+            "True Lies",
+            "Suicide Squad (film)",
+            "The Cool School (film)",
+            "Blank Check (film)",
+            "James Cameron filmography",
+            "Identity Films"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-09",
+          "category": "simple",
+          "question": "How many seasons did The Nanny air on CBS?",
+          "supporting_ranks": {
+            "List of The Nanny episodes": 1
+          },
+          "retrieved_titles": [
+            "List of The Nanny episodes",
+            "The Nanny (season 1)",
+            "Horseland (TV series)",
+            "Early Edition",
+            "Fran Drescher",
+            "Peter Marc Jacobson",
+            "CBS Television Stations",
+            "Rudolph the Red-Nosed Reindeer (TV special)",
+            "Telephone Time",
+            "CBS Innertube"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        }
+      ]
+    },
+    "hybrid_rerank": {
+      "overall": {
+        "recall@1": 0.475,
+        "recall@3": 0.775,
+        "recall@5": 0.825,
+        "recall@10": 0.825,
+        "all_found@1": 0.25,
+        "all_found@3": 0.7,
+        "all_found@5": 0.8,
+        "all_found@10": 0.8,
+        "reciprocal_rank": 0.767
+      },
+      "by_category": {
+        "bridge": {
+          "recall@1": 0.3,
+          "recall@3": 0.6,
+          "recall@5": 0.65,
+          "recall@10": 0.65,
+          "all_found@1": 0.0,
+          "all_found@3": 0.5,
+          "all_found@5": 0.6,
+          "all_found@10": 0.6,
+          "reciprocal_rank": 0.633
+        },
+        "comparison": {
+          "recall@1": 0.3,
+          "recall@3": 0.9,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "all_found@1": 0.0,
+          "all_found@3": 0.8,
+          "all_found@5": 1.0,
+          "all_found@10": 1.0,
+          "reciprocal_rank": 0.8
+        },
+        "simple": {
+          "recall@1": 1.0,
+          "recall@3": 1.0,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "all_found@1": 1.0,
+          "all_found@3": 1.0,
+          "all_found@5": 1.0,
+          "all_found@10": 1.0,
+          "reciprocal_rank": 1.0
+        }
+      },
+      "seconds": 5.1,
+      "questions": [
+        {
+          "id": "5a7b78c35542997c3ec971a9",
+          "category": "bridge",
+          "question": "What year was the voice actress of an animated television series premiered on Cartoon Network born?",
+          "supporting_ranks": {
+            "Lara Jill Miller": null,
+            "The Life and Times of Juniper Lee": null
+          },
+          "retrieved_titles": [
+            "List of Dexter's Laboratory episodes",
+            "Steven Universe",
+            "Yeardley Smith",
+            "Krypto the Superdog",
+            "Courage the Cowardly Dog",
+            "Young Justice (TV series)",
+            "Teen Titans (season 4)",
+            "List of Adventure Time episodes",
+            "Chowder (TV series)",
+            "Genndy Tartakovsky"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "5ae27b535542996483e649b6",
+          "category": "bridge",
+          "question": "The chorus of \"On the Radio\" contains references to the song \"November Rain\" whose band's lead singer is?",
+          "supporting_ranks": {
+            "On the Radio (Regina Spektor song)": 1,
+            "November Rain": 2
+          },
+          "retrieved_titles": [
+            "On the Radio (Regina Spektor song)",
+            "November Rain",
+            "Carolina Rain",
+            "Lead vocalist",
+            "Heard 'Em Say",
+            "Robert Plant",
+            "Mystery (band)",
+            "Marvin &amp; Chardonnay",
+            "Lovin' You's a Dirty Job",
+            "Till I Die (Machine Gun Kelly song)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ab5574b554299488d4d994e",
+          "category": "bridge",
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "supporting_ranks": {
+            "Rob Bottin": 2,
+            "David Fincher": 1
+          },
+          "retrieved_titles": [
+            "David Fincher",
+            "Rob Bottin",
+            "Danny Boyle",
+            "Tom Cruise",
+            "George Clooney",
+            "Damien Chazelle",
+            "Diane Ladd",
+            "Sam Mendes",
+            "Michel Hazanavicius",
+            "Oliver Stone"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5abf0bf95542997719eab63a",
+          "category": "bridge",
+          "question": "José Rubia Barcia  published a great number of books and articles on a Spanish poet, playwright, and what?",
+          "supporting_ranks": {
+            "José Rubia Barcia": 1,
+            "Federico García Lorca": 3
+          },
+          "retrieved_titles": [
+            "José Rubia Barcia",
+            "David Fernández Rivera",
+            "Federico García Lorca",
+            "Cuban literature",
+            "Carlos Fernández Shaw",
+            "Vicente Medina",
+            "José Echegaray",
+            "Shakespeare (disambiguation)",
+            "Carlos Alberto Montaner",
+            "List of Argentine operas"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5addcfd65542997dc790703e",
+          "category": "bridge",
+          "question": "Which company had a ten year contract with the anti-hero from Escape From New York played by Kurt Russel? ",
+          "supporting_ranks": {
+            "Snake Plissken": 1,
+            "Kurt Russell": 2
+          },
+          "retrieved_titles": [
+            "Snake Plissken",
+            "Kurt Russell",
+            "Donald Pleasence",
+            "Bill Pounds",
+            "Beecher's Handmade Cheese",
+            "The Next Step (Kurt Rosenwinkel album)",
+            "Ricardo Modrego",
+            "DeWayne Patmon",
+            "Syracuse, Ontario and New York Railway",
+            "Westinghouse Time Capsules"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a721bbc55429971e9dc9279",
+          "category": "bridge",
+          "question": "Which Grammy Nominated album was created by a band whose members include John Bowman?",
+          "supporting_ranks": {
+            "Nature's Symphony in 432": null,
+            "The Isaacs": null
+          },
+          "retrieved_titles": [
+            "Fascination (album)",
+            "Franz Ferdinand (band)",
+            "Carl Carlton (German musician)",
+            "Red Hot Chili Peppers",
+            "Kerry Marx",
+            "Wynona's Big Brown Beaver",
+            "Paul Epworth",
+            "Armen Chakmakian",
+            "The Foundation (Zac Brown Band album)",
+            "Sixpence None the Richer (album)"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "5ab48ec25542991779162cdc",
+          "category": "bridge",
+          "question": "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?",
+          "supporting_ranks": {
+            "Len Worley": 3,
+            "Tottenham Hotspur F.C.": 1
+          },
+          "retrieved_titles": [
+            "Tottenham Hotspur F.C.",
+            "History of Tottenham Hotspur F.C.",
+            "Len Worley",
+            "Tottenham Hotspur L.F.C.",
+            "Arsenal F.C. league record by opponent",
+            "Mauricio Pochettino",
+            "Wolverhampton Wanderers F.C.",
+            "Push and run",
+            "Dele Alli",
+            "Millwall F.C."
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5abd83775542993062266cb7",
+          "category": "bridge",
+          "question": "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?",
+          "supporting_ranks": {
+            "Walking in the Air": 1,
+            "Peter Auty": null
+          },
+          "retrieved_titles": [
+            "Walking in the Air",
+            "Charles Craig (tenor)",
+            "Anthony Rolfe Johnson",
+            "The Plague Dogs (film)",
+            "La Traviata (1983 film)",
+            "Plácido Domingo",
+            "John Mitchinson (tenor)",
+            "Cavalleria rusticana (1982 film)",
+            "David Hillman",
+            "A Man Has Dreams"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 0.5,
+            "recall@5": 0.5,
+            "recall@10": 0.5,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5ae0361155429925eb1afc2c",
+          "category": "bridge",
+          "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+          "supporting_ranks": {
+            "L'Oiseau Blanc": 4,
+            "Charles Nungesser": 3
+          },
+          "retrieved_titles": [
+            "François Coli",
+            "Gervais Raoul Lufbery",
+            "Charles Nungesser",
+            "L'Oiseau Blanc",
+            "Georges Madon",
+            "Wooster and Davis",
+            "Paul Sauvage (aviator)",
+            "Levasseur PL.8",
+            "Pascal Mazzotti",
+            "Manfred Meurer"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.5,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          }
+        },
+        {
+          "id": "5ab67bf255429954757d32f5",
+          "category": "bridge",
+          "question": "PISCES was developed by the company that is headquartered in what city?",
+          "supporting_ranks": {
+            "PISCES": null,
+            "Booz Allen Hamilton": null
+          },
+          "retrieved_titles": [
+            "OncoMed",
+            "SpaceX",
+            "Kansas City Southern (company)",
+            "Equinix",
+            "Stevanato Group",
+            "Hi Tech Expressions",
+            "Maritime Broadband",
+            "Guidance Software",
+            "Sprint Corporation",
+            "Dow Chemical Company"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.0,
+            "recall@5": 0.0,
+            "recall@10": 0.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 0.0,
+            "all_found@10": 0.0,
+            "reciprocal_rank": 0.0
+          }
+        },
+        {
+          "id": "5ae3790f5542992e3233c415",
+          "category": "comparison",
+          "question": "Are Leopold Lummerstorfer and Valeria Sarmiento both authors?",
+          "supporting_ranks": {
+            "Leopold Lummerstorfer": 2,
+            "Valeria Sarmiento": 1
+          },
+          "retrieved_titles": [
+            "Valeria Sarmiento",
+            "Leopold Lummerstorfer",
+            "Archduke Leopold Salvator of Austria",
+            "Leopold von Sacher-Masoch",
+            "Rubén Darío",
+            "Lines of Wellington",
+            "Amelia Lópes O'Neill",
+            "Niolamia",
+            "Barrie &amp; Jenkins",
+            "Zelkova × verschaffeltii"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a8e276b5542995a26add468",
+          "category": "comparison",
+          "question": "Which band formed first, Swervedriver or Incubus?",
+          "supporting_ranks": {
+            "Swervedriver": 2,
+            "Incubus (band)": 3
+          },
+          "retrieved_titles": [
+            "Time Lapse Consortium",
+            "Swervedriver",
+            "Incubus (band)",
+            "List of the Smashing Pumpkins band members",
+            "Revelations (Audioslave album)",
+            "Casino (band)",
+            "List of Slipknot concert tours",
+            "Giants of Science",
+            "Acrassicauda",
+            "Wake Me Up (Avicii song)"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.5
+          }
+        },
+        {
+          "id": "5ac3bd0c554299204fd21e21",
+          "category": "comparison",
+          "question": "Sam Mendes and Ruby Yang share what profession?",
+          "supporting_ranks": {
+            "Sam Mendes": 3,
+            "Ruby Yang": 1
+          },
+          "retrieved_titles": [
+            "Ruby Yang",
+            "List of accolades received by American Beauty",
+            "Sam Mendes",
+            "Ruby (1977 film)",
+            "Neal Street Productions",
+            "The Blood of Yingzhou District",
+            "Yang Yo-seob",
+            "American Beauty (1999 film)",
+            "My Voice, My Life",
+            "Drew Barry"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "5a7332935542991f9a20c67d",
+          "category": "comparison",
+          "question": "Which board game was published most recently, Pirate's Cove or Catan?",
+          "supporting_ranks": {
+            "Pirate's Cove": 2,
+            "Catan": 4
+          },
+          "retrieved_titles": [
+            "Catan Dice Game",
+            "Pirate's Cove",
+            "Catan: Seafarers",
+            "Catan",
+            "The Rivals for Catan",
+            "Pirate and Traveler",
+            "Struggle for Rome (board game)",
+            "Cartagena (board game)",
+            "Catan: Cities &amp; Knights",
+            "Camel Up"
+          ],
+          "scores": {
+            "recall@1": 0.0,
+            "recall@3": 0.5,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 0.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 0.5
+          }
+        },
+        {
+          "id": "5a7df7115542990b8f503b0f",
+          "category": "comparison",
+          "question": "Who was born first out of Todd Field and Aaron Katz?",
+          "supporting_ranks": {
+            "Todd Field": 3,
+            "Aaron Katz (filmmaker)": 1
+          },
+          "retrieved_titles": [
+            "Aaron Katz (filmmaker)",
+            "Too Romantic",
+            "Todd Field",
+            "Cold Weather",
+            "Mike Katz",
+            "Dance Party USA (film)",
+            "In the Bedroom",
+            "Quiet City (film)",
+            "Little Children (film)",
+            "The Tree (1993 film)"
+          ],
+          "scores": {
+            "recall@1": 0.5,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 0.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-04",
+          "category": "simple",
+          "question": "Who wrote and directed the 2007 American horror film Hostel: Part II?",
+          "supporting_ranks": {
+            "Hostel: Part II": 1
+          },
+          "retrieved_titles": [
+            "Hostel: Part II",
+            "Hostel: Part III",
+            "Unearthed (film)",
+            "Eli Roth",
+            "Contracted: Phase II",
+            "The Hills Have Eyes 2",
+            "Hostel (2005 film)",
+            "Planet Terror",
+            "Dead Silence",
+            "Disturbia (film)"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-05",
+          "category": "simple",
+          "question": "Who created The Simpsons character Hans Moleman?",
+          "supporting_ranks": {
+            "Hans Moleman": 1
+          },
+          "retrieved_titles": [
+            "Hans Moleman",
+            "Dan Castellaneta",
+            "Homer Simpson",
+            "Milhouse Van Houten",
+            "List of The Simpsons comics",
+            "Kent Brockman",
+            "Waylon Smithers",
+            "The Simpsons shorts",
+            "Grampa Simpson",
+            "Maggie Simpson"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-06",
+          "category": "simple",
+          "question": "What has been the inspiration for both Roberta Allen's writing and her art?",
+          "supporting_ranks": {
+            "Roberta Allen": 1
+          },
+          "retrieved_titles": [
+            "Roberta Allen",
+            "Bernadette Mayer",
+            "Donald Allen",
+            "Grace Aguilar",
+            "Frances Greenslade",
+            "Flavia Pennetta",
+            "Berber orthography",
+            "Roberta Romano",
+            "An Na",
+            "The Autumn Garden"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-07",
+          "category": "simple",
+          "question": "Who directed the 1994 film Cool and the Crazy, starring Jared Leto and Alicia Silverstone?",
+          "supporting_ranks": {
+            "Cool and the Crazy": 1
+          },
+          "retrieved_titles": [
+            "Cool and the Crazy",
+            "Alicia Silverstone",
+            "Knut Erik Jensen",
+            "As Cool as I Am (film)",
+            "True Lies",
+            "Suicide Squad (film)",
+            "The Cool School (film)",
+            "Blank Check (film)",
+            "James Cameron filmography",
+            "Roadracers"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        },
+        {
+          "id": "simple-09",
+          "category": "simple",
+          "question": "How many seasons did The Nanny air on CBS?",
+          "supporting_ranks": {
+            "List of The Nanny episodes": 1
+          },
+          "retrieved_titles": [
+            "List of The Nanny episodes",
+            "Horseland (TV series)",
+            "The Nanny (season 1)",
+            "Early Edition",
+            "Rudolph the Red-Nosed Reindeer (TV special)",
+            "Telephone Time",
+            "CBS Television Stations",
+            "Fran Drescher",
+            "The Big Bang Theory (season 9)",
+            "WSYY-FM"
+          ],
+          "scores": {
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
+          }
+        }
+      ]
+    }
+  }
+}
