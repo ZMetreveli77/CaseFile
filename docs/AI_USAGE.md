@@ -492,3 +492,41 @@ server. I wrote the code and tests myself.
     - It calls the metric functions I am writing (task H1). The AI smoke-tested its own runner with temporary
       in-memory stand-in metrics and discarded those numbers.
   - 5 tests for the selection logic.
+
+### Evaluation metrics (milestone 7, H1)
+I wrote `backend/casefile/evaluation/metrics.py` and `backend/tests/test_metrics.py` (20 tests). I documented every
+edge-case decision in the docstrings:
+
+| Function | What it measures | My decision |
+|---|---|---|
+| `recall_at_k` | share of supporting paragraphs in the top K | duplicates count once; `k` larger than the list uses the whole list; empty `relevant_ids` raises a `ValueError` (undefined, and 0 or 1 would bias the average) |
+| `all_found_at_k` | every supporting paragraph in the top K | the strict version for multi-hop questions |
+| `reciprocal_rank` (MRR) | 1 / rank of the first hit | same empty-input rule |
+| `mean` | average | returns 0.0 for an empty category instead of crashing |
+| `normalize_answer` | HotpotQA's official recipe | lowercase → remove punctuation (deleted, so "U.S." becomes "us") → remove whole-word articles (`\b`, so "theater" survives) → collapse whitespace |
+| `exact_match`, `token_f1` | answer correctness | yes/no rule: a different yes/no answer gets 0 F1; repeated words handled with `Counter &` |
+| `citation_precision` | share of cited documents that are supporting | citing nothing scores 0.0, never perfect; abstentions are scored separately |
+| `citation_recall` | share of supporting documents cited | no supporting titles raises an error, consistent with `recall_at_k` |
+
+**Verified:**
+- Breaking `reciprocal_rank` on purpose (`1 / (rank + 1)`) makes a test fail.
+- The full suite passes (167 tests).
+
+**First real retrieval results (dev split, 20 questions)**, from `eval/results/retrieval_dev.json`:
+
+| Mode | Both supporting paragraphs in the top 10 | MRR |
+|---|---|---|
+| dense | 0.65 | 0.810 |
+| hybrid | 0.80 | 0.867 |
+| hybrid_rerank | 0.75 | 0.835 |
+
+- Hybrid beats dense.
+- The current reranker settings are slightly worse than plain hybrid; tuning them is task T.
+- With 20 questions, one question equals 0.05, so small differences aren't meaningful yet.
+- The single simple-question miss (simple-03) is a question-quality problem: the generated question asks about the
+  historical Imhotep, but its source paragraph is the film character "Imhotep (The Mummy)". It was noted for my
+  manual check (E1).
+
+**AI help:** Claude Code split the task into steps with suggested signatures and edge cases to decide. Its review
+found a duplicate import, and it ran the mutation check and the first retrieval evaluation with my metrics. I wrote
+the code and tests myself.
