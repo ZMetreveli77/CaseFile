@@ -622,3 +622,17 @@ The first full evaluation run stopped with Gemini 429 errors: the free tier allo
   - `find_retry_delay_seconds` reads Google's `RetryInfo` (or the "retry in 49.6s" text), capped at 120 s.
   - `RequestRateLimiter` paces requests to 14 per minute (`LLM_REQUESTS_PER_MINUTE`), with tests using a fake clock.
 - Everything already done was replayed from the LLM cache, so the rerun lost nothing.
+- **Answer-format fix (AI, on the dev split):**
+  - **Problem:** the first dev run had judge accuracy 0.90 but exact match 0.10. The agent's answers were correct but
+    written as sentences ("The Genesis Suite was written in 1945…", "Yes, both are American."), and HotpotQA scores
+    short answers; my yes/no rule correctly gave 0.
+  - **Fix:** the AI made `ANSWER_FORMAT` explicit (only the answer itself, never a sentence, with examples;
+    explanations go in claims). The JSON keys are unchanged.
+  - **Result:**
+    - exact match 0.10 → **0.80**; F1 0.34 → **0.86**; judge 0.90 → **0.95**;
+    - false abstentions 2 → 1;
+    - abstention and conflict detection unchanged at 1.0.
+  - 3 of the 4 remaining non-exact answers are correct paraphrases accepted by the judge (e.g. "Suffolk County" vs
+    "Suffolk").
+  - The "before" results are kept in `eval/results/answers_dev_hybrid_before_format_fix.json`. The test split was not
+    used.
