@@ -1,7 +1,8 @@
 """API tests: real FastAPI app + in-memory Qdrant + fake embedder + scripted fake LLM (no network, no keys)."""
 import json
-
 import pytest
+import time
+
 from fastapi.testclient import TestClient
 
 from casefile.api.app import create_app
@@ -149,3 +150,72 @@ def test_file_with_only_spaces_is_422(client):
 
 def test_page_size_zero_is_422(client):
     assert client.get("/documents", params={"limit": 0}).status_code == 422
+
+
+def read_sse_events(stream_text):
+    """Parse an SSE body into (event name, data) pairs; each event ends with a blank line."""
+    events = []
+    for block in stream_text.strip().split("\n\n"):
+        if block.startswith(":"):  # an SSE comment such as the keep-alive heartbeat: not an event
+            continue
+        name_line, data_line = block.split("\n")
+        events.append((name_line.removeprefix("event: "), json.loads(data_line.removeprefix("data: "))))
+    return events
+
+
+def stream_ask(client, question):
+    """POST /ask/stream and read the body piece by piece, as it arrives (like a browser would)."""
+    with client.stream("POST", "/ask/stream", json={"question": question}) as response:
+        body = "".join(response.iter_text())
+    return response, body
+
+
+def test_ask_stream_sends_progress_events_then_the_answer(qdrant_store, embedder):
+    hotel_chunk_id = f"{create_document_id('hotel.txt')}:0"
+    final_answer = {"answer": "Margaret Hale, in 1902", "should_abstain": False, "abstain_reason": "", "conflicts": [],
+                    "claims": [{"text": "Built in 1902 by Margaret Hale.", "citations": [hotel_chunk_id]}]}
+    replies = [LLMReply(text="", tool_calls=[ToolCall("search_documents", {"query": "Lighthouse Hotel builder"})]),
+               LLMReply(text=json.dumps(final_answer))]
+    with make_client(qdrant_store, embedder, replies) as client:
+        upload(client, "hotel.txt", HOTEL_TEXT)
+        response, body = stream_ask(client, "Who built the Lighthouse Hotel?")
+    assert response.status_code == 200
+    assert response.headers["content-type"].startswith("text/event-stream")
+    assert response.headers["cache-control"] == "no-cache" and response.headers["x-accel-buffering"] == "no"
+
+    events = read_sse_events(body)
+    assert [name for name, _ in events] == ["started", "tool_call", "tool_result", "answer"]
+    assert all(name == data["type"] for name, data in events)  # the SSE event name matches the JSON type
+    assert events[2][1]["titles"] == ["hotel.txt"]
+    final = events[-1][1]
+    assert final["answer"] == "Margaret Hale, in 1902" and final["claims"][0]["citations"] == [hotel_chunk_id]
+
+
+def test_ask_stream_turns_an_llm_outage_into_an_error_event(qdrant_store, embedder):
+    with make_client(qdrant_store, embedder, [LLMError("Gave up after 5 attempts")]) as client:
+        response, body = stream_ask(client, "Anything?")
+    assert response.status_code == 200  # the stream had already started, so the error travels as an event
+    event_names = [name for name, _ in read_sse_events(body)]
+    assert event_names == ["started", "error"]
+    assert "answer" not in event_names  # an error replaces the answer, it never comes in addition to it
+    assert "unavailable" in read_sse_events(body)[-1][1]["detail"]
+
+
+def test_ask_stream_rejects_a_blank_question(client):
+    assert client.post("/ask/stream", json={"question": "   "}).status_code == 422
+
+
+def test_ask_stream_sends_keep_alive_comments_while_the_llm_is_slow(qdrant_store, embedder, monkeypatch):
+    monkeypatch.setattr("casefile.api.app.HEARTBEAT_SECONDS", 0.05)  # instead of 15 s, so the test stays fast
+    original_generate = FakeLLM.generate
+
+    def slow_generate(self, *arguments):
+        time.sleep(0.3)  # a slow model / retries: several heartbeat intervals without any event
+        return original_generate(self, *arguments)
+
+    monkeypatch.setattr(FakeLLM, "generate", slow_generate)
+    final_answer = {"answer": "", "claims": [], "conflicts": [], "should_abstain": True, "abstain_reason": "none"}
+    with make_client(qdrant_store, embedder, [LLMReply(text=json.dumps(final_answer))]) as client:
+        _, body = stream_ask(client, "Anything?")
+    assert ": keep-alive" in body
+    assert [name for name, _ in read_sse_events(body)] == ["started", "answer"]  # comments are not events

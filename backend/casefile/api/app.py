@@ -1,15 +1,19 @@
 """HTTP API for CaseFile. Run locally (from backend/):  ../.venv/bin/uvicorn casefile.api.app:app --reload
 Interactive docs: http://127.0.0.1:8000/docs
 """
+import logging
+import queue
 import threading
+from fastapi.responses import JSONResponse, RedirectResponse, StreamingResponse
 from contextlib import asynccontextmanager
 from dataclasses import asdict
+from casefile.api.streaming import KEEP_ALIVE_COMMENT, format_sse
 
 from fastapi import FastAPI, File, HTTPException, Query, Request, UploadFile
-from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import BaseModel, Field, field_validator
 
 from casefile.api.services import AppServices, build_services
+from casefile.api.streaming import format_sse
 from casefile.config import get_settings
 from casefile.ingestion.loaders import SUPPORTED_EXTENSIONS, UnsupportedFormat, load_documents
 from casefile.rag.llm import LLMError
@@ -18,6 +22,12 @@ MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10 MB per file
 DEFAULT_PAGE_SIZE = 50
 MAX_PAGE_SIZE = 200
 MAX_QUESTION_CHARACTERS = 1000
+# Without these, proxies (Render's included) may buffer the stream and deliver every event at the very end.
+STREAM_HEADERS = {"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+END_OF_STREAM = None  # sentinel the worker thread always puts on the queue last
+HEARTBEAT_SECONDS = 15  # silence after which a keep-alive comment is sent (slow LLM, retries), so proxies don't hang up
+
+logger = logging.getLogger(__name__)
 
 
 class AskRequest(BaseModel):
@@ -30,6 +40,11 @@ class AskRequest(BaseModel):
         if not question:
             raise ValueError("question must not be empty")
         return question
+
+
+def describe_llm_error(error: LLMError) -> str:
+    """Same message for /ask (HTTP 503) and /ask/stream (an error event)."""
+    return f"The language model is unavailable: {error}"
 
 
 def read_upload(file: UploadFile) -> bytes:
@@ -58,7 +73,7 @@ def create_app(services: AppServices | None = None) -> FastAPI:
 
     @app.exception_handler(LLMError)
     def handle_llm_error(request: Request, error: LLMError) -> JSONResponse:
-        return JSONResponse(status_code=503, content={"detail": f"The language model is unavailable: {error}"})
+        return JSONResponse(status_code=503, content={"detail": describe_llm_error(error)})
 
     @app.exception_handler(UnsupportedFormat)
     def handle_unsupported_format(request: Request, error: UnsupportedFormat) -> JSONResponse:
@@ -145,6 +160,40 @@ def create_app(services: AppServices | None = None) -> FastAPI:
     def ask(request: Request, body: AskRequest) -> dict:
         """Investigate a question: multi-step search, then a cited answer (or an abstention)."""
         return asdict(get_services(request).agent.answer(body.question))
+
+    @app.post("/ask/stream")
+    def ask_stream(request: Request, body: AskRequest) -> StreamingResponse:
+        """Same investigation as /ask, streamed as Server-Sent Events: progress events, then "answer" or "error"."""
+        agent = get_services(request).agent
+        events: queue.Queue[dict | None] = queue.Queue()  # thread-safe hand-over from the worker to the response
+
+        def run_investigation() -> None:
+            # Runs in its own thread, because agent.answer() blocks until it is done. Errors are caught HERE:
+            # the 200 status and headers are already sent, so the LLMError -> 503 handler can no longer help.
+            try:
+                final_answer = agent.answer(body.question, on_event=events.put)
+                events.put({"type": "answer", **asdict(final_answer)})
+            except LLMError as error:
+                events.put({"type": "error", "detail": describe_llm_error(error)})
+            except Exception:
+                logger.exception("streamed investigation failed")
+                events.put({"type": "error", "detail": "Internal error while investigating the question."})
+            finally:
+                events.put(END_OF_STREAM)  # always, so the generator below can never wait forever
+
+        def stream_events():
+            threading.Thread(target=run_investigation, daemon=True).start()
+            while True:
+                try:
+                    event = events.get(timeout=HEARTBEAT_SECONDS)  # waits until the worker has something
+                except queue.Empty:
+                    yield KEEP_ALIVE_COMMENT  # nothing new yet: show the connection is still alive
+                    continue
+                if event is END_OF_STREAM:
+                    return
+                yield format_sse(event)
+
+        return StreamingResponse(stream_events(), media_type="text/event-stream", headers=STREAM_HEADERS)
 
     @app.get("/formats")
     def supported_formats() -> dict:

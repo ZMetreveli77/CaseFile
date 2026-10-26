@@ -4,6 +4,7 @@ Loop: LLM reply -> if it asks for tools, run them and send the results back -> r
 -> parse the final JSON answer -> keep only citations that point at chunks the agent actually retrieved.
 """
 import json
+import logging
 from dataclasses import dataclass, field
 from typing import Callable
 
@@ -13,6 +14,8 @@ from casefile.rag.tools import AGENT_TOOLS, ToolExecutor
 
 MAX_TOOL_STEPS = 5  # rounds of tool use per question: enough for 2-hop questions, bounded cost on the free tier
 INVALID_FORMAT_REASON = "The model did not return a valid answer, so no answer is given."
+logger = logging.getLogger(__name__)
+ProgressCallback = Callable[[dict], None]  # receives JSON-serializable progress events, e.g. for a live UI
 
 
 @dataclass
@@ -44,6 +47,30 @@ class InvestigationAnswer:
 
 
 CitationValidator = Callable[[InvestigationAnswer, set[str]], InvestigationAnswer]
+
+
+def send_event(on_event: ProgressCallback | None, event: dict) -> None:
+    """Report progress if someone is listening.
+
+    Design decision: a failing on_event must NOT crash the agent. Progress is only a display; a broken display
+    (e.g. a closed browser connection) should not throw away a correct answer that costs several LLM calls.
+    So the error is logged and the investigation continues.
+    """
+    if on_event is None:
+        return
+    try:
+        on_event(event)
+    except Exception:
+        logger.exception("on_event failed for a %r event; continuing without it", event.get("type"))
+
+
+def describe_tool_result(tool_name: str, result: dict) -> dict:
+    """A small, JSON-serializable summary of a tool result: which documents it found, or what went wrong."""
+    titles = [str(item.get("title", "")) for item in result.get("results", [])]  # search_documents
+    if "title" in result:  # read_document returns one document
+        titles.append(str(result["title"]))
+    error = result.get("error")
+    return {"type": "tool_result", "tool": tool_name, "titles": titles, "error": str(error) if error else None}
 
 
 def extract_json_object(text: str) -> dict:
@@ -80,8 +107,12 @@ class InvestigationAgent:
         self.max_tool_steps = max_tool_steps
         self.system_prompt = build_system_prompt()
 
-    def answer(self, question: str) -> InvestigationAnswer:
-        """Raises LLMError if the LLM is unreachable even after retries (the API turns that into an error response)."""
+    def answer(self, question: str, on_event: ProgressCallback | None = None) -> InvestigationAnswer:
+        """Raises LLMError if the LLM is unreachable even after retries (the API turns that into an error response).
+
+        on_event, if given, is called with progress events: started, then tool_call / tool_result per tool use.
+        """
+        send_event(on_event, {"type": "started", "question": question})
         tool_executor = self.create_tool_executor()
         messages = [Message(role="user", text=question)]
         llm_calls = 0
@@ -93,7 +124,10 @@ class InvestigationAgent:
             if not reply.tool_calls:
                 return self.finish(question, reply.text, tool_executor, llm_calls)
             for tool_call in reply.tool_calls:
+                send_event(on_event, {"type": "tool_call", "tool": tool_call.name,
+                                      "arguments": dict(tool_call.arguments)})
                 result = tool_executor.execute(tool_call)
+                send_event(on_event, describe_tool_result(tool_call.name, result))
                 messages.append(Message(role="tool", tool_name=tool_call.name, tool_result=result))
 
         # Step limit reached: ask for the final answer with no tools available.

@@ -2,8 +2,8 @@ import json
 
 import pytest
 
+from casefile.rag.agent import INVALID_FORMAT_REASON, InvestigationAgent, describe_tool_result, extract_json_object
 from casefile.models import Chunk
-from casefile.rag.agent import INVALID_FORMAT_REASON, InvestigationAgent, extract_json_object
 from casefile.rag.llm import LLMError, LLMReply, ToolCall
 from casefile.rag.prompts import FINAL_ANSWER_REMINDER
 from tests.fakes import FakeLLM
@@ -115,3 +115,29 @@ def test_extract_json_object_rejects_non_objects():
         extract_json_object("no json here")
     with pytest.raises(ValueError):
         extract_json_object("[1, 2]")
+
+
+def test_progress_events_come_in_order_and_are_json_serializable():
+    agent, _ = make_agent([search("Kiss and Tell 1945 film"), search("Shirley Temple"), final_json(answer="x")])
+    collected = []
+    agent.answer("Who?", on_event=collected.append)
+    assert [event["type"] for event in collected] == ["started", "tool_call", "tool_result", "tool_call", "tool_result"]
+    assert collected[0] == {"type": "started", "question": "Who?"}
+    assert collected[1] == {"type": "tool_call", "tool": "search_documents",
+                            "arguments": {"query": "Kiss and Tell 1945 film"}}
+    assert collected[2] == {"type": "tool_result", "tool": "search_documents",
+                            "titles": ["Kiss and Tell 1945 film"], "error": None}
+    json.dumps(collected)  # raises TypeError if any event is not JSON-serializable
+
+
+def test_tool_error_is_reported_in_the_event():
+    assert describe_tool_result("read_document", {"error": "No document with doc_id 'x'."}) == {
+        "type": "tool_result", "tool": "read_document", "titles": [], "error": "No document with doc_id 'x'."}
+
+
+def test_a_failing_progress_callback_does_not_break_the_answer():
+    def broken_display(event):
+        raise RuntimeError("browser disconnected")
+
+    agent, _ = make_agent([search("q"), final_json(answer="still answered")])
+    assert agent.answer("question", on_event=broken_display).answer == "still answered"
