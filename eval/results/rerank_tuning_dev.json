@@ -1,0 +1,428 @@
+{
+  "split": "dev",
+  "questions": 20,
+  "main_metric": "all_found@10",
+  "tie_breaker": "mrr",
+  "rows": [
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.85,
+      "mrr": 0.917
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.85,
+      "mrr": 0.917
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.85,
+      "mrr": 0.917
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.8,
+      "mrr": 0.925
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.8,
+      "mrr": 0.925
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.8,
+      "mrr": 0.925
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.8,
+      "mrr": 0.92
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.8,
+      "mrr": 0.92
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.8,
+      "mrr": 0.92
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.8,
+      "mrr": 0.902
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.8,
+      "mrr": 0.902
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.8,
+      "mrr": 0.902
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.8,
+      "mrr": 0.896
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.8,
+      "mrr": 0.896
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.8,
+      "mrr": 0.896
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.8,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.8,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.8,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.8,
+      "mrr": 0.879
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.8,
+      "mrr": 0.879
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.8,
+      "mrr": 0.879
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.8,
+      "mrr": 0.872
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.8,
+      "mrr": 0.872
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.9,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.8,
+      "mrr": 0.872
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.8,
+      "mrr": 0.872
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.8,
+      "mrr": 0.872
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.8,
+      "mrr": 0.872
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.8,
+      "mrr": 0.87
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.8,
+      "mrr": 0.87
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 1.0,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.8,
+      "mrr": 0.87
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.75,
+      "mrr": 0.933
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.75,
+      "mrr": 0.933
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.75,
+      "mrr": 0.933
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.75,
+      "mrr": 0.927
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.75,
+      "mrr": 0.927
+    },
+    {
+      "coverage_weight": 0.0,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.75,
+      "mrr": 0.927
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.75,
+      "mrr": 0.917
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.75,
+      "mrr": 0.917
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.75,
+      "mrr": 0.917
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.75,
+      "mrr": 0.908
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.75,
+      "mrr": 0.908
+    },
+    {
+      "coverage_weight": 0.15,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.75,
+      "mrr": 0.908
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.75,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.75,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.75,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.75,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.75,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.5,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.75,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.75,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.75,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.75,
+      "mrr": 0.892
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.75,
+      "mrr": 0.883
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.75,
+      "mrr": 0.883
+    },
+    {
+      "coverage_weight": 0.5,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.75,
+      "mrr": 0.883
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.75,
+      "mrr": 0.879
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.75,
+      "mrr": 0.879
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.6,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.75,
+      "mrr": 0.879
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 5,
+      "all_found@10": 0.75,
+      "mrr": 0.879
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 10,
+      "all_found@10": 0.75,
+      "mrr": 0.879
+    },
+    {
+      "coverage_weight": 0.3,
+      "mmr_lambda": 0.75,
+      "dense_rank_limit": 20,
+      "all_found@10": 0.75,
+      "mrr": 0.879
+    }
+  ]
+}
