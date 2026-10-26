@@ -8,6 +8,7 @@ import random
 import re
 import zlib
 from collections import defaultdict
+from dataclasses import dataclass
 
 LARGE_PRIME = (1 << 61) - 1
 MAX_HASH_VALUE = (1 << 32) - 1
@@ -62,6 +63,42 @@ def estimate_similarity(first_signature: Signature, second_signature: Signature)
     return matching_positions / len(first_signature)
 
 
+def split_into_bands(signature: Signature, bands: int = LSH_BANDS):
+    """LSH banding: cut the signature into `bands` equal slices; yields (band number, that slice's values)."""
+    rows_per_band = len(signature) // bands
+    for band in range(bands):
+        yield band, signature[band * rows_per_band:(band + 1) * rows_per_band]
+
+
+@dataclass
+class Fingerprint:
+    """Everything stored with a chunk so Qdrant itself can find its exact and near duplicates."""
+    exact_hash: str  # hash_normalized_text(text): equal for texts that differ only in case and whitespace
+    signature: list[int]  # the SIGNATURE_LENGTH MinHash numbers, used to estimate similarity with a candidate
+    band_keys: list[str]  # one string per LSH band, e.g. "3:111-222-333-444"; a shared key marks a candidate
+
+
+DEFAULT_SIGNATURE_BUILDER = MinHashSignatureBuilder()  # built once: same seed, so same signatures as DuplicateDetector
+
+
+def build_band_key(band: int, band_values: tuple[int, ...]) -> str:
+    """A string, because Qdrant filters on keyword strings. The band number comes first, so equal values in
+    different bands never produce the same key."""
+    return f"{band}:" + "-".join(str(value) for value in band_values)
+
+
+def compute_fingerprint(text: str, signature_builder: MinHashSignatureBuilder = DEFAULT_SIGNATURE_BUILDER,
+                        bands: int = LSH_BANDS) -> Fingerprint:
+    signature = signature_builder.build_signature(text)
+    if len(signature) % bands:
+        raise ValueError("signature length must be divisible by bands")
+    return Fingerprint(
+        exact_hash=hash_normalized_text(text),
+        signature=list(signature),
+        band_keys=[build_band_key(band, band_values) for band, band_values in split_into_bands(signature, bands)],
+    )
+
+
 class DuplicateDetector:
     """Remembers texts by key; `find_duplicate` returns the key of an exact or near duplicate, or None."""
 
@@ -79,9 +116,7 @@ class DuplicateDetector:
         self.keys_by_bucket: dict[tuple, set[str]] = defaultdict(set)
 
     def lsh_bucket_keys(self, signature: Signature):
-        for band in range(self.bands):
-            band_values = signature[band * self.rows_per_band:(band + 1) * self.rows_per_band]
-            yield (band, band_values)
+        yield from split_into_bands(signature, self.bands)
 
     def find_duplicate(self, text: str) -> str | None:
         exact_match = self.key_by_exact_hash.get(hash_normalized_text(text))
@@ -104,6 +139,10 @@ class DuplicateDetector:
         self.signature_by_key[key] = signature
         for bucket_key in self.lsh_bucket_keys(signature):
             self.keys_by_bucket[bucket_key].add(key)
+
+    def forget_recently_added(self) -> None:
+        """No-op: for this detector, memory IS the index, so stored chunks must stay. (Same method name as
+        QdrantDuplicateDetector, so the pipeline can call it after every upload without knowing which one it has.)"""
 
     def remove(self, key: str) -> None:
         signature = self.signature_by_key.pop(key, None)

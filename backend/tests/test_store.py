@@ -1,3 +1,8 @@
+from qdrant_client import models as qdrant
+
+from casefile.ingestion.dedup import compute_fingerprint
+from casefile.models import Chunk, Document
+from casefile.retrieval.store import create_point_id
 from casefile.ingestion.chunking import chunk_document
 from casefile.ingestion.loaders import load_documents
 from casefile.ingestion.pipeline import IngestionPipeline
@@ -86,3 +91,19 @@ def test_pipeline_works_with_qdrant_store(qdrant_store):
     assert any("Rolled back" in chunk.text for chunk in qdrant_store.iter_chunks(updated.doc_id))
     assert pipeline.delete(updated.doc_id) is True
     assert list(qdrant_store.iter_chunks()) == []
+
+
+def test_chunk_payload_stores_its_fingerprint(qdrant_store):
+    chunk = Chunk(chunk_id="inc:0", doc_id="inc", index=0, text=INCIDENT_TEXT, title="inc.txt")
+    qdrant_store.upsert(Document(doc_id="inc", title="inc.txt", text=INCIDENT_TEXT, content_hash="hash"), [chunk])
+    [point] = qdrant_store.client.retrieve(qdrant_store.chunks_collection, [create_point_id(chunk.chunk_id)],
+                                           with_payload=True)
+    fingerprint = compute_fingerprint(INCIDENT_TEXT)
+    assert point.payload["exact_hash"] == fingerprint.exact_hash
+    assert point.payload["minhash"] == fingerprint.signature
+    assert point.payload["lsh_band_keys"] == fingerprint.band_keys
+
+    band_filter = qdrant.Filter(must=[qdrant.FieldCondition(key="lsh_band_keys",
+                                                            match=qdrant.MatchAny(any=fingerprint.band_keys[:1]))])
+    points, _ = qdrant_store.client.scroll(qdrant_store.chunks_collection, scroll_filter=band_filter)
+    assert [found.payload["chunk_id"] for found in points] == ["inc:0"]

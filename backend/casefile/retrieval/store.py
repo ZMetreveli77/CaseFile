@@ -5,6 +5,7 @@ from typing import Iterable
 from qdrant_client import QdrantClient
 from qdrant_client import models as qdrant
 
+from casefile.ingestion.dedup import compute_fingerprint
 from casefile.models import Chunk, Document, SearchResult
 from casefile.retrieval import bm25
 from casefile.retrieval.embeddings import TextEmbedder
@@ -14,6 +15,9 @@ SPARSE_VECTOR_NAME = "bm25"
 UPLOAD_BATCH_SIZE = 128
 SCROLL_PAGE_SIZE = 256
 CLOUD_TIMEOUT_SECONDS = 60
+# Chunk payload fields that are filtered on. Without a keyword index, every lookup scans all chunks.
+# exact_hash / lsh_band_keys: duplicate lookups done by Qdrant instead of an in-memory index (see dedup.py).
+CHUNK_KEYWORD_FIELDS = ("doc_id", "exact_hash", "lsh_band_keys")
 
 
 def create_qdrant_client(qdrant_url: str = "", qdrant_api_key: str = "") -> QdrantClient:
@@ -60,7 +64,10 @@ class QdrantStore:
                 # IDF modifier: Qdrant multiplies our BM25 term weights by corpus-wide IDF at query time.
                 sparse_vectors_config={SPARSE_VECTOR_NAME: qdrant.SparseVectorParams(modifier=qdrant.Modifier.IDF)},
             )
-            self.client.create_payload_index(self.chunks_collection, "doc_id", qdrant.PayloadSchemaType.KEYWORD)
+            # Outside the "if": an existing collection (e.g. Qdrant Cloud) gets indexes added later too.
+            # Creating an index that already exists is a no-op in Qdrant.
+        for field_name in CHUNK_KEYWORD_FIELDS:
+            self.client.create_payload_index(self.chunks_collection, field_name, qdrant.PayloadSchemaType.KEYWORD)
         if not self.client.collection_exists(self.documents_collection):
             self.client.create_collection(self.documents_collection, vectors_config={})
             for field_name in ("doc_id", "content_hash"):
@@ -113,12 +120,17 @@ class QdrantStore:
 
     def build_chunk_point(self, chunk: Chunk, dense_vector: list[float]) -> qdrant.PointStruct:
         sparse_vector = bm25.encode_document(chunk.text)
+        fingerprint = compute_fingerprint(chunk.text)
         return qdrant.PointStruct(
             id=create_point_id(chunk.chunk_id),
             vector={DENSE_VECTOR_NAME: dense_vector,
-                    SPARSE_VECTOR_NAME: qdrant.SparseVector(indices=sparse_vector.indices, values=sparse_vector.values)},
+                    SPARSE_VECTOR_NAME: qdrant.SparseVector(indices=sparse_vector.indices,
+                                                            values=sparse_vector.values)},
             payload={"chunk_id": chunk.chunk_id, "doc_id": chunk.doc_id, "index": chunk.index,
-                     "text": chunk.text, "title": chunk.title, "metadata": chunk.metadata},
+                     "text": chunk.text, "title": chunk.title, "metadata": chunk.metadata,
+                     # duplicate detection in Qdrant: exact copies by hash, near copies by shared LSH band key
+                     "exact_hash": fingerprint.exact_hash, "minhash": fingerprint.signature,
+                     "lsh_band_keys": fingerprint.band_keys},
         )
 
     # Single-document conveniences (used by the API and tests).

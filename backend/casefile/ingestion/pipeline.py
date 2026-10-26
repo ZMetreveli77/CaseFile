@@ -39,9 +39,13 @@ class IngestionPipeline:
         self.strategy = strategy
         self.max_characters = max_characters
         self.overlap_characters = overlap_characters
-        self.duplicate_detector = duplicate_detector or DuplicateDetector()
-        for stored_chunk in store.iter_chunks():  # rebuild the duplicate index from what is already stored
-            self.duplicate_detector.add(stored_chunk.chunk_id, stored_chunk.text)
+        if duplicate_detector is None:
+            # Default in-memory index: rebuild it from what is already stored (slow for a large store).
+            duplicate_detector = DuplicateDetector()
+            for stored_chunk in store.iter_chunks():
+                duplicate_detector.add(stored_chunk.chunk_id, stored_chunk.text)
+        # A detector passed in (e.g. QdrantDuplicateDetector) brings its own knowledge: nothing to rebuild.
+        self.duplicate_detector = duplicate_detector
 
     def ingest_file(self, file_name: str, file_bytes: bytes) -> list[IngestResult]:
         return self.ingest_documents(load_documents(file_name, file_bytes))
@@ -92,6 +96,8 @@ class IngestionPipeline:
 
         if items_to_store:
             self.store.upsert_many(items_to_store)
+            # The batch is stored now, so the detector can find these chunks in the store itself.
+            self.duplicate_detector.forget_recently_added()
         return results
 
     def split_into_unique_chunks(self, document: Document) -> tuple[list[Chunk], list[dict]]:

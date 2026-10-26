@@ -1,0 +1,13 @@
+step 1 done, process peak so far: 332 MB
+step 2 done: 78,730 chunks
+
+MEMORY run: times are inflated by tracemalloc, use the time run for seconds
+step                                seconds     %  MB
+1. load embedding model                 1.0    0%  -
+2. read all chunks from Qdrant         35.7   10%  -
+3. build duplicate index              322.5   90%  662 (peak 662)
+total                                 359.2
+
+chunks indexed:          78,730
+index memory per chunk:  8,814 bytes
+whole process peak:      1717 MB of Render's 512 MB (335%)

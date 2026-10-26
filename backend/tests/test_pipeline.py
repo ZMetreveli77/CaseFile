@@ -1,5 +1,6 @@
 import json
 
+from casefile.ingestion.dedup import DuplicateDetector
 from casefile.ingestion.loaders import load_documents
 from casefile.ingestion.pipeline import IngestionPipeline
 
@@ -87,3 +88,13 @@ def test_rerunning_a_batch_changes_nothing(store):
     results = pipeline.ingest_documents(documents)
     assert all(result.status == "unchanged" for result in results)
     assert store.call_count == 2  # lookups only, no upsert (this is what makes the indexer resumable)
+
+
+def test_pipeline_does_not_scan_the_store_when_given_a_detector(store, monkeypatch):
+    def fail_if_scanned():
+        raise AssertionError("should not scan: a detector passed in needs no rebuild")
+
+    monkeypatch.setattr(store, "iter_chunks", fail_if_scanned)
+    pipeline = IngestionPipeline(store, duplicate_detector=DuplicateDetector())  # would raise if it scanned
+    [result] = pipeline.ingest_file("a.txt", INCIDENT_TEXT.encode())
+    assert result.status == "added"
