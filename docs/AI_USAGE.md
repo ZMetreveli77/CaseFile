@@ -581,3 +581,44 @@ I did the review and wrote the verdicts myself, with no other tool.
   - **Decision:** keep sentence chunking at 800 characters.
   - **Caveat:** absolute scores are higher than on the full corpus because fewer paragraphs compete; only the
     comparison is meaningful. Long documents such as PDFs would separate the strategies more.
+
+### Contradictory questions (milestone 7, H2)
+I built the contradiction test:
+- **Picking paragraphs** (`pick_contradiction_paragraphs` in `eval_set.py` + `eval/pick_contradiction_paragraphs.py`):
+  - a seeded choice of paragraphs with exactly one year, stated in the first sentence;
+  - skipping lists, titles that contain a year, and corpus text with glued digits;
+  - skipping every paragraph the eval set uses, including the false-premise ones.
+- **Writing 10 conflicting documents** (`eval/contradictions_written.jsonl`): each is a genuinely different "source"
+  (a press-history survey, a fan wiki, a programme note…) stating an altered year. That way my own MinHash duplicate
+  detector doesn't skip them: similarity to the originals is 0.00–0.08.
+- **Validation** (`find_contradiction_problems`): the builder refuses to write anything if:
+  - the original paragraph is missing or used by the eval set;
+  - the title already exists in the corpus;
+  - the altered year is missing from the text, or the original year is still in it;
+  - the text is a near-duplicate of the original.
+- **Upload:** all 10 documents were **added** through the real pipeline (66,565 documents in Qdrant now).
+- **Retrieval check:** for **10/10** questions, both sources are among the agent's search results, so every conflict
+  actually reaches the agent.
+- **Decision:** I kept contradictory-06 (founded 2006 vs first published 2009) as a **soft conflict** on purpose, to
+  see whether the agent over-reports conflicts.
+
+**First result (dev, agent):** conflicts were reported **5/5**. The agent abstained on 3 of them and answered with the
+disagreement spelled out on 2. The soft conflict was also flagged, which is arguably over-reporting.
+
+**AI help:** Claude Code suggested the task and its steps. It also:
+- warned about the near-duplicate trap and about altering paragraphs the eval set uses;
+- found errors in my first version: a misspelled file name, a script reading a file that didn't exist, missing
+  `question` fields, and output written into `eval_set.jsonl`, which `build_eval_set.py` would overwrite;
+- fixed those at my request, and **wrote the 10 questions**, each checked against its original paragraph;
+- pointed out the founded-vs-published issue.
+
+I wrote the picker, the conflicting documents, the validation and the upload and retrieval checks myself.
+
+### Free-tier rate limit (milestone 7)
+The first full evaluation run stopped with Gemini 429 errors: the free tier allows 15 requests per minute.
+- My retry logic already supports a provider's "retry after" hint, but the Gemini code never extracted it (an AI
+  oversight), so my retries gave up after about 15 s while Google asked for about 49 s.
+- **AI fix:**
+  - `find_retry_delay_seconds` reads Google's `RetryInfo` (or the "retry in 49.6s" text), capped at 120 s.
+  - `RequestRateLimiter` paces requests to 14 per minute (`LLM_REQUESTS_PER_MINUTE`), with tests using a fake clock.
+- Everything already done was replayed from the LLM cache, so the rerun lost nothing.
