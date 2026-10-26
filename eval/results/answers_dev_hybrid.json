@@ -6,50 +6,50 @@
     "agent": {
       "summary": {
         "questions": 30,
-        "answer_accuracy_judge": 0.95,
-        "exact_match": 0.8,
-        "f1": 0.858,
-        "evidence_retrieved": 0.95,
-        "citation_precision": 0.947,
-        "citation_recall": 0.868,
-        "false_abstention_rate": 0.05,
+        "answer_accuracy_judge": 1.0,
+        "exact_match": 0.7,
+        "f1": 0.882,
+        "evidence_retrieved": 0.9,
+        "citation_precision": 0.95,
+        "citation_recall": 0.875,
+        "false_abstention_rate": 0.0,
         "abstention_precision": 0.714,
         "abstention_recall": 1.0,
         "conflict_detection": 1.0,
-        "llm_calls_per_question": 2.9,
+        "llm_calls_per_question": 2.967,
         "searches_per_question": 2.0
       },
-      "seconds": 441,
+      "seconds": 373,
       "by_category": {
         "bridge": {
           "questions": 10,
           "answer_accuracy_judge": 1.0,
-          "exact_match": 0.7,
-          "f1": 0.817,
-          "evidence_retrieved": 0.9,
+          "exact_match": 0.5,
+          "f1": 0.797,
+          "evidence_retrieved": 0.8,
           "citation_precision": 0.9,
           "citation_recall": 0.8,
           "false_abstention_rate": 0.0,
           "abstention_precision": null,
           "abstention_recall": null,
           "conflict_detection": null,
-          "llm_calls_per_question": 3.0,
-          "searches_per_question": 2.1
+          "llm_calls_per_question": 3.2,
+          "searches_per_question": 2.2
         },
         "comparison": {
           "questions": 5,
-          "answer_accuracy_judge": 0.8,
+          "answer_accuracy_judge": 1.0,
           "exact_match": 0.8,
-          "f1": 0.8,
+          "f1": 0.933,
           "evidence_retrieved": 1.0,
           "citation_precision": 1.0,
-          "citation_recall": 0.875,
-          "false_abstention_rate": 0.2,
-          "abstention_precision": 0.0,
+          "citation_recall": 0.9,
+          "false_abstention_rate": 0.0,
+          "abstention_precision": null,
           "abstention_recall": null,
           "conflict_detection": null,
-          "llm_calls_per_question": 3.0,
-          "searches_per_question": 2.4
+          "llm_calls_per_question": 3.6,
+          "searches_per_question": 2.8
         },
         "contradictory": {
           "questions": 5,
@@ -63,8 +63,8 @@
           "abstention_precision": 0.0,
           "abstention_recall": null,
           "conflict_detection": 1.0,
-          "llm_calls_per_question": 2.6,
-          "searches_per_question": 1.6
+          "llm_calls_per_question": 2.4,
+          "searches_per_question": 1.4
         },
         "simple": {
           "questions": 5,
@@ -93,8 +93,8 @@
           "abstention_precision": 1.0,
           "abstention_recall": 1.0,
           "conflict_detection": null,
-          "llm_calls_per_question": 3.8,
-          "searches_per_question": 2.8
+          "llm_calls_per_question": 3.4,
+          "searches_per_question": 2.4
         }
       },
       "results": [
@@ -124,13 +124,13 @@
             "answer": "Hee Haw",
             "claims": [
               {
-                "text": "Jim Halsey has guided the careers of illustrious personalities including Roy Clark.",
+                "text": "Jim Halsey guided the career of Roy Clark.",
                 "citations": [
                   "dd821802e21d119c:0"
                 ]
               },
               {
-                "text": "Roy Clark is best known for hosting 'Hee Haw', a nationally televised country variety show, from 1969 to 1992.",
+                "text": "Roy Clark hosted the country variety show Hee Haw.",
                 "citations": [
                   "0b2328321e0a9070:0"
                 ]
@@ -140,36 +140,34 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Jim Halsey musician career manager",
-              "Roy Clark variety show"
+              "Jim Halsey musician career guided",
+              "Roy Clark country variety show"
             ],
             "retrieved_chunk_ids": [
               "dd821802e21d119c:0",
-              "7a60a959f37d38f8:1",
               "8318109cfe6b7fe3:0",
-              "0d67d09fc4624f1c:0",
+              "6343e0a5deeb7938:0",
+              "ddba0f1eb4b87228:0",
               "8ec4a76fc9402a7b:0",
-              "5f95eb53d3bb2b9b:1",
+              "ac7dd50b0459d977:0",
               "0b2328321e0a9070:0",
-              "1b10666006d9ad75:0",
-              "343a9877589f4e13:0",
-              "ecd07b92d049a4b9:0",
-              "d73f6ff43a4168ad:0",
-              "8bce264c59a6a9d0:0"
+              "23be13a740273dc8:0",
+              "8bce264c59a6a9d0:0",
+              "6cc5919e22b3d470:0",
+              "2aca7567f9ecc621:0"
             ],
             "source_titles": {
               "dd821802e21d119c:0": "Jim Halsey",
-              "7a60a959f37d38f8:1": "WGOH",
               "8318109cfe6b7fe3:0": "Joe Buck (musician)",
-              "0d67d09fc4624f1c:0": "Ted Collins (manager)",
+              "6343e0a5deeb7938:0": "Robert Pollard",
+              "ddba0f1eb4b87228:0": "Fred &quot;Sonic&quot; Smith",
               "8ec4a76fc9402a7b:0": "The Hitcher II: I've Been Waiting",
-              "5f95eb53d3bb2b9b:1": "Shenandoah (band)",
+              "ac7dd50b0459d977:0": "James Baker (musician)",
               "0b2328321e0a9070:0": "Roy Clark",
-              "1b10666006d9ad75:0": "Royal Variety Performance",
-              "343a9877589f4e13:0": "Roy Tuckman",
-              "ecd07b92d049a4b9:0": "Man from 1997",
-              "d73f6ff43a4168ad:0": "Roy Orbison and Friends: A Black and White Night",
-              "8bce264c59a6a9d0:0": "The Roy Files"
+              "23be13a740273dc8:0": "Country Music Greats Radio Show",
+              "8bce264c59a6a9d0:0": "The Roy Files",
+              "6cc5919e22b3d470:0": "Keith Bilbrey",
+              "2aca7567f9ecc621:0": "The Adventures of Wild Bill Hickok"
             },
             "llm_calls": 3,
             "notes": []
@@ -201,15 +199,15 @@
             "answer": "Eielson Air Force Base",
             "claims": [
               {
-                "text": "Eielson Air Force Base is located approximately 26 miles southeast of Fairbanks, Alaska.",
-                "citations": [
-                  "f5adbabc330a5824:0"
-                ]
-              },
-              {
                 "text": "Eielson Air Force Base in Alaska is named in honor of Carl Benjamin \"Ben\" Eielson.",
                 "citations": [
                   "f46a7ccd1ca1a4ef:0"
+                ]
+              },
+              {
+                "text": "Eielson Air Force Base (AFB) is a United States Air Force base located approximately 26 miles (42 km) southeast of Fairbanks, Alaska.",
+                "citations": [
+                  "f5adbabc330a5824:0"
                 ]
               }
             ],
@@ -217,22 +215,22 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Ben Eielson Air Force Base Fairbanks Alaska"
+              "Carl Benjamin Ben Eielson air force base Fairbanks Alaska"
             ],
             "retrieved_chunk_ids": [
+              "f46a7ccd1ca1a4ef:0",
               "f5adbabc330a5824:0",
               "c4b664b62c3fd77c:0",
-              "f46a7ccd1ca1a4ef:0",
               "54be90600ed45589:0",
-              "4d23f9e1bc7d1eac:0",
+              "878ee4dd47e30692:0",
               "99d529801a1b2a94:0"
             ],
             "source_titles": {
+              "f46a7ccd1ca1a4ef:0": "Carl Ben Eielson",
               "f5adbabc330a5824:0": "Eielson Air Force Base",
               "c4b664b62c3fd77c:0": "168th Air Refueling Squadron",
-              "f46a7ccd1ca1a4ef:0": "Carl Ben Eielson",
               "54be90600ed45589:0": "Exercise Red Flag",
-              "4d23f9e1bc7d1eac:0": "Moose Creek, Alaska",
+              "878ee4dd47e30692:0": "1950 British Columbia B-36 crash",
               "99d529801a1b2a94:0": "343d Wing"
             },
             "llm_calls": 2,
@@ -281,15 +279,15 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Cari Roccaro county hometown birthplace",
+              "Cari Roccaro",
               "East Islip New York county"
             ],
             "retrieved_chunk_ids": [
               "10bc9e11f9d8fc4c:0",
-              "b14158004cb94d2b:0",
-              "87831523abcef91d:0",
-              "9bed670f9af360ea:0",
-              "ccb90d5e9be0bd24:0",
+              "9d4df49a7552fad7:0",
+              "264fed238cc43853:0",
+              "6bfec7eb71abdc04:0",
+              "507243866722c36d:0",
               "c6460e0a914bcb29:0",
               "fc7d3e573a32a0fc:0",
               "a7c86cd6d102a1c0:0",
@@ -300,10 +298,10 @@
             ],
             "source_titles": {
               "10bc9e11f9d8fc4c:0": "Cari Roccaro",
-              "b14158004cb94d2b:0": "Tiriolo",
-              "87831523abcef91d:0": "Romeo Munoz Cachola",
-              "9bed670f9af360ea:0": "Pittsburg, Texas",
-              "ccb90d5e9be0bd24:0": "Downey, California",
+              "9d4df49a7552fad7:0": "Ferrari Ascari",
+              "264fed238cc43853:0": "Isabel de los Ángeles Ruano",
+              "6bfec7eb71abdc04:0": "Carlos Carmona",
+              "507243866722c36d:0": "Micom Film and TV Productions",
               "c6460e0a914bcb29:0": "Margareth Madè",
               "fc7d3e573a32a0fc:0": "East Islip, New York",
               "a7c86cd6d102a1c0:0": "New York State Route 111",
@@ -323,15 +321,15 @@
           "gold": "Washington State",
           "judge": {
             "correct": true,
-            "reason": "The predicted answer matches the gold answer."
+            "reason": "The predicted answer 'Washington State Cougars' correctly identifies Washington State, where Mike Leach coached after Texas Tech (the Red Raiders)."
           },
           "scores": {
             "abstained": false,
-            "llm_calls": 3,
-            "searches": 2,
+            "llm_calls": 4,
+            "searches": 3,
             "evidence_retrieved": true,
-            "exact_match": true,
-            "f1": 1.0,
+            "exact_match": false,
+            "f1": 0.8,
             "judge_correct": true,
             "correct": true,
             "citation_precision": 1.0,
@@ -339,10 +337,10 @@
           },
           "answer": {
             "question": "After coaching the red raiders to several winning seasons, where does Mike Leach currently coach at?",
-            "answer": "Washington State",
+            "answer": "Washington State Cougars",
             "claims": [
               {
-                "text": "He is the head coach of the Washington State Cougars football team.",
+                "text": "Mike Leach is the head coach of the Washington State Cougars football team.",
                 "citations": [
                   "bd3bf590a9ccb5c8:0"
                 ]
@@ -359,7 +357,8 @@
             "abstain_reason": "",
             "search_queries": [
               "Mike Leach Red Raiders",
-              "Mike Leach current coach Mississippi State Washington State"
+              "Washington State Cougars Mike Leach current coach Mississippi State",
+              "\"Mike Leach\" Mississippi State"
             ],
             "retrieved_chunk_ids": [
               "a9db69e2c6aa1c8e:1",
@@ -369,9 +368,11 @@
               "540a7c312912837d:0",
               "c6ca0825f1d7fe37:0",
               "e8eab711b0945599:0",
+              "838be9952ebf3b56:0",
               "58524829c83f51da:0",
-              "7ad3c2da8caaec53:0",
-              "949bce7c2f170385:0"
+              "ae43d38f4928302c:0",
+              "a547746d2b8e3268:0",
+              "b707e51d8931d30a:0"
             ],
             "source_titles": {
               "a9db69e2c6aa1c8e:1": "Ruffin McNeill",
@@ -381,11 +382,13 @@
               "540a7c312912837d:0": "2009 Texas Tech Red Raiders football team",
               "c6ca0825f1d7fe37:0": "2003 Texas Tech Red Raiders football team",
               "e8eab711b0945599:0": "2012 Washington State Cougars football team",
+              "838be9952ebf3b56:0": "Marv Harshman",
               "58524829c83f51da:0": "Rick Stansbury",
-              "7ad3c2da8caaec53:0": "Mike Garland",
-              "949bce7c2f170385:0": "Sylvester Croom"
+              "ae43d38f4928302c:0": "Andy Kennedy (basketball)",
+              "a547746d2b8e3268:0": "Mississippi Veterans Memorial Stadium",
+              "b707e51d8931d30a:0": "2005 Texas Tech Red Raiders football team"
             },
-            "llm_calls": 3,
+            "llm_calls": 4,
             "notes": []
           }
         },
@@ -400,7 +403,7 @@
           },
           "scores": {
             "abstained": false,
-            "llm_calls": 2,
+            "llm_calls": 3,
             "searches": 2,
             "evidence_retrieved": true,
             "exact_match": true,
@@ -415,13 +418,13 @@
             "answer": "1907",
             "claims": [
               {
-                "text": "Pike Place Market opened August 17, 1907.",
+                "text": "Pike Place Market opened August 17, 1907",
                 "citations": [
                   "ba7d985a83dff85c:0"
                 ]
               },
               {
-                "text": "Beecher's Handmade Cheese was founded by Kurt Beecher Dammeier in 2003.",
+                "text": "Beecher's Handmade Cheese was founded by Kurt Beecher Dammeier in 2003",
                 "citations": [
                   "d405aacde9970019:0"
                 ]
@@ -460,7 +463,7 @@
               "bac4abf1bfb18365:0": "Rachel (Gerber)",
               "e3feb2a06b1b1fc3:0": "Butterworth Building"
             },
-            "llm_calls": 2,
+            "llm_calls": 3,
             "notes": []
           }
         },
@@ -475,8 +478,8 @@
           },
           "scores": {
             "abstained": false,
-            "llm_calls": 4,
-            "searches": 3,
+            "llm_calls": 6,
+            "searches": 5,
             "evidence_retrieved": true,
             "exact_match": true,
             "f1": 1.0,
@@ -506,35 +509,47 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Mississippi county seat five miles west city",
-              "miles west of the county seat Mississippi county",
-              "Indianola county seat Sunflower County Mississippi"
+              "Mississippi county seat city five miles west",
+              "Mississippi county seat \"five miles west\"",
+              "\"five miles west of\" Mississippi county seat city",
+              "\"five miles west of\" Mississippi city",
+              "\"Sunflower County\" Mississippi county seat"
             ],
             "retrieved_chunk_ids": [
               "3d37563c299add6c:0",
               "b505b6a7aa507504:0",
-              "ecc18cd166e4f969:0",
-              "4e9469aa36f6da24:0",
-              "26ae9a18661c5f1d:0",
               "c5563a2639b36bed:0",
+              "ecc18cd166e4f969:0",
+              "26ae9a18661c5f1d:0",
+              "4e9469aa36f6da24:0",
               "bad468975ff6d1c3:0",
+              "aff1463989fb1e56:0",
               "cb0c25aa5dd5db39:0",
-              "1f995904b229562e:0",
-              "909bed5f1b490a35:0"
+              "8798e7e29a818cad:0",
+              "aca315667be670fb:0",
+              "36ed3352c96081a9:0",
+              "c02ac95aaa7604da:0",
+              "909bed5f1b490a35:0",
+              "1f995904b229562e:0"
             ],
             "source_titles": {
               "3d37563c299add6c:0": "Pontotoc, Mississippi",
               "b505b6a7aa507504:0": "Helena–West Helena, Arkansas",
-              "ecc18cd166e4f969:0": "Brandon, Mississippi",
-              "4e9469aa36f6da24:0": "Charleston, Missouri",
-              "26ae9a18661c5f1d:0": "Tupelo, Mississippi",
               "c5563a2639b36bed:0": "Biloxi, Mississippi",
+              "ecc18cd166e4f969:0": "Brandon, Mississippi",
+              "26ae9a18661c5f1d:0": "Tupelo, Mississippi",
+              "4e9469aa36f6da24:0": "Charleston, Missouri",
               "bad468975ff6d1c3:0": "Mississippi County Airport",
+              "aff1463989fb1e56:0": "Paulding, Mississippi",
               "cb0c25aa5dd5db39:0": "Holly Ridge, Mississippi",
-              "1f995904b229562e:0": "DeSoto County, Mississippi",
-              "909bed5f1b490a35:0": "Indianola, Mississippi"
+              "8798e7e29a818cad:0": "West Memphis, Arkansas",
+              "aca315667be670fb:0": "Mobile Regional Airport",
+              "36ed3352c96081a9:0": "Olive Branch, Mississippi",
+              "c02ac95aaa7604da:0": "Ocean Springs, Mississippi",
+              "909bed5f1b490a35:0": "Indianola, Mississippi",
+              "1f995904b229562e:0": "DeSoto County, Mississippi"
             },
-            "llm_calls": 4,
+            "llm_calls": 6,
             "notes": []
           }
         },
@@ -549,24 +564,30 @@
           },
           "scores": {
             "abstained": false,
-            "llm_calls": 5,
-            "searches": 4,
+            "llm_calls": 4,
+            "searches": 3,
             "evidence_retrieved": false,
             "exact_match": false,
             "f1": 0.3333333333333333,
             "judge_correct": true,
             "correct": true,
-            "citation_precision": 0.0,
-            "citation_recall": 0.0
+            "citation_precision": 0.5,
+            "citation_recall": 0.5
           },
           "answer": {
             "question": "The ninth The Desert Sessions LP was released by by what kind of band?",
             "answer": "American desert rock collective",
             "claims": [
               {
-                "text": "The Desert Sessions is described as an American desert rock collective.",
+                "text": "The Desert Sessions is an American desert rock collective.",
                 "citations": [
                   "d703d2b50995e0a2:0"
+                ]
+              },
+              {
+                "text": "\"Volume 9: I See You Hearin' Me\" is the ninth The Desert Sessions LP.",
+                "citations": [
+                  "62af536f388aeb93:0"
                 ]
               }
             ],
@@ -574,32 +595,31 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "The Desert Sessions LP ninth ninth LP Volumes 9 & 10",
-              "The Desert Sessions Volume 9 American desert rock collective",
-              "\"Volume 9: I See You Hearin' Me\" desert rock collective",
-              "\"The Desert Sessions\" \"American desert rock collective\""
+              "The Desert Sessions LP 9 ninth",
+              "Volume 9: I See You Hearin' Me desert rock collective",
+              "\"Volume 9: I See You Hearin' Me\" desert rock collective"
             ],
             "retrieved_chunk_ids": [
               "62af536f388aeb93:0",
               "25f1feae42d7e26d:0",
-              "52d8518a989121c9:0",
               "fc29c0c43893ab2c:0",
-              "1cfdc1d4e517a9e6:0",
               "6681f56649a4238f:0",
+              "52d8518a989121c9:0",
+              "1cfdc1d4e517a9e6:0",
               "dfa097896de61961:0",
               "d703d2b50995e0a2:0"
             ],
             "source_titles": {
               "62af536f388aeb93:0": "Volume 9: I See You Hearin' Me",
               "25f1feae42d7e26d:0": "Volume 10: I Heart Disco",
-              "52d8518a989121c9:0": "Volume 2: Status: Ships Commander Butchered",
               "fc29c0c43893ab2c:0": "Volume 7: Gypsy Marches",
-              "1cfdc1d4e517a9e6:0": "Volume 3: Set Coordinates for the White Dwarf!!!",
               "6681f56649a4238f:0": "Volume 4: Hard Walls and Little Trips",
+              "52d8518a989121c9:0": "Volume 2: Status: Ships Commander Butchered",
+              "1cfdc1d4e517a9e6:0": "Volume 3: Set Coordinates for the White Dwarf!!!",
               "dfa097896de61961:0": "Volume 6: Black Anvil Ego",
               "d703d2b50995e0a2:0": "Volume 1: Instrumental Driving Music for Felons"
             },
-            "llm_calls": 5,
+            "llm_calls": 4,
             "notes": []
           }
         },
@@ -629,13 +649,13 @@
             "answer": "Larry Gatlin & the Gatlin Brothers",
             "claims": [
               {
-                "text": "\"What Are We Doin' Lonesome\" is a song written by Larry Gatlin",
+                "text": "\"What Are We Doin' Lonesome\" is a song written by Larry Gatlin.",
                 "citations": [
                   "ddbe81357381555a:0"
                 ]
               },
               {
-                "text": "Larry Gatlin performs as part of a trio with his younger brothers Steve and Rudy, known as Larry Gatlin & the Gatlin Brothers",
+                "text": "Larry Gatlin performs as part of a trio with his younger brothers Steve and Rudy, known as Larry Gatlin & the Gatlin Brothers.",
                 "citations": [
                   "2161d9b4217c14b7:0"
                 ]
@@ -645,34 +665,34 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "What Are We Doin Lonesome",
-              "Larry Gatlin trio group"
+              "What Are We Doin Lonesome songwriter trio",
+              "Larry Gatlin trio brothers"
             ],
             "retrieved_chunk_ids": [
               "ddbe81357381555a:0",
-              "e523d842b2912ef9:0",
+              "2bebd997d9166816:0",
+              "4486f4d92e435a67:0",
               "8b8a75da175c7431:0",
-              "073424449f7f974d:1",
-              "0e099040629a01f7:0",
-              "19af5848d1934b25:0",
+              "622aa5182468f453:3",
+              "e5c209ff1c975b95:0",
               "2161d9b4217c14b7:0",
               "e9dbea7ead2f860c:0",
-              "7fdbad685e74e56c:0",
-              "abe1bdea02059227:1",
-              "c51a680e45762130:2"
+              "ab80fc751aa66cb1:0",
+              "8c8be968e954ddda:0",
+              "5f4f5f6b85ad1c92:0"
             ],
             "source_titles": {
               "ddbe81357381555a:0": "What Are We Doin' Lonesome",
-              "e523d842b2912ef9:0": "Live! Shelly Manne &amp; His Men at the Manne-Hole",
+              "2bebd997d9166816:0": "Intro (R&amp;B group)",
+              "4486f4d92e435a67:0": "Lonestar",
               "8b8a75da175c7431:0": "Tracey Prescott &amp; Lonesome Daddy (album)",
-              "073424449f7f974d:1": "Welcome to the Family (song)",
-              "0e099040629a01f7:0": "Dan Tyler",
-              "19af5848d1934b25:0": "What About Us (Livin Out Loud album)",
+              "622aa5182468f453:3": "Lonesome Pine Fiddlers",
+              "e5c209ff1c975b95:0": "Paul Burlison",
               "2161d9b4217c14b7:0": "Larry Gatlin",
               "e9dbea7ead2f860c:0": "Houston (Means I'm One Day Closer to You)",
-              "7fdbad685e74e56c:0": "702 (group)",
-              "abe1bdea02059227:1": "Southern by the Grace of God",
-              "c51a680e45762130:2": "Gnosis (Gnidrolog album)"
+              "ab80fc751aa66cb1:0": "Big Three (San Antonio Spurs)",
+              "8c8be968e954ddda:0": "Saving Forever",
+              "5f4f5f6b85ad1c92:0": "The Delmore Brothers"
             },
             "llm_calls": 3,
             "notes": []
@@ -685,34 +705,34 @@
           "gold": "Trey Parker and Matt Stone",
           "judge": {
             "correct": true,
-            "reason": "The predicted answer correctly identifies the creators of the sitcom (South Park) as Trey Parker and Matt Stone, which matches the gold standard."
+            "reason": "The predicted answer correctly identifies the creators of South Park (which Cartman Finds Love belongs to) as Matt Stone and Trey Parker, which is equivalent to the gold answer."
           },
           "scores": {
             "abstained": false,
-            "llm_calls": 3,
-            "searches": 2,
-            "evidence_retrieved": true,
-            "exact_match": true,
+            "llm_calls": 2,
+            "searches": 1,
+            "evidence_retrieved": false,
+            "exact_match": false,
             "f1": 1.0,
             "judge_correct": true,
             "correct": true,
-            "citation_precision": 1.0,
-            "citation_recall": 1.0
+            "citation_precision": 0.5,
+            "citation_recall": 0.5
           },
           "answer": {
             "question": "Cartman Finds Love is an episode from the sitcom created by whom?",
-            "answer": "Trey Parker and Matt Stone",
+            "answer": "Matt Stone and Trey Parker",
             "claims": [
               {
-                "text": "\"Cartman Finds Love\" is an episode of the animated sitcom \"South Park\".",
+                "text": "\"Cartman Finds Love\" is an episode of the American animated sitcom \"South Park\".",
                 "citations": [
                   "e95ca94078f446e0:0"
                 ]
               },
               {
-                "text": "\"South Park\" was created by Trey Parker and Matt Stone.",
+                "text": "\"South Park\" is created by Matt Stone and Trey Parker.",
                 "citations": [
-                  "7f949640637fb017:0"
+                  "8103cc04b10ccdac:0"
                 ]
               }
             ],
@@ -720,8 +740,7 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Cartman Finds Love",
-              "Matt Stone and Trey Parker South Park created"
+              "Cartman Finds Love"
             ],
             "retrieved_chunk_ids": [
               "e95ca94078f446e0:0",
@@ -729,12 +748,7 @@
               "8103cc04b10ccdac:0",
               "9788ff3b96486242:0",
               "9788ff3b96486242:1",
-              "a6781a53c6601fbd:0",
-              "64555954b2eb1306:0",
-              "7f949640637fb017:0",
-              "e0c4b05c71fd4ca7:0",
-              "1c9a46151bc79290:0",
-              "4942c995fc2ec0ed:0"
+              "a6781a53c6601fbd:0"
             ],
             "source_titles": {
               "e95ca94078f446e0:0": "Cartman Finds Love",
@@ -742,14 +756,9 @@
               "8103cc04b10ccdac:0": "Eric Cartman",
               "9788ff3b96486242:0": "Cartman's Mom Is a Dirty Slut",
               "9788ff3b96486242:1": "Cartman's Mom Is a Dirty Slut",
-              "a6781a53c6601fbd:0": "Downfall (1997 film)",
-              "64555954b2eb1306:0": "South Park (season 2)",
-              "7f949640637fb017:0": "South Park",
-              "e0c4b05c71fd4ca7:0": "Chef Aid",
-              "1c9a46151bc79290:0": "Conjoined Fetus Lady",
-              "4942c995fc2ec0ed:0": "Chickenlover"
+              "a6781a53c6601fbd:0": "Downfall (1997 film)"
             },
-            "llm_calls": 3,
+            "llm_calls": 2,
             "notes": []
           }
         },
@@ -779,7 +788,7 @@
             "answer": "Skyscraper",
             "claims": [
               {
-                "text": "Skyscraper is an upcoming roller coaster at the Skyplex complex that will become the tallest in the world when it opens in 2020.",
+                "text": "Skyscraper is an upcoming roller coaster at the Skyplex complex expected to open in 2020 and become the tallest roller coaster in the world.",
                 "citations": [
                   "b277996bd125f991:0"
                 ]
@@ -822,7 +831,7 @@
           },
           "scores": {
             "abstained": false,
-            "llm_calls": 2,
+            "llm_calls": 3,
             "searches": 2,
             "evidence_retrieved": true,
             "exact_match": true,
@@ -843,7 +852,7 @@
                 ]
               },
               {
-                "text": "Dead by Sunrise (formerly known as Snow White Tan) was an American post-grunge rock band formed in 2005",
+                "text": "Dead by Sunrise ... was an American post-grunge rock band formed in 2005",
                 "citations": [
                   "5569dbb2ea4adc4f:0"
                 ]
@@ -853,38 +862,38 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Sound Team band formation year",
-              "Dead by Sunrise band formation year"
+              "Sound Team formed date",
+              "Dead by Sunrise formed date"
             ],
             "retrieved_chunk_ids": [
               "bdefa9ff7cc865d9:0",
-              "9cbeea28e1b4a4ba:0",
-              "7592abae36773572:0",
-              "3fd2b755a9716b70:0",
-              "dae6022a11815a35:0",
-              "19c0cc58a3607805:0",
+              "8c55729e40bf6bc5:0",
+              "9c8e08871a6fbf9f:0",
+              "c74ef9ba3f73a91e:0",
+              "1dee22a34a28bbbc:0",
+              "cf54043a81c195b3:0",
               "5569dbb2ea4adc4f:0",
               "2542ac4ab3efa783:0",
               "21db8480bb03cfdf:0",
+              "a6be15d952ee1686:0",
               "9b04cf26354fec38:0",
-              "5549bef5bf27b246:1",
-              "a6be15d952ee1686:0"
+              "c99465027aaa840a:0"
             ],
             "source_titles": {
               "bdefa9ff7cc865d9:0": "Sound Team",
-              "9cbeea28e1b4a4ba:0": "S.S.T. Band",
-              "7592abae36773572:0": "A Cry Farewell",
-              "3fd2b755a9716b70:0": "RPA &amp; The United Nations of Sound",
-              "dae6022a11815a35:0": "Subatomic Sound System",
-              "19c0cc58a3607805:0": "British Youth Band Association",
+              "8c55729e40bf6bc5:0": "Sounds True",
+              "9c8e08871a6fbf9f:0": "The For Carnation",
+              "c74ef9ba3f73a91e:0": "The Four Seasons (band)",
+              "1dee22a34a28bbbc:0": "Feathers (American band)",
+              "cf54043a81c195b3:0": "Team Sleep",
               "5569dbb2ea4adc4f:0": "Dead by Sunrise",
               "2542ac4ab3efa783:0": "Chester Bennington",
               "21db8480bb03cfdf:0": "Sunrise Avenue",
+              "a6be15d952ee1686:0": "The Dead Weather",
               "9b04cf26354fec38:0": "Dead Jesus",
-              "5549bef5bf27b246:1": "The Cult",
-              "a6be15d952ee1686:0": "The Dead Weather"
+              "c99465027aaa840a:0": "Sunrise (Day6 album)"
             },
-            "llm_calls": 2,
+            "llm_calls": 3,
             "notes": []
           }
         },
@@ -899,8 +908,8 @@
           },
           "scores": {
             "abstained": false,
-            "llm_calls": 4,
-            "searches": 3,
+            "llm_calls": 5,
+            "searches": 4,
             "evidence_retrieved": true,
             "exact_match": true,
             "f1": 1.0,
@@ -932,7 +941,8 @@
             "search_queries": [
               "Nautilus magazine print editions yearly frequency",
               "TV Guide print editions yearly frequency",
-              "TV Guide bi-weekly issues per year"
+              "TV Guide bi-weekly issues per year",
+              "\"TV Guide\" frequency issues per year NTVB Media bi-weekly"
             ],
             "retrieved_chunk_ids": [
               "f449afc6035d4edd:0",
@@ -964,7 +974,7 @@
               "19eaece899ad947c:0": "TV Guide's 50 Greatest TV Shows of All Time",
               "05ddb36abad7f107:0": "Oregon Field Guide"
             },
-            "llm_calls": 4,
+            "llm_calls": 5,
             "notes": []
           }
         },
@@ -973,66 +983,84 @@
           "category": "comparison",
           "question": "Havelock Ellis and Arnold Bennett were both what?",
           "gold": "writer",
-          "judge": null,
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'English writer' includes 'writer' and correctly identifies the nationality/profession, which means the same as the gold standard."
+          },
           "scores": {
-            "abstained": true,
-            "llm_calls": 4,
-            "searches": 3,
+            "abstained": false,
+            "llm_calls": 5,
+            "searches": 4,
             "evidence_retrieved": true,
             "exact_match": false,
-            "f1": 0.0,
-            "judge_correct": null,
-            "correct": false,
-            "citation_precision": null,
-            "citation_recall": null
+            "f1": 0.6666666666666666,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
           },
           "answer": {
             "question": "Havelock Ellis and Arnold Bennett were both what?",
-            "answer": "",
-            "claims": [],
+            "answer": "English writer",
+            "claims": [
+              {
+                "text": "Arnold Bennett was an English writer.",
+                "citations": [
+                  "b841f7cc8d344edf:0"
+                ]
+              },
+              {
+                "text": "Havelock Ellis was an English writer.",
+                "citations": [
+                  "e7e04c9d1974785a:0"
+                ]
+              }
+            ],
             "conflicts": [],
-            "should_abstain": true,
-            "abstain_reason": "None of the answer's claims cite evidence that was actually retrieved.",
+            "should_abstain": false,
+            "abstain_reason": "",
             "search_queries": [
+              "Havelock Ellis and Arnold Bennett",
+              "Havelock Ellis",
               "Havelock Ellis Arnold Bennett",
-              "Arnold Bennett",
-              "Havelock Ellis Arnold Bennett readers or writers or English"
+              "\"Havelock Ellis\" \"Arnold Bennett\""
             ],
             "retrieved_chunk_ids": [
-              "77d247ce894ec36a:0",
-              "c722bbc1deb90486:0",
-              "40aeadefe86f299f:0",
-              "e7e04c9d1974785a:0",
-              "8d3ce4095a75b527:0",
-              "ab6074ffd2310055:0",
-              "673377e4bacda4d2:1",
-              "37a23e0e55f25c89:0",
-              "1ab2ebea2631a69a:0",
               "b841f7cc8d344edf:0",
-              "dc1889cb80feaf5d:0",
-              "ae5ae4115b6caab4:0"
+              "37a23e0e55f25c89:0",
+              "e53061638b31ea82:0",
+              "c0c700995f2ecc3d:0",
+              "251f65225373c68e:0",
+              "c722bbc1deb90486:0",
+              "7906813f3bf3abf3:0",
+              "26defa1924d00a4e:0",
+              "4312bed2abe8bdae:0",
+              "e7e04c9d1974785a:0",
+              "4f37f2dfe1cfda2c:0",
+              "77d247ce894ec36a:0",
+              "40aeadefe86f299f:0",
+              "8d3ce4095a75b527:0",
+              "ab6074ffd2310055:0"
             ],
             "source_titles": {
-              "77d247ce894ec36a:0": "Benedict Arnold",
-              "c722bbc1deb90486:0": "Edith Ellis",
-              "40aeadefe86f299f:0": "Equal Opportunity to Govern Amendment",
-              "e7e04c9d1974785a:0": "Havelock Ellis",
-              "8d3ce4095a75b527:0": "James Fowle Baldwin",
-              "ab6074ffd2310055:0": "Autoeroticism",
-              "673377e4bacda4d2:1": "List of Home and Away characters (1995)",
-              "37a23e0e55f25c89:0": "The Grand Babylon Hotel",
-              "1ab2ebea2631a69a:0": "Kenneth Arnold",
               "b841f7cc8d344edf:0": "Arnold Bennett",
-              "dc1889cb80feaf5d:0": "Jay Bennett (author)",
-              "ae5ae4115b6caab4:0": "The Old Wives' Tale"
+              "37a23e0e55f25c89:0": "The Grand Babylon Hotel",
+              "e53061638b31ea82:0": "The Clayhanger Family",
+              "c0c700995f2ecc3d:0": "The Card (1952 film)",
+              "251f65225373c68e:0": "The Curse of Downers Grove",
+              "c722bbc1deb90486:0": "Edith Ellis",
+              "7906813f3bf3abf3:0": "Izzy Ellis",
+              "26defa1924d00a4e:0": "Charles H. Ellis III",
+              "4312bed2abe8bdae:0": "Don Ellis",
+              "e7e04c9d1974785a:0": "Havelock Ellis",
+              "4f37f2dfe1cfda2c:0": "Myloh Jaqory Mason",
+              "77d247ce894ec36a:0": "Benedict Arnold",
+              "40aeadefe86f299f:0": "Equal Opportunity to Govern Amendment",
+              "8d3ce4095a75b527:0": "James Fowle Baldwin",
+              "ab6074ffd2310055:0": "Autoeroticism"
             },
-            "llm_calls": 4,
-            "notes": [
-              "removed citation e7e04c9d1974785a: not retrieved",
-              "removed claim 'Havelock Ellis was an English physician, writer, progressive intellectual and social reformer': no valid citation",
-              "removed citation b841f7cc8d344edf: not retrieved",
-              "removed claim 'Arnold Bennett was an English writer': no valid citation"
-            ]
+            "llm_calls": 5,
+            "notes": []
           }
         },
         {
@@ -1061,15 +1089,15 @@
             "answer": "no",
             "claims": [
               {
-                "text": "William James was an American philosopher and psychologist.",
-                "citations": [
-                  "e40669b022776eb8:0"
-                ]
-              },
-              {
                 "text": "Bret Easton Ellis is an American author, screenwriter, and short story writer.",
                 "citations": [
                   "baddb1c374e5fc22:0"
+                ]
+              },
+              {
+                "text": "William James was an American philosopher and psychologist who was also trained as a physician.",
+                "citations": [
+                  "e40669b022776eb8:0"
                 ]
               }
             ],
@@ -1079,7 +1107,7 @@
             "search_queries": [
               "William James screenwriter",
               "Bret Easton Ellis screenwriter",
-              "\"William James\" philosopher psychologist screenwriter"
+              "William James philosopher psychologist screenwriter"
             ],
             "retrieved_chunk_ids": [
               "40c707088d61bad6:0",
@@ -1097,8 +1125,8 @@
               "e40669b022776eb8:0",
               "aaf0d09a5fb7e034:0",
               "87fd998a6b856a2b:0",
-              "8f07b5fd1030712c:0",
-              "decc95274621d1f6:0"
+              "decc95274621d1f6:0",
+              "8f07b5fd1030712c:0"
             ],
             "source_titles": {
               "40c707088d61bad6:0": "William Davies (screenwriter)",
@@ -1116,8 +1144,8 @@
               "e40669b022776eb8:0": "William James",
               "aaf0d09a5fb7e034:0": "Psychological Review",
               "87fd998a6b856a2b:0": "Maud Merrill James",
-              "8f07b5fd1030712c:0": "Will Durant",
-              "decc95274621d1f6:0": "William Stern (psychologist)"
+              "decc95274621d1f6:0": "William Stern (psychologist)",
+              "8f07b5fd1030712c:0": "Will Durant"
             },
             "llm_calls": 3,
             "notes": []
@@ -1159,7 +1187,7 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Diplolaena Rutaceae Arenaria"
+              "Diplolaena Arenaria family Rutaceae"
             ],
             "retrieved_chunk_ids": [
               "05ecfd9fd34ae3c1:0",
@@ -1167,7 +1195,7 @@
               "5a3303a2cc90fa26:0",
               "3e1e652677c865d9:0",
               "20f30f110116ad32:0",
-              "172cc0b461514782:0"
+              "aee2d73f20aa201e:0"
             ],
             "source_titles": {
               "05ecfd9fd34ae3c1:0": "Diplolaena",
@@ -1175,7 +1203,7 @@
               "5a3303a2cc90fa26:0": "Catinella arenaria",
               "3e1e652677c865d9:0": "Turnstone",
               "20f30f110116ad32:0": "Pimelea arenaria",
-              "172cc0b461514782:0": "Black turnstone"
+              "aee2d73f20aa201e:0": "Zieria"
             },
             "llm_calls": 2,
             "notes": []
@@ -1275,23 +1303,23 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Dhusha population 1991 Nepal census Dhading District"
+              "Dhusha Dhading District 1991 Nepal census population"
             ],
             "retrieved_chunk_ids": [
               "b03eb2b6ec8356cb:0",
               "811ecc3a448cc4ec:0",
-              "c35ce6fe97655955:0",
               "ae96d80664350d51:0",
+              "c35ce6fe97655955:0",
               "90b275a87007068d:0",
-              "561fcac838466638:0"
+              "822894431ed52e40:0"
             ],
             "source_titles": {
               "b03eb2b6ec8356cb:0": "Dhussa",
               "811ecc3a448cc4ec:0": "Biratnagar",
-              "c35ce6fe97655955:0": "Bhadrabas",
               "ae96d80664350d51:0": "Pune district",
+              "c35ce6fe97655955:0": "Bhadrabas",
               "90b275a87007068d:0": "2001 Bangladesh census",
-              "561fcac838466638:0": "Chhireshwarnath"
+              "822894431ed52e40:0": "Amuwa Paschim"
             },
             "llm_calls": 2,
             "notes": []
@@ -1333,23 +1361,23 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "2017 remake of The Mummy Ahmanet Imhotep cast"
+              "2017 remake of The Mummy Ahmanet Imhotep actress"
             ],
             "retrieved_chunk_ids": [
               "089530a234fd4523:0",
               "6a739c6d89736270:0",
               "9d796f79ad747a93:0",
               "bed30bb299c01998:1",
-              "ece4e95727f65447:0",
-              "aeec3ed4f31f1aa2:0"
+              "e033c90d85d1344d:0",
+              "96bf61eda6443dac:1"
             ],
             "source_titles": {
               "089530a234fd4523:0": "Imhotep (The Mummy)",
               "6a739c6d89736270:0": "The Mummy (1999 film)",
               "9d796f79ad747a93:0": "Oded Fehr",
               "bed30bb299c01998:1": "Flatliners",
-              "ece4e95727f65447:0": "The Mummy (1932 film)",
-              "aeec3ed4f31f1aa2:0": "Mom (film)"
+              "e033c90d85d1344d:0": "Alicia Morton",
+              "96bf61eda6443dac:1": "Kristina Davis"
             },
             "llm_calls": 2,
             "notes": []
@@ -1381,7 +1409,7 @@
             "answer": "Seth Hoffman",
             "claims": [
               {
-                "text": "\"Crossed\" is the seventh episode of the fifth season... It was written by Seth Hoffman",
+                "text": "\"Crossed\" is an episode of The Walking Dead written by Seth Hoffman.",
                 "citations": [
                   "a2986c4492ba672a:0"
                 ]
@@ -1391,23 +1419,23 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Crossed The Walking Dead fifth-season episode writer"
+              "Crossed The Walking Dead writer fifth season"
             ],
             "retrieved_chunk_ids": [
               "a2986c4492ba672a:0",
-              "c2494dd4485c5758:0",
-              "0754bef929e62b25:0",
               "3c3bd21db12c0c5a:0",
               "1c44e70755386dce:0",
-              "e06d412db6aab437:0"
+              "4f8f344e267fc0f4:0",
+              "0754bef929e62b25:0",
+              "c2494dd4485c5758:0"
             ],
             "source_titles": {
               "a2986c4492ba672a:0": "Crossed (The Walking Dead)",
-              "c2494dd4485c5758:0": "Pretty Much Dead Already",
-              "0754bef929e62b25:0": "The Walking Dead (season 1)",
               "3c3bd21db12c0c5a:0": "The Walking Dead (video game)",
               "1c44e70755386dce:0": "Fear the Walking Dead (season 1)",
-              "e06d412db6aab437:0": "What Lies Ahead"
+              "4f8f344e267fc0f4:0": "The Walking Dead: A New Frontier",
+              "0754bef929e62b25:0": "The Walking Dead (season 1)",
+              "c2494dd4485c5758:0": "Pretty Much Dead Already"
             },
             "llm_calls": 2,
             "notes": []
@@ -1449,22 +1477,22 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Whataburger headquarters based location city state"
+              "Whataburger based headquarters location"
             ],
             "retrieved_chunk_ids": [
               "5e8f66e57d2d4ca2:0",
-              "ca2def1a646c2185:0",
-              "6b2fa1f143728c20:0",
               "064d9a4fa2ef5d8d:1",
-              "29b94747ec71e500:0",
+              "6abc86a9a1badc13:0",
+              "1ece0abfa31655a1:0",
+              "ffd1d9e514fbca52:1",
               "39f68b3e931c0abd:0"
             ],
             "source_titles": {
               "5e8f66e57d2d4ca2:0": "Whataburger",
-              "ca2def1a646c2185:0": "Panera Bread",
-              "6b2fa1f143728c20:0": "Nagpur division",
               "064d9a4fa2ef5d8d:1": "Wells Fargo Building (Augusta)",
-              "29b94747ec71e500:0": "History of Saint Paul, Minnesota",
+              "6abc86a9a1badc13:0": "Bank Street (Hong Kong)",
+              "1ece0abfa31655a1:0": "Randall's Food Markets",
+              "ffd1d9e514fbca52:1": "Lindbergh Center station",
               "39f68b3e931c0abd:0": "Neiman Marcus Building"
             },
             "llm_calls": 2,
@@ -1489,7 +1517,7 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The documents do not contain any information about the 2030 FIFA World Cup or who won it.",
+            "abstain_reason": "The provided documents do not contain information about the winner of the 2030 FIFA World Cup.",
             "search_queries": [
               "2030 FIFA World Cup winner",
               "2030 FIFA World Cup"
@@ -1538,7 +1566,7 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The document collection does not contain any information about the population of the Brennholt archipelago.",
+            "abstain_reason": "No information about a 'Brennholt archipelago' or its population is present in the document collection.",
             "search_queries": [
               "Brennholt archipelago population",
               "Brennholt"
@@ -1593,9 +1621,9 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "Shirley Temple never won the Nobel Prize in Physics; she was an American actress, singer, dancer, businesswoman, and diplomat.",
+            "abstain_reason": "Shirley Temple was an American actress, singer, dancer, businesswoman, and diplomat, not a physicist, and she never won the Nobel Prize in Physics.",
             "search_queries": [
-              "Shirley Temple Nobel Prize Physics",
+              "Shirley Temple Nobel Prize in Physics",
               "Shirley Temple"
             ],
             "retrieved_chunk_ids": [
@@ -1603,7 +1631,7 @@
               "7fae33cba1fa130b:0",
               "f9de968c77555c24:0",
               "7b8957ef16a18434:0",
-              "6d4ad62e149dea1b:0",
+              "7b22cc9f78edffda:0",
               "a98541245eafa642:0",
               "1c9329a8d66048d0:0",
               "ea701adeedd5b71f:0",
@@ -1617,7 +1645,7 @@
               "7fae33cba1fa130b:0": "Brian Josephson",
               "f9de968c77555c24:0": "List of Nobel laureates in Physics",
               "7b8957ef16a18434:0": "Abdus Salam",
-              "6d4ad62e149dea1b:0": "Hans Bethe",
+              "7b22cc9f78edffda:0": "Aage Bohr",
               "a98541245eafa642:0": "Sheldon Lee Glashow",
               "1c9329a8d66048d0:0": "Shirley Temple",
               "ea701adeedd5b71f:0": "Kiss and Tell (1945 film)",
@@ -1638,8 +1666,8 @@
           "judge": null,
           "scores": {
             "abstained": true,
-            "llm_calls": 6,
-            "searches": 5,
+            "llm_calls": 5,
+            "searches": 4,
             "correct": true
           },
           "answer": {
@@ -1648,13 +1676,12 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "No Animorphs book was adapted into a film directed by Adriana Trigiani; the documents show Adriana Trigiani directed the film 'Big Stone Gap', which is based on her own novel, not an Animorphs book.",
+            "abstain_reason": "There is no record in the documents that any Animorphs book was adapted into a film directed by Adriana Trigiani.",
             "search_queries": [
               "Adriana Trigiani Animorphs film",
               "Animorphs film Adriana Trigiani",
               "Animorphs film adaptation director",
-              "Animorphs adaptation film",
-              "Animorphs books list"
+              "Animorphs book adaptation"
             ],
             "retrieved_chunk_ids": [
               "2535c99365fb01b8:0",
@@ -1671,17 +1698,11 @@
               "7b11b14811e595eb:0",
               "9f8f440c38e58763:0",
               "c4f350269ce194d7:1",
-              "9a39dc17a3702322:0",
-              "910f9f6a7e040039:1",
-              "f3c6d16e09bf8d10:0",
-              "59ce7a1641d1f323:0",
-              "63521bf2c6eef91d:0",
-              "293800e666251330:0",
               "1d34a4254e6c0d2b:0",
-              "d74a016d154e1c9f:1",
-              "f33c5eb82253c304:0",
-              "f7ee74b40827245e:1",
-              "686ba7e42b955855:0"
+              "293800e666251330:0",
+              "738ba5af1da50853:0",
+              "f8fc09511225b521:0",
+              "1d92eebdbbe6cc61:0"
             ],
             "source_titles": {
               "2535c99365fb01b8:0": "Big Stone Gap (film)",
@@ -1698,19 +1719,13 @@
               "7b11b14811e595eb:0": "Aladdin (2019 film)",
               "9f8f440c38e58763:0": "Jim Sharman",
               "c4f350269ce194d7:1": "The Fault in Our Stars",
-              "9a39dc17a3702322:0": "Beauty and the Beast (1991 film)",
-              "910f9f6a7e040039:1": "Luke and Lucy: The Texas Rangers",
-              "f3c6d16e09bf8d10:0": "The Taking of Pelham 123 (2009 film)",
-              "59ce7a1641d1f323:0": "A Connecticut Yankee (film)",
-              "63521bf2c6eef91d:0": "Beauty and the Beast (franchise)",
-              "293800e666251330:0": "Animorphs",
               "1d34a4254e6c0d2b:0": "The Hork-Bajir Chronicles",
-              "d74a016d154e1c9f:1": "High School Musical (book series)",
-              "f33c5eb82253c304:0": "James Patterson bibliography",
-              "f7ee74b40827245e:1": "Manga Bible (series)",
-              "686ba7e42b955855:0": "Jean Cocteau bibliography"
+              "293800e666251330:0": "Animorphs",
+              "738ba5af1da50853:0": "Waywords and Meansigns",
+              "f8fc09511225b521:0": "K. A. Applegate",
+              "1d92eebdbbe6cc61:0": "Lord of the Rings (musical)"
             },
-            "llm_calls": 6,
+            "llm_calls": 5,
             "notes": []
           }
         },
@@ -1722,8 +1737,8 @@
           "judge": null,
           "scores": {
             "abstained": true,
-            "llm_calls": 4,
-            "searches": 3,
+            "llm_calls": 3,
+            "searches": 2,
             "correct": true
           },
           "answer": {
@@ -1732,11 +1747,10 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The provided documents do not contain information about a CaseFile project or its API key.",
+            "abstain_reason": "The documents do not contain any information about the CaseFile project's API key.",
             "search_queries": [
               "CaseFile project API key",
-              "CaseFile",
-              "API key"
+              "CaseFile"
             ],
             "retrieved_chunk_ids": [
               "045239573b6cc248:0",
@@ -1750,11 +1764,7 @@
               "70294be60372954a:1",
               "83485cc39a9f3481:0",
               "a1852dbe13ab31b9:1",
-              "0ecfae64952d3e21:0",
-              "625c93a6bbe81aa4:0",
-              "a89b0d3f581ac245:0",
-              "fd0ecad23f2c513e:1",
-              "09d023b126d78c3c:0"
+              "0ecfae64952d3e21:0"
             ],
             "source_titles": {
               "045239573b6cc248:0": "WURFL",
@@ -1768,13 +1778,9 @@
               "70294be60372954a:1": "Commissioner v. Banks",
               "83485cc39a9f3481:0": "Gravel v. United States",
               "a1852dbe13ab31b9:1": "Hoffman v. Jones",
-              "0ecfae64952d3e21:0": "Beck v. Ohio",
-              "625c93a6bbe81aa4:0": "Key Club",
-              "a89b0d3f581ac245:0": "GrocerKey",
-              "fd0ecad23f2c513e:1": "CUPS (CMU)",
-              "09d023b126d78c3c:0": "GridRPC"
+              "0ecfae64952d3e21:0": "Beck v. Ohio"
             },
-            "llm_calls": 4,
+            "llm_calls": 3,
             "notes": []
           }
         },
@@ -1784,8 +1790,8 @@
           "question": "In which year was the liberal weekly newspaper La Voz del Pueblo published in Bogotá?",
           "gold": "1849",
           "judge": {
-            "correct": true,
-            "reason": "The predicted answer matches the gold standard year (1849)."
+            "correct": false,
+            "reason": "The predicted answer includes extra incorrect years (1852) alongside the correct one (1849), making the specific publication year uncertain."
           },
           "scores": {
             "abstained": false,
@@ -1795,7 +1801,7 @@
           },
           "answer": {
             "question": "In which year was the liberal weekly newspaper La Voz del Pueblo published in Bogotá?",
-            "answer": "1849",
+            "answer": "1849 / 1852",
             "claims": [
               {
                 "text": "La Voz del Pueblo was a liberal weekly newspaper published from Bogotá, Colombia in 1849.",
@@ -1804,7 +1810,7 @@
                 ]
               },
               {
-                "text": "La Voz del Pueblo, whose name means People's Voice, was a small liberal paper printed in Bogotá. According to these notes it was launched in 1852",
+                "text": "La Voz del Pueblo was launched in 1852 as a small liberal paper printed in Bogotá.",
                 "citations": [
                   "65ff2a3cbc683836:0"
                 ]
@@ -1812,7 +1818,7 @@
             ],
             "conflicts": [
               {
-                "description": "Document 30d69e0b37ab11df states that the liberal weekly newspaper La Voz del Pueblo in Bogotá was published in 1849, whereas document 65ff2a3cbc683836 states it was launched in 1852.",
+                "description": "Document 30d69e0b37ab11df states that La Voz del Pueblo was published in Bogotá in 1849, whereas document 65ff2a3cbc683836 states that it was launched in 1852.",
                 "citations": [
                   "30d69e0b37ab11df:0",
                   "65ff2a3cbc683836:0"
@@ -1822,23 +1828,23 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "La Voz del Pueblo Bogotá"
+              "La Voz del Pueblo liberal weekly newspaper Bogota year"
             ],
             "retrieved_chunk_ids": [
               "30d69e0b37ab11df:0",
               "65ff2a3cbc683836:0",
               "d673f8ce647d4e4e:0",
-              "3867aa8edc6a36ae:0",
-              "44ccb5c1374ac40d:0",
-              "8c23f18df85dae82:0"
+              "1c8bf35394da5146:0",
+              "235bb45b5a20dcbc:0",
+              "37ab0e6f1977d1e4:1"
             ],
             "source_titles": {
               "30d69e0b37ab11df:0": "La Voz del Pueblo (Bogotá)",
               "65ff2a3cbc683836:0": "La Voz del Pueblo (Colombian press history notes)",
               "d673f8ce647d4e4e:0": "La Voz del Pueblo (Santander)",
-              "3867aa8edc6a36ae:0": "¡El pueblo quiere saber de qué se trata!",
-              "44ccb5c1374ac40d:0": "Church of the Guanche People",
-              "8c23f18df85dae82:0": "Parachico"
+              "1c8bf35394da5146:0": "La Voz de Houston",
+              "235bb45b5a20dcbc:0": "El Gráfico",
+              "37ab0e6f1977d1e4:1": "Francisco Lemus Muñoz"
             },
             "llm_calls": 2,
             "notes": []
@@ -1851,7 +1857,7 @@
           "gold": "1945",
           "judge": {
             "correct": true,
-            "reason": "The predicted answer includes the correct year 1945 along with an alternative date, which is acceptable since the core correct answer (1945) is present."
+            "reason": "The predicted answer matches the gold answer (1945)."
           },
           "scores": {
             "abstained": false,
@@ -1861,24 +1867,18 @@
           },
           "answer": {
             "question": "In which year was the Genesis Suite, the work for narrator, orchestra and chorus, written?",
-            "answer": "1945 / 1947",
+            "answer": "1945",
             "claims": [
               {
                 "text": "Genesis Suite is a 1945 work for narrator, orchestra, and chorus.",
                 "citations": [
                   "bcc0968be162bda4:0"
                 ]
-              },
-              {
-                "text": "The Genesis Suite dates from 1947.",
-                "citations": [
-                  "5adc1b7b2946fec6:0"
-                ]
               }
             ],
             "conflicts": [
               {
-                "description": "The documents disagree on the year the Genesis Suite was written/dated: one states it is a 1945 work, while the other states it dates from 1947.",
+                "description": "One document states that the Genesis Suite is a 1945 work, while a programme note states that it dates from 1947.",
                 "citations": [
                   "bcc0968be162bda4:0",
                   "5adc1b7b2946fec6:0"
@@ -1889,7 +1889,7 @@
             "abstain_reason": "",
             "search_queries": [
               "Genesis Suite narrator orchestra chorus written year",
-              "Genesis Suite 1945 1947 conflict"
+              "Genesis Suite composed 1945 1947"
             ],
             "retrieved_chunk_ids": [
               "5adc1b7b2946fec6:0",
@@ -1898,10 +1898,10 @@
               "793973329185630f:0",
               "27e76021d9d7d10e:0",
               "a312448d53a01622:0",
-              "7bb52e78feb17514:0",
-              "56f7a78412bda5ac:0",
-              "64f34f23d9fc6e62:1",
-              "693fe77c9b44291f:0"
+              "cc4073908e5d6e87:0",
+              "6c935707b805c6e0:0",
+              "58db6bcff298f55a:0",
+              "40da0acbfad21a98:0"
             ],
             "source_titles": {
               "5adc1b7b2946fec6:0": "Genesis Suite (concert programme note)",
@@ -1910,10 +1910,10 @@
               "793973329185630f:0": "Wedding anthem for Princess Anne",
               "27e76021d9d7d10e:0": "Montagues and Capulets",
               "a312448d53a01622:0": "Messiah Part I",
-              "7bb52e78feb17514:0": "Guadalcanal Campaign",
-              "56f7a78412bda5ac:0": "Surrender of Japan",
-              "64f34f23d9fc6e62:1": "Gheorghe Cosma",
-              "693fe77c9b44291f:0": "Battle of Peleliu"
+              "cc4073908e5d6e87:0": "Suite, Op. 14 (Bartók)",
+              "6c935707b805c6e0:0": "Merrill Jenson",
+              "58db6bcff298f55a:0": "Petite Suite (Borodin)",
+              "40da0acbfad21a98:0": "Genesis 1970–1975"
             },
             "llm_calls": 3,
             "notes": []
@@ -1924,41 +1924,43 @@
           "category": "contradictory",
           "question": "In which year was the Cleveland rock and roll band the Starfires founded?",
           "gold": "1958",
-          "judge": {
-            "correct": true,
-            "reason": "The predicted answer matches the gold answer."
-          },
+          "judge": null,
           "scores": {
-            "abstained": false,
-            "llm_calls": 3,
-            "searches": 2,
+            "abstained": true,
+            "llm_calls": 2,
+            "searches": 1,
             "conflict_reported": true
           },
           "answer": {
             "question": "In which year was the Cleveland rock and roll band the Starfires founded?",
-            "answer": "1958",
+            "answer": "",
             "claims": [
               {
                 "text": "The Starfires is an American rock and roll band, founded in Cleveland, Ohio in 1958, by Tom King when he was aged 15.",
                 "citations": [
                   "853f694615e6dfac:0"
                 ]
+              },
+              {
+                "text": "guitarist Tom King put together his first group, the Starfires, in 1961 while still a teenager.",
+                "citations": [
+                  "f55b896f3e38bb69:0"
+                ]
               }
             ],
             "conflicts": [
               {
-                "description": "One document states the band was founded in 1958, while another local music newsletter source states it was founded in 1961.",
+                "description": "Document 853f694615e6dfac states that the Cleveland rock and roll band the Starfires was founded in 1958, whereas document f55b896f3e38bb69 states it was founded in 1961.",
                 "citations": [
                   "853f694615e6dfac:0",
                   "f55b896f3e38bb69:0"
                 ]
               }
             ],
-            "should_abstain": false,
-            "abstain_reason": "",
+            "should_abstain": true,
+            "abstain_reason": "The documents conflict on the founding year of the Starfires, giving both 1958 and 1961.",
             "search_queries": [
-              "Starfires Cleveland rock and roll band founded year",
-              "Starfires Tom King 1958 OR 1961 Cleveland"
+              "Starfires Cleveland rock and roll band founded year"
             ],
             "retrieved_chunk_ids": [
               "853f694615e6dfac:0",
@@ -1966,11 +1968,7 @@
               "4ca9f4d2c4f81252:0",
               "00530b0b26426bcb:0",
               "8a9b7e0dfe9efe33:0",
-              "cdf79cf312ea68be:1",
-              "1edd2b4e80afc8fe:0",
-              "37feaeac82e08883:0",
-              "a281e79e2ca3abfa:1",
-              "43e743d3c75a6152:1"
+              "cdf79cf312ea68be:1"
             ],
             "source_titles": {
               "853f694615e6dfac:0": "The Starfires (Cleveland band)",
@@ -1978,13 +1976,9 @@
               "4ca9f4d2c4f81252:0": "Hollywood Rose",
               "00530b0b26426bcb:0": "Music of Ohio",
               "8a9b7e0dfe9efe33:0": "David Starfire",
-              "cdf79cf312ea68be:1": "Sean Aaberg",
-              "1edd2b4e80afc8fe:0": "Dick King (American football)",
-              "37feaeac82e08883:0": "1958 NBA Finals",
-              "a281e79e2ca3abfa:1": "Ferrari TR",
-              "43e743d3c75a6152:1": "Modern history of American football"
+              "cdf79cf312ea68be:1": "Sean Aaberg"
             },
-            "llm_calls": 3,
+            "llm_calls": 2,
             "notes": []
           }
         },
@@ -1993,38 +1987,41 @@
           "category": "contradictory",
           "question": "In which year was The Horror Zine first published?",
           "gold": "2009",
-          "judge": {
-            "correct": true,
-            "reason": "The predicted answer correctly identifies the year 2009, matching the gold standard."
-          },
+          "judge": null,
           "scores": {
-            "abstained": false,
+            "abstained": true,
             "llm_calls": 2,
             "searches": 1,
             "conflict_reported": true
           },
           "answer": {
             "question": "In which year was The Horror Zine first published?",
-            "answer": "2009",
+            "answer": "",
             "claims": [
               {
                 "text": "The Horror Zine is an American fantasy and horror fiction pulp magazine first published in July 2009.",
                 "citations": [
                   "c69dddbc5664d099:0"
                 ]
+              },
+              {
+                "text": "The Horror Zine was founded in 2006 by editor Jeani Rector.",
+                "citations": [
+                  "58bcdad765d3ae36:0"
+                ]
               }
             ],
             "conflicts": [
               {
-                "description": "Document c69dddbc5664d099 states that The Horror Zine was first published in July 2009, whereas document 58bcdad765d3ae36 states it was founded in 2006.",
+                "description": "One document states that The Horror Zine was first published in July 2009, while another states it was founded in 2006.",
                 "citations": [
                   "c69dddbc5664d099:0",
                   "58bcdad765d3ae36:0"
                 ]
               }
             ],
-            "should_abstain": false,
-            "abstain_reason": "",
+            "should_abstain": true,
+            "abstain_reason": "The documents conflict on whether The Horror Zine was first published in 2009 or founded in 2006.",
             "search_queries": [
               "The Horror Zine first published year"
             ],
@@ -2053,55 +2050,65 @@
           "category": "contradictory",
           "question": "In which year was the rock and blues duo 7Horse formed?",
           "gold": "2011",
-          "judge": null,
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies the year 2011, which matches the gold standard."
+          },
           "scores": {
-            "abstained": true,
+            "abstained": false,
             "llm_calls": 3,
             "searches": 2,
             "conflict_reported": true
           },
           "answer": {
             "question": "In which year was the rock and blues duo 7Horse formed?",
-            "answer": "",
-            "claims": [],
+            "answer": "2011",
+            "claims": [
+              {
+                "text": "7Horse is an American rock and blues duo formed in 2011.",
+                "citations": [
+                  "7f8835ab68e69074:0"
+                ]
+              }
+            ],
             "conflicts": [
               {
-                "description": "Document 7f8835ab68e69074 states that 7Horse was formed in 2011, while document 717891ba7de28040 states that the pair started playing as 7Horse in 2008.",
+                "description": "One source states the duo was formed in 2011, while another soundtrack fan site states the pair started playing as 7Horse in 2008.",
                 "citations": [
                   "7f8835ab68e69074:0",
                   "717891ba7de28040:0"
                 ]
               }
             ],
-            "should_abstain": true,
-            "abstain_reason": "The documents conflict on the formation year of 7Horse, giving both 2011 and 2008.",
+            "should_abstain": false,
+            "abstain_reason": "",
             "search_queries": [
-              "7Horse formed year rock blues duo",
-              "7Horse formed 2011 2008"
+              "7Horse formed year",
+              "7Horse formation year conflict 2008 2011"
             ],
             "retrieved_chunk_ids": [
-              "7f8835ab68e69074:0",
-              "8a9dd7fd127ef394:0",
-              "0b6dc04c514946fb:0",
               "717891ba7de28040:0",
-              "14b08366274f6804:0",
+              "7f8835ab68e69074:0",
+              "5bb4818aa2edca61:1",
+              "8e19ed08b35b9fb7:0",
               "25247baf21cf5eb3:0",
-              "90ed1b40b28f0eb1:1",
-              "ec937f656b01ce2c:0",
-              "5bb4818aa2edca61:0",
-              "f62c4f9d228fe472:0"
+              "4890f4a8dc297d76:0",
+              "6a9f6cfb62840fc5:0",
+              "8199ff13a4221ff1:1",
+              "aa31dd4dcc6c0863:0",
+              "dba368ca37277636:0"
             ],
             "source_titles": {
-              "7f8835ab68e69074:0": "7horse",
-              "8a9dd7fd127ef394:0": "Double Trouble (band)",
-              "0b6dc04c514946fb:0": "Five Horse Johnson",
               "717891ba7de28040:0": "7Horse (soundtrack fan site)",
-              "14b08366274f6804:0": "Royal Blood (band)",
+              "7f8835ab68e69074:0": "7horse",
+              "5bb4818aa2edca61:1": "Dark Horse (Nickelback album)",
+              "8e19ed08b35b9fb7:0": "Story of the Year",
               "25247baf21cf5eb3:0": "From Birth to Burial",
-              "90ed1b40b28f0eb1:1": "Keith Semple",
-              "ec937f656b01ce2c:0": "Little Girls (band)",
-              "5bb4818aa2edca61:0": "Dark Horse (Nickelback album)",
-              "f62c4f9d228fe472:0": "October Rage"
+              "4890f4a8dc297d76:0": "Kilburn and the High Roads",
+              "6a9f6cfb62840fc5:0": "Timeline of the 2011 Libyan Civil War",
+              "8199ff13a4221ff1:1": "Kentucky Horsemen",
+              "aa31dd4dcc6c0863:0": "Greek Fire (band)",
+              "dba368ca37277636:0": "Military Attack"
             },
             "llm_calls": 3,
             "notes": []
