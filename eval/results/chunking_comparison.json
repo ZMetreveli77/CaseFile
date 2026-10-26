@@ -1,0 +1,166 @@
+{
+  "paragraphs": 5070,
+  "search_mode": "hybrid",
+  "configurations": [
+    {
+      "strategy": "fixed",
+      "max_characters": 800,
+      "overlap_characters": 100,
+      "chunks": 5917,
+      "seconds": 226,
+      "all": {
+        "recall@1": 0.588,
+        "recall@3": 0.912,
+        "recall@5": 0.938,
+        "recall@10": 0.938,
+        "all_found@1": 0.25,
+        "all_found@3": 0.85,
+        "all_found@5": 0.875,
+        "all_found@10": 0.875,
+        "reciprocal_rank": 0.947
+      },
+      "dev": {
+        "recall@1": 0.6,
+        "recall@3": 0.925,
+        "recall@5": 0.95,
+        "recall@10": 0.95,
+        "all_found@1": 0.25,
+        "all_found@3": 0.85,
+        "all_found@5": 0.9,
+        "all_found@10": 0.9,
+        "reciprocal_rank": 0.967
+      },
+      "test": {
+        "recall@1": 0.575,
+        "recall@3": 0.9,
+        "recall@5": 0.925,
+        "recall@10": 0.925,
+        "all_found@1": 0.25,
+        "all_found@3": 0.85,
+        "all_found@5": 0.85,
+        "all_found@10": 0.85,
+        "reciprocal_rank": 0.927
+      }
+    },
+    {
+      "strategy": "sentence",
+      "max_characters": 800,
+      "overlap_characters": 100,
+      "chunks": 5982,
+      "seconds": 225,
+      "all": {
+        "recall@1": 0.588,
+        "recall@3": 0.912,
+        "recall@5": 0.938,
+        "recall@10": 0.938,
+        "all_found@1": 0.25,
+        "all_found@3": 0.85,
+        "all_found@5": 0.875,
+        "all_found@10": 0.875,
+        "reciprocal_rank": 0.947
+      },
+      "dev": {
+        "recall@1": 0.6,
+        "recall@3": 0.925,
+        "recall@5": 0.95,
+        "recall@10": 0.95,
+        "all_found@1": 0.25,
+        "all_found@3": 0.85,
+        "all_found@5": 0.9,
+        "all_found@10": 0.9,
+        "reciprocal_rank": 0.967
+      },
+      "test": {
+        "recall@1": 0.575,
+        "recall@3": 0.9,
+        "recall@5": 0.925,
+        "recall@10": 0.925,
+        "all_found@1": 0.25,
+        "all_found@3": 0.85,
+        "all_found@5": 0.85,
+        "all_found@10": 0.85,
+        "reciprocal_rank": 0.927
+      }
+    },
+    {
+      "strategy": "fixed",
+      "max_characters": 300,
+      "overlap_characters": 50,
+      "chunks": 12352,
+      "seconds": 233,
+      "all": {
+        "recall@1": 0.588,
+        "recall@3": 0.912,
+        "recall@5": 0.938,
+        "recall@10": 0.95,
+        "all_found@1": 0.25,
+        "all_found@3": 0.825,
+        "all_found@5": 0.875,
+        "all_found@10": 0.9,
+        "reciprocal_rank": 0.958
+      },
+      "dev": {
+        "recall@1": 0.6,
+        "recall@3": 0.9,
+        "recall@5": 0.95,
+        "recall@10": 0.95,
+        "all_found@1": 0.25,
+        "all_found@3": 0.8,
+        "all_found@5": 0.9,
+        "all_found@10": 0.9,
+        "reciprocal_rank": 0.967
+      },
+      "test": {
+        "recall@1": 0.575,
+        "recall@3": 0.925,
+        "recall@5": 0.925,
+        "recall@10": 0.95,
+        "all_found@1": 0.25,
+        "all_found@3": 0.85,
+        "all_found@5": 0.85,
+        "all_found@10": 0.9,
+        "reciprocal_rank": 0.95
+      }
+    },
+    {
+      "strategy": "sentence",
+      "max_characters": 300,
+      "overlap_characters": 50,
+      "chunks": 15028,
+      "seconds": 303,
+      "all": {
+        "recall@1": 0.588,
+        "recall@3": 0.925,
+        "recall@5": 0.925,
+        "recall@10": 0.938,
+        "all_found@1": 0.25,
+        "all_found@3": 0.85,
+        "all_found@5": 0.85,
+        "all_found@10": 0.875,
+        "reciprocal_rank": 0.963
+      },
+      "dev": {
+        "recall@1": 0.6,
+        "recall@3": 0.925,
+        "recall@5": 0.925,
+        "recall@10": 0.95,
+        "all_found@1": 0.25,
+        "all_found@3": 0.85,
+        "all_found@5": 0.85,
+        "all_found@10": 0.9,
+        "reciprocal_rank": 0.975
+      },
+      "test": {
+        "recall@1": 0.575,
+        "recall@3": 0.925,
+        "recall@5": 0.925,
+        "recall@10": 0.925,
+        "all_found@1": 0.25,
+        "all_found@3": 0.85,
+        "all_found@5": 0.85,
+        "all_found@10": 0.85,
+        "reciprocal_rank": 0.95
+      }
+    }
+  ]
+}

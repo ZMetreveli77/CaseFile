@@ -23,7 +23,7 @@ Interview: I must explain and change the code live without AI, so every part sta
 - [x] 3+ file formats (we plan 5: PDF, TXT/MD, HTML, JSON/JSONL, CSV)
 - [x] Text and metadata extraction, chunking, duplicate handling
 - [x] Add / update / delete documents (pipeline logic; persisted once the Qdrant store exists)
-- [ ] 2+ chunking strategies, compared (both implemented; comparison happens in milestone 7)
+- [x] 2+ chunking strategies, compared (fixed vs sentence at 800 and 300 chars: no meaningful difference on HotpotQA; kept sentence-800)
 - [x] Embeddings + semantic search + hybrid search (semantic + keyword)
 - [x] At least one **own** ranking/search component (BM25 encoder, RRF fusion, reranker)
 - [x] RAG with an LLM, multi-step reasoning, citations (agent solved 3/3 bridge questions, both paragraphs cited)

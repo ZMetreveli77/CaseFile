@@ -572,3 +572,12 @@ I did the review and wrote the verdicts myself, with no other tool.
   - `eval/run_answer_eval.py` and `eval/compare_chunking.py`.
   - 13 tests (180 in total).
   - A 3-question trial; its numbers are too few to use. A second run made 0 real LLM calls.
+- **Chunking comparison** (`eval/compare_chunking.py` → `eval/results/chunking_comparison.json`):
+  - **Setup:** fixed vs sentence chunking at 800 and 300 characters, on the same seeded sample (5,070 paragraphs: all
+    supporting paragraphs plus 5,000 random distractors), 40 questions, hybrid search, in-memory store.
+  - **Result:** at 800 characters the strategies are identical (R@5 0.938, all@10 0.875, MRR 0.947), because 85% of
+    HotpotQA paragraphs are a single chunk either way. At 300 characters they differ by at most one question, in
+    both directions, while needing 2–2.5× as many chunks.
+  - **Decision:** keep sentence chunking at 800 characters.
+  - **Caveat:** absolute scores are higher than on the full corpus because fewer paragraphs compete; only the
+    comparison is meaningful. Long documents such as PDFs would separate the strategies more.
