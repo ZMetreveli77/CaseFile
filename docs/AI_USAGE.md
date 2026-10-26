@@ -474,3 +474,21 @@ I wrote the streaming feature:
 
 Its review explained the TestClient buffering and the disconnect limitation, and it timed the stream against a real
 server. I wrote the code and tests myself.
+
+### Milestone 7: Evaluation (in progress)
+- **AI did (step 1):**
+  - Wrote `casefile/evaluation/eval_set.py` + `eval/build_eval_set.py`, which build a fixed, seeded set of 50
+    questions: 20 bridge, 10 comparison, 10 simple, 10 unanswerable. Contradictory questions come in task H2.
+    - The 5 spot-check questions are excluded.
+    - Each category is split evenly into dev (for tuning) and test (for final numbers).
+    - The 10 simple questions were generated once by Gemini from single paragraphs and saved, so rebuilding gives a
+      byte-identical file. They still need checking by hand (task E1).
+    - The 10 unanswerable questions are hand-written in four kinds: future events, fictional entities, false
+      premises, and out of scope.
+  - Wrote `eval/run_retrieval_eval.py`:
+    - Recall@1/3/5/10, all-supporting-found@K and MRR for each search mode, overall and per category, with
+      per-question details saved for error analysis.
+    - It ranks by document, so a multi-chunk paragraph counts once.
+    - It calls the metric functions I am writing (task H1). The AI smoke-tested its own runner with temporary
+      in-memory stand-in metrics and discarded those numbers.
+  - 5 tests for the selection logic.
