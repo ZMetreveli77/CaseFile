@@ -51,3 +51,10 @@ simple-10: keep
 
 
 None of the unanswerable questions were answerable.
+## Contradictory questions (task H2)
+
+contradictory-06 (The Horror Zine): kept as a "soft" conflict on purpose.
+The original paragraph says the magazine was first published in 2009, and the conflicting document says it was founded
+in 2006. Both can be true at once (founded first, publishing later), so this is not a strict contradiction. It tests
+whether the agent over-reports conflicts. Not flagging it is arguably correct, so the error analysis reports
+conflict detection both with and without this question.
