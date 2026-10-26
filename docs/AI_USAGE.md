@@ -368,3 +368,65 @@ All 123 tests pass. The one remaining pytest warning came from inside Starlette'
 from our code. The AI added a filter for that exact warning only, so other warnings still show.
 
 **AI help:** Claude Code listed which status codes to test and gave the `monkeypatch` hint for 413. I wrote the tests.
+
+### Startup and memory redesign: duplicate index moved into Qdrant (milestone 6, H2)
+**Problem:** the API server took 85–107 s to start, because `IngestionPipeline` rebuilt its MinHash/LSH duplicate
+index from every stored chunk.
+
+**1. I measured it** (`eval/measure_startup.py`; results in `eval/startup_before_*.txt`):
+
+| Step | Seconds | Share |
+|---|---|---|
+| Load the embedding model | 1.3 | 2% |
+| Read all 78,730 chunks from Qdrant | 27.5 | 35% |
+| Build the index | 48.9 | 63% |
+| **Total** | **77.7** | |
+
+- The index alone needed **662 MB** (8.8 KB per chunk).
+- The whole process peaked at **938 MB**, against Render's free limit of 512 MB.
+- My first run measured time with `tracemalloc` on, which made the index build look like 322 s: it slowed that step
+  about 7×. I then measured time and memory in separate runs.
+- **Conclusion:** building the in-memory index later (lazily or in the background) would still not fit in 512 MB.
+
+**2. I redesigned it.** Each chunk now stores its fingerprint in its Qdrant payload: `exact_hash`, the 64-number
+`minhash` signature, and 16 `lsh_band_keys`, all indexed.
+- `compute_fingerprint` and `split_into_bands` in `dedup.py` are shared with the old detector.
+- The new `QdrantDuplicateDetector` (`ingestion/qdrant_dedup.py`) asks Qdrant for an exact match, then for chunks
+  sharing any band key. It compares signatures only for those candidates.
+- Near-identical chunks within the same upload aren't in Qdrant yet, so they are held in memory until the batch is
+  stored (`forget_recently_added`). This keeps memory flat over time.
+- `IngestionPipeline` no longer scans the store when given a detector, and the API uses the Qdrant detector.
+- Offline bulk indexing keeps the fast in-memory detector: a laptop has the RAM, and a Qdrant lookup costs about
+  117 ms per chunk.
+- **Backfill:** `eval/backfill_fingerprints.py` added fingerprints to the 78,730 existing chunks without
+  re-embedding. It writes in batches, can be resumed, and has a dry run.
+
+**3. Result** (`eval/startup_after_time.txt`):
+
+| | Before | After |
+|---|---|---|
+| Startup | 77.7 s | **0.9 s** |
+| Peak memory | 938 MB | **372 MB** (73% of 512 MB) |
+| Chunks held in memory between uploads | all | 0 |
+
+**Verified:**
+- `test_fingerprint_matches_the_in_memory_detector` checks that the fingerprint uses the same seed and banding as the
+  old detector.
+- New tests cover: fingerprints, Qdrant lookups, a duplicate inside one upload, removal, the pending set being
+  emptied after a batch while the copy is still found via Qdrant, and the pipeline not scanning the store.
+- On the real corpus after the backfill (0 chunks without a fingerprint), on 40 random chunks:
+  - exact copies were found 40/40;
+  - near-copy decisions matched the original in-memory detector 40/40.
+- Near copies that weren't detected are below the 0.85 similarity threshold for both detectors (e.g. one added
+  sentence in a 34–57-word chunk gives 0.80–0.84).
+
+**AI help:**
+- Claude Code proposed the Qdrant-backed design after my measurement showed the index couldn't fit in memory, and
+  split it into steps with hints.
+- Its reviews found three issues:
+  - `tracemalloc` distorting the timing;
+  - the in-memory pending set never shrinking;
+  - one test defined twice, so only one copy ran.
+- It checked payload index creation on Qdrant Cloud, the backfill state, and the 40-chunk random sample.
+
+I wrote the code, tests, measurement scripts and backfill script myself.
