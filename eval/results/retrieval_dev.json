@@ -4,15 +4,15 @@
   "modes": {
     "dense": {
       "overall": {
-        "recall@1": 0.5,
-        "recall@3": 0.7,
-        "recall@5": 0.75,
-        "recall@10": 0.75,
-        "all_found@1": 0.2,
-        "all_found@3": 0.6,
-        "all_found@5": 0.65,
-        "all_found@10": 0.65,
-        "reciprocal_rank": 0.81
+        "recall@1": 0.55,
+        "recall@3": 0.75,
+        "recall@5": 0.8,
+        "recall@10": 0.8,
+        "all_found@1": 0.25,
+        "all_found@3": 0.65,
+        "all_found@5": 0.7,
+        "all_found@10": 0.7,
+        "reciprocal_rank": 0.86
       },
       "by_category": {
         "bridge": {
@@ -38,18 +38,18 @@
           "reciprocal_rank": 1.0
         },
         "simple": {
-          "recall@1": 0.8,
-          "recall@3": 0.8,
-          "recall@5": 0.8,
-          "recall@10": 0.8,
-          "all_found@1": 0.8,
-          "all_found@3": 0.8,
-          "all_found@5": 0.8,
-          "all_found@10": 0.8,
-          "reciprocal_rank": 0.8
+          "recall@1": 1.0,
+          "recall@3": 1.0,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "all_found@1": 1.0,
+          "all_found@3": 1.0,
+          "all_found@5": 1.0,
+          "all_found@10": 1.0,
+          "reciprocal_rank": 1.0
         }
       },
-      "seconds": 5.4,
+      "seconds": 3.4,
       "questions": [
         {
           "id": "5ae351405542994393b9e67f",
@@ -565,7 +565,7 @@
         {
           "id": "simple-02",
           "category": "simple",
-          "question": "What was the population of Dhusha at the time of the 1991 Nepal census?",
+          "question": "What was the population of Dhusha, in Dhading District, at the time of the 1991 Nepal census?",
           "supporting_ranks": {
             "Dhussa": 1
           },
@@ -574,12 +574,12 @@
             "Biratnagar",
             "Bhadrabas",
             "Balamta",
-            "Amuwa Paschim",
             "Pune district",
-            "2001 Bangladesh census",
-            "Ghorahi",
-            "Ludhiana",
-            "Dschang"
+            "Dwarka",
+            "Shreekhandpur",
+            "Dhoolpet",
+            "Bajura District",
+            "Ludhiana"
           ],
           "scores": {
             "recall@1": 1.0,
@@ -596,52 +596,52 @@
         {
           "id": "simple-03",
           "category": "simple",
-          "question": "Which Pharaoh did the historical figure Imhotep serve as a counselor to?",
+          "question": "Who plays Ahmanet, the female version of Imhotep, in the 2017 remake of The Mummy?",
           "supporting_ranks": {
-            "Imhotep (The Mummy)": null
+            "Imhotep (The Mummy)": 1
           },
           "retrieved_titles": [
-            "Ahmose I",
-            "Seqenenre Tao",
-            "Ahmose-ankh",
-            "Cleopatra",
-            "Seti I",
-            "Meritaten",
-            "Hatshepsut",
-            "Treasurer (Ancient Egypt)",
-            "Ramesses II",
-            "Netjerkare Siptah"
+            "Imhotep (The Mummy)",
+            "The Mummy (1999 film)",
+            "Mom (film)",
+            "Oded Fehr",
+            "Gal Gadot",
+            "The Mummy (1932 film)",
+            "Zooey Deschanel filmography",
+            "The Predator (film)",
+            "Aladdin (2019 film)",
+            "Olaf's Frozen Adventure"
           ],
           "scores": {
-            "recall@1": 0.0,
-            "recall@3": 0.0,
-            "recall@5": 0.0,
-            "recall@10": 0.0,
-            "all_found@1": 0.0,
-            "all_found@3": 0.0,
-            "all_found@5": 0.0,
-            "all_found@10": 0.0,
-            "reciprocal_rank": 0.0
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
           }
         },
         {
           "id": "simple-08",
           "category": "simple",
-          "question": "Who wrote the television episode \"Crossed\"?",
+          "question": "Who wrote \"Crossed\", the fifth-season episode of The Walking Dead?",
           "supporting_ranks": {
             "Crossed (The Walking Dead)": 1
           },
           "retrieved_titles": [
             "Crossed (The Walking Dead)",
-            "The Front (The Simpsons)",
-            "Conduit (The X-Files)",
-            "The Simpsons Guy",
-            "Leave It to Beaver (Veronica Mars)",
-            "The Sue Sylvester Shuffle",
-            "Two and a Half Men",
-            "Luther (TV series)",
-            "Across the River to Motor City",
-            "Rewrite This Story"
+            "The Walking Dead (season 1)",
+            "Crossed (comics)",
+            "What Lies Ahead",
+            "Swan Song (Supernatural)",
+            "Pretty Much Dead Already",
+            "Fear the Walking Dead (season 1)",
+            "Tea Leaves (Mad Men)",
+            "Daryl Dixon",
+            "Louie (season 5)"
           ],
           "scores": {
             "recall@1": 1.0,
@@ -690,15 +690,15 @@
     },
     "hybrid": {
       "overall": {
-        "recall@1": 0.525,
-        "recall@3": 0.7,
-        "recall@5": 0.75,
-        "recall@10": 0.875,
-        "all_found@1": 0.2,
-        "all_found@3": 0.55,
-        "all_found@5": 0.6,
-        "all_found@10": 0.8,
-        "reciprocal_rank": 0.867
+        "recall@1": 0.575,
+        "recall@3": 0.75,
+        "recall@5": 0.8,
+        "recall@10": 0.925,
+        "all_found@1": 0.25,
+        "all_found@3": 0.6,
+        "all_found@5": 0.65,
+        "all_found@10": 0.85,
+        "reciprocal_rank": 0.917
       },
       "by_category": {
         "bridge": {
@@ -724,18 +724,18 @@
           "reciprocal_rank": 1.0
         },
         "simple": {
-          "recall@1": 0.8,
-          "recall@3": 0.8,
-          "recall@5": 0.8,
-          "recall@10": 0.8,
-          "all_found@1": 0.8,
-          "all_found@3": 0.8,
-          "all_found@5": 0.8,
-          "all_found@10": 0.8,
-          "reciprocal_rank": 0.8
+          "recall@1": 1.0,
+          "recall@3": 1.0,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "all_found@1": 1.0,
+          "all_found@3": 1.0,
+          "all_found@5": 1.0,
+          "all_found@10": 1.0,
+          "reciprocal_rank": 1.0
         }
       },
-      "seconds": 8.3,
+      "seconds": 4.2,
       "questions": [
         {
           "id": "5ae351405542994393b9e67f",
@@ -1251,21 +1251,21 @@
         {
           "id": "simple-02",
           "category": "simple",
-          "question": "What was the population of Dhusha at the time of the 1991 Nepal census?",
+          "question": "What was the population of Dhusha, in Dhading District, at the time of the 1991 Nepal census?",
           "supporting_ranks": {
             "Dhussa": 1
           },
           "retrieved_titles": [
             "Dhussa",
-            "Amuwa Paschim",
             "Biratnagar",
             "Bhadrabas",
-            "Ghansikuwa",
-            "2001 Bangladesh census",
+            "Pune district",
+            "Amuwa Paschim",
             "Ghorahi",
             "Sundarpur, Mahottari",
-            "Bantawa language",
-            "Timnath, Colorado"
+            "Ghansikuwa",
+            "2001 Bangladesh census",
+            "Birgunj"
           ],
           "scores": {
             "recall@1": 1.0,
@@ -1282,52 +1282,52 @@
         {
           "id": "simple-03",
           "category": "simple",
-          "question": "Which Pharaoh did the historical figure Imhotep serve as a counselor to?",
+          "question": "Who plays Ahmanet, the female version of Imhotep, in the 2017 remake of The Mummy?",
           "supporting_ranks": {
-            "Imhotep (The Mummy)": null
+            "Imhotep (The Mummy)": 1
           },
           "retrieved_titles": [
-            "Ahmose-ankh",
-            "Seqenenre Tao",
-            "Ahmose I",
-            "Meritaten",
-            "Ahmose (queen)",
-            "Thutmose III",
-            "Ramesses II",
-            "Cleopatra",
-            "Hatshepsut",
-            "Wadi es-Sebua"
+            "Imhotep (The Mummy)",
+            "The Mummy (1999 film)",
+            "Oded Fehr",
+            "The Mummy (1932 film)",
+            "Flatliners",
+            "Whisky Galore! (2016 film)",
+            "Mom (film)",
+            "Gal Gadot",
+            "Night of the Living Dead 3D",
+            "Evermore (Beauty and the Beast song)"
           ],
           "scores": {
-            "recall@1": 0.0,
-            "recall@3": 0.0,
-            "recall@5": 0.0,
-            "recall@10": 0.0,
-            "all_found@1": 0.0,
-            "all_found@3": 0.0,
-            "all_found@5": 0.0,
-            "all_found@10": 0.0,
-            "reciprocal_rank": 0.0
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
+            "recall@10": 1.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
+            "all_found@10": 1.0,
+            "reciprocal_rank": 1.0
           }
         },
         {
           "id": "simple-08",
           "category": "simple",
-          "question": "Who wrote the television episode \"Crossed\"?",
+          "question": "Who wrote \"Crossed\", the fifth-season episode of The Walking Dead?",
           "supporting_ranks": {
             "Crossed (The Walking Dead)": 1
           },
           "retrieved_titles": [
             "Crossed (The Walking Dead)",
-            "Leave It to Beaver (Veronica Mars)",
             "The Walking Dead (season 1)",
-            "The Quick and the Wed",
-            "Pilot (The Office)",
-            "Moving On (The Office)",
-            "You Made Me (Adventure Time)",
-            "The Front (The Simpsons)",
-            "The Strain (TV series)",
-            "Conduit (The X-Files)"
+            "Crossed (comics)",
+            "Pretty Much Dead Already",
+            "What Lies Ahead",
+            "The Walking Dead (video game)",
+            "The Walking Dead: A New Frontier",
+            "Cherokee Rose (The Walking Dead)",
+            "Save the Last One",
+            "Fear the Walking Dead (season 1)"
           ],
           "scores": {
             "recall@1": 1.0,
@@ -1376,15 +1376,15 @@
     },
     "hybrid_rerank": {
       "overall": {
-        "recall@1": 0.475,
-        "recall@3": 0.7,
-        "recall@5": 0.75,
+        "recall@1": 0.525,
+        "recall@3": 0.75,
+        "recall@5": 0.8,
         "recall@10": 0.875,
-        "all_found@1": 0.2,
-        "all_found@3": 0.5,
-        "all_found@5": 0.55,
+        "all_found@1": 0.25,
+        "all_found@3": 0.55,
+        "all_found@5": 0.6,
         "all_found@10": 0.75,
-        "reciprocal_rank": 0.835
+        "reciprocal_rank": 0.879
       },
       "by_category": {
         "bridge": {
@@ -1410,18 +1410,18 @@
           "reciprocal_rank": 0.9
         },
         "simple": {
-          "recall@1": 0.8,
-          "recall@3": 0.8,
-          "recall@5": 0.8,
+          "recall@1": 1.0,
+          "recall@3": 1.0,
+          "recall@5": 1.0,
           "recall@10": 1.0,
-          "all_found@1": 0.8,
-          "all_found@3": 0.8,
-          "all_found@5": 0.8,
+          "all_found@1": 1.0,
+          "all_found@3": 1.0,
+          "all_found@5": 1.0,
           "all_found@10": 1.0,
-          "reciprocal_rank": 0.822
+          "reciprocal_rank": 1.0
         }
       },
-      "seconds": 6.5,
+      "seconds": 5.0,
       "questions": [
         {
           "id": "5ae351405542994393b9e67f",
@@ -1937,20 +1937,20 @@
         {
           "id": "simple-02",
           "category": "simple",
-          "question": "What was the population of Dhusha at the time of the 1991 Nepal census?",
+          "question": "What was the population of Dhusha, in Dhading District, at the time of the 1991 Nepal census?",
           "supporting_ranks": {
             "Dhussa": 1
           },
           "retrieved_titles": [
             "Dhussa",
-            "Amuwa Paschim",
-            "Bhadrabas",
             "Biratnagar",
-            "2001 Bangladesh census",
-            "Ghansikuwa",
+            "Bhadrabas",
+            "Amuwa Paschim",
+            "Pune district",
             "Sundarpur, Mahottari",
             "Ghorahi",
-            "Bantawa language",
+            "Ghansikuwa",
+            "2001 Bangladesh census",
             "Matsari"
           ],
           "scores": {
@@ -1968,52 +1968,52 @@
         {
           "id": "simple-03",
           "category": "simple",
-          "question": "Which Pharaoh did the historical figure Imhotep serve as a counselor to?",
+          "question": "Who plays Ahmanet, the female version of Imhotep, in the 2017 remake of The Mummy?",
           "supporting_ranks": {
-            "Imhotep (The Mummy)": 9
+            "Imhotep (The Mummy)": 1
           },
           "retrieved_titles": [
-            "Ahmose-ankh",
-            "Seqenenre Tao",
-            "Meritaten",
-            "Ahmose I",
-            "Ramesses II",
-            "Thutmose III",
-            "Cleopatra",
-            "Hatshepsut",
             "Imhotep (The Mummy)",
-            "Wadi es-Sebua"
+            "The Mummy (1999 film)",
+            "Oded Fehr",
+            "The Mummy (1932 film)",
+            "Flatliners",
+            "Whisky Galore! (2016 film)",
+            "Evermore (Beauty and the Beast song)",
+            "Baby Jane Hudson",
+            "Zooey Deschanel filmography",
+            "Night of the Living Dead 3D"
           ],
           "scores": {
-            "recall@1": 0.0,
-            "recall@3": 0.0,
-            "recall@5": 0.0,
+            "recall@1": 1.0,
+            "recall@3": 1.0,
+            "recall@5": 1.0,
             "recall@10": 1.0,
-            "all_found@1": 0.0,
-            "all_found@3": 0.0,
-            "all_found@5": 0.0,
+            "all_found@1": 1.0,
+            "all_found@3": 1.0,
+            "all_found@5": 1.0,
             "all_found@10": 1.0,
-            "reciprocal_rank": 0.1111111111111111
+            "reciprocal_rank": 1.0
           }
         },
         {
           "id": "simple-08",
           "category": "simple",
-          "question": "Who wrote the television episode \"Crossed\"?",
+          "question": "Who wrote \"Crossed\", the fifth-season episode of The Walking Dead?",
           "supporting_ranks": {
             "Crossed (The Walking Dead)": 1
           },
           "retrieved_titles": [
             "Crossed (The Walking Dead)",
-            "Leave It to Beaver (Veronica Mars)",
             "The Walking Dead (season 1)",
-            "The Quick and the Wed",
-            "Pilot (The Office)",
-            "Matt Williams (TV producer)",
-            "The Strain (TV series)",
-            "You Made Me (Adventure Time)",
-            "Moving On (The Office)",
-            "John Frink"
+            "Crossed (comics)",
+            "What Lies Ahead",
+            "The Walking Dead: A New Frontier",
+            "Pretty Much Dead Already",
+            "The Walking Dead (video game)",
+            "Carl Grimes",
+            "Save the Last One",
+            "Cherokee Rose (The Walking Dead)"
           ],
           "scores": {
             "recall@1": 1.0,

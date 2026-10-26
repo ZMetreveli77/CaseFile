@@ -87,7 +87,9 @@ def average(results: list[dict], metric: str) -> float | None:
 def summarize_answers(results: list[dict]) -> dict:
     answerable = [result for result in results if result["category"] in ANSWERABLE_CATEGORIES]
     unanswerable = [result for result in results if result["category"] == "unanswerable"]
-    abstained = [result for result in results if result["scores"]["abstained"]]
+    # Abstentions on contradictory questions are left out: declining because sources disagree is a valid outcome,
+    # scored by conflict_detection, not a needless refusal.
+    abstained = [result for result in answerable + unanswerable if result["scores"]["abstained"]]
     correct_abstentions = [result for result in unanswerable if result["scores"]["abstained"]]
     return {
         "questions": len(results),

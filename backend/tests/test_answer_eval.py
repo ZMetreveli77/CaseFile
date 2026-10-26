@@ -80,3 +80,12 @@ def test_single_search_baseline_answers_from_one_search_with_valid_citations(qdr
 def test_every_answerable_category_gets_answer_scores(category):
     scores = score_answer({**ANSWERABLE, "category": category}, make_answer(), {"correct": True, "reason": ""})
     assert "f1" in scores and "citation_precision" in scores
+
+
+def test_abstaining_on_a_contradictory_question_does_not_lower_abstention_precision():
+    results = [
+        {"category": "unanswerable", "scores": {"abstained": True, "correct": True, "llm_calls": 1, "searches": 1}},
+        {"category": "contradictory", "scores": {"abstained": True, "conflict_reported": True, "llm_calls": 1,
+                                                 "searches": 1}},
+    ]
+    assert summarize_answers(results)["abstention_precision"] == 1.0
