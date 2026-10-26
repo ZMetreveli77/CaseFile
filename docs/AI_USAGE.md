@@ -636,3 +636,30 @@ The first full evaluation run stopped with Gemini 429 errors: the free tier allo
     "Suffolk").
   - The "before" results are kept in `eval/results/answers_dev_hybrid_before_format_fix.json`. The test split was not
     used.
+
+### Reranker tuning (milestone 7, task T)
+I wrote `eval/tune_reranker.py`: a grid search over `COVERAGE_WEIGHT` × `MMR_LAMBDA` × `DENSE_RANK_LIMIT`
+(60 combinations) on the **dev** split only.
+- **Metric:** fixed before running: all_found@10, tie-breaker MRR.
+- **Speed:** candidates are fetched once per question; only reranking is repeated, so the 60 combinations take seconds.
+- **The gotcha:** `mmr_lambda` is passed explicitly, because it is a default argument and setting the module constant
+  would change nothing. The constants are restored in a `finally`.
+- **Results** (`eval/results/rerank_tuning_dev.json`, notes in `eval/results/tuning_notes.md`):
+
+  | Setting | all_found@10 | MRR |
+  |---|---|---|
+  | Best (coverage 0, lambda 1.0) | 0.85 | 0.917 |
+  | Plain hybrid | 0.80 | 0.867 |
+  | Current reranker | 0.75 | 0.879 (rank 56 of 60) |
+
+  - The best setting wins by only one question, which is noise on 20 questions. It is also "hybrid in disguise": its
+    settings switch the reranker's features off.
+  - Isolating the features: MMR diversity costs two questions and coverage costs one.
+- **My decision:** make plain `hybrid` the default; keep the reranker as the `hybrid_rerank` option.
+- **Consequence:** my `is_junk` filter only runs in `hybrid_rerank` mode now. Plain hybrid still finds both
+  conflicting sources for 10/10 contradictory questions (re-checked).
+
+**AI help:** Claude Code suggested the grid, the prefetch trick and the default-argument gotcha. Its review found one
+unsupported sentence in my notes, which it reworded after isolating the two features with my results. At my request
+it applied the decision (`DEFAULT_SEARCH_MODE = "hybrid"` in `search.py`, used by `rag/setup.py`). I wrote the script,
+ran it and made the decision.
