@@ -1,8 +1,10 @@
 import json
 
+import pytest
+
 from casefile.ingestion.dedup import DuplicateDetector
 from casefile.ingestion.loaders import load_documents
-from casefile.ingestion.pipeline import IngestionPipeline
+from casefile.ingestion.pipeline import IngestionPipeline, ProtectedDocumentError
 
 INCIDENT_TEXT = ("Incident report. The checkout API went down on March 3rd. Root cause was change CHG-42, "
                  "which updated the load balancer timeout. Services affected: payments and invoicing.")
@@ -98,3 +100,35 @@ def test_pipeline_does_not_scan_the_store_when_given_a_detector(store, monkeypat
     pipeline = IngestionPipeline(store, duplicate_detector=DuplicateDetector())  # would raise if it scanned
     [result] = pipeline.ingest_file("a.txt", INCIDENT_TEXT.encode())
     assert result.status == "added"
+
+
+def is_from_corpus_file(document):
+    return document.metadata.get("source", "").startswith("corpus.jsonl#")
+
+
+def corpus_record(text):
+    return (json.dumps({"id": "Flavian dynasty", "title": "Flavian dynasty", "text": text}) + "\n").encode()
+
+
+def test_protected_documents_cannot_be_overwritten_by_reusing_their_name(store):
+    """The public demo's corpus: an upload named corpus.jsonl gets the same document ids, so the stored document is
+    checked, not the upload."""
+    indexing_pipeline = IngestionPipeline(store)  # the indexing script protects nothing
+    [original] = indexing_pipeline.ingest_file("corpus.jsonl", corpus_record("The Flavian dynasty ruled Rome."))
+    public_pipeline = IngestionPipeline(store, is_protected=is_from_corpus_file)
+    [attempt] = public_pipeline.ingest_file("corpus.jsonl", corpus_record("The Flavians never existed."))
+    assert attempt.status == "protected" and attempt.doc_id == original.doc_id
+    assert store.get_document(original.doc_id).text == "The Flavian dynasty ruled Rome."
+    [same_again] = public_pipeline.ingest_file("corpus.jsonl", corpus_record("The Flavian dynasty ruled Rome."))
+    assert same_again.status == "unchanged"  # nothing would change, so nothing to refuse
+
+
+def test_protected_documents_cannot_be_deleted_but_others_can(store):
+    [corpus_document] = IngestionPipeline(store).ingest_file("corpus.jsonl",
+                                                             corpus_record("The Flavian dynasty ruled Rome."))
+    public_pipeline = IngestionPipeline(store, is_protected=is_from_corpus_file)
+    [own_upload] = public_pipeline.ingest_file("inc.txt", INCIDENT_TEXT.encode())
+    with pytest.raises(ProtectedDocumentError):
+        public_pipeline.delete(corpus_document.doc_id)
+    assert store.get_document(corpus_document.doc_id) is not None
+    assert public_pipeline.delete(own_upload.doc_id) is True

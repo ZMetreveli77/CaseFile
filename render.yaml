@@ -1,0 +1,21 @@
+# Render Blueprint: the settings of the CaseFile web service, kept in the repo so they're reviewable.
+# Secret VALUES are never here: "sync: false" makes Render ask for them in its dashboard.
+services:
+  - type: web
+    name: casefile
+    runtime: docker
+    plan: free
+    region: frankfurt  # same region as the Qdrant Cloud cluster (eu-central-1)
+    healthCheckPath: /health
+    autoDeploy: true  # every push to main redeploys
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: QDRANT_URL
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: LLM_PROVIDER
+        value: gemini

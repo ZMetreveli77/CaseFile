@@ -36,6 +36,11 @@ class Settings(BaseSettings):
     chunk_overlap: int = 100
     top_k: int = 8
 
+    # Public demo protection (api/): the HotpotQA corpus is read-only, and each visitor may ask a limited number of
+    # questions per hour, so one person can't use up the shared free LLM quota.
+    protect_corpus: bool = True
+    questions_per_hour_per_visitor: int = 10  # 0 = no limit
+
 
 @lru_cache
 def get_settings() -> Settings:

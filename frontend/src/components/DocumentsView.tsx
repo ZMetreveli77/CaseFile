@@ -14,6 +14,7 @@ const STATUS_DESCRIPTIONS: Record<IngestResult['status'], string> = {
   updated: 'Updated (same file name, new content)',
   unchanged: 'Unchanged (identical content already indexed)',
   duplicate: 'Skipped (duplicate of another document)',
+  protected: 'Not changed (part of the read-only demo corpus)',
 }
 
 interface UploadMessage {

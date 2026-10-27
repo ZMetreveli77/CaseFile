@@ -6,7 +6,7 @@ import time
 from fastapi.testclient import TestClient
 
 from casefile.api.app import create_app
-from casefile.api.services import AppServices
+from casefile.api.services import AppServices, is_corpus_document
 from casefile.ingestion.loaders import create_document_id
 from casefile.ingestion.pipeline import IngestionPipeline
 from casefile.rag.agent import InvestigationAgent
@@ -240,3 +240,52 @@ def test_health_reports_the_backup_model_when_there_is_one(qdrant_store):
                            model_name="gemini", backup_model_name="groq")
     with TestClient(create_app(services)) as test_client:
         assert test_client.get("/health").json()["backup_model"] == "groq"
+
+
+# ---- public demo protection ----
+
+def corpus_upload(text):
+    record = json.dumps({"id": "Flavian dynasty", "title": "Flavian dynasty", "text": text})
+    return {"file": ("corpus.jsonl", record.encode(), "application/jsonl")}
+
+
+def make_protected_client(qdrant_store, embedder, llm_replies=(), questions_per_hour_per_visitor=0):
+    """Like the real server: the corpus files are protected (indexed directly, as the indexing script does)."""
+    IngestionPipeline(qdrant_store).ingest_file("corpus.jsonl", corpus_upload("The Flavians ruled Rome.")["file"][1])
+    searcher = HybridSearcher(qdrant_store, embedder)
+    agent = InvestigationAgent(FakeLLM(llm_replies), create_tool_executor=lambda: ToolExecutor(searcher, qdrant_store))
+    pipeline = IngestionPipeline(qdrant_store, is_protected=is_corpus_document)
+    services = AppServices(store=qdrant_store, pipeline=pipeline, agent=agent, model_name="fake")
+    return TestClient(create_app(services, questions_per_hour_per_visitor=questions_per_hour_per_visitor))
+
+
+def test_corpus_documents_cannot_be_deleted_replaced_or_overwritten(qdrant_store, embedder):
+    corpus_id = create_document_id("corpus.jsonl#Flavian dynasty")
+    with make_protected_client(qdrant_store, embedder) as protected_client:
+        response = protected_client.delete(f"/documents/{corpus_id}")
+        assert response.status_code == 403 and "demo corpus" in response.json()["detail"]
+        response = protected_client.put(f"/documents/{corpus_id}",
+                                        files={"file": ("new.txt", b"The Flavians never existed.", "text/plain")})
+        assert response.status_code == 403
+        [result] = protected_client.post("/documents", files=corpus_upload("The Flavians never existed.")).json()["results"]
+        assert result["status"] == "protected"
+        assert protected_client.get(f"/documents/{corpus_id}").json()["text"] == "The Flavians ruled Rome."
+        # Your own uploads can still be deleted.
+        own_id = upload(protected_client, "hotel.txt", HOTEL_TEXT).json()["results"][0]["doc_id"]
+        assert protected_client.delete(f"/documents/{own_id}").status_code == 204
+
+
+def test_questions_over_the_hourly_limit_get_429_with_retry_after(qdrant_store, embedder):
+    answer = LLMReply(text=json.dumps({"answer": "", "claims": [], "conflicts": [], "should_abstain": True,
+                                       "abstain_reason": "no evidence"}))
+    with make_protected_client(qdrant_store, embedder, llm_replies=[answer],
+                               questions_per_hour_per_visitor=1) as limited_client:
+        visitor = {"X-Forwarded-For": "203.0.113.9"}
+        assert limited_client.post("/ask", json={"question": "Who built it?"}, headers=visitor).status_code == 200
+        for path in ("/ask", "/ask/stream"):
+            response = limited_client.post(path, json={"question": "Who built it?"}, headers=visitor)
+            assert response.status_code == 429
+            assert int(response.headers["retry-after"]) > 0 and "per visitor" in response.json()["detail"]
+        # Faking an earlier X-Forwarded-For entry doesn't help: the proxy's (last) entry is used.
+        faked = {"X-Forwarded-For": "1.1.1.1, 203.0.113.9"}
+        assert limited_client.post("/ask", json={"question": "Who built it?"}, headers=faked).status_code == 429

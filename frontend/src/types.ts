@@ -61,7 +61,7 @@ export interface DocumentPage {
 export interface IngestResult {
   doc_id: string
   title: string
-  status: 'added' | 'updated' | 'unchanged' | 'duplicate'
+  status: 'added' | 'updated' | 'unchanged' | 'duplicate' | 'protected'
   chunks: number
   duplicate_of: string | null
 }

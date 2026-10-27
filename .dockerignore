@@ -1,0 +1,15 @@
+# Keep secrets, local data and build leftovers out of the image (and make builds faster).
+.env
+.git
+.venv
+.idea
+.DS_Store
+CLAUDE.md
+data
+eval
+docs
+**/__pycache__
+**/.pytest_cache
+backend/tests
+frontend/node_modules
+frontend/dist

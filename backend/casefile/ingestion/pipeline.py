@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Iterable, Protocol
+from typing import Callable, Iterable, Protocol
 
 from casefile.ingestion.chunking import MAX_CHUNK_CHARACTERS, OVERLAP_CHARACTERS, chunk_document
 from casefile.ingestion.dedup import DuplicateDetector
@@ -9,6 +9,11 @@ from casefile.models import Chunk, Document
 # Documents handled per round trip to the store. Each batch costs 3 calls (lookup ids, lookup hashes, upsert)
 # instead of 3 calls per document, which matters when the store is a cloud service.
 INGEST_BATCH_SIZE = 256
+ProtectionRule = Callable[[Document], bool]  # True = this stored document must not be changed or deleted
+
+
+class ProtectedDocumentError(Exception):
+    """A request tried to change or delete a protected document (e.g. the demo corpus on the public site)."""
 
 
 class DocumentStore(Protocol):
@@ -25,7 +30,7 @@ class DocumentStore(Protocol):
 class IngestResult:
     doc_id: str
     title: str
-    status: str  # added | updated | unchanged | duplicate
+    status: str  # added | updated | unchanged | duplicate | protected
     chunks: int = 0
     duplicate_of: str | None = None
     skipped_chunks: list[dict] = field(default_factory=list)  # [{chunk_id, duplicate_of}]
@@ -34,8 +39,10 @@ class IngestResult:
 class IngestionPipeline:
     def __init__(self, store: DocumentStore, strategy: str = "sentence",
                  max_characters: int = MAX_CHUNK_CHARACTERS, overlap_characters: int = OVERLAP_CHARACTERS,
-                 duplicate_detector: DuplicateDetector | None = None):
+                 duplicate_detector: DuplicateDetector | None = None, is_protected: ProtectionRule | None = None):
         self.store = store
+        # The API passes a rule so the public demo's corpus is read-only; scripts (indexing, evaluation) pass none.
+        self.is_protected = is_protected or (lambda document: False)
         self.strategy = strategy
         self.max_characters = max_characters
         self.overlap_characters = overlap_characters
@@ -75,6 +82,11 @@ class IngestionPipeline:
                 results.append(IngestResult(document.doc_id, document.title, "unchanged"))
                 continue
 
+            # Checked against the STORED document: an upload can't overwrite a protected one by reusing its name.
+            if existing_document is not None and self.is_protected(existing_document):
+                results.append(IngestResult(document.doc_id, document.title, "protected"))
+                continue
+
             stored_owner = stored_by_hash.get(document.content_hash)
             content_owner_id = stored_owner.doc_id if stored_owner else owner_by_hash_in_batch.get(document.content_hash)
             is_duplicate = content_owner_id is not None and content_owner_id != document.doc_id
@@ -112,9 +124,13 @@ class IngestionPipeline:
         return unique_chunks, duplicate_chunks
 
     def delete(self, doc_id: str) -> bool:
-        """Remove a document and its chunks. Returns False if it did not exist."""
-        if doc_id not in self.store.get_documents([doc_id]):
+        """Remove a document and its chunks. Returns False if it did not exist; raises ProtectedDocumentError if it
+        is protected."""
+        stored_document = self.store.get_documents([doc_id]).get(doc_id)
+        if stored_document is None:
             return False
+        if self.is_protected(stored_document):
+            raise ProtectedDocumentError(f"Document '{doc_id}' is protected")
         for removed_chunk_id in self.store.delete(doc_id):
             self.duplicate_detector.remove(removed_chunk_id)
         return True

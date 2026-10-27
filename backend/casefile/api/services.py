@@ -4,10 +4,21 @@ from dataclasses import dataclass
 
 from casefile.config import Settings
 from casefile.ingestion.pipeline import IngestionPipeline
+from casefile.models import Document
 from casefile.ingestion.qdrant_dedup import QdrantDuplicateDetector
 from casefile.rag.agent import InvestigationAgent
 from casefile.rag.setup import build_agent_for_store, build_llm, build_store
 from casefile.retrieval.store import QdrantStore
+
+
+# Documents indexed from these files are the shared demo corpus: on the public site nobody may change or delete them.
+# A document's source is "<file name>#<record id>" for JSONL records (ingestion/loaders.py).
+PROTECTED_SOURCE_FILES = ("corpus.jsonl", "contradictory_documents.jsonl")
+
+
+def is_corpus_document(document: Document) -> bool:
+    source = str(document.metadata.get("source", ""))
+    return source.split("#", 1)[0] in PROTECTED_SOURCE_FILES
 
 
 @dataclass
@@ -25,7 +36,8 @@ def build_services(settings: Settings) -> AppServices:
     # stored chunk to rebuild an in-memory index (task H2: that took ~90 s and ~660 MB).
     duplicate_detector = QdrantDuplicateDetector(store)
     pipeline = IngestionPipeline(store, settings.chunking_strategy, settings.chunk_size, settings.chunk_overlap,
-                                 duplicate_detector=duplicate_detector)
+                                 duplicate_detector=duplicate_detector,
+                                 is_protected=is_corpus_document if settings.protect_corpus else None)
     llm = build_llm(settings)
     agent = build_agent_for_store(settings, store, embedder, llm=llm)
     return AppServices(store=store, pipeline=pipeline, agent=agent, model_name=llm.model_name,

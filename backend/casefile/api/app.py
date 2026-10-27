@@ -2,6 +2,7 @@
 Interactive docs: http://127.0.0.1:8000/docs
 """
 import logging
+import math
 import queue
 import threading
 from pathlib import Path
@@ -15,9 +16,11 @@ from fastapi import FastAPI, File, HTTPException, Query, Request, UploadFile
 from pydantic import BaseModel, Field, field_validator
 
 from casefile.api.services import AppServices, build_services
+from casefile.api.visitor_limit import QuestionLimiter, describe_limit_reached, identify_visitor
 from casefile.api.streaming import format_sse
 from casefile.config import get_settings
 from casefile.ingestion.loaders import SUPPORTED_EXTENSIONS, UnsupportedFormat, load_documents
+from casefile.ingestion.pipeline import ProtectedDocumentError
 from casefile.rag.llm import LLMError
 
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10 MB per file
@@ -27,6 +30,8 @@ MAX_QUESTION_CHARACTERS = 1000
 # Without these, proxies (Render's included) may buffer the stream and deliver every event at the very end.
 STREAM_HEADERS = {"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
 END_OF_STREAM = None  # sentinel the worker thread always puts on the queue last
+PROTECTED_DOCUMENT_MESSAGE = ("This document is part of the shared demo corpus and can't be changed or deleted here. "
+                              "Upload your own file to try updating and deleting.")
 HEARTBEAT_SECONDS = 15  # silence after which a keep-alive comment is sent (slow LLM, retries), so proxies don't hang up
 # The React UI after `npm run build` (repo root/frontend/dist). parents[3]: api -> casefile -> backend -> repo root.
 FRONTEND_BUILD_DIRECTORY = Path(__file__).resolve().parents[3] / "frontend" / "dist"
@@ -60,9 +65,14 @@ def read_upload(file: UploadFile) -> bytes:
 
 
 def create_app(services: AppServices | None = None,
-               frontend_directory: Path = FRONTEND_BUILD_DIRECTORY) -> FastAPI:
+               frontend_directory: Path = FRONTEND_BUILD_DIRECTORY,
+               questions_per_hour_per_visitor: int | None = None) -> FastAPI:
     """Pass `services` in tests; otherwise they are built from settings when the server starts.
-    The UI is served from `frontend_directory` when it has been built; otherwise "/" opens the API docs."""
+    The UI is served from `frontend_directory` when it has been built; otherwise "/" opens the API docs.
+    questions_per_hour_per_visitor: None = the setting's value, 0 = no limit."""
+    if questions_per_hour_per_visitor is None:
+        questions_per_hour_per_visitor = get_settings().questions_per_hour_per_visitor
+    question_limiter = QuestionLimiter(questions_per_hour_per_visitor)
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -76,6 +86,13 @@ def create_app(services: AppServices | None = None,
 
     def get_services(request: Request) -> AppServices:
         return request.app.state.services
+
+    def admit_question(request: Request) -> None:
+        """Raises 429 (with a Retry-After header) when this visitor has used up their questions for the hour."""
+        wait_seconds = question_limiter.admit_question(identify_visitor(request))
+        if wait_seconds is not None:
+            raise HTTPException(429, describe_limit_reached(question_limiter.questions_per_hour, wait_seconds),
+                                headers={"Retry-After": str(math.ceil(wait_seconds))})
 
     @app.exception_handler(LLMError)
     def handle_llm_error(request: Request, error: LLMError) -> JSONResponse:
@@ -150,12 +167,17 @@ def create_app(services: AppServices | None = None,
         document.doc_id = doc_id  # keep the id: the new content replaces the old document
         with write_lock:
             result = services.pipeline.ingest_document(document)
+        if result.status == "protected":
+            raise HTTPException(403, PROTECTED_DOCUMENT_MESSAGE)
         return asdict(result)
 
     @app.delete("/documents/{doc_id}", status_code=204)
     def delete_document(request: Request, doc_id: str) -> None:
-        with write_lock:
-            was_deleted = get_services(request).pipeline.delete(doc_id)
+        try:
+            with write_lock:
+                was_deleted = get_services(request).pipeline.delete(doc_id)
+        except ProtectedDocumentError:
+            raise HTTPException(403, PROTECTED_DOCUMENT_MESSAGE)
         if not was_deleted:
             raise HTTPException(404, f"No document with id '{doc_id}'")
 
@@ -170,11 +192,13 @@ def create_app(services: AppServices | None = None,
     @app.post("/ask")
     def ask(request: Request, body: AskRequest) -> dict:
         """Investigate a question: multi-step search, then a cited answer (or an abstention)."""
+        admit_question(request)
         return asdict(get_services(request).agent.answer(body.question))
 
     @app.post("/ask/stream")
     def ask_stream(request: Request, body: AskRequest) -> StreamingResponse:
         """Same investigation as /ask, streamed as Server-Sent Events: progress events, then "answer" or "error"."""
+        admit_question(request)  # before the stream starts, so a refusal is a normal 429 response
         agent = get_services(request).agent
         events: queue.Queue[dict | None] = queue.Queue()  # thread-safe hand-over from the worker to the response
 

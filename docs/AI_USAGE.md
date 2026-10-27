@@ -747,3 +747,27 @@ ran it and made the decision.
 - **Verified live** with a deliberately wrong Gemini key (only for that command; `.env` unchanged): Groq answered the
   Corliss Archer question correctly with the switch noted, and declined the unanswerable "favourite colour" question.
   Weakness seen: Groq cited only the second-hop paragraph.
+
+### Milestone 9: Deployment (in progress)
+- **My work:**
+  - Created the Render account and the web service, connected GitHub (installed Render's GitHub app for the private
+    repo).
+  - Set up the domain: after `metroz.me` failed verification (it was proxied by Cloudflare), I added
+    `casefile.metroz.me` with a DNS-only CNAME, and Render verified it.
+  - Decisions: Render (free, custom domain), a subdomain, and asking Claude Code to do H1 and H2 itself.
+- **Claude Code, at my request:**
+  - `Dockerfile` (UI build stage + Python stage with the embedding model baked in, non-root user, one worker),
+    `.dockerignore`, `render.yaml`, `requirements.txt` without the unused `groq`/`tenacity`, test tools moved to
+    `requirements-dev.txt`, `docs/DEPLOYMENT.md`.
+  - Scanned all 71 commits for the real key values from `.env`: none found, so the repo can be made public.
+  - **H2, protecting the public demo (proposed as my task; done by Claude Code at my request):**
+    - The corpus is read-only through the API (403). The check is on the *stored* document, because an upload named
+      `corpus.jsonl` would otherwise overwrite real evidence (doc ids are hashes of the source name). Found while
+      planning this.
+    - 10 questions per visitor per hour (429 + `Retry-After`); the visitor is the last `X-Forwarded-For` entry, so
+      a faked header doesn't help. 9 new tests.
+  - **H1, the memory test (proposed as my task; done by Claude Code at my request):**
+    - Questions peak at 439 MB, but a 1 MB upload reached 1,142 MB, which would crash the 512 MB server.
+    - Cause found by measuring batch sizes: `EMBEDDING_BATCH_SIZE = 64` (+871 MB) vs 4 (+70 MB, 16% slower).
+      Fewer ONNX threads were tested and ruled out.
+    - After the fix: question + 1 MB upload peaks at 474 MB. Details in `docs/DEPLOYMENT.md` section 7.

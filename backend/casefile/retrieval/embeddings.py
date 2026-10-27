@@ -1,7 +1,10 @@
 """Text -> dense vector (meaning). The real model runs locally via fastembed; tests use a fake."""
 from typing import Protocol
 
-EMBEDDING_BATCH_SIZE = 64
+# Chunks embedded at once. Memory grows with it (the model's attention tables are batch × length², and ONNX Runtime
+# keeps the memory it reserved): embedding 1 MB of text took +871 MB at 64 but +70 MB at 4, only 16% slower.
+# The server has 512 MB on Render, so 4 (milestone 9, H1; docs/DEPLOYMENT.md).
+EMBEDDING_BATCH_SIZE = 4
 
 
 class TextEmbedder(Protocol):
