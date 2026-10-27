@@ -5,7 +5,7 @@ minute while the server wakes up; the UI shows "waking").
 
 ## 1. Architecture
 ```
-Browser ──HTTPS──► Cloudflare DNS ──► Render web service (Docker, free, 512 MB)
+Browser ──HTTPS──► Cloudflare DNS ──► Render web service (Docker, free, 512 MB, Frankfurt)
   casefile.metroz.me   CNAME, DNS only     │  FastAPI: API + the built React UI at "/"
                                            │  fastembed bge-small (in the image, for query embeddings)
                                            ├──► Qdrant Cloud (free, AWS eu-central-1): chunks + documents
@@ -13,6 +13,8 @@ Browser ──HTTPS──► Cloudflare DNS ──► Render web service (Docker
                                            └──► Groq API (failsafe LLM, when Gemini fails)
 ```
 - **One service.** FastAPI serves both the API and the React UI, so there's one URL, no CORS and one deploy.
+- **Same region as the data.** Render runs in Frankfurt, next to the Qdrant Cloud cluster (AWS eu-central-1), so
+  every search and duplicate lookup stays inside the region.
 - **The server stores nothing on its own disk.** Every document, chunk, vector and duplicate fingerprint lives in
   Qdrant Cloud. A restart, redeploy or sleep on Render loses nothing (section 4).
 

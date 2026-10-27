@@ -249,6 +249,17 @@ which id to cite, and validate citations rather than trusting them.
     retrying for minutes.
   - Model choice: `gemini-3.5-flash-lite`, because larger models were overloaded (166–245 s per call).
 
+### 6.10 Open questions on the live site
+- **What:** "What has Lionel Messi won?" is declined, although the corpus has partial evidence (2009 FIFA World Player
+  of the Year, the 2008–09 treble). The agent found it and listed it in its reason for declining.
+- **Why:** rule 4 (abstain when the documents lack the facts you need) and the one-value answer format were designed
+  for HotpotQA's short, single-answer questions, so an open question becomes all-or-nothing.
+- **Decision:** left as is. Changing it risks the abstention behaviour the evaluation measures (unanswerable questions
+  declined 10/10).
+- **Not a failure:** "Did Quentin Tarantino win an Oscar?" is correctly declined: no paragraph in the corpus says so;
+  the closest is Christoph Waltz winning for a Tarantino film. The Documents page search shows which documents mention
+  a topic before asking.
+
 ## 7. Reproducing
 ```
 .venv/bin/python eval/build_eval_set.py                 # rebuilds eval/eval_set.jsonl (byte-identical)

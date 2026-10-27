@@ -797,7 +797,8 @@ ran it and made the decision.
 - **Live checks (Claude Code):** 4 eval questions answered correctly on Render. My reports of failures: "did Tarantino
   win an Oscar" is correctly declined (no paragraph says so); "what has Messi won" was declined although the agent
   found partial evidence (2009 FIFA World Player, 2008–09 treble), because rule 4 and the short-answer format
-  treat open questions as all-or-nothing. A fix is proposed, pending my decision.
+  treat open questions as all-or-nothing. **My decision:** keep the rules as they are (recorded as a known
+  limitation in `docs/EVALUATION.md` 6.10). Render region: Frankfurt, next to Qdrant (I checked).
 
 ### Upload speed (milestone 9)
 - **My report:** uploading a file on the live site takes a long time.
