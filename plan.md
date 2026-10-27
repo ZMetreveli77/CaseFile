@@ -30,7 +30,7 @@ Interview: I must explain and change the code live without AI, so every part sta
 - [ ] Contradiction detection and abstention when evidence is insufficient (abstention verified 3/3; conflict reporting implemented but not yet seen on a real contradiction: milestone 7)
 - [x] LLM error handling, and at least one tool-calling mechanism (retry/backoff, timeouts, 2 tools)
 - [x] Evaluation: 40+ questions (60), Recall@K, MRR, answer correctness, citation accuracy, 2+ configurations, error analysis (docs/EVALUATION.md; post-fix test run pending the daily quota)
-- [ ] Python backend + working UI (upload, manage, ask, view sources) (backend API done in milestone 6, incl. streaming; UI in milestone 8)
+- [x] Python backend + working UI (upload, manage, ask, view sources) (API in milestone 6; React UI in milestone 8, served by FastAPI at `/`)
 - [x] 50,000+ records processed (66,555 HotpotQA paragraphs → 78,730 chunks in Qdrant Cloud)
 - [ ] Public deployment, persistence across restarts, secrets protected, deployment description
 - [ ] Tests, modular code, documentation

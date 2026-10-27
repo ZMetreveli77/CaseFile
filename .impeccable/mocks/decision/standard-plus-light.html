@@ -1,0 +1,61 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>CaseFile: Standard+ light</title>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffffff;--side:#f6f7f9;--ink:#141a21;--muted:#5b6572;--line:#e3e6ea;--cited:#2457c5;--cited-bg:#e8effc;--conflict:#a55a00;--conflict-bg:#fdf3e5;--declined:#6b7280;--ok:#1f8a4c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:var(--bg);color:var(--ink);font:15px/1.55 "Onest",sans-serif;display:grid;grid-template-columns:272px 1fr}
+aside{background:var(--side);border-right:1px solid var(--line);padding:20px 16px;display:flex;flex-direction:column;gap:6px}
+.brand{font-weight:700;font-size:18px;padding:0 8px 14px}
+.nav a{display:block;padding:8px 10px;border-radius:6px;color:var(--muted);text-decoration:none;font-weight:500}
+.nav a.on{background:#fff;color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+aside h3{font-size:13px;color:var(--muted);font-weight:600;padding:16px 10px 6px}
+.try{padding:8px 10px;border-radius:6px;font-size:14px;color:var(--ink)}
+.try small{display:block;color:var(--muted);font-size:12.5px}
+.status{margin-top:auto;padding:10px;font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+main{display:flex;flex-direction:column;align-items:center;padding:40px 0 0}
+.col{width:760px}
+.user{margin-left:auto;width:fit-content;max-width:560px;background:var(--side);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:22px}
+.log{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:22px}
+.log summary{font-weight:600;font-size:14px;display:flex;justify-content:space-between;list-style:none}
+.log summary span{color:var(--muted);font-weight:400}
+.log ol{list-style:none;margin-top:10px;display:grid;gap:6px}
+.log li{display:grid;grid-template-columns:18px 1fr auto;gap:8px;font-size:14px;align-items:baseline}
+.log li i{width:8px;height:8px;border-radius:50%;background:var(--cited);display:inline-block}
+.log li em{font-style:normal;color:var(--muted);font-size:13px}
+.ans{font-size:17px;line-height:1.75}
+sup{font-size:12px;font-weight:600;color:var(--cited);background:var(--cited-bg);border-radius:4px;padding:0 5px;margin-left:2px}
+.conflict{margin-top:18px;background:var(--conflict-bg);border-radius:10px;padding:14px 16px}
+.conflict b{color:var(--conflict);font-size:14px}
+.conflict div{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+.conflict strong{font-size:22px;display:block}
+.conflict span{font-size:13px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px}
+.card b{font-weight:600;display:block}
+.card span{color:var(--muted);font-size:13px}
+.box{position:absolute;bottom:28px;left:calc(272px + (1440px - 272px - 760px)/2);width:760px;display:flex;gap:8px;border:1px solid #c9ced5;border-radius:14px;padding:10px 10px 10px 16px;background:#fff}
+.box input{flex:1;border:0;font:15px "Onest",sans-serif;outline:0}
+.box button{border:0;background:var(--ink);color:#fff;border-radius:9px;padding:8px 16px;font:600 14px "Onest",sans-serif}
+</style></head><body>
+<aside><div class="brand">CaseFile</div>
+<div class="nav"><a class="on">Ask</a><a>Documents</a></div>
+<h3>Try a question</h3>
+<div class="try">Jim Halsey guided the career of which variety show host?<small>Multi-hop</small></div>
+<div class="try">Who won the 2030 FIFA World Cup?<small>No evidence</small></div>
+<div class="try">When was La Voz del Pueblo published?<small>Sources conflict</small></div>
+<div class="status"><i></i>Ready · 66,555 documents</div></aside>
+<main><div class="col">
+<div class="user">In which year was the liberal weekly newspaper La Voz del Pueblo published in Bogotá?</div>
+<details class="log" open><summary>Investigation <span>4 steps · 7.2 s</span></summary>
+<ol><li><i></i>Searched “La Voz del Pueblo Bogotá newspaper”<em>4 results</em></li>
+<li><i></i>Read “Colombian press history notes”<em>1 document</em></li>
+<li><i></i>Searched “liberal weekly Bogotá 1849 1852”<em>3 results</em></li>
+<li><i style="background:var(--conflict)"></i>Checked citations<em>1 conflict found</em></li></ol></details>
+<p class="ans">La Voz del Pueblo was a liberal weekly newspaper published in Bogotá<sup>1</sup>. The sources disagree on the year it first appeared<sup>1</sup><sup>2</sup>.</p>
+<div class="conflict"><b>Sources conflict on the publication year</b><div><p><strong>1849</strong><span>[1] La Voz del Pueblo (Bogotá)</span></p><p><strong>1852</strong><span>[2] Colombian press history notes</span></p></div></div>
+<div class="cards"><div class="card"><b>1 · La Voz del Pueblo (Bogotá)</b><span>“…published in Bogotá in 1849…”</span></div><div class="card"><b>2 · Colombian press history notes</b><span>“…first appeared in 1852…”</span></div></div>
+</div></main>
+<div class="box"><input placeholder="Ask a question about the documents…"><button>Investigate</button></div>
+</body></html>

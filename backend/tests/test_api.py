@@ -219,3 +219,17 @@ def test_ask_stream_sends_keep_alive_comments_while_the_llm_is_slow(qdrant_store
         _, body = stream_ask(client, "Anything?")
     assert ": keep-alive" in body
     assert [name for name, _ in read_sse_events(body)] == ["started", "answer"]  # comments are not events
+
+def test_serves_built_frontend_and_keeps_api_routes(qdrant_store, tmp_path):
+    (tmp_path / "index.html").write_text("<html>CaseFile UI</html>")
+    services = AppServices(store=qdrant_store, pipeline=IngestionPipeline(qdrant_store), agent=None, model_name="fake")
+    with TestClient(create_app(services, frontend_directory=tmp_path)) as test_client:
+        assert "CaseFile UI" in test_client.get("/").text
+        assert test_client.get("/health").json()["status"] == "ok"  # API routes win over the static mount
+
+
+def test_redirects_to_docs_without_a_frontend_build(qdrant_store, tmp_path):
+    services = AppServices(store=qdrant_store, pipeline=IngestionPipeline(qdrant_store), agent=None, model_name="fake")
+    with TestClient(create_app(services, frontend_directory=tmp_path)) as test_client:
+        response = test_client.get("/", follow_redirects=False)
+        assert response.status_code == 307 and response.headers["location"] == "/docs"

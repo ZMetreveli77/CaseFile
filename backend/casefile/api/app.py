@@ -4,7 +4,9 @@ Interactive docs: http://127.0.0.1:8000/docs
 import logging
 import queue
 import threading
+from pathlib import Path
 from fastapi.responses import JSONResponse, RedirectResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from dataclasses import asdict
 from casefile.api.streaming import KEEP_ALIVE_COMMENT, format_sse
@@ -26,6 +28,8 @@ MAX_QUESTION_CHARACTERS = 1000
 STREAM_HEADERS = {"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
 END_OF_STREAM = None  # sentinel the worker thread always puts on the queue last
 HEARTBEAT_SECONDS = 15  # silence after which a keep-alive comment is sent (slow LLM, retries), so proxies don't hang up
+# The React UI after `npm run build` (repo root/frontend/dist). parents[3]: api -> casefile -> backend -> repo root.
+FRONTEND_BUILD_DIRECTORY = Path(__file__).resolve().parents[3] / "frontend" / "dist"
 
 logger = logging.getLogger(__name__)
 
@@ -55,8 +59,10 @@ def read_upload(file: UploadFile) -> bytes:
     return file_bytes
 
 
-def create_app(services: AppServices | None = None) -> FastAPI:
-    """Pass `services` in tests; otherwise they are built from settings when the server starts."""
+def create_app(services: AppServices | None = None,
+               frontend_directory: Path = FRONTEND_BUILD_DIRECTORY) -> FastAPI:
+    """Pass `services` in tests; otherwise they are built from settings when the server starts.
+    The UI is served from `frontend_directory` when it has been built; otherwise "/" opens the API docs."""
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -79,9 +85,11 @@ def create_app(services: AppServices | None = None) -> FastAPI:
     def handle_unsupported_format(request: Request, error: UnsupportedFormat) -> JSONResponse:
         return JSONResponse(status_code=415, content={"detail": str(error)})
 
-    @app.get("/", include_in_schema=False)
-    def open_docs() -> RedirectResponse:
-        return RedirectResponse("/docs")  # the React UI replaces this in milestone 8
+    has_built_frontend = (frontend_directory / "index.html").is_file()
+    if not has_built_frontend:
+        @app.get("/", include_in_schema=False)
+        def open_docs() -> RedirectResponse:
+            return RedirectResponse("/docs")  # no UI build yet (backend-only development)
 
     @app.get("/health")
     def health(request: Request) -> JSONResponse:
@@ -198,6 +206,10 @@ def create_app(services: AppServices | None = None) -> FastAPI:
     @app.get("/formats")
     def supported_formats() -> dict:
         return {"extensions": SUPPORTED_EXTENSIONS, "max_upload_bytes": MAX_UPLOAD_BYTES}
+
+    if has_built_frontend:
+        # Mounted last, so every API route above is matched first. html=True serves index.html for "/".
+        app.mount("/", StaticFiles(directory=frontend_directory, html=True), name="frontend")
 
     return app
 

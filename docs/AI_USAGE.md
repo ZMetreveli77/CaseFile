@@ -691,3 +691,30 @@ ran it and made the decision.
   - The judge is slightly lenient.
 - **Error analysis (A): written by Claude Code at my request** (`docs/EVALUATION.md`, section 6), from the results of
   my and the AI's runs.
+
+### Milestone 8: React UI
+- **Design process (my decisions):**
+  - I answered the product questions: ask-first (the corpus is already loaded), sample questions from the eval set (one
+    per outcome), and the investigation log shows titles only, so no backend change.
+  - Claude Code proposed three rounds of themed visual directions (e.g. a "declassified release", a lab notebook). I
+    rejected them all: wrong colours, too busy.
+  - I chose the familiar research-assistant layout ("Standard+") with the reasoning log kept visible, in both light and
+    dark. Recorded in `PRODUCT.md`.
+- **AI wrote, at my request:** all of `frontend/`.
+  - Vite + React + TypeScript, no other runtime libraries.
+  - `investigationStream.ts` reads the POST SSE stream by hand (`EventSource` only does GET).
+  - `investigationState.ts` turns stream events into UI state as a pure function.
+  - Components: Sidebar, StatusIndicator, AskView, InvestigationLog, AnswerView, SourceCard, SourceDrawer, DocumentsView.
+  - Light/dark colour tokens, a cold-start "waking" status, and a friendly Gemini-quota message.
+  - Backend: `create_app` serves `frontend/dist` at `/` (StaticFiles mounted after all routes). 2 new backend tests,
+    8 Vitest tests.
+- **Verification:**
+  - Real backend and real Qdrant data (66,565 documents) in headless Chrome, at desktop and phone width, light and dark.
+  - The Gemini daily quota was used up, so the answer, conflict and declined screens were checked by replaying real
+    recorded answers from `eval/results` through the real stream format. The live quota error was checked for real.
+  - An independent AI review found 8 issues, among them: a step count that disagreed with the rows, sources repeated
+    twice, a table that shifted on delete-confirm, and a `docId` abbreviation against my naming rules. Its second pass
+    scored all 8 resolved.
+  - That pass also found one regression the fixes caused: a squeezed mobile Documents table. Claude Code fixed it and
+    checked it in a screenshot; the reviewer did not re-score it.
+- **Still to do:** ask a live question once the quota resets, and read every frontend file myself before the interview.

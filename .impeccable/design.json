@@ -1,0 +1,838 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T00:54:04+00:00",
+  "title": "Design System: CaseFile",
+  "extensions": {
+    "colorMeta": {
+      "background": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "sidebar": {
+        "role": "neutral",
+        "displayName": "Sidebar Mist",
+        "canonical": "#f6f7f9",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#242526",
+          "#414243",
+          "#606163",
+          "#818284",
+          "#a4a5a7",
+          "#c8c9cb",
+          "#edeef0"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "raised": {
+        "role": "neutral",
+        "displayName": "Raised",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#141a21",
+        "tonalRamp": [
+          "#070c12",
+          "#1f262d",
+          "#3c434b",
+          "#5b626b",
+          "#7b838c",
+          "#9ea6af",
+          "#c2cad4",
+          "#e7effa"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Slate",
+        "canonical": "#5b6572",
+        "tonalRamp": [
+          "#050b15",
+          "#1d2631",
+          "#39434f",
+          "#58626f",
+          "#798391",
+          "#9ba6b4",
+          "#bfcad9",
+          "#e4f0ff"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#e3e6ea",
+        "tonalRamp": [
+          "#090b0e",
+          "#232528",
+          "#404245",
+          "#5f6165",
+          "#808286",
+          "#a2a5a9",
+          "#c6c9cd",
+          "#eceff3"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Hairline Strong",
+        "canonical": "#c9ced5",
+        "tonalRamp": [
+          "#080b10",
+          "#22252b",
+          "#3e4248",
+          "#5d6268",
+          "#7e8389",
+          "#a1a5ac",
+          "#c5cad0",
+          "#eaeff6"
+        ]
+      },
+      "cited": {
+        "role": "primary",
+        "displayName": "Evidence Blue",
+        "canonical": "#2457c5",
+        "tonalRamp": [
+          "#000037",
+          "#00166a",
+          "#03339f",
+          "#2558c6",
+          "#457ced",
+          "#78a4f7",
+          "#afcafd",
+          "#e7effe"
+        ]
+      },
+      "cited-soft": {
+        "role": "primary",
+        "displayName": "Cited Wash",
+        "canonical": "#e8effc",
+        "tonalRamp": [
+          "#070b13",
+          "#20252f",
+          "#3d424c",
+          "#5c616c",
+          "#7c838e",
+          "#9fa5b1",
+          "#c3c9d6",
+          "#e8effc"
+        ]
+      },
+      "conflict": {
+        "role": "secondary",
+        "displayName": "Conflict Amber",
+        "canonical": "#9a5300",
+        "tonalRamp": [
+          "#1a0400",
+          "#3b1b00",
+          "#643401",
+          "#8e4f0f",
+          "#b76e2b",
+          "#dd9151",
+          "#ffb87f",
+          "#feeadc"
+        ]
+      },
+      "conflict-soft": {
+        "role": "secondary",
+        "displayName": "Conflict Wash",
+        "canonical": "#fdf3e5",
+        "tonalRamp": [
+          "#100a03",
+          "#2b2419",
+          "#494135",
+          "#686054",
+          "#8a8174",
+          "#ada497",
+          "#d1c8ba",
+          "#f7eddf"
+        ]
+      },
+      "danger": {
+        "role": "tertiary",
+        "displayName": "Failure Red",
+        "canonical": "#b42318",
+        "tonalRamp": [
+          "#210000",
+          "#4d0100",
+          "#7e0b05",
+          "#b12015",
+          "#da4a3b",
+          "#fb7866",
+          "#fdb4a8",
+          "#ffe9e5"
+        ]
+      },
+      "danger-soft": {
+        "role": "tertiary",
+        "displayName": "Failure Wash",
+        "canonical": "#fdecea",
+        "tonalRamp": [
+          "#120807",
+          "#2e2220",
+          "#4c3e3d",
+          "#6c5d5c",
+          "#8d7e7d",
+          "#b1a19f",
+          "#d5c5c3",
+          "#fbeae8"
+        ]
+      },
+      "ready": {
+        "role": "tertiary",
+        "displayName": "Ready Green",
+        "canonical": "#1f8a4c",
+        "tonalRamp": [
+          "#001003",
+          "#002e13",
+          "#025027",
+          "#14743e",
+          "#33995a",
+          "#5bbd7b",
+          "#80e29f",
+          "#c7ffd5"
+        ]
+      },
+      "button": {
+        "role": "neutral",
+        "displayName": "Button Fill",
+        "canonical": "#141a21",
+        "tonalRamp": [
+          "#070c12",
+          "#1f262d",
+          "#3c434b",
+          "#5b626b",
+          "#7b838c",
+          "#9ea6af",
+          "#c2cad4",
+          "#e7effa"
+        ]
+      },
+      "button-text": {
+        "role": "neutral",
+        "displayName": "Button Label",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus Ring",
+        "canonical": "#2457c5",
+        "tonalRamp": [
+          "#000037",
+          "#00166a",
+          "#03339f",
+          "#2558c6",
+          "#457ced",
+          "#78a4f7",
+          "#afcafd",
+          "#e7effe"
+        ]
+      },
+      "selection": {
+        "role": "primary",
+        "displayName": "Selection",
+        "canonical": "#cfdcf7",
+        "tonalRamp": [
+          "#040a1c",
+          "#1c2539",
+          "#384258",
+          "#566178",
+          "#77829b",
+          "#99a5bf",
+          "#bdc9e4",
+          "#e7efff"
+        ]
+      },
+      "background-dark": {
+        "role": "neutral",
+        "displayName": "Night Ink",
+        "canonical": "#111418",
+        "tonalRamp": [
+          "#090b0f",
+          "#22252a",
+          "#3f4247",
+          "#5e6267",
+          "#7f8388",
+          "#a1a5ab",
+          "#c5c9cf",
+          "#eaeff5"
+        ]
+      },
+      "sidebar-dark": {
+        "role": "neutral",
+        "displayName": "Sidebar Night",
+        "canonical": "#171b21",
+        "tonalRamp": [
+          "#080b11",
+          "#21252c",
+          "#3e4249",
+          "#5d6269",
+          "#7e838a",
+          "#a0a5ae",
+          "#c4cad2",
+          "#e9eff8"
+        ]
+      },
+      "surface-dark": {
+        "role": "neutral",
+        "displayName": "Surface (dark)",
+        "canonical": "#171b21",
+        "tonalRamp": [
+          "#080b11",
+          "#21252c",
+          "#3e4249",
+          "#5d6269",
+          "#7e838a",
+          "#a0a5ae",
+          "#c4cad2",
+          "#e9eff8"
+        ]
+      },
+      "raised-dark": {
+        "role": "neutral",
+        "displayName": "Raised (dark)",
+        "canonical": "#1d2229",
+        "tonalRamp": [
+          "#070b12",
+          "#20252d",
+          "#3d424a",
+          "#5c626a",
+          "#7d838c",
+          "#9fa6af",
+          "#c3cad3",
+          "#e8eff9"
+        ]
+      },
+      "text-dark": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "#e8ebef",
+        "tonalRamp": [
+          "#090b0e",
+          "#232528",
+          "#404245",
+          "#5f6165",
+          "#808286",
+          "#a2a5a9",
+          "#c6c9cd",
+          "#eceff3"
+        ]
+      },
+      "muted-dark": {
+        "role": "neutral",
+        "displayName": "Slate (dark)",
+        "canonical": "#a1aab5",
+        "tonalRamp": [
+          "#060c13",
+          "#1f262e",
+          "#3b434c",
+          "#5a626c",
+          "#7b838e",
+          "#9da6b1",
+          "#c1cad6",
+          "#e6f0fb"
+        ]
+      },
+      "line-dark": {
+        "role": "neutral",
+        "displayName": "Hairline (dark)",
+        "canonical": "#2a3039",
+        "tonalRamp": [
+          "#070b13",
+          "#20252e",
+          "#3c424c",
+          "#5b626c",
+          "#7c838e",
+          "#9ea6b1",
+          "#c2cad5",
+          "#e7effb"
+        ]
+      },
+      "line-strong-dark": {
+        "role": "neutral",
+        "displayName": "Hairline Strong (dark)",
+        "canonical": "#3a414c",
+        "tonalRamp": [
+          "#060b14",
+          "#1f252f",
+          "#3b424d",
+          "#5a626e",
+          "#7b838f",
+          "#9da6b3",
+          "#c1cad7",
+          "#e6effd"
+        ]
+      },
+      "cited-dark": {
+        "role": "primary",
+        "displayName": "Evidence Blue (dark)",
+        "canonical": "#8fb3ff",
+        "tonalRamp": [
+          "#000036",
+          "#071d5c",
+          "#223d7f",
+          "#3f5ea3",
+          "#5f80c8",
+          "#80a3ee",
+          "#b0c9fc",
+          "#e7effe"
+        ]
+      },
+      "cited-soft-dark": {
+        "role": "primary",
+        "displayName": "Cited Wash (dark)",
+        "canonical": "#1d2a45",
+        "tonalRamp": [
+          "#020921",
+          "#18243f",
+          "#33425e",
+          "#526180",
+          "#7283a3",
+          "#94a5c7",
+          "#b8caed",
+          "#e7effe"
+        ]
+      },
+      "conflict-dark": {
+        "role": "secondary",
+        "displayName": "Conflict Amber (dark)",
+        "canonical": "#f0b35c",
+        "tonalRamp": [
+          "#160700",
+          "#362000",
+          "#593b0a",
+          "#835707",
+          "#ae750c",
+          "#d4983f",
+          "#fabc66",
+          "#ffebd2"
+        ]
+      },
+      "conflict-soft-dark": {
+        "role": "secondary",
+        "displayName": "Conflict Wash (dark)",
+        "canonical": "#2c2416",
+        "tonalRamp": [
+          "#110a01",
+          "#2c2416",
+          "#494132",
+          "#696050",
+          "#8b8170",
+          "#aea493",
+          "#d2c8b6",
+          "#f8eddb"
+        ]
+      },
+      "danger-dark": {
+        "role": "tertiary",
+        "displayName": "Failure Red (dark)",
+        "canonical": "#ff8a80",
+        "tonalRamp": [
+          "#210000",
+          "#4c0205",
+          "#7d0e13",
+          "#a33733",
+          "#ca5b53",
+          "#f27e75",
+          "#fcb4ac",
+          "#fee9e6"
+        ]
+      },
+      "danger-soft-dark": {
+        "role": "tertiary",
+        "displayName": "Failure Wash (dark)",
+        "canonical": "#3a1d1b",
+        "tonalRamp": [
+          "#1b0303",
+          "#381c1a",
+          "#583836",
+          "#795754",
+          "#9c7875",
+          "#c09a97",
+          "#e6beba",
+          "#ffe9e6"
+        ]
+      },
+      "ready-dark": {
+        "role": "tertiary",
+        "displayName": "Ready Green (dark)",
+        "canonical": "#4cc38a",
+        "tonalRamp": [
+          "#001005",
+          "#022d1a",
+          "#0c4f32",
+          "#08744a",
+          "#0e9a64",
+          "#47bf86",
+          "#70e4a9",
+          "#c5fedd"
+        ]
+      },
+      "button-dark": {
+        "role": "neutral",
+        "displayName": "Button Fill (dark)",
+        "canonical": "#e8ebef",
+        "tonalRamp": [
+          "#090b0e",
+          "#232528",
+          "#404245",
+          "#5f6165",
+          "#808286",
+          "#a2a5a9",
+          "#c6c9cd",
+          "#eceff3"
+        ]
+      },
+      "button-text-dark": {
+        "role": "neutral",
+        "displayName": "Button Label (dark)",
+        "canonical": "#111418",
+        "tonalRamp": [
+          "#090b0f",
+          "#22252a",
+          "#3f4247",
+          "#5e6267",
+          "#7f8388",
+          "#a1a5ab",
+          "#c5c9cf",
+          "#eaeff5"
+        ]
+      },
+      "focus-dark": {
+        "role": "primary",
+        "displayName": "Focus Ring (dark)",
+        "canonical": "#8fb3ff",
+        "tonalRamp": [
+          "#000036",
+          "#071d5c",
+          "#223d7f",
+          "#3f5ea3",
+          "#5f80c8",
+          "#80a3ee",
+          "#b0c9fc",
+          "#e7effe"
+        ]
+      },
+      "selection-dark": {
+        "role": "primary",
+        "displayName": "Selection (dark)",
+        "canonical": "#2c3f66",
+        "tonalRamp": [
+          "#000729",
+          "#122347",
+          "#2e4168",
+          "#4c618a",
+          "#6c82ae",
+          "#8ea5d3",
+          "#b1caf9",
+          "#e7effe"
+        ]
+      },
+      "danger-text": {
+        "role": "tertiary",
+        "displayName": "Danger Text",
+        "canonical": "#ffffff"
+      },
+      "danger-text-dark": {
+        "role": "tertiary",
+        "displayName": "Danger Text (dark)",
+        "canonical": "#111418"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Empty-state intro title on the Ask view."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles such as Documents."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Source drawer title."
+      },
+      "answer": {
+        "displayName": "Answer",
+        "purpose": "Answer text (17px) and drawer passage (16px); the reading voice."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Base interface text and question bubble."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Log rows, source-card titles, tables, sample questions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Sidebar section heading, table headers, small buttons."
+      },
+      "citation": {
+        "displayName": "Citation",
+        "purpose": "Numbered citation chips; tabular figures."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Inline code only."
+      }
+    },
+    "themes": {
+      "mechanism": "Light tokens on :root. Dark tokens apply under prefers-color-scheme: dark unless html[data-theme=\"light\"], and always under html[data-theme=\"dark\"]. The toggle saves the choice in localStorage ('casefile-theme') and main.tsx sets data-theme before first paint.",
+      "darkTokenSuffix": "-dark"
+    },
+    "shadows": [
+      {
+        "name": "ask-lift",
+        "value": "0 8px 24px -12px rgba(20, 26, 33, 0.18)",
+        "valueDark": "0 8px 24px -12px rgba(0, 0, 0, 0.6)",
+        "purpose": "Docked ask box, over the scrolling thread."
+      },
+      {
+        "name": "drawer-edge",
+        "value": "-16px 0 40px -24px rgba(0, 0, 0, 0.35)",
+        "purpose": "Left edge of the source drawer."
+      },
+      {
+        "name": "hairline-ring",
+        "value": "0 0 0 1px var(--line)",
+        "purpose": "Current nav item; a border drawn as a shadow, not elevation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every transition and entrance."
+      },
+      {
+        "name": "hover",
+        "value": "150ms",
+        "purpose": "Button opacity, source-card border, disclosure chevron rotation."
+      },
+      {
+        "name": "step-in",
+        "value": "420ms, translateY(4px) + fade",
+        "purpose": "New investigation log rows."
+      },
+      {
+        "name": "drawer-in",
+        "value": "320ms, translateX(24px) + fade",
+        "purpose": "Source drawer entrance."
+      },
+      {
+        "name": "pulse",
+        "value": "1.2–1.4s ease-in-out, opacity to 0.35",
+        "purpose": "Pending log dots and the waking status dot."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all animation and transition off",
+        "purpose": "prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "860px",
+        "purpose": "max-width: sidebar becomes a top bar, samples a horizontal strip (hidden on Documents), drawer full width."
+      }
+    ],
+    "layout": {
+      "sidebarWidth": "272px",
+      "columnWidth": "760px",
+      "documentsWidth": "1040px",
+      "drawerWidth": "480px"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one main action per view: Investigate, Upload.",
+      "html": "<button class=\"ds-button\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14Zm9 16-4.35-4.35\"/></svg>Investigate</button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border:0;border-radius:9px;background:var(--button,#141a21);color:var(--button-text,#fff);font:600 14px var(--font,'Onest',system-ui,sans-serif);cursor:pointer;transition:opacity 150ms cubic-bezier(0.16,1,0.3,1)}.ds-button:hover{opacity:.88}.ds-button:focus-visible{outline:2px solid var(--focus,#2457c5);outline-offset:2px}.ds-button:disabled{opacity:.45;cursor:not-allowed}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Try again, Cancel, Load more: a hairline ring with no fill.",
+      "html": "<button class=\"ds-button-secondary\">Try again</button>",
+      "css": ".ds-button-secondary{display:inline-flex;align-items:center;height:38px;padding:0 16px;border:0;border-radius:9px;background:transparent;color:var(--text,#141a21);box-shadow:inset 0 0 0 1px var(--line-strong,#c9ced5);font:600 14px var(--font,'Onest',system-ui,sans-serif);cursor:pointer;transition:opacity 150ms cubic-bezier(0.16,1,0.3,1)}.ds-button-secondary:hover{opacity:.88}.ds-button-secondary:focus-visible{outline:2px solid var(--focus,#2457c5);outline-offset:2px}"
+    },
+    {
+      "name": "Inline Delete Confirm",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "Second step of the two-step inline delete; replaces the row icons, no dialog.",
+      "html": "<span class=\"ds-confirm\"><button class=\"ds-button-danger\">Delete</button><button class=\"ds-button-small\">Cancel</button></span>",
+      "css": ".ds-confirm{display:inline-flex;gap:4px}.ds-button-danger,.ds-button-small{height:32px;padding:0 12px;border:0;border-radius:9px;font:600 13px var(--font,'Onest',system-ui,sans-serif);cursor:pointer}.ds-button-danger{background:var(--danger,#b42318);color:var(--danger-text,#fff)}.ds-button-small{background:transparent;color:var(--text,#141a21);box-shadow:inset 0 0 0 1px var(--line-strong,#c9ced5)}.ds-button-danger:hover,.ds-button-small:hover{opacity:.88}.ds-button-danger:focus-visible,.ds-button-small:focus-visible{outline:2px solid var(--focus,#2457c5);outline-offset:2px}"
+    },
+    {
+      "name": "Ask Box",
+      "kind": "input",
+      "refersTo": "ask-box",
+      "description": "Docked question field with the primary action; one of two elements allowed a shadow.",
+      "html": "<form class=\"ds-ask\"><textarea class=\"ds-ask-input\" rows=\"1\" placeholder=\"Ask a question about the documents…\"></textarea><button class=\"ds-ask-button\" type=\"button\">Investigate</button></form>",
+      "css": ".ds-ask{display:flex;align-items:flex-end;gap:8px;padding:10px 10px 10px 16px;border:1px solid var(--line-strong,#c9ced5);border-radius:14px;background:var(--surface,#fff);box-shadow:var(--ask-shadow,0 8px 24px -12px rgba(20,26,33,.18));max-width:760px}.ds-ask-input{flex:1;min-height:38px;padding:8px 0;border:0;outline:0;resize:none;background:transparent;color:var(--text,#141a21);caret-color:var(--cited,#2457c5);font:15px/1.55 var(--font,'Onest',system-ui,sans-serif)}.ds-ask-input::placeholder{color:var(--muted,#5b6572)}.ds-ask:focus-within{outline:2px solid var(--focus,#2457c5);outline-offset:2px}.ds-ask-button{height:38px;padding:0 16px;border:0;border-radius:9px;background:var(--button,#141a21);color:var(--button-text,#fff);font:600 14px var(--font,'Onest',system-ui,sans-serif);cursor:pointer}.ds-ask-button:hover{opacity:.88}"
+    },
+    {
+      "name": "Sidebar Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Ask / Documents nav; the current page gets the raised fill and a hairline ring.",
+      "html": "<nav class=\"ds-nav\"><button class=\"ds-nav-item\" aria-current=\"page\">Ask</button><button class=\"ds-nav-item\">Documents</button></nav>",
+      "css": ".ds-nav{display:grid;gap:2px;width:244px;padding:14px;background:var(--sidebar,#f6f7f9)}.ds-nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border:0;border-radius:6px;background:transparent;color:var(--muted,#5b6572);font:500 15px var(--font,'Onest',system-ui,sans-serif);text-align:left;cursor:pointer}.ds-nav-item:hover{color:var(--text,#141a21);background:var(--raised,#fff)}.ds-nav-item[aria-current=page]{background:var(--raised,#fff);color:var(--text,#141a21);box-shadow:0 0 0 1px var(--line,#e3e6ea)}.ds-nav-item:focus-visible{outline:2px solid var(--focus,#2457c5);outline-offset:2px}"
+    },
+    {
+      "name": "Citation Chip",
+      "kind": "chip",
+      "refersTo": "citation-chip",
+      "description": "Numbered inline link from a claim to its source; blue means cited.",
+      "html": "<p class=\"ds-answer\">ICON has been held in the Cedar Rapids area since 1975.<button class=\"ds-citation\">1</button></p>",
+      "css": ".ds-answer{font:17px/1.75 var(--font,'Onest',system-ui,sans-serif);color:var(--text,#141a21);max-width:70ch;margin:0}.ds-citation{display:inline-grid;place-items:center;min-width:20px;height:18px;margin-left:3px;padding:0 5px;border:0;border-radius:4px;background:var(--cited-soft,#e8effc);color:var(--cited,#2457c5);font:600 12px var(--font,'Onest',system-ui,sans-serif);font-variant-numeric:tabular-nums;vertical-align:2px;cursor:pointer}.ds-citation:hover{background:var(--cited,#2457c5);color:var(--background,#fff)}.ds-citation:focus-visible{outline:2px solid var(--focus,#2457c5);outline-offset:2px}"
+    },
+    {
+      "name": "Investigation Log",
+      "kind": "custom",
+      "refersTo": "investigation-log",
+      "description": "Signature: the visible reasoning above every answer, counted by kind.",
+      "html": "<details class=\"ds-log\" open><summary class=\"ds-log-summary\"><span>Investigation</span><span class=\"ds-log-meta\">2 searches · 1 read · 1.2 s</span></summary><ol class=\"ds-log-steps\"><li class=\"ds-log-step\"><span class=\"ds-dot\"></span><span>Searched “ICON science fiction convention”</span><span class=\"ds-log-result\">7 results</span></li><li class=\"ds-log-step\"><span class=\"ds-dot\"></span><span>Read “ICON convention (fan wiki)”</span><span class=\"ds-log-result\">1 passage</span></li><li class=\"ds-log-step\"><span class=\"ds-dot ds-dot--conflict\"></span><span>Checked every citation against the retrieved passages</span><span class=\"ds-log-result\">1 conflict</span></li></ol></details>",
+      "css": ".ds-log{max-width:760px;padding:12px 16px;border:1px solid var(--line,#e3e6ea);border-radius:10px;background:var(--surface,#fff);color:var(--text,#141a21);font:15px/1.55 var(--font,'Onest',system-ui,sans-serif)}.ds-log-summary{display:flex;justify-content:space-between;gap:12px;font-weight:600;font-size:14px;cursor:pointer;list-style:none}.ds-log-summary::-webkit-details-marker{display:none}.ds-log-summary:focus-visible{outline:2px solid var(--focus,#2457c5);outline-offset:2px;border-radius:6px}.ds-log-meta{font-weight:400;color:var(--muted,#5b6572);font-variant-numeric:tabular-nums}.ds-log-steps{display:grid;gap:6px;margin:10px 0 0;padding:0;list-style:none}.ds-log-step{display:grid;grid-template-columns:18px 1fr auto;gap:8px;align-items:baseline;font-size:14px}.ds-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cited,#2457c5)}.ds-dot--conflict{background:var(--conflict,#9a5300)}.ds-log-result{color:var(--muted,#5b6572);font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Conflict Panel",
+      "kind": "card",
+      "refersTo": "conflict-panel",
+      "description": "Signature: sources disagree; description plus numbered links to each conflicting source.",
+      "html": "<section class=\"ds-conflict\"><h3 class=\"ds-conflict-title\">Sources conflict</h3><p class=\"ds-conflict-text\">One document says 1975, a fan wiki says 1979. <span class=\"ds-conflict-between\">Between sources</span><button class=\"ds-chip\">1</button><button class=\"ds-chip\">2</button></p></section>",
+      "css": ".ds-conflict{max-width:760px;padding:14px 16px;border-radius:10px;background:var(--conflict-soft,#fdf3e5);color:var(--text,#141a21);font:15px/1.55 var(--font,'Onest',system-ui,sans-serif)}.ds-conflict-title{margin:0 0 4px;font-size:14px;font-weight:600;color:var(--conflict,#9a5300)}.ds-conflict-text{margin:0}.ds-conflict-between{color:var(--muted,#5b6572);font-size:14px}.ds-chip{display:inline-grid;place-items:center;min-width:20px;height:18px;margin-left:3px;padding:0 5px;border:0;border-radius:4px;background:var(--cited-soft,#e8effc);color:var(--cited,#2457c5);font:600 12px var(--font,'Onest',system-ui,sans-serif);vertical-align:2px;cursor:pointer}.ds-chip:hover{background:var(--cited,#2457c5);color:var(--background,#fff)}.ds-chip:focus-visible{outline:2px solid var(--focus,#2457c5);outline-offset:2px}"
+    },
+    {
+      "name": "Source Card",
+      "kind": "card",
+      "refersTo": "source-card",
+      "description": "One cited source: number, title and a two-line excerpt; opens the drawer.",
+      "html": "<button class=\"ds-source-card\"><span class=\"ds-source-number\">1</span><span class=\"ds-source-title\">Icon (Iowa science fiction convention)</span><span class=\"ds-source-excerpt\">ICON is an annual science fiction convention held in the Cedar Rapids / Iowa City area of Iowa since 1975.</span></button>",
+      "css": ".ds-source-card{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;width:240px;padding:12px 14px;border:1px solid var(--line,#e3e6ea);border-radius:10px;background:var(--surface,#fff);color:var(--text,#141a21);font-family:var(--font,'Onest',system-ui,sans-serif);text-align:left;align-content:start;cursor:pointer;transition:border-color 150ms cubic-bezier(0.16,1,0.3,1)}.ds-source-card:hover{border-color:var(--cited,#2457c5)}.ds-source-card:focus-visible{outline:2px solid var(--focus,#2457c5);outline-offset:2px}.ds-source-number{grid-row:span 2;color:var(--cited,#2457c5);font-weight:600;font-variant-numeric:tabular-nums}.ds-source-title{font-weight:600;font-size:14px;line-height:1.35}.ds-source-excerpt{font-size:13px;line-height:1.45;color:var(--muted,#5b6572);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}"
+    },
+    {
+      "name": "Declined Panel",
+      "kind": "card",
+      "refersTo": "declined-panel",
+      "description": "The plain refusal when evidence is missing: dashed border, no fill.",
+      "html": "<div class=\"ds-declined\"><h3 class=\"ds-declined-title\">Not enough evidence to answer</h3><p class=\"ds-declined-text\">The documents do not contain what this question needs.</p><p class=\"ds-declined-detail\">CaseFile searched 3 times and read 12 passages, but none supported an answer.</p></div>",
+      "css": ".ds-declined{max-width:760px;padding:16px 18px;border:1px dashed var(--line-strong,#c9ced5);border-radius:10px;color:var(--text,#141a21);font:15px/1.55 var(--font,'Onest',system-ui,sans-serif)}.ds-declined-title{margin:0 0 4px;font-size:16px;font-weight:600}.ds-declined-text{margin:0}.ds-declined-detail{margin:8px 0 0;font-size:14px;color:var(--muted,#5b6572)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Open Case File",
+    "overview": "CaseFile wears the familiar research-assistant layout on purpose: a quiet sidebar on the left, one centred reading column, an ask box pinned to the bottom. Nothing about the frame is themed. What sets it apart is that the work is never hidden: every investigation shows its log of searches and reads above the answer, every claim carries a numbered citation chip, conflicts and refusals are stated in their own plainly marked panels, and any source opens in a drawer beside the answer for checking.\n\nThe ground is neutral (white in light, near-black in dark) with one slightly tinted sidebar tone. Colour is rationed: each hue has exactly one meaning, so a reader learns the vocabulary in one answer and can scan the next one by colour alone. Depth comes from 1px hairlines and a single tonal step, not from shadows. Onest carries every word; hierarchy comes from size and weight, never from a second face.\n\nLight and dark are equal citizens. Both palettes are full token sets; the page follows the system setting until the visitor uses the toggle, and that choice is saved and applied before first paint. The code is plain CSS custom properties and React with no UI library, deliberately simple enough for its author to explain line by line.",
+    "keyCharacteristics": [
+      "Familiar sidebar + 760px column layout, executed cleanly rather than themed.",
+      "Every colour is a meaning: blue cited, amber conflict, grey not cited / declined, green ready, red error or destructive.",
+      "The investigation log always sits above the answer it produced.",
+      "Hairline 1px borders and 10px panel radii; only the ask box and the source drawer cast shadows.",
+      "One typeface (Onest) at a 13 / 15 / 17 / 20 / 26 / 28px ramp.",
+      "Light and dark both first-class, from one set of token names."
+    ],
+    "rules": [
+      {
+        "name": "The One Meaning Rule",
+        "body": "Each signal hue means one thing everywhere: blue = cited, amber = conflict, grey = not cited / declined, green = ready, red = error or destructive. If a new element needs a colour that is not one of these meanings, it stays neutral.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paired Token Rule",
+        "body": "Every colour exists as a light value and a dark value under the same token name. Never write a colour that only works in one theme; never hard-code a hex in a component.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Face Rule",
+        "body": "Onest is the only typeface; monospace appears only inside inline code. Do not introduce a display face.",
+        "section": "typography"
+      },
+      {
+        "name": "The Steady Numbers Rule",
+        "body": "Any count, timing or citation number uses tabular figures (`font-variant-numeric: tabular-nums`).",
+        "section": "typography"
+      },
+      {
+        "name": "The Work Above The Answer Rule",
+        "body": "The investigation log is always rendered above the answer it produced, open by default, and its header counts by kind (\"2 searches · 1 read · 1.2 s\") so the summary matches the rows beneath it.",
+        "section": "layout"
+      },
+      {
+        "name": "The Floating Only Rule",
+        "body": "A shadow is allowed only on something that floats over scrolling content (the ask dock, the drawer). Panels, cards and the log sit flat on hairlines.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do take every colour from the custom properties so both themes resolve from the same token name.",
+      "Do keep each signal hue to its one meaning: blue cited, amber conflict, grey not cited / declined, green ready, red error or destructive.",
+      "Do keep the investigation log above the answer, open by default, with counts by kind that match its rows.",
+      "Do use 1px hairlines and 10px radii for panels and cards; 14px only for the question bubble and ask box.",
+      "Do use tabular figures for every count, timing and citation number.",
+      "Do confirm destructive actions inline in two steps (icon, then Delete / Cancel) rather than in a dialog.",
+      "Do open source passages in the right-hand drawer, full width under 860px.",
+      "Do honour reduced motion: all animation and transitions switch off under `prefers-reduced-motion`.",
+      "Do keep the styling plain CSS with React only, simple enough to explain live."
+    ],
+    "donts": [
+      "Don't use any signal colour (blue, amber, green, red) for decoration, emphasis or branding.",
+      "Don't add shadows to panels, cards or the log; shadows are for the ask dock and the drawer only.",
+      "Don't introduce a second typeface or a UI component library.",
+      "Don't hide the reasoning behind a spinner; pending work shows as a pulsing grey row in the log.",
+      "Don't write a colour that exists in only one theme."
+    ]
+  }
+}
