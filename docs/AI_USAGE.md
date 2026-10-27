@@ -807,6 +807,7 @@ ran it and made the decision.
     faster under a limit (0.1 CPU: 14.4 → 3.7 s per chunk). New setting `EMBEDDING_THREADS`, default 1.
   - The model loaded on the first request after each wake-up (~15 s). Now loaded in the background at startup.
   - Also measured: duplicate lookups cost ~143 ms per chunk from Georgia, ~5 ms in Qdrant's region; left as is.
+  - Measured on Render after deploying: 100 chunks 332 s → 87 s; 2 KB 70 s → 3.3 s.
 
 ### Document search (milestone 9)
 - **My request:** a search box on the Documents page, to find documents on a topic.

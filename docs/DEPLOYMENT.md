@@ -151,6 +151,8 @@ Uploads on Render were very slow: 2 KB took 70 s, and 61 KB (100 chunks) took 33
   too.
 - **Cause 3: the first request after a wake-up loaded the model** (≈15 s at 0.1 CPU). The server now loads it in a
   background thread at startup, so `/health` answers at once and the first visitor usually doesn't wait.
+- **Result on Render** (same files, before → after): 2 KB 70 s → **3.3 s**; 34 chunks 118 s → **33 s**; 100 chunks
+  332 s → **87 s**. About 0.9 s per chunk instead of 3.3 s. Document search answers in 0.5 s.
 - **Smaller: two Qdrant lookups per chunk** for duplicate detection: 143 ms per chunk from a laptop in Georgia; about
   5 ms when the server is in the same region as Qdrant (Frankfurt). Could be batched (one lookup per document)
   if it ever matters.
