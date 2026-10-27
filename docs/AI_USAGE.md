@@ -807,3 +807,14 @@ ran it and made the decision.
     faster under a limit (0.1 CPU: 14.4 → 3.7 s per chunk). New setting `EMBEDDING_THREADS`, default 1.
   - The model loaded on the first request after each wake-up (~15 s). Now loaded in the background at startup.
   - Also measured: duplicate lookups cost ~143 ms per chunk from Georgia, ~5 ms in Qdrant's region; left as is.
+
+### Document search (milestone 9)
+- **My request:** a search box on the Documents page, to find documents on a topic.
+- **Claude Code, at my request:**
+  - `GET /documents?query=...` runs the same hybrid search as the agent over passages and keeps the best passage per
+    document (`retrieval/document_search.py`). A query parameter rather than `/documents/search`, which would clash
+    with `/documents/{doc_id}`. No LLM, so no quota.
+  - UI: search box with *Show all*; each result shows its title and two lines of the matching passage; Replace and
+    Delete work on results. 2 new API tests.
+  - Checked on the real corpus: "Kiss and Tell" finds the film first; "lighthouse keeper" finds lighthouse articles;
+    "Lionel Messi" shows that only a few documents mention him (no article about him).

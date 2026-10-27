@@ -48,7 +48,8 @@ export interface DocumentSummary {
   doc_id: string
   title: string
   content_hash: string
-  metadata: { filename?: string; format?: string; [key: string]: unknown }
+  metadata?: { filename?: string; format?: string; [key: string]: unknown }
+  matching_passage?: string // only in search results: the passage that matched the search
 }
 
 export interface DocumentPage {

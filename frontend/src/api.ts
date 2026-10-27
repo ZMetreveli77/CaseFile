@@ -5,6 +5,7 @@ import type {
 } from './types'
 
 const DOCUMENTS_PAGE_SIZE = 50
+const SEARCH_RESULT_COUNT = 20
 
 // Raised for any non-2xx response; `message` is the backend's "detail" text when there is one.
 export class ApiError extends Error {
@@ -49,6 +50,12 @@ export async function listDocuments(cursor: string | null): Promise<DocumentPage
   if (cursor) {
     query.set('cursor', cursor)
   }
+  return readJsonOrThrow(await fetch(`/documents?${query}`))
+}
+
+// Documents whose content best matches the search, most relevant first (one page, each with its matching passage).
+export async function searchDocuments(searchText: string): Promise<DocumentPage> {
+  const query = new URLSearchParams({ query: searchText, limit: String(SEARCH_RESULT_COUNT) })
   return readJsonOrThrow(await fetch(`/documents?${query}`))
 }
 

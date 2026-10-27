@@ -1,12 +1,13 @@
 // The Documents screen: upload files, page through what is indexed, replace or delete a document.
-import { useCallback, useEffect, useRef, useState, type ChangeEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import {
-  deleteDocument, fetchSupportedFormats, listDocuments, replaceDocument, uploadDocument,
+  deleteDocument, fetchSupportedFormats, listDocuments, replaceDocument, searchDocuments, uploadDocument,
 } from '../api'
 import type { DocumentSummary, IngestResult, SupportedFormats } from '../types'
 import { Icon } from './Icon'
 
 const BYTES_PER_MEGABYTE = 1024 * 1024
+const MAX_SEARCH_CHARACTERS = 200 // same limit as the backend
 
 // What each upload status means to the person who uploaded the file.
 const STATUS_DESCRIPTIONS: Record<IngestResult['status'], string> = {
@@ -34,6 +35,8 @@ export function DocumentsView() {
   const [isUploading, setIsUploading] = useState(false)
   const [documentPendingDelete, setDocumentPendingDelete] = useState<string | null>(null)
   const [busyDocumentId, setBusyDocumentId] = useState<string | null>(null)
+  const [searchText, setSearchText] = useState('')
+  const [activeSearch, setActiveSearch] = useState<string | null>(null) // the search the table shows, null = all
   const uploadInputRef = useRef<HTMLInputElement>(null)
   const replaceInputRef = useRef<HTMLInputElement>(null)
   const documentToReplaceRef = useRef<string | null>(null)
@@ -41,6 +44,7 @@ export function DocumentsView() {
   const loadFirstPage = useCallback(async () => {
     setIsLoading(true)
     setLoadError(null)
+    setActiveSearch(null)
     try {
       const page = await listDocuments(null)
       setDocuments(page.documents)
@@ -57,6 +61,32 @@ export function DocumentsView() {
     loadFirstPage()
     fetchSupportedFormats().then(setSupportedFormats).catch(() => setSupportedFormats(null))
   }, [loadFirstPage])
+
+  const runSearch = async (event: FormEvent) => {
+    event.preventDefault()
+    const text = searchText.trim()
+    if (!text) {
+      clearSearch()
+      return
+    }
+    setIsLoading(true)
+    setLoadError(null)
+    try {
+      const results = await searchDocuments(text)
+      setDocuments(results.documents)
+      setNextCursor(null)
+      setActiveSearch(text)
+    } catch (error) {
+      setLoadError((error as Error).message)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const clearSearch = () => {
+    setSearchText('')
+    loadFirstPage()
+  }
 
   const loadNextPage = async () => {
     if (!nextCursor) {
@@ -143,6 +173,7 @@ export function DocumentsView() {
           <h1 className="page-title">Documents</h1>
           <p className="muted">
             {totalDocuments === null ? 'Loading…' : `${totalDocuments.toLocaleString('en-US')} documents indexed`}
+            {activeSearch !== null && ` · ${documents.length} best matches for “${activeSearch}”`}
           </p>
         </div>
         <div className="upload">
@@ -190,6 +221,28 @@ export function DocumentsView() {
         </ul>
       )}
 
+      <form className="document-search" role="search" onSubmit={runSearch}>
+        <label htmlFor="document-search" className="visually-hidden">Search documents</label>
+        <input
+          id="document-search"
+          type="search"
+          className="document-search-input"
+          maxLength={MAX_SEARCH_CHARACTERS}
+          placeholder="Search documents by what they say, e.g. lighthouse keeper"
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
+        />
+        <button type="submit" className="button button--secondary" disabled={isLoading}>
+          <Icon name="search" size={16} />
+          Search
+        </button>
+        {activeSearch !== null && (
+          <button type="button" className="button button--secondary" onClick={clearSearch}>
+            Show all
+          </button>
+        )}
+      </form>
+
       {loadError && (
         <div className="failure" role="alert">
           <p>{loadError}</p>
@@ -210,8 +263,11 @@ export function DocumentsView() {
           <tbody>
             {documents.map((document) => (
               <tr key={document.doc_id}>
-                <td className="document-title">{document.title}</td>
-                <td>{document.metadata.format ?? '—'}</td>
+                <td className="document-title">
+                  {document.title}
+                  {document.matching_passage && <p className="matching-passage">{document.matching_passage}</p>}
+                </td>
+                <td>{document.metadata?.format ?? '—'}</td>
                 <td><code>{document.doc_id}</code></td>
                 <td className="row-actions">
                   {documentPendingDelete === document.doc_id ? (
@@ -261,7 +317,11 @@ export function DocumentsView() {
           </tbody>
         </table>
         {!isLoading && documents.length === 0 && !loadError && (
-          <p className="empty">No documents yet. Upload a PDF, text, HTML, JSON or CSV file to start.</p>
+          <p className="empty">
+            {activeSearch !== null
+              ? `No documents match “${activeSearch}”.`
+              : 'No documents yet. Upload a PDF, text, HTML, JSON or CSV file to start.'}
+          </p>
         )}
       </div>
 

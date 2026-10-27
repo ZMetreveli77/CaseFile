@@ -289,3 +289,22 @@ def test_questions_over_the_hourly_limit_get_429_with_retry_after(qdrant_store, 
         # Faking an earlier X-Forwarded-For entry doesn't help: the proxy's (last) entry is used.
         faked = {"X-Forwarded-For": "1.1.1.1, 203.0.113.9"}
         assert limited_client.post("/ask", json={"question": "Who built it?"}, headers=faked).status_code == 429
+
+
+def test_documents_can_be_searched_by_content(client):
+    upload(client, "hotel.txt", HOTEL_TEXT)
+    upload(client, "bakery.txt", "The Old Mill Bakery in Ashford sells sourdough bread baked in a wood-fired oven.")
+    response = client.get("/documents", params={"query": "sourdough bread oven", "limit": 5})
+    assert response.status_code == 200
+    body = response.json()
+    first = body["documents"][0]
+    assert first["title"] == "bakery.txt" and "sourdough" in first["matching_passage"]
+    assert first["chunk_id"].startswith(first["doc_id"])
+    assert len({document["doc_id"] for document in body["documents"]}) == len(body["documents"])  # one row each
+    assert body["next_cursor"] is None and body["total"] == 2
+
+
+def test_a_blank_search_lists_documents_as_usual(client):
+    upload(client, "hotel.txt", HOTEL_TEXT)
+    listed = client.get("/documents", params={"query": "  "}).json()["documents"]
+    assert [document["title"] for document in listed] == ["hotel.txt"] and "matching_passage" not in listed[0]

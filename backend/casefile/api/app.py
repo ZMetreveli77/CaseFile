@@ -24,11 +24,14 @@ from casefile.ingestion.loaders import SUPPORTED_EXTENSIONS, UnsupportedFormat, 
 from casefile.ingestion.pipeline import ProtectedDocumentError
 from casefile.rag.agent import InvestigationStopped
 from casefile.rag.llm import LLMError
+from casefile.retrieval.document_search import find_documents
+from casefile.retrieval.search import HybridSearcher
 
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10 MB per file
 DEFAULT_PAGE_SIZE = 50
 MAX_PAGE_SIZE = 200
 MAX_QUESTION_CHARACTERS = 1000
+MAX_SEARCH_CHARACTERS = 200
 # Without these, proxies (Render's included) may buffer the stream and deliver every event at the very end.
 STREAM_HEADERS = {"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
 END_OF_STREAM = None  # sentinel the worker thread always puts on the queue last
@@ -140,9 +143,15 @@ def create_app(services: AppServices | None = None,
 
     @app.get("/documents")
     def list_documents(request: Request, limit: int = Query(DEFAULT_PAGE_SIZE, ge=1, le=MAX_PAGE_SIZE),
-                       cursor: str | None = None) -> dict:
-        """One page of documents. Pass `next_cursor` back as `cursor` to get the next page."""
+                       cursor: str | None = None,
+                       query: str | None = Query(None, max_length=MAX_SEARCH_CHARACTERS)) -> dict:
+        """One page of documents. Pass `next_cursor` back as `cursor` to get the next page.
+        With `query`: the documents whose content best matches it, most relevant first, each with the matching passage
+        (one page only). A query parameter, not a /documents/search path, which would clash with /documents/{doc_id}."""
         store = get_services(request).store
+        if query and query.strip():
+            documents = find_documents(HybridSearcher(store, store.embedder), query.strip(), limit)
+            return {"documents": documents, "next_cursor": None, "total": store.count_documents()}
         documents, next_cursor = store.list_documents_page(limit, cursor)
         return {"documents": documents, "next_cursor": next_cursor, "total": store.count_documents()}
 

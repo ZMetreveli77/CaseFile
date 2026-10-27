@@ -618,6 +618,32 @@ a { color: var(--cited); text-underline-offset: 3px; }
 .empty { padding: 32px 16px; text-align: center; color: var(--muted); }
 .load-more { margin: 20px auto 0; display: flex; }
 
+.document-search { display: flex; gap: 8px; margin-bottom: 16px; }
+.document-search-input {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-small);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+}
+.document-search-input::placeholder { color: var(--muted); }
+.document-search-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.matching-passage {
+  margin-top: 4px;
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* two lines are enough to see why the document matched */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ---------- Motion ---------- */
 
 @keyframes step-in {
