@@ -76,7 +76,7 @@ def main() -> None:
         sys.exit("QDRANT_URL is not set. The spot check needs the indexed corpus in Qdrant (see .env).")
 
     client = create_qdrant_client(settings.qdrant_url, settings.qdrant_api_key)
-    embedder = FastEmbedEmbedder(settings.embedding_model, settings.embedding_dim)
+    embedder = FastEmbedEmbedder(settings.embedding_model, settings.embedding_dim, settings.embedding_threads)
     store = QdrantStore(client, embedder, settings.chunks_collection, settings.documents_collection)
 
     questions = load_spot_check_questions(arguments.questions)

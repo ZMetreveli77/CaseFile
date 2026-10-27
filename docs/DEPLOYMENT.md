@@ -133,6 +133,28 @@ About 108 MB of headroom. Render's *Metrics* tab is checked after deploying.
 wouldn't have hit it (git stores only the executable bit, so a fresh clone gets normal permissions), but the
 Dockerfile now runs `chmod -R a+rX` on the code so the image never depends on the build machine.
 
+## 7b. Upload speed (CPU)
+Uploads on Render were very slow: 2 KB took 70 s, and 61 KB (100 chunks) took 332 s, about **3.3 s per chunk**
+(on a laptop, ~0.04 s).
+
+- **Cause 1: Render's free tier has a fraction of one CPU**, and embedding is pure computation. In Docker:
+
+  | CPU limit | Threads | Model load | Question embedding | Per chunk |
+  |---|---|---|---|---|
+  | 1 CPU | 10 (default) | 1.3 s | 0.20 s | 0.87 s |
+  | 1 CPU | **1** | 1.1 s | 0.05 s | **0.10 s** |
+  | 0.1 CPU | 10 (default) | 18.8 s | 3.7 s | 14.4 s |
+  | 0.1 CPU | **1** | 15.6 s | 0.8 s | **3.7 s** |
+- **Cause 2: too many threads.** ONNX Runtime starts one thread per core it can *see* (10 here), not per core the
+  container may *use*, so the threads fight over the CPU limit. One thread is 4–9× faster under a limit. Fix:
+  `EMBEDDING_THREADS = 1` by default (0 = all cores, for bulk indexing on a laptop). Question embedding gets faster
+  too.
+- **Cause 3: the first request after a wake-up loaded the model** (≈15 s at 0.1 CPU). The server now loads it in a
+  background thread at startup, so `/health` answers at once and the first visitor usually doesn't wait.
+- **Smaller: two Qdrant lookups per chunk** for duplicate detection: 143 ms per chunk from a laptop in Georgia; about
+  5 ms when the server is in the same region as Qdrant (Frankfurt). Could be batched (one lookup per document)
+  if it ever matters.
+
 ## 8. Deploying a change
 1. Push to `main`. Render rebuilds the image and switches over only after `/health` answers (zero-downtime deploy).
 2. If a deploy fails, the previous version keeps running. Render → *Events* shows the build log.

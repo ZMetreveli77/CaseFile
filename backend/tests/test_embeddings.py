@@ -17,8 +17,9 @@ class FakeTextEmbedding:
     most_running_at_once = 0
     batch_sizes: list[int] = []
 
-    def __init__(self, model_name):
+    def __init__(self, model_name, threads=None):
         FakeTextEmbedding.created += 1
+        FakeTextEmbedding.threads = threads
         time.sleep(0.05)  # loading takes a while, so two first requests overlap
 
     def track_overlap(self):
@@ -62,3 +63,10 @@ def test_parallel_requests_load_the_model_once_and_never_embed_at_the_same_time(
 def test_vectors_come_back_in_order_as_lists():
     vectors = FastEmbedEmbedder().embed_documents(["a", "b", "c", "d", "e"])
     assert vectors == [[1.0, 1.0, 1.0]] * 5
+
+
+def test_one_thread_by_default_and_zero_means_all_cores():
+    FastEmbedEmbedder().embed_query("q")
+    assert FakeTextEmbedding.threads == 1
+    FastEmbedEmbedder(threads=0).embed_query("q")
+    assert FakeTextEmbedding.threads is None  # fastembed's "use every core"

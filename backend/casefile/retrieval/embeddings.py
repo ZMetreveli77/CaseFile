@@ -18,9 +18,13 @@ class TextEmbedder(Protocol):
 class FastEmbedEmbedder:
     """bge-small-en-v1.5: 384-dim, small enough for a free 512 MB server."""
 
-    def __init__(self, model_name: str = "BAAI/bge-small-en-v1.5", dimension: int = 384):
+    def __init__(self, model_name: str = "BAAI/bge-small-en-v1.5", dimension: int = 384, threads: int = 1):
         self.model_name = model_name
         self.dimension = dimension
+        # ONNX Runtime threads. It counts the machine's cores, not what the container may use: on a server limited to
+        # a fraction of a CPU (Render free), 10 threads fight over it. Measured in Docker at 0.1 CPU: 14.4 s per
+        # chunk with 10 threads, 3.7 s with 1; at 1 CPU, 0.87 s vs 0.10 s. 0 = one per visible core (fine on a laptop).
+        self.threads = threads or None
         self.model = None  # loaded on first use, so importing this module stays fast
         # One embedding at a time. The API runs requests in parallel threads that share this model; two runs at once
         # each need ONNX Runtime working memory, and two first requests would load the model twice (+151 MB each).
@@ -31,7 +35,7 @@ class FastEmbedEmbedder:
         """Call only while holding self.lock."""
         if self.model is None:
             from fastembed import TextEmbedding
-            self.model = TextEmbedding(self.model_name)
+            self.model = TextEmbedding(self.model_name, threads=self.threads)
         return self.model
 
     def embed_documents(self, texts: list[str]) -> list[list[float]]:

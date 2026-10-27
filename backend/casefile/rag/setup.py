@@ -10,7 +10,7 @@ from casefile.retrieval.store import QdrantStore, create_qdrant_client
 
 
 def build_store(settings: Settings) -> tuple[QdrantStore, TextEmbedder]:
-    embedder = FastEmbedEmbedder(settings.embedding_model, settings.embedding_dim)
+    embedder = FastEmbedEmbedder(settings.embedding_model, settings.embedding_dim, settings.embedding_threads)
     client = create_qdrant_client(settings.qdrant_url, settings.qdrant_api_key)
     store = QdrantStore(client, embedder, settings.chunks_collection, settings.documents_collection)
     return store, embedder

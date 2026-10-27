@@ -80,6 +80,9 @@ def create_app(services: AppServices | None = None,
     async def lifespan(app: FastAPI):
         if app.state.services is None:
             app.state.services = build_services(get_settings())
+            # Load the embedding model in the background now, not on the first question: on Render's fraction of a
+            # CPU it takes several seconds, and the server sleeps when idle, so every wake-up would make one visitor wait.
+            threading.Thread(target=app.state.services.store.embedder.embed_query, args=("warm-up",), daemon=True).start()
         yield
 
     app = FastAPI(title="CaseFile", description="AI investigation engine that cites its evidence", lifespan=lifespan)

@@ -45,7 +45,7 @@ def main() -> None:
 
     client = create_qdrant_client() if arguments.in_memory else create_qdrant_client(settings.qdrant_url,
                                                                                     settings.qdrant_api_key)
-    embedder = FastEmbedEmbedder(settings.embedding_model, settings.embedding_dim)
+    embedder = FastEmbedEmbedder(settings.embedding_model, settings.embedding_dim, settings.embedding_threads)
     store = QdrantStore(client, embedder, settings.chunks_collection, settings.documents_collection)
 
     started = time.perf_counter()

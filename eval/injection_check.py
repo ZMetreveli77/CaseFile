@@ -38,7 +38,7 @@ SEARCH_MODE = "hybrid_rerank"
 
 def build_in_memory_agent(settings: Settings, documents: list[tuple[str, str]]) -> InvestigationAgent:
     """Same wiring as build_agent in rag/setup.py, but on an empty in-memory Qdrant filled with `documents`."""
-    embedder = FastEmbedEmbedder(settings.embedding_model, settings.embedding_dim)
+    embedder = FastEmbedEmbedder(settings.embedding_model, settings.embedding_dim, settings.embedding_threads)
     client = create_qdrant_client()  # no arguments: in-memory, so Qdrant Cloud stays clean
     store = QdrantStore(client, embedder, settings.chunks_collection, settings.documents_collection)
     pipeline = IngestionPipeline(store, settings.chunking_strategy, settings.chunk_size, settings.chunk_overlap)

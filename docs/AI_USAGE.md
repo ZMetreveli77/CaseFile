@@ -798,3 +798,12 @@ ran it and made the decision.
   win an Oscar" is correctly declined (no paragraph says so); "what has Messi won" was declined although the agent
   found partial evidence (2009 FIFA World Player, 2008–09 treble), because rule 4 and the short-answer format
   treat open questions as all-or-nothing. A fix is proposed, pending my decision.
+
+### Upload speed (milestone 9)
+- **My report:** uploading a file on the live site takes a long time.
+- **Claude Code, at my request:** measured live (2 KB: 70 s; 100 chunks: 332 s, 3.3 s per chunk), then reproduced it
+  in Docker with CPU limits. Found two causes and fixed both:
+  - ONNX Runtime starts one thread per visible core (10), which fight over a fraction of a CPU. One thread is 4–9×
+    faster under a limit (0.1 CPU: 14.4 → 3.7 s per chunk). New setting `EMBEDDING_THREADS`, default 1.
+  - The model loaded on the first request after each wake-up (~15 s). Now loaded in the background at startup.
+  - Also measured: duplicate lookups cost ~143 ms per chunk from Georgia, ~5 ms in Qdrant's region; left as is.

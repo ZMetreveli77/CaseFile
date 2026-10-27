@@ -30,6 +30,7 @@ class Settings(BaseSettings):
 
     embedding_model: str = "BAAI/bge-small-en-v1.5"
     embedding_dim: int = 384
+    embedding_threads: int = 1  # 1 suits a server with a fraction of a CPU; 0 = all cores (bulk indexing on a laptop)
 
     chunking_strategy: str = "sentence"  # "fixed" | "sentence"
     chunk_size: int = 800
