@@ -32,7 +32,7 @@ Interview: I must explain and change the code live without AI, so every part sta
 - [x] Evaluation: 40+ questions (60), Recall@K, MRR, answer correctness, citation accuracy, 2+ configurations, error analysis (docs/EVALUATION.md; test after fixes: agent judge 0.85 vs one-search baseline 0.75)
 - [x] Python backend + working UI (upload, manage, ask, view sources) (API in milestone 6; React UI in milestone 8, served by FastAPI at `/`)
 - [x] 50,000+ records processed (66,555 HotpotQA paragraphs → 78,730 chunks in Qdrant Cloud)
-- [ ] Public deployment, persistence across restarts, secrets protected, deployment description
+- [x] Public deployment, persistence across restarts, secrets protected, deployment description (https://casefile.metroz.me, docs/DEPLOYMENT.md)
 - [ ] Tests, modular code, documentation
 
 ## 4. Milestones (when)

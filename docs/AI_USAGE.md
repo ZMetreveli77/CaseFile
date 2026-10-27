@@ -820,3 +820,8 @@ ran it and made the decision.
     Delete work on results. 2 new API tests.
   - Checked on the real corpus: "Kiss and Tell" finds the film first; "lighthouse keeper" finds lighthouse articles;
     "Lionel Messi" shows that only a few documents mention him (no article about him).
+
+### Persistence check (milestone 9)
+- I asked Claude Code to do it instead of me. It uploaded a marker file to the live site, pushed a docs commit
+  (Render redeployed into a new container; I confirmed the deploy was live in Render's Events), then found the
+  document unchanged after the restart and deleted it.

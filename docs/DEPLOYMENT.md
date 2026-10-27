@@ -65,7 +65,13 @@ Anyone with the URL can use the site, so two limits apply (both in `config.py`, 
 
 ## 5. Persistence
 - **Data:** Qdrant Cloud, a managed database outside Render. Uploads, updates and deletes are written there at once.
-- **Check:** *(to fill in: upload → restart the service → document still listed)*
+- **Check (27 October 2026):**
+  1. A marker file `persistence-check.txt` was uploaded through the live site (19:30).
+  2. A push made Render redeploy, which replaces the server with a new container; Render's *Events* showed the deploy
+     live.
+  3. After the restart, `GET /documents/8ce26c1efdc9c28e` returned the document with the same text, metadata and
+     content hash. It was then deleted.
+  Earlier deploys that day also kept every document uploaded through the site.
 - **Limits of the free tiers:**
   - Render sleeps after 15 minutes without requests; waking takes about a minute.
   - Qdrant Cloud suspends a free cluster after a period of inactivity; it has to be resumed in the Qdrant console.
