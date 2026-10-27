@@ -6,50 +6,50 @@
     "agent": {
       "summary": {
         "questions": 30,
-        "answer_accuracy_judge": 0.65,
-        "exact_match": 0.45,
-        "f1": 0.546,
-        "evidence_retrieved": 0.85,
-        "citation_precision": 1.0,
-        "citation_recall": 1.0,
-        "false_abstention_rate": 0.3,
-        "abstention_precision": 0.333,
+        "answer_accuracy_judge": 0.85,
+        "exact_match": 0.55,
+        "f1": 0.686,
+        "evidence_retrieved": 0.9,
+        "citation_precision": 0.921,
+        "citation_recall": 0.921,
+        "false_abstention_rate": 0.05,
+        "abstention_precision": 0.833,
         "abstention_recall": 1.0,
         "conflict_detection": 1.0,
-        "llm_calls_per_question": 3.167,
-        "searches_per_question": 2.3
+        "llm_calls_per_question": 2.867,
+        "searches_per_question": 1.967
       },
-      "seconds": 435,
+      "seconds": 310,
       "by_category": {
         "bridge": {
           "questions": 10,
-          "answer_accuracy_judge": 0.6,
-          "exact_match": 0.3,
-          "f1": 0.492,
-          "evidence_retrieved": 0.7,
-          "citation_precision": 1.0,
-          "citation_recall": 1.0,
-          "false_abstention_rate": 0.4,
+          "answer_accuracy_judge": 0.8,
+          "exact_match": 0.5,
+          "f1": 0.692,
+          "evidence_retrieved": 0.8,
+          "citation_precision": 0.889,
+          "citation_recall": 0.833,
+          "false_abstention_rate": 0.1,
           "abstention_precision": 0.0,
           "abstention_recall": null,
           "conflict_detection": null,
-          "llm_calls_per_question": 4.1,
-          "searches_per_question": 3.1
+          "llm_calls_per_question": 3.2,
+          "searches_per_question": 2.2
         },
         "comparison": {
           "questions": 5,
-          "answer_accuracy_judge": 0.4,
+          "answer_accuracy_judge": 0.8,
           "exact_match": 0.4,
-          "f1": 0.4,
+          "f1": 0.56,
           "evidence_retrieved": 1.0,
-          "citation_precision": 1.0,
+          "citation_precision": 0.9,
           "citation_recall": 1.0,
-          "false_abstention_rate": 0.4,
-          "abstention_precision": 0.0,
+          "false_abstention_rate": 0.0,
+          "abstention_precision": null,
           "abstention_recall": null,
           "conflict_detection": null,
-          "llm_calls_per_question": 2.8,
-          "searches_per_question": 2.6
+          "llm_calls_per_question": 2.6,
+          "searches_per_question": 2.2
         },
         "contradictory": {
           "questions": 5,
@@ -60,11 +60,11 @@
           "citation_precision": null,
           "citation_recall": null,
           "false_abstention_rate": null,
-          "abstention_precision": 0.0,
+          "abstention_precision": null,
           "abstention_recall": null,
           "conflict_detection": 1.0,
-          "llm_calls_per_question": 2.2,
-          "searches_per_question": 1.2
+          "llm_calls_per_question": 2.4,
+          "searches_per_question": 1.4
         },
         "simple": {
           "questions": 5,
@@ -103,84 +103,71 @@
           "category": "bridge",
           "question": "What year was the voice actress of an animated television series premiered on Cartoon Network born?",
           "gold": "1967",
-          "judge": null,
+          "judge": {
+            "correct": false,
+            "reason": "The predicted year (1968) does not match the gold standard year (1967) for the voice actress's birth year."
+          },
           "scores": {
-            "abstained": true,
-            "llm_calls": 6,
-            "searches": 5,
+            "abstained": false,
+            "llm_calls": 3,
+            "searches": 2,
             "evidence_retrieved": false,
             "exact_match": false,
             "f1": 0.0,
-            "judge_correct": null,
+            "judge_correct": false,
             "correct": false,
-            "citation_precision": null,
-            "citation_recall": null
+            "citation_precision": 0.0,
+            "citation_recall": 0.0
           },
           "answer": {
             "question": "What year was the voice actress of an animated television series premiered on Cartoon Network born?",
-            "answer": "",
-            "claims": [],
+            "answer": "1968",
+            "claims": [
+              {
+                "text": "Kathryn 'Kat' Cressida is a voice actress for the animated television series Dexter's Laboratory on Cartoon Network.",
+                "citations": [
+                  "eab89f39234e7b9b:0"
+                ]
+              },
+              {
+                "text": "Kathryn 'Kat' Cressida was born on March 1, 1968.",
+                "citations": [
+                  "4dc39c736fb07d2c:0"
+                ]
+              }
+            ],
             "conflicts": [],
-            "should_abstain": true,
-            "abstain_reason": "The documents mention several voice actresses of animated television series premiered on Cartoon Network (such as Deedee Magno and Michaela Dietz), but do not contain their birth years.",
+            "should_abstain": false,
+            "abstain_reason": "",
             "search_queries": [
-              "voice actress animated television series premiered on Cartoon Network born",
-              "Deedee Magno born",
-              "\"Deedee Magno\" born",
-              "\"Michaela Dietz\" born",
-              "\"Deedee Magno Hall\" born"
+              "animated television series premiered on Cartoon Network voice actress",
+              "Allison Moore voice actor born OR Kathryn Cressida born"
             ],
             "retrieved_chunk_ids": [
               "eab89f39234e7b9b:0",
               "f11190c00dc98388:0",
               "aecb47c2bcab49a7:1",
-              "b43c7927c5958545:0",
-              "46ff86ba0414e2b3:0",
               "2563b2716feb1ccd:0",
-              "ce2efcada4690cba:0",
-              "182a64bb9ff5727c:0",
-              "c86274403e97de34:0",
-              "12213134edfb5625:0",
-              "8f8e7a3085686eb7:0",
-              "b823983c4f1cad25:0",
-              "40aeadefe86f299f:2",
-              "fa707a0218948819:0",
-              "c874a0ccb372ace9:0",
-              "7b52224cc046782d:0",
-              "0e3f1537bc619898:0",
-              "d0a7331ae61c4d38:0",
-              "23f3ea5a7d08508d:0",
-              "4ba1cbe02a33c476:0",
-              "b76bdb0fe341f379:0",
-              "9c656298b4b785d3:0",
-              "95f9e1c591ca92ed:0"
+              "f6acf6571348823e:2",
+              "b43c7927c5958545:0",
+              "4dc39c736fb07d2c:0",
+              "7895e8a34af4d8c8:0",
+              "7a85b6663688621e:0",
+              "6525df7650897ecd:0"
             ],
             "source_titles": {
               "eab89f39234e7b9b:0": "List of Dexter's Laboratory episodes",
               "f11190c00dc98388:0": "Steven Universe",
               "aecb47c2bcab49a7:1": "Wendy Testaburger",
-              "b43c7927c5958545:0": "Cory Doran",
-              "46ff86ba0414e2b3:0": "Teen Titans (season 1)",
               "2563b2716feb1ccd:0": "Sheep in the Big City",
-              "ce2efcada4690cba:0": "Marissa Perry",
-              "182a64bb9ff5727c:0": "JoJo (singer)",
-              "c86274403e97de34:0": "Tinka Milinović",
-              "12213134edfb5625:0": "Elizabeth Jagger",
-              "8f8e7a3085686eb7:0": "Janine Gutierrez",
-              "b823983c4f1cad25:0": "Biddu",
-              "40aeadefe86f299f:2": "Equal Opportunity to Govern Amendment",
-              "fa707a0218948819:0": "Michaela von Habsburg",
-              "c874a0ccb372ace9:0": "Idina Menzel",
-              "7b52224cc046782d:0": "Viva Bianca",
-              "0e3f1537bc619898:0": "Azealia Banks",
-              "d0a7331ae61c4d38:0": "Michaela Schaffrath",
-              "23f3ea5a7d08508d:0": "Aaron Hall (singer)",
-              "4ba1cbe02a33c476:0": "Dave U. Hall",
-              "b76bdb0fe341f379:0": "Michelle Magorian",
-              "9c656298b4b785d3:0": "Andre Hall (actor)",
-              "95f9e1c591ca92ed:0": "Tony Hall, Baron Hall of Birkenhead"
+              "f6acf6571348823e:2": "Rebecca Forstadt",
+              "b43c7927c5958545:0": "Cory Doran",
+              "4dc39c736fb07d2c:0": "Kat Cressida",
+              "7895e8a34af4d8c8:0": "Cressida Bonas",
+              "7a85b6663688621e:0": "Eli Grant",
+              "6525df7650897ecd:0": "Chloe (film)"
             },
-            "llm_calls": 6,
+            "llm_calls": 3,
             "notes": []
           }
         },
@@ -210,13 +197,13 @@
             "answer": "Axl Rose",
             "claims": [
               {
-                "text": "\"On the Radio\" is the first single from Regina Spektor's fourth album, \"Begin to Hope\". The chorus contains references to the song \"November Rain\" by Guns N' Roses.",
+                "text": "\"On the Radio\" by Regina Spektor contains references to the song \"November Rain\" by Guns N' Roses.",
                 "citations": [
                   "d88d778fc70054e7:0"
                 ]
               },
               {
-                "text": "\"November Rain\" is a power ballad by the American hard rock band Guns N' Roses. Written by the band's lead singer Axl Rose...",
+                "text": "\"November Rain\" was written by the band's lead singer Axl Rose.",
                 "citations": [
                   "13e9c2415466a60e:0"
                 ]
@@ -270,8 +257,8 @@
           },
           "scores": {
             "abstained": false,
-            "llm_calls": 6,
-            "searches": 5,
+            "llm_calls": 3,
+            "searches": 2,
             "evidence_retrieved": true,
             "exact_match": true,
             "f1": 1.0,
@@ -285,13 +272,13 @@
             "answer": "The Social Network",
             "claims": [
               {
-                "text": "Robin R. Bottin is known for collaborations with directors including David Fincher.",
+                "text": "Robin R. Bottin is known for his collaborations with directors including David Fincher.",
                 "citations": [
                   "883505ccbf41d3b9:0"
                 ]
               },
               {
-                "text": "David Fincher is an American director and producer who won a Golden Globe Award and a BAFTA Award for 'The Social Network' (and was nominated for the Academy Award for Best Director for it).",
+                "text": "David Fincher is an American director and producer who won the Golden Globe Award for Best Director and the BAFTA Award for Best Direction for \"The Social Network\".",
                 "citations": [
                   "11cb9bba8a425a44:0"
                 ]
@@ -301,11 +288,8 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Robin R. Bottin collaboration director producer Academy Award Golden Globe BAFTA",
-              "\"David Fincher\" Academy Award Golden Globe BAFTA movie",
-              "\"The Social Network\" Academy Award wins",
-              "\"David Fincher\" Academy Award won film",
-              "Robin Bottin collaborator Academy Award Golden Globe BAFTA"
+              "Robin R Bottin collaboration director producer Academy Award Golden Globe BAFTA",
+              "David Fincher won Golden Globe BAFTA award movie"
             ],
             "retrieved_chunk_ids": [
               "11cb9bba8a425a44:0",
@@ -313,22 +297,12 @@
               "883505ccbf41d3b9:0",
               "e583b2a50ef8ddae:1",
               "180a47cec63ff750:0",
-              "a3304d2278100c70:0",
-              "3fa50b1e103db3d2:1",
+              "26d4e58db9f0f597:0",
               "9e62104e6f7a6e77:1",
-              "3fa50b1e103db3d2:0",
-              "d87a8cad65da9ab9:0",
-              "93035fee85dd5b74:0",
-              "d16699ba698708cd:0",
-              "7bcaa8cfadce4caf:0",
-              "73d7721dd34284bb:1",
-              "50bbc6135be26ae9:1",
-              "d8842be6e4170ceb:0",
+              "3fa50b1e103db3d2:1",
+              "8b178d1910b166c0:0",
               "8518a79a734302d8:1",
-              "013ee81181afa7cc:0",
-              "eb4ad392f37c8c8d:0",
-              "88b00fdb36bbbe56:0",
-              "8b178d1910b166c0:0"
+              "eb4ad392f37c8c8d:0"
             ],
             "source_titles": {
               "11cb9bba8a425a44:0": "David Fincher",
@@ -336,24 +310,14 @@
               "883505ccbf41d3b9:0": "Rob Bottin",
               "e583b2a50ef8ddae:1": "Wash West",
               "180a47cec63ff750:0": "Al Pacino on stage and screen",
-              "a3304d2278100c70:0": "71st Golden Globe Awards",
-              "3fa50b1e103db3d2:1": "Cate Blanchett",
+              "26d4e58db9f0f597:0": "Goodbye Christopher Robin",
               "9e62104e6f7a6e77:1": "Emily Blunt",
-              "3fa50b1e103db3d2:0": "Cate Blanchett",
-              "d87a8cad65da9ab9:0": "70th British Academy Film Awards",
-              "93035fee85dd5b74:0": "Geoffrey Rush",
-              "d16699ba698708cd:0": "Ceán Chaffin",
-              "7bcaa8cfadce4caf:0": "The Social Network",
-              "73d7721dd34284bb:1": "The Bridges of Madison County (film)",
-              "50bbc6135be26ae9:1": "List of accolades received by American Beauty",
-              "d8842be6e4170ceb:0": "Sidney Lumet",
+              "3fa50b1e103db3d2:1": "Cate Blanchett",
+              "8b178d1910b166c0:0": "List of American films of 2004",
               "8518a79a734302d8:1": "List of Primetime Emmy Awards received by Netflix",
-              "013ee81181afa7cc:0": "Academy Award for Best Film Editing",
-              "eb4ad392f37c8c8d:0": "Angus Wall",
-              "88b00fdb36bbbe56:0": "Al Pacino",
-              "8b178d1910b166c0:0": "List of American films of 2004"
+              "eb4ad392f37c8c8d:0": "Angus Wall"
             },
-            "llm_calls": 6,
+            "llm_calls": 3,
             "notes": []
           }
         },
@@ -368,8 +332,8 @@
           },
           "scores": {
             "abstained": false,
-            "llm_calls": 3,
-            "searches": 2,
+            "llm_calls": 2,
+            "searches": 1,
             "evidence_retrieved": true,
             "exact_match": true,
             "f1": 1.0,
@@ -399,8 +363,7 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "José Rubia Barcia Spanish poet playwright",
-              "Federico García Lorca poet playwright"
+              "José Rubia Barcia Spanish poet playwright"
             ],
             "retrieved_chunk_ids": [
               "411078dc0d2e04fd:0",
@@ -408,10 +371,7 @@
               "0c1b153e42e4971f:0",
               "21c8dd11bedfcc87:0",
               "83b67c98f6d20a99:0",
-              "f51983bd45fe3894:0",
-              "e0d3653e320e8481:2",
-              "578f405ac9f33f9c:0",
-              "5d5778e09f586fec:0"
+              "f51983bd45fe3894:0"
             ],
             "source_titles": {
               "411078dc0d2e04fd:0": "José Rubia Barcia",
@@ -419,12 +379,9 @@
               "0c1b153e42e4971f:0": "Shakespeare (disambiguation)",
               "21c8dd11bedfcc87:0": "Cuban literature",
               "83b67c98f6d20a99:0": "Carlos Fernández Shaw",
-              "f51983bd45fe3894:0": "Shakespeare bibliography",
-              "e0d3653e320e8481:2": "List of Argentine operas",
-              "578f405ac9f33f9c:0": "William Shakespeare",
-              "5d5778e09f586fec:0": "Enrique García-Máiquez"
+              "f51983bd45fe3894:0": "Shakespeare bibliography"
             },
-            "llm_calls": 3,
+            "llm_calls": 2,
             "notes": []
           }
         },
@@ -454,7 +411,7 @@
             "answer": "The Walt Disney Company",
             "claims": [
               {
-                "text": "Snake Plissken is the anti-hero protagonist of Escape from New York and is portrayed by Kurt Russell.",
+                "text": "Snake Plissken is the anti-hero protagonist of 'Escape from New York' and is portrayed by Kurt Russell.",
                 "citations": [
                   "edff3e99317108ba:0"
                 ]
@@ -470,7 +427,7 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Escape From New York Kurt Russell anti-hero ten year contract company"
+              "Escape From New York Kurt Russell anti-hero contract company"
             ],
             "retrieved_chunk_ids": [
               "edff3e99317108ba:0",
@@ -478,7 +435,7 @@
               "e312ff6c11cb4746:0",
               "995b59562206a01e:1",
               "028ca2f259a2555f:0",
-              "39fe743604b17a7e:1"
+              "18c89135889ef4c3:1"
             ],
             "source_titles": {
               "edff3e99317108ba:0": "Snake Plissken",
@@ -486,7 +443,7 @@
               "e312ff6c11cb4746:0": "Now You See Him, Now You Don't",
               "995b59562206a01e:1": "UCW-Zero Heavyweight Championship",
               "028ca2f259a2555f:0": "The Computer Wore Tennis Shoes",
-              "39fe743604b17a7e:1": "List of accolades received by The Hurt Locker"
+              "18c89135889ef4c3:1": "Starrcade (1984)"
             },
             "llm_calls": 2,
             "notes": []
@@ -516,13 +473,13 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The model did not return a valid answer, so no answer is given.",
+            "abstain_reason": "The provided document collection does not contain information about a Grammy Nominated album created by a band whose members include John Bowman.",
             "search_queries": [
               "John Bowman band Grammy Nominated album",
-              "John Bowman band",
-              "\"John Bowman\" musician band OR group OR album OR grammy",
-              "\"John Bowman\" band OR album OR grammy OR music",
-              "\"John Bowman\" bluegrass OR gospel OR band"
+              "John Bowman band members",
+              "\"John Bowman\" musician band",
+              "\"John Bowman\" bluegrass OR country OR band OR album OR grammy",
+              "\"John Bowman\" \"Grammy\""
             ],
             "retrieved_chunk_ids": [
               "6c5d63c5a57e5a56:0",
@@ -531,26 +488,28 @@
               "c80050f6a0946df4:1",
               "72331d339bccec4e:0",
               "e05cd254ec898342:1",
-              "f49a8e30f41ccece:0",
-              "255b3e7ff2b91d5d:0",
               "516a6ef579a540c7:0",
+              "255b3e7ff2b91d5d:0",
+              "b0751b485b52d4ff:2",
+              "c9105f4ec986fb7f:0",
+              "f49a8e30f41ccece:0",
               "081bb60a28c97fef:0",
-              "e31b63b6d003ac0f:0",
-              "7f2a495f0989fd74:1",
-              "c1f2c56e179ec4f3:0",
+              "f2b49b8574547493:0",
               "1c66c27e083f02b4:0",
-              "664e98f2a4552a62:0",
-              "992da1f8841ffb8f:0",
-              "0c48dbdc94c225af:0",
-              "583377654f36237e:0",
-              "e3cd93669ac0daff:0",
-              "240e7296f0b46d0b:0",
-              "be80ea51888812f9:0",
-              "3c4105370f5d940b:0",
+              "8fb780195a5c86a4:0",
+              "e31b63b6d003ac0f:0",
+              "439946feaaf7db5f:0",
               "5fdd6a6122ac06f8:0",
-              "00fa3419de2b60b5:0",
+              "be80ea51888812f9:0",
+              "b9da79ae52ad50b2:0",
+              "00ea8beb51c1b5e2:0",
               "842f360e3170b466:1",
-              "d867549a07feec08:0"
+              "a677002d134da312:0",
+              "bddcb9b88973e2ff:0",
+              "ce3e1284f5193cb9:0",
+              "708e7aedc33d89a3:0",
+              "4e5a9b92226f1d0b:0",
+              "583377654f36237e:0"
             ],
             "source_titles": {
               "6c5d63c5a57e5a56:0": "Sixpence None the Richer (album)",
@@ -559,31 +518,31 @@
               "c80050f6a0946df4:1": "Paul Nelson (musician)",
               "72331d339bccec4e:0": "The Foundation (Zac Brown Band album)",
               "e05cd254ec898342:1": "Hello, I'm Johnny Cash",
-              "f49a8e30f41ccece:0": "John Kirby (musician)",
-              "255b3e7ff2b91d5d:0": "John Bowman (pioneer)",
               "516a6ef579a540c7:0": "Polar Bear (British band)",
+              "255b3e7ff2b91d5d:0": "John Bowman (pioneer)",
+              "b0751b485b52d4ff:2": "Five Style",
+              "c9105f4ec986fb7f:0": "Trip Shakespeare",
+              "f49a8e30f41ccece:0": "John Kirby (musician)",
               "081bb60a28c97fef:0": "Beyond Rangoon",
-              "e31b63b6d003ac0f:0": "Manchester Orchestra",
-              "7f2a495f0989fd74:1": "Bu Laia",
-              "c1f2c56e179ec4f3:0": "Kerry Marx",
+              "f2b49b8574547493:0": "John McCrea (musician)",
               "1c66c27e083f02b4:0": "Bassist",
-              "664e98f2a4552a62:0": "Tool (band)",
-              "992da1f8841ffb8f:0": "Armen Chakmakian",
-              "0c48dbdc94c225af:0": "Jody Porter",
-              "583377654f36237e:0": "Johnnie Ray",
-              "e3cd93669ac0daff:0": "HazeBanga",
-              "240e7296f0b46d0b:0": "Mary Ramsey",
-              "be80ea51888812f9:0": "Bluegrass Cardinals",
-              "3c4105370f5d940b:0": "The Isaacs",
+              "8fb780195a5c86a4:0": "Nick McCarthy",
+              "e31b63b6d003ac0f:0": "Manchester Orchestra",
+              "439946feaaf7db5f:0": "Jay Joyce",
               "5fdd6a6122ac06f8:0": "Johnson Mountain Boys",
-              "00fa3419de2b60b5:0": "Greensky Bluegrass",
+              "be80ea51888812f9:0": "Bluegrass Cardinals",
+              "b9da79ae52ad50b2:0": "Fascination (album)",
+              "00ea8beb51c1b5e2:0": "Larry Sparks",
               "842f360e3170b466:1": "Weather and Water",
-              "d867549a07feec08:0": "Union Station (band)"
+              "a677002d134da312:0": "Somewhere in the Vicinity of the Heart",
+              "bddcb9b88973e2ff:0": "Steve Chrisanthou",
+              "ce3e1284f5193cb9:0": "Grammy Award for Best Male Rap Solo Performance",
+              "708e7aedc33d89a3:0": "Robert Glasper",
+              "4e5a9b92226f1d0b:0": "John Congleton",
+              "583377654f36237e:0": "Johnnie Ray"
             },
             "llm_calls": 6,
-            "notes": [
-              "unparseable final reply: ''"
-            ]
+            "notes": []
           }
         },
         {
@@ -591,26 +550,36 @@
           "category": "bridge",
           "question": "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?",
           "gold": "Spurs",
-          "judge": null,
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer 'Spurs' matches the gold answer and correctly identifies the common nickname for Tottenham Hotspur."
+          },
           "scores": {
-            "abstained": true,
+            "abstained": false,
             "llm_calls": 3,
             "searches": 2,
             "evidence_retrieved": true,
-            "exact_match": false,
-            "f1": 0.0,
-            "judge_correct": null,
-            "correct": false,
-            "citation_precision": null,
-            "citation_recall": null
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 0.5
           },
           "answer": {
             "question": "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?",
-            "answer": "",
-            "claims": [],
+            "answer": "Spurs",
+            "claims": [
+              {
+                "text": "Tottenham Hotspur Football Club, commonly referred to simply as Tottenham or Spurs, is an English football club",
+                "citations": [
+                  "8ad9fec8fa354a2f:0"
+                ]
+              }
+            ],
             "conflicts": [],
-            "should_abstain": true,
-            "abstain_reason": "None of the answer's claims cite evidence that was actually retrieved.",
+            "should_abstain": false,
+            "abstain_reason": "",
             "search_queries": [
               "Leonard Francis Tottenham Hotspur",
               "Leonard Francis footballer"
@@ -642,10 +611,7 @@
               "ff0d1a8f897efb63:1": "1967 FA Charity Shield"
             },
             "llm_calls": 3,
-            "notes": [
-              "removed citation 8ad9fec8fa354a2f: not retrieved",
-              "removed claim 'Tottenham Hotspur Football Club, commonly referred to simply as Tottenham or Spurs, is an English football club': no valid citation"
-            ]
+            "notes": []
           }
         },
         {
@@ -653,74 +619,81 @@
           "category": "bridge",
           "question": "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?",
           "gold": "The Snowman",
-          "judge": null,
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies the animated film 'The Snowman', which matches the gold answer."
+          },
           "scores": {
-            "abstained": true,
-            "llm_calls": 6,
-            "searches": 5,
-            "evidence_retrieved": false,
-            "exact_match": false,
-            "f1": 0.0,
-            "judge_correct": null,
-            "correct": false,
-            "citation_precision": null,
-            "citation_recall": null
+            "abstained": false,
+            "llm_calls": 4,
+            "searches": 3,
+            "evidence_retrieved": true,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
           },
           "answer": {
             "question": "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?",
-            "answer": "",
-            "claims": [],
+            "answer": "The Snowman",
+            "claims": [
+              {
+                "text": "\"Walking in the Air\" is a song written by Howard Blake for the 1982 animated film of Raymond Briggs' 1978 children's book \"The Snowman\".",
+                "citations": [
+                  "593daabb403390a9:0"
+                ]
+              },
+              {
+                "text": "In the film, the song was performed by Peter Auty, who is an English operatic tenor.",
+                "citations": [
+                  "593daabb403390a9:0",
+                  "2b2712b3633d7bae:0"
+                ]
+              }
+            ],
             "conflicts": [],
-            "should_abstain": true,
-            "abstain_reason": "The documents mention that 'Walking in the Air' from the 1982 animated film 'The Snowman' was performed by choirboy Peter Auty, but do not contain information about an English operatic tenor performing it for that film.",
+            "should_abstain": false,
+            "abstain_reason": "",
             "search_queries": [
-              "Walking in the Air 1982 animated film tenor",
-              "\"Walking in the Air\" operatic tenor OR tenor 1982 animated film OR \"The Snowman\"",
-              "\"Walking in the Air\" tenor OR \"The Snowman\" cover OR version tenor",
-              "\"The Snowman\" \"tenor\" OR \"Walking in the Air\" tenor",
-              "\"The Snowman\" \"operatic tenor\" OR \"tenor\" \"Walking in the Air\""
+              "Walking in the Air 1982 animated film operatic tenor",
+              "\"Walking in the Air\" tenor OR \"English operatic tenor\" OR cover OR version OR \"The Snowman\"",
+              "\"Walking in the Air\" Peter Auty"
             ],
             "retrieved_chunk_ids": [
               "593daabb403390a9:0",
+              "99bc2533d36b84bd:0",
               "07b15e2cec0c4307:0",
-              "c6f50d4dd92f823c:0",
-              "629ed30f1487be5a:1",
-              "aa269ad5266aa0ca:0",
-              "16592df8768358aa:0",
-              "9fff47e85aeff251:0",
               "34bb451f5f0d6784:0",
-              "3df6368d1fdbc282:0",
+              "1e4cc7b92e8f167d:1",
               "a243b0cb7f806335:0",
-              "f0c4f5fed480a2c8:1",
-              "cade13ebe091333c:1",
-              "c71f8fc9635aaa7c:0",
-              "0888e78dccdf8283:0",
+              "9fff47e85aeff251:0",
+              "b33bf5500f220040:0",
+              "2b2712b3633d7bae:0",
               "c50f592b5ba0db5e:0",
-              "63427d7fe1488c62:0",
-              "93478cac5f72fef1:2",
-              "99bc2533d36b84bd:0"
+              "e8f0fcd12445185d:0",
+              "9dd7d1d7e8c399ca:0",
+              "c7fbda82a6742c21:0",
+              "1af37061aab1ee1f:0"
             ],
             "source_titles": {
               "593daabb403390a9:0": "Walking in the Air",
+              "99bc2533d36b84bd:0": "Charles Craig (tenor)",
               "07b15e2cec0c4307:0": "La Traviata (1983 film)",
-              "c6f50d4dd92f823c:0": "Cavalleria rusticana (1982 film)",
-              "629ed30f1487be5a:1": "Dog Tales (1958 film)",
-              "aa269ad5266aa0ca:0": "Walking Tall Part 2",
-              "16592df8768358aa:0": "Step in Time",
-              "9fff47e85aeff251:0": "David Hillman",
               "34bb451f5f0d6784:0": "Nicholas Sharratt",
-              "3df6368d1fdbc282:0": "The Hunchback of Notre Dame (1996 film)",
+              "1e4cc7b92e8f167d:1": "Mehrdad Raissi Ardali",
               "a243b0cb7f806335:0": "David Rendall",
-              "f0c4f5fed480a2c8:1": "Fantasia on Christmas Carols",
-              "cade13ebe091333c:1": "NBA 2K16",
-              "c71f8fc9635aaa7c:0": "Anthem (Chess song)",
-              "0888e78dccdf8283:0": "Trinity (My Dying Bride album)",
+              "9fff47e85aeff251:0": "David Hillman",
+              "b33bf5500f220040:0": "Anthony Rolfe Johnson",
+              "2b2712b3633d7bae:0": "Peter Auty",
               "c50f592b5ba0db5e:0": "Plácido Domingo discography",
-              "63427d7fe1488c62:0": "Repertoire of Plácido Domingo",
-              "93478cac5f72fef1:2": "James Westman",
-              "99bc2533d36b84bd:0": "Charles Craig (tenor)"
+              "e8f0fcd12445185d:0": "Peter Townsend (RAF officer)",
+              "9dd7d1d7e8c399ca:0": "A Dandy in Aspic",
+              "c7fbda82a6742c21:0": "Something in the Air (2012 film)",
+              "1af37061aab1ee1f:0": "Pieterpad"
             },
-            "llm_calls": 6,
+            "llm_calls": 4,
             "notes": []
           }
         },
@@ -750,13 +723,13 @@
             "answer": "Charles Nungesser",
             "claims": [
               {
-                "text": "Charles Eugène Jules Marie Nungesser was a French ace pilot and adventurer, best remembered as a rival of Charles Lindbergh.",
+                "text": "Charles Eugène Jules Marie Nungesser was a French ace pilot and adventurer.",
                 "citations": [
                   "ad9cbf0656d27c89:0"
                 ]
               },
               {
-                "text": "The aircraft was flown by French World War I aviation heroes, Charles Nungesser and François Coli.",
+                "text": "L'Oiseau Blanc was flown by French World War I aviation heroes Charles Nungesser and François Coli.",
                 "citations": [
                   "100fd0029e8667dd:0"
                 ]
@@ -767,7 +740,7 @@
             "abstain_reason": "",
             "search_queries": [
               "L'Oiseau Blanc pilot adventurer",
-              "Charles Nungesser adventurer ace"
+              "Charles Nungesser"
             ],
             "retrieved_chunk_ids": [
               "6620168ec959c0fe:0",
@@ -778,9 +751,8 @@
               "f1d64366d986e841:0",
               "ad9cbf0656d27c89:0",
               "7e1789f35d96e79a:1",
-              "c9641198075e8451:0",
-              "5a73be2a04b33bce:0",
-              "caeba57f0047cc48:0"
+              "d4ddd676a08d28f5:0",
+              "a7e31dd088317496:0"
             ],
             "source_titles": {
               "6620168ec959c0fe:0": "François Coli",
@@ -791,9 +763,8 @@
               "f1d64366d986e841:0": "François Laurent d'Arlandes",
               "ad9cbf0656d27c89:0": "Charles Nungesser",
               "7e1789f35d96e79a:1": "Wooster and Davis",
-              "c9641198075e8451:0": "Charles J. Biddle (aviator)",
-              "5a73be2a04b33bce:0": "Ernest Charles Hoy",
-              "caeba57f0047cc48:0": "Gervais Raoul Lufbery"
+              "d4ddd676a08d28f5:0": "Charles Carroll of Carrollton",
+              "a7e31dd088317496:0": "King Charles the Martyr"
             },
             "llm_calls": 3,
             "notes": []
@@ -841,16 +812,16 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "PISCES developed by company headquartered city",
+              "PISCES developed company headquartered",
               "Booz Allen Hamilton headquartered city"
             ],
             "retrieved_chunk_ids": [
               "c6f094279db87c89:0",
               "4752482b14eb5e81:0",
-              "dacb7e0c737cdc99:1",
-              "018080d2db1c0d7e:0",
               "4e078a041d48ea53:0",
-              "e03e2d73e5a0ced6:0",
+              "018080d2db1c0d7e:0",
+              "8fc8d447a3122f84:0",
+              "740f78ae36dd270f:0",
               "552167a95dd95f0e:0",
               "0c254fbcc8073047:0",
               "b48e17f266188b90:0",
@@ -860,10 +831,10 @@
             "source_titles": {
               "c6f094279db87c89:0": "PISCES",
               "4752482b14eb5e81:0": "SpaceX",
-              "dacb7e0c737cdc99:1": "Fonciere des Regions",
-              "018080d2db1c0d7e:0": "Maritime Broadband",
               "4e078a041d48ea53:0": "Chelsio Communications",
-              "e03e2d73e5a0ced6:0": "Guidance Software",
+              "018080d2db1c0d7e:0": "Maritime Broadband",
+              "8fc8d447a3122f84:0": "PIMCO",
+              "740f78ae36dd270f:0": "AVG Technologies",
               "552167a95dd95f0e:0": "Booz Allen Hamilton",
               "0c254fbcc8073047:0": "Hamilton Brothers Building",
               "b48e17f266188b90:0": "Cincinnati",
@@ -906,7 +877,7 @@
                 ]
               },
               {
-                "text": "Valeria Sarmiento is a Chilean film editor, director and screenwriter, and has also worked as a writer.",
+                "text": "Valeria Sarmiento is a Chilean film editor, director and screenwriter, and worked as a writer.",
                 "citations": [
                   "6bbc2cf69a53f974:0"
                 ]
@@ -916,36 +887,30 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Leopold Lummerstorfer",
-              "Valeria Sarmiento"
+              "Leopold Lummerstorfer Valeria Sarmiento author",
+              "Valeria Sarmiento author screenwriter writer"
             ],
             "retrieved_chunk_ids": [
               "b996e58310e1ae5e:0",
-              "b9bcacbfd8e20a15:0",
-              "4a087147256c5535:0",
-              "5c99089d1a4c239f:0",
-              "3f0746b2c2093056:0",
-              "0ffab917d63ff5bf:0",
               "6bbc2cf69a53f974:0",
-              "354f95b71ab3d064:0",
+              "c3b61aaf2166065f:0",
               "056771552f58f39c:0",
+              "5c99089d1a4c239f:0",
               "a586d233551bf2b2:0",
-              "35e0c13c8738c1b0:0",
-              "6897e1cbd46cbac1:0"
+              "fd309504c5f8ffb1:1",
+              "34abd5f6912d53a0:0",
+              "c83d2d207365a13b:1"
             ],
             "source_titles": {
               "b996e58310e1ae5e:0": "Leopold Lummerstorfer",
-              "b9bcacbfd8e20a15:0": "Archduke Leopold Salvator of Austria",
-              "4a087147256c5535:0": "Archduke Friedrich of Austria (1821–1847)",
-              "5c99089d1a4c239f:0": "Leopold von Sacher-Masoch",
-              "3f0746b2c2093056:0": "Philippe of Belgium",
-              "0ffab917d63ff5bf:0": "Prince Leopold, Duke of Albany",
               "6bbc2cf69a53f974:0": "Valeria Sarmiento",
-              "354f95b71ab3d064:0": "Valeria Bondarenko",
+              "c3b61aaf2166065f:0": "Don Quixote",
               "056771552f58f39c:0": "Amelia Lópes O'Neill",
+              "5c99089d1a4c239f:0": "Leopold von Sacher-Masoch",
               "a586d233551bf2b2:0": "Lines of Wellington",
-              "35e0c13c8738c1b0:0": "Rubén Darío",
-              "6897e1cbd46cbac1:0": "Iris Fontbona"
+              "fd309504c5f8ffb1:1": "Samanta Schweblin",
+              "34abd5f6912d53a0:0": "Miguel de Cervantes",
+              "c83d2d207365a13b:1": "Carlos Alberto Montaner"
             },
             "llm_calls": 3,
             "notes": []
@@ -977,13 +942,13 @@
             "answer": "Swervedriver",
             "claims": [
               {
-                "text": "Swervedriver were an English alternative rock band formed in Oxford in 1989.",
+                "text": "Swervedriver are an English alternative rock band formed in Oxford in 1989.",
                 "citations": [
                   "8c558bd5eac2da8c:0"
                 ]
               },
               {
-                "text": "Incubus is an American rock band from Calabasas, California. The band was formed in 1991",
+                "text": "Incubus is an American rock band from Calabasas, California. The band was formed in 1991...",
                 "citations": [
                   "a9e2e5ee48ec76be:0"
                 ]
@@ -993,32 +958,32 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Swervedriver formed incubation formation year band",
-              "Incubus band formed year"
+              "Swervedriver formed year band",
+              "Incubus formed year band"
             ],
             "retrieved_chunk_ids": [
               "8c558bd5eac2da8c:0",
+              "6b0efb4f0f788eff:0",
               "ec5bd8b1441260a2:0",
               "79c6a385b783fe3d:1",
-              "f78e7923457fc332:0",
-              "aa31dd4dcc6c0863:0",
-              "60c0c3d801e289a6:0",
-              "a9e2e5ee48ec76be:0",
-              "bec2f1e8cae78b6d:0",
+              "79c6a385b783fe3d:0",
               "4890f4a8dc297d76:0",
+              "a9e2e5ee48ec76be:0",
+              "60c0c3d801e289a6:0",
+              "8e19ed08b35b9fb7:0",
               "beb79c234b78ef09:0",
               "2cb6ad86350ccefe:1"
             ],
             "source_titles": {
               "8c558bd5eac2da8c:0": "Swervedriver",
+              "6b0efb4f0f788eff:0": "The Word Alive discography",
               "ec5bd8b1441260a2:0": "Giants of Science",
               "79c6a385b783fe3d:1": "SWMRS",
-              "f78e7923457fc332:0": "Sanctuary (band)",
-              "aa31dd4dcc6c0863:0": "Greek Fire (band)",
-              "60c0c3d801e289a6:0": "Time Lapse Consortium",
-              "a9e2e5ee48ec76be:0": "Incubus (band)",
-              "bec2f1e8cae78b6d:0": "List of the Smashing Pumpkins band members",
+              "79c6a385b783fe3d:0": "SWMRS",
               "4890f4a8dc297d76:0": "Kilburn and the High Roads",
+              "a9e2e5ee48ec76be:0": "Incubus (band)",
+              "60c0c3d801e289a6:0": "Time Lapse Consortium",
+              "8e19ed08b35b9fb7:0": "Story of the Year",
               "beb79c234b78ef09:0": "The Smashing Pumpkins",
               "2cb6ad86350ccefe:1": "Wake Me Up (Avicii song)"
             },
@@ -1031,31 +996,48 @@
           "category": "comparison",
           "question": "Sam Mendes and Ruby Yang share what profession?",
           "gold": "filmmaker.",
-          "judge": null,
+          "judge": {
+            "correct": true,
+            "reason": "Filmmaker and director are synonymous in the context of their profession."
+          },
           "scores": {
-            "abstained": true,
+            "abstained": false,
             "llm_calls": 3,
-            "searches": 4,
+            "searches": 3,
             "evidence_retrieved": true,
             "exact_match": false,
             "f1": 0.0,
-            "judge_correct": null,
-            "correct": false,
-            "citation_precision": null,
-            "citation_recall": null
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 0.5,
+            "citation_recall": 1.0
           },
           "answer": {
             "question": "Sam Mendes and Ruby Yang share what profession?",
-            "answer": "",
-            "claims": [],
+            "answer": "director",
+            "claims": [
+              {
+                "text": "Sam Mendes is an English stage and film director.",
+                "citations": [
+                  "68588a0127083a50:0"
+                ]
+              },
+              {
+                "text": "Ruby Yang is a filmmaker who has directed films such as My Voice, My Life and The Blood of Yingzhou District.",
+                "citations": [
+                  "168de342501307d8:0",
+                  "b4a28d504a162edf:0",
+                  "59fbc6457d20c7e2:0"
+                ]
+              }
+            ],
             "conflicts": [],
-            "should_abstain": true,
-            "abstain_reason": "None of the answer's claims cite evidence that was actually retrieved.",
+            "should_abstain": false,
+            "abstain_reason": "",
             "search_queries": [
               "Sam Mendes profession",
               "Ruby Yang profession",
-              "Sam Mendes director film director",
-              "Ruby Yang filmmaker director"
+              "director filmmaker film director Sam Mendes Ruby Yang"
             ],
             "retrieved_chunk_ids": [
               "50bbc6135be26ae9:0",
@@ -1069,11 +1051,7 @@
               "59fbc6457d20c7e2:0",
               "0ff2bac62cbdb32f:0",
               "a6b1a4d9588d94a2:0",
-              "e9efbebc4ebf9694:0",
-              "b5954c277d44346f:0",
-              "50bbc6135be26ae9:1",
-              "dc990084eebb1642:0",
-              "a1493f2670e8173d:1"
+              "e9efbebc4ebf9694:0"
             ],
             "source_titles": {
               "50bbc6135be26ae9:0": "List of accolades received by American Beauty",
@@ -1087,21 +1065,10 @@
               "59fbc6457d20c7e2:0": "The Blood of Yingzhou District",
               "0ff2bac62cbdb32f:0": "Ruby Buckton",
               "a6b1a4d9588d94a2:0": "The Warriors of Qiugang",
-              "e9efbebc4ebf9694:0": "Yang Seung-ho",
-              "b5954c277d44346f:0": "Sam Taylor (director)",
-              "50bbc6135be26ae9:1": "List of accolades received by American Beauty",
-              "dc990084eebb1642:0": "Ruby (1977 film)",
-              "a1493f2670e8173d:1": "Beautiful Young Minds"
+              "e9efbebc4ebf9694:0": "Yang Seung-ho"
             },
             "llm_calls": 3,
-            "notes": [
-              "removed citation 68588a0127083a50: not retrieved",
-              "removed claim 'Sam Mendes is an English stage and film director.': no valid citation",
-              "removed citation 168de342501307d8: not retrieved",
-              "removed citation b4a28d504a162edf: not retrieved",
-              "removed citation 59fbc6457d20c7e2: not retrieved",
-              "removed claim 'Ruby Yang is a Chinese American filmmaker who directs films such as My Voice, My Life and The Blood of Yingzhou District.': no valid citation"
-            ]
+            "notes": []
           }
         },
         {
@@ -1136,7 +1103,7 @@
                 ]
               },
               {
-                "text": "The Settlers of Catan (also known as Catan) was first published in 1995 in Germany.",
+                "text": "The Settlers of Catan (Catan) was first published in 1995.",
                 "citations": [
                   "ffe8ef165b22aef2:0"
                 ]
@@ -1184,72 +1151,73 @@
           "category": "comparison",
           "question": "Who was born first out of Todd Field and Aaron Katz?",
           "gold": "William Todd Field",
-          "judge": null,
+          "judge": {
+            "correct": true,
+            "reason": "Todd Field and William Todd Field are the same person, and he was born in 1964, whereas Aaron Katz was born later (1981)."
+          },
           "scores": {
-            "abstained": true,
-            "llm_calls": 3,
-            "searches": 3,
+            "abstained": false,
+            "llm_calls": 2,
+            "searches": 2,
             "evidence_retrieved": true,
             "exact_match": false,
-            "f1": 0.0,
-            "judge_correct": null,
-            "correct": false,
-            "citation_precision": null,
-            "citation_recall": null
+            "f1": 0.8,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
+            "citation_recall": 1.0
           },
           "answer": {
             "question": "Who was born first out of Todd Field and Aaron Katz?",
-            "answer": "",
-            "claims": [],
+            "answer": "Todd Field",
+            "claims": [
+              {
+                "text": "William Todd Field was born on February 24, 1964.",
+                "citations": [
+                  "72ad74d160bbf24d:0"
+                ]
+              },
+              {
+                "text": "Aaron Katz was born on October 29, 1981.",
+                "citations": [
+                  "7a25f1d0e4c7eaca:0"
+                ]
+              }
+            ],
             "conflicts": [],
-            "should_abstain": true,
-            "abstain_reason": "None of the answer's claims cite evidence that was actually retrieved.",
+            "should_abstain": false,
+            "abstain_reason": "",
             "search_queries": [
-              "Todd Field birth date",
-              "Aaron Katz birth date",
-              "\"Todd Field\" filmmaker OR director OR born"
+              "Todd Field born birth date",
+              "Aaron Katz born birth date"
             ],
             "retrieved_chunk_ids": [
-              "d4f4779af0be1e55:0",
-              "f075afbf138cb457:0",
               "de2aa9a977b17243:0",
               "ee57a59a307ec0a1:0",
               "4c1396a51b496e73:0",
-              "cbf2e50a479d67a8:0",
-              "7a25f1d0e4c7eaca:0",
-              "7958e3db68439499:0",
-              "7b6c3119d7ccecb9:0",
-              "63493952644d4e67:0",
-              "3334b43678889d06:0",
-              "a217379f8d8904b9:0",
               "72ad74d160bbf24d:0",
-              "508e4056ef7bb46b:0",
-              "28f0ab4a7086235a:0",
-              "74ea35f9f36c3071:0",
-              "d4c8940701d6ddfb:0",
-              "56817a199fc3b14a:0"
+              "d4f4779af0be1e55:0",
+              "dfb873badfbca9e0:0",
+              "23f3ea5a7d08508d:0",
+              "7a25f1d0e4c7eaca:0",
+              "f154442d5fd1535b:0",
+              "3167a7b95ed3d949:0",
+              "7b6c3119d7ccecb9:0"
             ],
             "source_titles": {
-              "d4f4779af0be1e55:0": "Todd Mission, Texas",
-              "f075afbf138cb457:0": "Long Prairie Municipal Airport",
               "de2aa9a977b17243:0": "Chris Todd (American football)",
               "ee57a59a307ec0a1:0": "Thomas D. Singleton",
               "4c1396a51b496e73:0": "Todd Anderson",
-              "cbf2e50a479d67a8:0": "Hippolytus (archbishop of Gniezno)",
-              "7a25f1d0e4c7eaca:0": "Aaron Katz (filmmaker)",
-              "7958e3db68439499:0": "Dance Party USA (film)",
-              "7b6c3119d7ccecb9:0": "Cold Weather",
-              "63493952644d4e67:0": "Quiet City (film)",
-              "3334b43678889d06:0": "Mike Katz",
-              "a217379f8d8904b9:0": "Diamonds (1999 film)",
               "72ad74d160bbf24d:0": "Todd Field",
-              "508e4056ef7bb46b:0": "Too Romantic",
-              "28f0ab4a7086235a:0": "Todd Fisher",
-              "74ea35f9f36c3071:0": "In the Bedroom",
-              "d4c8940701d6ddfb:0": "Delivering (film)",
-              "56817a199fc3b14a:0": "Todd Haynes"
+              "d4f4779af0be1e55:0": "Todd Mission, Texas",
+              "dfb873badfbca9e0:0": "Place of birth",
+              "23f3ea5a7d08508d:0": "Aaron Hall (singer)",
+              "7a25f1d0e4c7eaca:0": "Aaron Katz (filmmaker)",
+              "f154442d5fd1535b:0": "Zach Woods",
+              "3167a7b95ed3d949:0": "AZ (rapper)",
+              "7b6c3119d7ccecb9:0": "Cold Weather"
             },
-            "llm_calls": 3,
+            "llm_calls": 2,
             "notes": []
           }
         },
@@ -1289,23 +1257,23 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Hostel Part II 2007 American horror film writer director"
+              "Hostel Part II 2007 American horror film written and directed by"
             ],
             "retrieved_chunk_ids": [
               "6b2dd0d50bb62b21:0",
               "acf795f1414c07dd:0",
-              "d6a0307053cf93ac:0",
               "5b74943c13e2619b:0",
               "eb4064ac593d6dd0:0",
-              "df0892c7a9efba5b:0"
+              "949c276c55908c39:0",
+              "d6a0307053cf93ac:0"
             ],
             "source_titles": {
               "6b2dd0d50bb62b21:0": "Hostel: Part II",
               "acf795f1414c07dd:0": "Hostel (2005 film)",
-              "d6a0307053cf93ac:0": "Eli Roth",
               "5b74943c13e2619b:0": "Hostel: Part III",
               "eb4064ac593d6dd0:0": "Unearthed (film)",
-              "df0892c7a9efba5b:0": "John Carpenter"
+              "949c276c55908c39:0": "The Hills Have Eyes 2",
+              "d6a0307053cf93ac:0": "Eli Roth"
             },
             "llm_calls": 2,
             "notes": []
@@ -1347,7 +1315,7 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Hans Moleman creator creator character The Simpsons"
+              "Hans Moleman creator creator: The Simpsons"
             ],
             "retrieved_chunk_ids": [
               "68b8e8c074b6c659:0",
@@ -1463,7 +1431,7 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "Cool and the Crazy 1994 Jared Leto Alicia Silverstone director"
+              "Cool and the Crazy 1994 director Jared Leto Alicia Silverstone"
             ],
             "retrieved_chunk_ids": [
               "78c7eee4c0ed6f7d:0",
@@ -1471,7 +1439,7 @@
               "af5a5b5533a4d8b2:0",
               "2d2aabfdd5a8d1d1:1",
               "872b81bf9be72e01:0",
-              "9da5891b75de8547:1"
+              "7f67599207b3532e:0"
             ],
             "source_titles": {
               "78c7eee4c0ed6f7d:0": "Cool and the Crazy",
@@ -1479,7 +1447,7 @@
               "af5a5b5533a4d8b2:0": "Requiem for a Dream",
               "2d2aabfdd5a8d1d1:1": "Hard Candy (cosmetics)",
               "872b81bf9be72e01:0": "Knut Erik Jensen",
-              "9da5891b75de8547:1": "Alicia Silverstone"
+              "7f67599207b3532e:0": "Suicide Squad (film)"
             },
             "llm_calls": 2,
             "notes": []
@@ -1551,8 +1519,8 @@
           "judge": null,
           "scores": {
             "abstained": true,
-            "llm_calls": 4,
-            "searches": 3,
+            "llm_calls": 3,
+            "searches": 2,
             "correct": true
           },
           "answer": {
@@ -1561,43 +1529,38 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The document collection does not contain information about the Academy Award for Best Picture in 2029.",
+            "abstain_reason": "The document collection does not contain information about the Academy Awards for 2029.",
             "search_queries": [
-              "Academy Award for Best Picture 2029",
-              "Best Picture 2029",
-              "Academy Award Best Picture 2029"
+              "Academy Award for Best Picture 2029 winner",
+              "\"Best Picture\" 2029"
             ],
             "retrieved_chunk_ids": [
               "013ee81181afa7cc:0",
-              "8b178d1910b166c0:0",
               "a83d5e698a91ccec:0",
-              "635661ebcc62acac:0",
               "382f75025097b797:0",
+              "635661ebcc62acac:0",
+              "bb8824417dd1b578:0",
               "73d7721dd34284bb:1",
+              "50bbc6135be26ae9:1",
               "ba5d52fb7628b66e:1",
-              "99d0eb6de3eb2e1e:1",
-              "052f75355a18112b:1",
-              "ea95f618758317d9:2",
-              "016bd1b85d35fa05:0",
-              "08fbac3268b7ebfd:0",
-              "5fddf2d19a693467:0"
+              "8b178d1910b166c0:0",
+              "cb01efb60bce6021:0",
+              "052f75355a18112b:1"
             ],
             "source_titles": {
               "013ee81181afa7cc:0": "Academy Award for Best Film Editing",
-              "8b178d1910b166c0:0": "List of American films of 2004",
               "a83d5e698a91ccec:0": "List of Academy Award Best Actress winners by age",
-              "635661ebcc62acac:0": "List of Best Supporting Actress winners by age",
               "382f75025097b797:0": "List of Best Supporting Actor winners by age",
+              "635661ebcc62acac:0": "List of Best Supporting Actress winners by age",
+              "bb8824417dd1b578:0": "Academy Honorary Award",
               "73d7721dd34284bb:1": "The Bridges of Madison County (film)",
+              "50bbc6135be26ae9:1": "List of accolades received by American Beauty",
               "ba5d52fb7628b66e:1": "The Grandmaster (film)",
-              "99d0eb6de3eb2e1e:1": "DragonBlade: The Legend of Lang",
-              "052f75355a18112b:1": "Cantinflas",
-              "ea95f618758317d9:2": "MTV Africa Music Awards 2014",
-              "016bd1b85d35fa05:0": "North Carolina Highway 2A",
-              "08fbac3268b7ebfd:0": "The Lion King (2019 film)",
-              "5fddf2d19a693467:0": "Emile Sherman"
+              "8b178d1910b166c0:0": "List of American films of 2004",
+              "cb01efb60bce6021:0": "61st Golden Globe Awards",
+              "052f75355a18112b:1": "Cantinflas"
             },
-            "llm_calls": 4,
+            "llm_calls": 3,
             "notes": []
           }
         },
@@ -1619,10 +1582,10 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The provided documents do not contain any information about the 2032 presidential election in France or who was elected President in 2032.",
+            "abstain_reason": "The document collection does not contain information about the 2032 French presidential election or who was elected President of France in 2032.",
             "search_queries": [
               "President of France in 2032",
-              "2032 President of France"
+              "President of France 2032 election"
             ],
             "retrieved_chunk_ids": [
               "67e6d66684cfd959:0",
@@ -1630,7 +1593,12 @@
               "2e6b7078f5a2b59b:1",
               "88ed2bb7a7f6028b:0",
               "a8fb1d3f42dd5ffc:0",
-              "3b01286554558d15:0"
+              "3b01286554558d15:0",
+              "dc13602366935df4:0",
+              "c0d1103b27de7ac7:0",
+              "7379d6ee6c473066:0",
+              "75816f373e578079:0",
+              "da11b893bf88e0de:1"
             ],
             "source_titles": {
               "67e6d66684cfd959:0": "Napoleon III",
@@ -1638,7 +1606,12 @@
               "2e6b7078f5a2b59b:1": "Government of France",
               "88ed2bb7a7f6028b:0": "Marine Le Pen",
               "a8fb1d3f42dd5ffc:0": "Dwight D. Eisenhower",
-              "3b01286554558d15:0": "Jean-de-Dieu Soult"
+              "3b01286554558d15:0": "Jean-de-Dieu Soult",
+              "dc13602366935df4:0": "United States presidential election, 1792",
+              "c0d1103b27de7ac7:0": "2044 election",
+              "7379d6ee6c473066:0": "United States presidential election, 2020",
+              "75816f373e578079:0": "United States presidential election, 1968",
+              "da11b893bf88e0de:1": "Haitian presidential election, 2015"
             },
             "llm_calls": 3,
             "notes": []
@@ -1721,7 +1694,7 @@
             "search_queries": [
               "Kestrelmoor Institute of Applied Linguistics founder founded",
               "Kestrelmoor Institute",
-              "Kestrelmoor"
+              "\"Kestrelmoor\""
             ],
             "retrieved_chunk_ids": [
               "d7304348923cfbb3:2",
@@ -1736,11 +1709,11 @@
               "b0b8a987001cb91e:0",
               "d22f7738903d7937:0",
               "7ec7ee77377e1d3a:0",
-              "759209ac69fe0c1b:0",
               "1471ea92af2ccaf7:0",
-              "8e8ff949cf86e785:0",
               "ecc7da55f3beba98:1",
-              "ecc7da55f3beba98:0"
+              "759209ac69fe0c1b:0",
+              "ecc7da55f3beba98:0",
+              "fe5965e28f91ccbf:0"
             ],
             "source_titles": {
               "d7304348923cfbb3:2": "Lucille Watahomigie",
@@ -1755,11 +1728,11 @@
               "b0b8a987001cb91e:0": "Kripalu Center",
               "d22f7738903d7937:0": "Education in Hyderabad",
               "7ec7ee77377e1d3a:0": "Kelsall",
-              "759209ac69fe0c1b:0": "Alston Moor",
               "1471ea92af2ccaf7:0": "Keadby Bridge",
-              "8e8ff949cf86e785:0": "Castle Bytham",
               "ecc7da55f3beba98:1": "Kiehnmoor",
-              "ecc7da55f3beba98:0": "Kiehnmoor"
+              "759209ac69fe0c1b:0": "Alston Moor",
+              "ecc7da55f3beba98:0": "Kiehnmoor",
+              "fe5965e28f91ccbf:0": "Isle of Axholme"
             },
             "llm_calls": 4,
             "notes": []
@@ -1773,8 +1746,8 @@
           "judge": null,
           "scores": {
             "abstained": true,
-            "llm_calls": 5,
-            "searches": 4,
+            "llm_calls": 6,
+            "searches": 5,
             "correct": true
           },
           "answer": {
@@ -1783,12 +1756,13 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "There is no information in the documents indicating that Ed Wood ever played for the United States national football team or scored any goals for them.",
+            "abstain_reason": "There are no documents mentioning an Ed Wood who played soccer or scored goals for the United States national football team.",
             "search_queries": [
               "Ed Wood United States national football team goals",
-              "\"Ed Wood\" soccer OR football OR goals",
-              "\"Ed Wood\" \"soccer\" OR \"football\" OR \"United States\"",
-              "\"Ed Wood\" national football team OR soccer"
+              "\"Ed Wood\" soccer OR football",
+              "\"Ed Wood\" national team OR goals OR soccer OR football",
+              "\"Ed Wood\" goals",
+              "\"Ed Wood\" soccer player OR footballer"
             ],
             "retrieved_chunk_ids": [
               "f6d9e40dff68a37f:0",
@@ -1798,17 +1772,23 @@
               "c7998faa8b6d30ee:0",
               "b430ae58c773c28d:0",
               "793dc126bfc1832b:0",
-              "d1cfdf1811d4c398:0",
-              "60013d47f3ff1bfb:0",
-              "1e8edd0cd810974e:0",
-              "eda422d0b8a3dfa8:0",
               "ec8f5166c4081659:1",
-              "8adca38712fcab96:0",
-              "ec8f5166c4081659:0",
-              "68b44d1ff4e77588:0",
               "991d1a7b06dafcf2:0",
+              "eda422d0b8a3dfa8:0",
+              "8adca38712fcab96:0",
+              "b0a3b77b29a88392:0",
+              "78b58a1086d64720:0",
+              "60013d47f3ff1bfb:0",
               "6061b284e2bf8e1d:0",
-              "8ca3fcf34601f486:0"
+              "254116fd89440751:0",
+              "7ba41392535f610b:1",
+              "5c83e86bfbed53d0:1",
+              "d9f60b88d211380f:1",
+              "acf2f8ccf9d8d6b0:0",
+              "8c66108a24c24f7c:0",
+              "dd29fbefc6496171:0",
+              "479cb18cec904f11:0",
+              "53bf0fbc708f7042:0"
             ],
             "source_titles": {
               "f6d9e40dff68a37f:0": "Jim Wood (American football)",
@@ -1818,19 +1798,25 @@
               "c7998faa8b6d30ee:0": "Sebastian Janikowski",
               "b430ae58c773c28d:0": "Sandjar Ahmadi",
               "793dc126bfc1832b:0": "Indoor soccer",
-              "d1cfdf1811d4c398:0": "Defender (association football)",
-              "60013d47f3ff1bfb:0": "2009–10 Premier League",
-              "1e8edd0cd810974e:0": "Step over",
-              "eda422d0b8a3dfa8:0": "Ed Wood (film)",
               "ec8f5166c4081659:1": "Sports in the United States",
-              "8adca38712fcab96:0": "United States men's national under-23 soccer team",
-              "ec8f5166c4081659:0": "Sports in the United States",
-              "68b44d1ff4e77588:0": "History of soccer in the United States",
               "991d1a7b06dafcf2:0": "Wake Forest Demon Deacons men's soccer",
+              "eda422d0b8a3dfa8:0": "Ed Wood (film)",
+              "8adca38712fcab96:0": "United States men's national under-23 soccer team",
+              "b0a3b77b29a88392:0": "Chris Wood (footballer, born 1991)",
+              "78b58a1086d64720:0": "Adam Taggart",
+              "60013d47f3ff1bfb:0": "2009–10 Premier League",
               "6061b284e2bf8e1d:0": "Australia women's national soccer team",
-              "8ca3fcf34601f486:0": "List of Perth Glory FC players"
+              "254116fd89440751:0": "Wayne Rooney",
+              "7ba41392535f610b:1": "Impression management",
+              "5c83e86bfbed53d0:1": "Jeff Wood (racing driver)",
+              "d9f60b88d211380f:1": "Calvin Tyler Scott",
+              "acf2f8ccf9d8d6b0:0": "Conrad Brooks",
+              "8c66108a24c24f7c:0": "Taylor Kemp",
+              "dd29fbefc6496171:0": "Ronaldo (Brazilian footballer)",
+              "479cb18cec904f11:0": "Cristiano Ronaldo",
+              "53bf0fbc708f7042:0": "Bastian Schweinsteiger"
             },
-            "llm_calls": 5,
+            "llm_calls": 6,
             "notes": []
           }
         },
@@ -1854,7 +1840,7 @@
             "answer": "1975",
             "claims": [
               {
-                "text": "ICON is an annual science fiction convention held in the Cedar Rapids/ Iowa City area of Iowa since 1975.",
+                "text": "ICON is an annual science fiction convention held in the Cedar Rapids/ Iowa City area of Iowa since 1975",
                 "citations": [
                   "581cc79262d22476:0"
                 ]
@@ -1862,7 +1848,7 @@
             ],
             "conflicts": [
               {
-                "description": "One document states the convention has been held since 1975, while a fan wiki entry states the very first ICON took place in 1979.",
+                "description": "Document 581cc79262d22476 states that ICON has been held since 1975, whereas the fan wiki entry in document 6f0e6ade49fcad23 states that the very first ICON took place in 1979.",
                 "citations": [
                   "581cc79262d22476:0",
                   "6f0e6ade49fcad23:0"
@@ -1872,26 +1858,28 @@
             "should_abstain": false,
             "abstain_reason": "",
             "search_queries": [
-              "ICON science fiction convention Cedar Rapids Iowa City since year",
-              "ICON 1975 1979 Iowa science fiction convention conflict"
+              "ICON science fiction convention Cedar Rapids Iowa City",
+              "ICON science fiction convention 1975 1979"
             ],
             "retrieved_chunk_ids": [
               "581cc79262d22476:0",
               "6f0e6ade49fcad23:0",
               "b7810f4e3aa09d3d:1",
-              "ae8ffecd7cf9b1b1:0",
+              "a4c37806fc19fabc:0",
               "b7810f4e3aa09d3d:0",
-              "17c275473c80dcfd:0",
-              "8aa4909e2c598d77:0"
+              "ae8ffecd7cf9b1b1:0",
+              "241050dcd8f8ea91:0",
+              "17c275473c80dcfd:0"
             ],
             "source_titles": {
               "581cc79262d22476:0": "Icon (Iowa science fiction convention)",
               "6f0e6ade49fcad23:0": "ICON convention (fan wiki)",
               "b7810f4e3aa09d3d:1": "I-CON",
-              "ae8ffecd7cf9b1b1:0": "Grant Vocational High School",
+              "a4c37806fc19fabc:0": "Readercon",
               "b7810f4e3aa09d3d:0": "I-CON",
-              "17c275473c80dcfd:0": "Trinoc*coN",
-              "8aa4909e2c598d77:0": "InConJunction"
+              "ae8ffecd7cf9b1b1:0": "Grant Vocational High School",
+              "241050dcd8f8ea91:0": "Conestoga (convention)",
+              "17c275473c80dcfd:0": "Trinoc*coN"
             },
             "llm_calls": 3,
             "notes": []
@@ -1902,30 +1890,40 @@
           "category": "contradictory",
           "question": "In which year was the anthology Avant-Pop: Fiction for a Daydream Nation, edited by Larry McCaffery, published?",
           "gold": "1992",
-          "judge": null,
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer correctly identifies the publication year as 1992, matching the gold answer."
+          },
           "scores": {
-            "abstained": true,
+            "abstained": false,
             "llm_calls": 2,
             "searches": 1,
             "conflict_reported": true
           },
           "answer": {
             "question": "In which year was the anthology Avant-Pop: Fiction for a Daydream Nation, edited by Larry McCaffery, published?",
-            "answer": "",
-            "claims": [],
+            "answer": "1992",
+            "claims": [
+              {
+                "text": "Avant-Pop: Fiction for a Daydream Nation is a Fiction Collective Two book published by Black Ice Books in 1992 edited by Larry McCaffery.",
+                "citations": [
+                  "88c4f00c7aac1e71:0"
+                ]
+              }
+            ],
             "conflicts": [
               {
-                "description": "Document 88c4f00c7aac1e71 states that Avant-Pop: Fiction for a Daydream Nation was published in 1992, whereas document 04a1a402267baf72 states that the first edition was published in 1994.",
+                "description": "Document 88c4f00c7aac1e71 states the publication year is 1992, while document 04a1a402267baf72 states it is a first edition from 1994.",
                 "citations": [
                   "88c4f00c7aac1e71:0",
                   "04a1a402267baf72:0"
                 ]
               }
             ],
-            "should_abstain": true,
-            "abstain_reason": "The documents conflict on the publication year (1992 vs 1994).",
+            "should_abstain": false,
+            "abstain_reason": "",
             "search_queries": [
-              "Avant-Pop Fiction for a Daydream Nation Larry McCaffery"
+              "Avant-Pop Fiction for a Daydream Nation Larry McCaffery published year"
             ],
             "retrieved_chunk_ids": [
               "88c4f00c7aac1e71:0",
@@ -1933,7 +1931,7 @@
               "d84c02e6276bdf4e:0",
               "e5db42f23cffd75a:0",
               "adfe1571ece255b4:0",
-              "2c65d6513eb29f06:0"
+              "7757e9c1b71d5769:1"
             ],
             "source_titles": {
               "88c4f00c7aac1e71:0": "Avant-Pop: Fiction for a Daydream Nation",
@@ -1941,7 +1939,7 @@
               "d84c02e6276bdf4e:0": "Fiction International",
               "e5db42f23cffd75a:0": "Alexander Theroux",
               "adfe1571ece255b4:0": "Larry Eisenberg",
-              "2c65d6513eb29f06:0": "Roman à clef"
+              "7757e9c1b71d5769:1": "Virginia Sorensen"
             },
             "llm_calls": 2,
             "notes": []
@@ -1978,7 +1976,7 @@
             ],
             "conflicts": [
               {
-                "description": "Document e33b8f14eb5469c2 states that the TRANSFER gallery was created in 2013, while document c4c05fcbffd9b4a4 states that it was opened in 2015.",
+                "description": "The documents disagree on the year the TRANSFER gallery was created/opened: one source states it was created in 2013, while another states it was opened in 2015.",
                 "citations": [
                   "e33b8f14eb5469c2:0",
                   "c4c05fcbffd9b4a4:0"
@@ -1986,25 +1984,25 @@
               }
             ],
             "should_abstain": true,
-            "abstain_reason": "The documents conflict on the founding year of the TRANSFER gallery, giving both 2013 and 2015.",
+            "abstain_reason": "The documents conflict on the year the TRANSFER gallery was created, with one source stating 2013 and another stating 2015.",
             "search_queries": [
-              "TRANSFER gallery Brooklyn created year founded"
+              "TRANSFER gallery Brooklyn created year"
             ],
             "retrieved_chunk_ids": [
               "e33b8f14eb5469c2:0",
-              "f09eec5d78799071:0",
               "c4c05fcbffd9b4a4:0",
-              "a65d1d14e3278b2b:0",
-              "ca416037f11a5969:0",
-              "0a248208647e1791:0"
+              "f09eec5d78799071:0",
+              "4cd5d9015e0ec007:0",
+              "87580b3fc5872020:0",
+              "f19793d2f4e706b9:0"
             ],
             "source_titles": {
               "e33b8f14eb5469c2:0": "TRANSFER Gallery",
-              "f09eec5d78799071:0": "Brooklyn Heights",
               "c4c05fcbffd9b4a4:0": "TRANSFER Gallery (Brooklyn arts listings)",
-              "a65d1d14e3278b2b:0": "Matthew Marks Gallery",
-              "ca416037f11a5969:0": "Magda Sawon",
-              "0a248208647e1791:0": "Studio Museum in Harlem"
+              "f09eec5d78799071:0": "Brooklyn Heights",
+              "4cd5d9015e0ec007:0": "Bruce Silverstein Gallery",
+              "87580b3fc5872020:0": "Downtown Brooklyn Cultural District",
+              "f19793d2f4e706b9:0": "MacKenzie Art Gallery"
             },
             "llm_calls": 2,
             "notes": []
@@ -2027,13 +2025,13 @@
             "answer": "",
             "claims": [
               {
-                "text": "Jared Rushton was born on March 3, 1972 according to the 1980s child stars fan page.",
+                "text": "Jared Rushton was born on March 3, 1972.",
                 "citations": [
                   "8a1387e8139597ad:0"
                 ]
               },
               {
-                "text": "Jared Michael Rushton was born on March 3, 1974 according to his biography document.",
+                "text": "Jared Michael Rushton was born March 3, 1974.",
                 "citations": [
                   "2712af39184f80df:0"
                 ]
@@ -2041,7 +2039,7 @@
             ],
             "conflicts": [
               {
-                "description": "Document 8a1387e8139597ad states Jared Rushton was born in 1972, while document 2712af39184f80df states he was born in 1974.",
+                "description": "The documents disagree on the birth year of Jared Rushton: one states he was born in 1972, while the other states he was born in 1974.",
                 "citations": [
                   "8a1387e8139597ad:0",
                   "2712af39184f80df:0"
@@ -2081,30 +2079,17 @@
           "judge": null,
           "scores": {
             "abstained": true,
-            "llm_calls": 2,
-            "searches": 1,
+            "llm_calls": 3,
+            "searches": 2,
             "conflict_reported": true
           },
           "answer": {
             "question": "In which year was the documentary film Traceroute, directed by Johannes Grenzfurthner, released?",
             "answer": "",
-            "claims": [
-              {
-                "text": "Traceroute is a 2014 documentary by Austrian artist and director Johannes Grenzfurthner.",
-                "citations": [
-                  "5a05cc6b5bc2959c:0"
-                ]
-              },
-              {
-                "text": "Traceroute is a 2016 Austrian/American documentary film directed by Johannes Grenzfurthner.",
-                "citations": [
-                  "92a00210b12968f7:0"
-                ]
-              }
-            ],
+            "claims": [],
             "conflicts": [
               {
-                "description": "Document 5a05cc6b5bc2959c states that Traceroute was released in 2014, whereas document 92a00210b12968f7 states that it is a 2016 film.",
+                "description": "The documents disagree on the release year of Traceroute: one source describes it as a 2014 documentary, while another describes it as a 2016 documentary film.",
                 "citations": [
                   "5a05cc6b5bc2959c:0",
                   "92a00210b12968f7:0"
@@ -2112,9 +2097,10 @@
               }
             ],
             "should_abstain": true,
-            "abstain_reason": "The documents disagree on the release year of Traceroute (citing 2014 in one place and 2016 in another).",
+            "abstain_reason": "The provided documents contain a direct conflict regarding the release year, referring to it as both 2014 and 2016.",
             "search_queries": [
-              "Traceroute Johannes Grenzfurthner released year"
+              "Traceroute Johannes Grenzfurthner released year",
+              "Traceroute release date premiere 2014 2016 Johannes Grenzfurthner"
             ],
             "retrieved_chunk_ids": [
               "5a05cc6b5bc2959c:0",
@@ -2122,7 +2108,10 @@
               "c52c4d4a04758a5c:0",
               "312396336173db4e:1",
               "b68d1035ca7069ca:1",
-              "c80798214f8419f0:0"
+              "c80798214f8419f0:0",
+              "2f1ffb80eaa09699:1",
+              "80a83e271733f3c1:0",
+              "1d9563899ab8badc:0"
             ],
             "source_titles": {
               "5a05cc6b5bc2959c:0": "Traceroute (film festival catalogue)",
@@ -2130,9 +2119,12 @@
               "c52c4d4a04758a5c:0": "Johannes Grenzfurthner",
               "312396336173db4e:1": "Gassenhauer",
               "b68d1035ca7069ca:1": "Night Striker",
-              "c80798214f8419f0:0": "Soviet Unterzoegersdorf"
+              "c80798214f8419f0:0": "Soviet Unterzoegersdorf",
+              "2f1ffb80eaa09699:1": "Teslagrad",
+              "80a83e271733f3c1:0": "Travelers (TV series)",
+              "1d9563899ab8badc:0": "Geronimo (2014 film)"
             },
-            "llm_calls": 2,
+            "llm_calls": 3,
             "notes": []
           }
         }
@@ -2141,29 +2133,29 @@
     "single_search": {
       "summary": {
         "questions": 30,
-        "answer_accuracy_judge": 0.7,
-        "exact_match": 0.5,
-        "f1": 0.628,
+        "answer_accuracy_judge": 0.75,
+        "exact_match": 0.7,
+        "f1": 0.802,
         "evidence_retrieved": 0.8,
-        "citation_precision": 0.969,
-        "citation_recall": 1.0,
+        "citation_precision": 1.0,
+        "citation_recall": 0.969,
         "false_abstention_rate": 0.2,
-        "abstention_precision": 0.455,
+        "abstention_precision": 0.556,
         "abstention_recall": 1.0,
         "conflict_detection": 1.0,
         "llm_calls_per_question": 1.0,
         "searches_per_question": 1.0
       },
-      "seconds": 173,
+      "seconds": 164,
       "by_category": {
         "bridge": {
           "questions": 10,
           "answer_accuracy_judge": 0.6,
-          "exact_match": 0.3,
-          "f1": 0.475,
+          "exact_match": 0.6,
+          "f1": 0.725,
           "evidence_retrieved": 0.6,
           "citation_precision": 1.0,
-          "citation_recall": 1.0,
+          "citation_recall": 0.917,
           "false_abstention_rate": 0.4,
           "abstention_precision": 0.0,
           "abstention_recall": null,
@@ -2173,11 +2165,11 @@
         },
         "comparison": {
           "questions": 5,
-          "answer_accuracy_judge": 0.6,
-          "exact_match": 0.4,
-          "f1": 0.56,
+          "answer_accuracy_judge": 0.8,
+          "exact_match": 0.6,
+          "f1": 0.76,
           "evidence_retrieved": 1.0,
-          "citation_precision": 0.9,
+          "citation_precision": 1.0,
           "citation_recall": 1.0,
           "false_abstention_rate": 0.0,
           "abstention_precision": null,
@@ -2195,7 +2187,7 @@
           "citation_precision": null,
           "citation_recall": null,
           "false_abstention_rate": null,
-          "abstention_precision": 0.0,
+          "abstention_precision": null,
           "abstention_recall": null,
           "conflict_detection": 1.0,
           "llm_calls_per_question": 1.0,
@@ -2257,7 +2249,7 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The provided documents do not contain the birth year of any of the voice actresses mentioned (such as Allison Moore, Kathryn Cressida, Deedee Magno, or Hynden Walch).",
+            "abstain_reason": "The question asks for the birth year of a voice actress of an animated television series premiered on Cartoon Network, but multiple voice actresses across different Cartoon Network shows are mentioned in the text without specifying which one is being referred to.",
             "search_queries": [
               "What year was the voice actress of an animated television series premiered on Cartoon Network born?"
             ],
@@ -2307,7 +2299,7 @@
             "answer": "Axl Rose",
             "claims": [
               {
-                "text": "The chorus of \"On the Radio\" contains references to the song \"November Rain\" by Guns N' Roses.",
+                "text": "\"On the Radio\" references the song \"November Rain\" by Guns N' Roses.",
                 "citations": [
                   "d88d778fc70054e7:0"
                 ]
@@ -2371,13 +2363,13 @@
             "answer": "The Social Network",
             "claims": [
               {
-                "text": "Robin R. Bottin collaborated with American director and producer David Fincher.",
+                "text": "Robin R. Bottin is known for his collaborations with American director and producer David Fincher.",
                 "citations": [
                   "883505ccbf41d3b9:0"
                 ]
               },
               {
-                "text": "David Fincher won the Golden Globe Award for Best Director and the BAFTA Award for Best Direction for \"The Social Network\".",
+                "text": "David Fincher won the Golden Globe Award for Best Director and the BAFTA Award for Best Direction for the movie \"The Social Network\".",
                 "citations": [
                   "11cb9bba8a425a44:0"
                 ]
@@ -2435,13 +2427,13 @@
             "answer": "theatre director",
             "claims": [
               {
-                "text": "José Rubia Barcia published a great number of books and articles on Federico García Lorca.",
+                "text": "Barcia published a great number of books and articles on Valle Inclan, Unamuno, Federico Garcia Lorca and other writers of the 20th century.",
                 "citations": [
                   "411078dc0d2e04fd:0"
                 ]
               },
               {
-                "text": "Federico García Lorca was a Spanish poet, playwright, and theatre director.",
+                "text": "Federico Garcia Lorca was a Spanish poet, playwright, and theatre director.",
                 "citations": [
                   "5ae4dabd97094925:0"
                 ]
@@ -2499,13 +2491,13 @@
             "answer": "The Walt Disney Company",
             "claims": [
               {
-                "text": "Snake Plissken is the anti-hero from Escape From New York played by Kurt Russell.",
+                "text": "Snake Plissken is the anti-hero from Escape from New York played by Kurt Russell.",
                 "citations": [
                   "edff3e99317108ba:0"
                 ]
               },
               {
-                "text": "Kurt Russell signed a ten-year contract with The Walt Disney Company in the late 1960s.",
+                "text": "In the late 1960s, Kurt Russell signed a ten-year contract with The Walt Disney Company.",
                 "citations": [
                   "59bc74d96740d967:0"
                 ]
@@ -2561,7 +2553,7 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "No document in the collection mentions a band whose members include John Bowman or a Grammy Nominated album created by such a band.",
+            "abstain_reason": "The provided documents do not contain information about a band with a member named John Bowman or any Grammy-nominated album created by such a band.",
             "search_queries": [
               "Which Grammy Nominated album was created by a band whose members include John Bowman?"
             ],
@@ -2592,34 +2584,28 @@
           "gold": "Spurs",
           "judge": {
             "correct": true,
-            "reason": "The predicted answer includes 'Spurs', which is the gold standard answer."
+            "reason": "The predicted answer 'Spurs' matches the gold answer and correctly identifies the common nickname for Tottenham Hotspur."
           },
           "scores": {
             "abstained": false,
             "llm_calls": 1,
             "searches": 1,
             "evidence_retrieved": true,
-            "exact_match": false,
-            "f1": 0.5,
+            "exact_match": true,
+            "f1": 1.0,
             "judge_correct": true,
             "correct": true,
             "citation_precision": 1.0,
-            "citation_recall": 1.0
+            "citation_recall": 0.5
           },
           "answer": {
             "question": "What was the English football club Tottenham Hotspur  that Leonard Francis played for commonly referred to as ?",
-            "answer": "Tottenham or Spurs",
+            "answer": "Spurs",
             "claims": [
               {
-                "text": "Tottenham Hotspur Football Club, commonly referred to simply as Tottenham or Spurs, is an English football club located in Tottenham, Haringey, London",
+                "text": "Tottenham Hotspur Football Club is commonly referred to simply as Tottenham or Spurs.",
                 "citations": [
                   "8ad9fec8fa354a2f:0"
-                ]
-              },
-              {
-                "text": "Leonard Francis \"Len\" Worley is a former amateur footballer who played for Tottenham Hotspur",
-                "citations": [
-                  "b6bd358adfc674b7:0"
                 ]
               }
             ],
@@ -2660,8 +2646,8 @@
             "llm_calls": 1,
             "searches": 1,
             "evidence_retrieved": false,
-            "exact_match": false,
-            "f1": 0.0,
+            "exact_match": true,
+            "f1": 1.0,
             "judge_correct": null,
             "correct": false,
             "citation_precision": null,
@@ -2669,11 +2655,31 @@
           },
           "answer": {
             "question": "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?",
-            "answer": "",
-            "claims": [],
+            "answer": "The Snowman",
+            "claims": [
+              {
+                "text": "Anthony Rolfe Johnson was an English operatic tenor.",
+                "citations": [
+                  "b33bf5500f220040:0"
+                ]
+              },
+              {
+                "text": "\"Walking in the Air\" is a song for the 1982 animated film \"The Snowman\".",
+                "citations": [
+                  "593daabb403390a9:0"
+                ]
+              },
+              {
+                "text": "Anthony Rolfe Johnson recorded \"Walking in the Air\" for the 1982 animated film \"The Snowman\".",
+                "citations": [
+                  "b33bf5500f220040:0",
+                  "593daabb403390a9:0"
+                ]
+              }
+            ],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "No document mentions an English operatic tenor performing 'Walking in the Air' for the 1982 animated film; the film's song was performed by choirboy Peter Auty, while the provided documents for English operatic tenors (Charles Craig, Anthony Rolfe Johnson, Nicholas Sharratt) do not mention this performance.",
+            "abstain_reason": "The provided documents state that Peter Auty performed \"Walking in the Air\" in the 1982 film, and mention various English operatic tenors (Charles Craig, Anthony Rolfe Johnson, Nicholas Sharratt), but do not connect any English operatic tenor to performing the song for that film.",
             "search_queries": [
               "An English operatic tenor performed \"Walking in the Air\" for which 1982 animated film?"
             ],
@@ -2723,13 +2729,13 @@
             "answer": "Charles Nungesser",
             "claims": [
               {
-                "text": "Charles Nungesser was a French ace pilot and adventurer.",
+                "text": "Charles Eugène Jules Marie Nungesser was a French ace pilot and adventurer.",
                 "citations": [
                   "ad9cbf0656d27c89:0"
                 ]
               },
               {
-                "text": "The aircraft L'Oiseau Blanc was flown by Charles Nungesser and François Coli.",
+                "text": "The aircraft \"L'Oiseau Blanc\" was flown by Charles Nungesser and François Coli.",
                 "citations": [
                   "100fd0029e8667dd:0"
                 ]
@@ -2772,8 +2778,8 @@
             "llm_calls": 1,
             "searches": 1,
             "evidence_retrieved": false,
-            "exact_match": false,
-            "f1": 0.0,
+            "exact_match": true,
+            "f1": 1.0,
             "judge_correct": null,
             "correct": false,
             "citation_precision": null,
@@ -2781,11 +2787,11 @@
           },
           "answer": {
             "question": "PISCES was developed by the company that is headquartered in what city?",
-            "answer": "",
+            "answer": "McLean, Virginia",
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The documents state that PISCES was developed by Booz Allen Hamilton Inc., but the collection does not contain a document about Booz Allen Hamilton Inc. specifying the city where it is headquartered.",
+            "abstain_reason": "The documents state that PISCES was developed by Booz Allen Hamilton Inc., but do not mention the headquarters city of Booz Allen Hamilton.",
             "search_queries": [
               "PISCES was developed by the company that is headquartered in what city?"
             ],
@@ -2841,7 +2847,7 @@
                 ]
               },
               {
-                "text": "Valeria Sarmiento is a Chilean film editor, director and screenwriter who has also worked as a writer.",
+                "text": "Valeria Sarmiento is a Chilean film editor, director and screenwriter, who also worked as a writer.",
                 "citations": [
                   "6bbc2cf69a53f974:0"
                 ]
@@ -2969,7 +2975,7 @@
                 ]
               },
               {
-                "text": "Sam Mendes is an English stage and film director.",
+                "text": "Sam Mendes is a film director.",
                 "citations": [
                   "68588a0127083a50:0"
                 ]
@@ -3007,47 +3013,35 @@
           "question": "Which board game was published most recently, Pirate's Cove or Catan?",
           "gold": "Pirate's Cove",
           "judge": {
-            "correct": false,
-            "reason": "Pirate's Cove was published in 2002, while Catan (The Settlers of Catan) was published in 1995. Therefore, Pirate's Cove was published more recently, but the predicted answer was Catan."
+            "correct": true,
+            "reason": "The predicted answer 'Pirate's Cove' correctly identifies that Pirate's Cove was published in 2002, which is more recent than Catan (originally published as The Settlers of Catan in 1995)."
           },
           "scores": {
             "abstained": false,
             "llm_calls": 1,
             "searches": 1,
             "evidence_retrieved": true,
-            "exact_match": false,
-            "f1": 0.0,
-            "judge_correct": false,
-            "correct": false,
-            "citation_precision": 0.5,
+            "exact_match": true,
+            "f1": 1.0,
+            "judge_correct": true,
+            "correct": true,
+            "citation_precision": 1.0,
             "citation_recall": 1.0
           },
           "answer": {
             "question": "Which board game was published most recently, Pirate's Cove or Catan?",
-            "answer": "Catan",
+            "answer": "Pirate's Cove",
             "claims": [
+              {
+                "text": "Pirate's Cove was originally published in 2002.",
+                "citations": [
+                  "5e6064c26c2b9e75:0"
+                ]
+              },
               {
                 "text": "The Settlers of Catan (Catan) was first published in 1995.",
                 "citations": [
                   "ffe8ef165b22aef2:0"
-                ]
-              },
-              {
-                "text": "Catan Dice Game was published in 2007.",
-                "citations": [
-                  "97d5c2ed5990756b:0"
-                ]
-              },
-              {
-                "text": "The Rivals for Catan was released in 2010.",
-                "citations": [
-                  "9712a281d953c00f:0"
-                ]
-              },
-              {
-                "text": "Pirate's Cove was originally published in 2002 and republished in 2003.",
-                "citations": [
-                  "5e6064c26c2b9e75:0"
                 ]
               }
             ],
@@ -3399,7 +3393,7 @@
             "answer": "six",
             "claims": [
               {
-                "text": "The Nanny is an American television sitcom that aired for six seasons on CBS from 1993 to 1999.",
+                "text": "The Nanny aired for six seasons on CBS from 1993 to 1999.",
                 "citations": [
                   "1dc6f2251c5cd29e:0"
                 ]
@@ -3449,7 +3443,7 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The provided documents do not contain information about which film won the Academy Award for Best Picture in 2029.",
+            "abstain_reason": "The provided documents do not contain information about the Academy Award for Best Picture in 2029.",
             "search_queries": [
               "Which film won the Academy Award for Best Picture in 2029?"
             ],
@@ -3491,7 +3485,7 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The provided documents do not contain information about the President of France elected in 2032.",
+            "abstain_reason": "The provided documents do not contain any information about who was elected President of France in 2032.",
             "search_queries": [
               "Who was elected President of France in 2032?"
             ],
@@ -3533,7 +3527,7 @@
             "claims": [],
             "conflicts": [],
             "should_abstain": true,
-            "abstain_reason": "The provided documents do not contain any information about a city named Zorvania hosting the Winter Olympics.",
+            "abstain_reason": "The provided documents do not contain any information about a city named Zorvania or whether it hosted the Winter Olympics.",
             "search_queries": [
               "In which year did the city of Zorvania host the Winter Olympics?"
             ],
@@ -3661,7 +3655,7 @@
             "answer": "1975",
             "claims": [
               {
-                "text": "ICON is an annual science fiction convention held in the Cedar Rapids/ Iowa City area of Iowa since 1975",
+                "text": "ICON is an annual science fiction convention held in the Cedar Rapids/ Iowa City area of Iowa since 1975.",
                 "citations": [
                   "581cc79262d22476:0"
                 ]
@@ -3669,7 +3663,7 @@
             ],
             "conflicts": [
               {
-                "description": "Document 581cc79262d22476 states ICON has been held since 1975, whereas document 6f0e6ade49fcad23 states the very first ICON took place in 1979.",
+                "description": "Document 581cc79262d22476 states that ICON has been held since 1975, while document 6f0e6ade49fcad23 states that the very first ICON took place in 1979.",
                 "citations": [
                   "581cc79262d22476:0",
                   "6f0e6ade49fcad23:0"
@@ -3719,7 +3713,7 @@
             "claims": [],
             "conflicts": [
               {
-                "description": "The documents disagree on the publication year of Avant-Pop: Fiction for a Daydream Nation: one states it was published in 1992, while another states the first edition was published in 1994.",
+                "description": "Document 88c4f00c7aac1e71 states that Avant-Pop: Fiction for a Daydream Nation was published in 1992, whereas document 04a1a402267baf72 states it was published as a first edition in 1994.",
                 "citations": [
                   "88c4f00c7aac1e71:0",
                   "04a1a402267baf72:0"
@@ -3727,7 +3721,7 @@
               }
             ],
             "should_abstain": true,
-            "abstain_reason": "The provided documents conflict regarding the publication year of the anthology (1992 vs 1994).",
+            "abstain_reason": "The documents conflict on the publication year, giving both 1992 and 1994.",
             "search_queries": [
               "In which year was the anthology Avant-Pop: Fiction for a Daydream Nation, edited by Larry McCaffery, published?"
             ],
@@ -3756,38 +3750,28 @@
           "category": "contradictory",
           "question": "In which year was the TRANSFER gallery in Brooklyn created?",
           "gold": "2013",
-          "judge": {
-            "correct": true,
-            "reason": "The predicted answer correctly identifies the year 2013 as requested by the gold standard."
-          },
+          "judge": null,
           "scores": {
-            "abstained": false,
+            "abstained": true,
             "llm_calls": 1,
             "searches": 1,
             "conflict_reported": true
           },
           "answer": {
             "question": "In which year was the TRANSFER gallery in Brooklyn created?",
-            "answer": "2013",
-            "claims": [
-              {
-                "text": "TRANSFER is a gallery that was created in 2013 and is located in Brooklyn, New York.",
-                "citations": [
-                  "e33b8f14eb5469c2:0"
-                ]
-              }
-            ],
+            "answer": "",
+            "claims": [],
             "conflicts": [
               {
-                "description": "Document e33b8f14eb5469c2 states that TRANSFER was created in 2013, whereas document c4c05fcbffd9b4a4 states that it opened in 2015.",
+                "description": "The documents disagree on the year TRANSFER gallery was created/opened: e33b8f14eb5469c2:0 states it was created in 2013, while c4c05fcbffd9b4a4:0 states it was opened in 2015.",
                 "citations": [
                   "e33b8f14eb5469c2:0",
                   "c4c05fcbffd9b4a4:0"
                 ]
               }
             ],
-            "should_abstain": false,
-            "abstain_reason": "",
+            "should_abstain": true,
+            "abstain_reason": "The documents provide conflicting years for the creation of the TRANSFER gallery (2013 in e33b8f14eb5469c2:0 and 2015 in c4c05fcbffd9b4a4:0).",
             "search_queries": [
               "In which year was the TRANSFER gallery in Brooklyn created?"
             ],
@@ -3816,38 +3800,28 @@
           "category": "contradictory",
           "question": "In which year was the American musician and former actor Jared Rushton born?",
           "gold": "1974",
-          "judge": {
-            "correct": true,
-            "reason": "The predicted answer matches the gold answer (1974)."
-          },
+          "judge": null,
           "scores": {
-            "abstained": false,
+            "abstained": true,
             "llm_calls": 1,
             "searches": 1,
             "conflict_reported": true
           },
           "answer": {
             "question": "In which year was the American musician and former actor Jared Rushton born?",
-            "answer": "1974",
-            "claims": [
-              {
-                "text": "Jared Michael Rushton was born on March 3, 1974.",
-                "citations": [
-                  "2712af39184f80df:0"
-                ]
-              }
-            ],
+            "answer": "",
+            "claims": [],
             "conflicts": [
               {
-                "description": "Document 2712af39184f80df states Jared Rushton was born on March 3, 1974, whereas document 8a1387e8139597ad states he was born on March 3, 1972.",
+                "description": "Chunk 2712af39184f80df:0 states Jared Rushton was born on March 3, 1974, while chunk 8a1387e8139597ad:0 states he was born on March 3, 1972.",
                 "citations": [
                   "2712af39184f80df:0",
                   "8a1387e8139597ad:0"
                 ]
               }
             ],
-            "should_abstain": false,
-            "abstain_reason": "",
+            "should_abstain": true,
+            "abstain_reason": "The documents conflict on the birth year of Jared Rushton, giving both 1974 and 1972.",
             "search_queries": [
               "In which year was the American musician and former actor Jared Rushton born?"
             ],
@@ -3876,28 +3850,38 @@
           "category": "contradictory",
           "question": "In which year was the documentary film Traceroute, directed by Johannes Grenzfurthner, released?",
           "gold": "2016",
-          "judge": null,
+          "judge": {
+            "correct": true,
+            "reason": "The predicted answer matches the gold standard year 2016."
+          },
           "scores": {
-            "abstained": true,
+            "abstained": false,
             "llm_calls": 1,
             "searches": 1,
             "conflict_reported": true
           },
           "answer": {
             "question": "In which year was the documentary film Traceroute, directed by Johannes Grenzfurthner, released?",
-            "answer": "",
-            "claims": [],
+            "answer": "2016",
+            "claims": [
+              {
+                "text": "Traceroute is a 2016 Austrian/American documentary film directed by Johannes Grenzfurthner.",
+                "citations": [
+                  "92a00210b12968f7:0"
+                ]
+              }
+            ],
             "conflicts": [
               {
-                "description": "Document 92a00210b12968f7:0 states that Traceroute is a 2016 documentary film, while document 5a05cc6b5bc2959c:0 describes it as a 2014 documentary.",
+                "description": "Document 92a00210b12968f7 states Traceroute is a 2016 documentary, whereas document 5a05cc6b5bc2959c states it is a 2014 documentary.",
                 "citations": [
                   "92a00210b12968f7:0",
                   "5a05cc6b5bc2959c:0"
                 ]
               }
             ],
-            "should_abstain": true,
-            "abstain_reason": "The provided documents conflict on the release year of Traceroute, listing it as both 2016 and 2014.",
+            "should_abstain": false,
+            "abstain_reason": "",
             "search_queries": [
               "In which year was the documentary film Traceroute, directed by Johannes Grenzfurthner, released?"
             ],

@@ -679,8 +679,10 @@ ran it and made the decision.
       never-retrieved documents stay invalid;
     - one retry on an empty or invalid final reply.
   - **Dev after the fixes:** judge 1.00 and 0 false abstentions.
-  - The first test run is kept and reported unchanged. A post-fix test run is pending: the free tier's daily limit
-    (500 requests) ran out.
+  - The first test run is kept and reported unchanged.
+  - **Post-fix test run (run by Claude Code at my request, after the daily quota reset):** agent judge 0.85 vs
+    baseline 0.75, false abstentions 0.05, conflict detection 1.0. 0 document-id citations needed resolving. Claude
+    Code wrote section 5.4 of `docs/EVALUATION.md` from these results.
 - **Other AI fixes:**
   - When the provider asks to wait longer than the retry cap (a daily quota: "retry in 7h"), fail at once instead of
     retrying for minutes.

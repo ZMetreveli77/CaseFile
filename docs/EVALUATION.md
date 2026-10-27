@@ -3,8 +3,7 @@
 How well CaseFile retrieves evidence and answers multi-step questions with citations, measured on a fixed,
 reproducible question set: what works, where it fails, why, and how to improve it.
 
-> **Status:** the post-fix test run is pending. The Gemini free tier's daily limit (500 requests) ran out after 5 of
-> its 30 questions; it resumes from the LLM cache when the quota resets (section 5.4). All other numbers are final.
+> **Status:** final. All runs, including the post-fix test run (section 5.4), are complete.
 
 ## 1. Setup
 
@@ -136,16 +135,41 @@ Of the agent's 7 misses on answerable test questions:
 - On the next dev run, the clearer instruction alone prevented document-id citations: the validator resolved 0 and the
   retry repaired 0. Those two remain as safety nets.
 
-### 5.4 Test after the fixes (pending)
+### 5.4 Test after the fixes
 | Test, after fixes | Agent | One-search baseline |
 |---|---|---|
-| Judge accuracy | *pending* | *pending* |
-| Exact match / F1 | *pending* | *pending* |
-| False abstentions | *pending* | *pending* |
-| Conflict detection | *pending* | *pending* |
+| Judge accuracy | **0.850** | 0.750 |
+| Exact match / F1 | 0.550 / 0.686 | **0.700 / 0.802** |
+| Evidence retrieved | **0.900** | 0.800 |
+| Citation precision / recall | 0.921 / 0.921 | **1.000 / 0.969** |
+| False abstentions | **0.050** | 0.200 |
+| Abstention precision / recall | **0.833** / 1.000 | 0.556 / 1.000 |
+| Conflict detection | 1.000 | 1.000 |
+| LLM calls per question | 2.9 | 1.0 |
+
+By category (judge accuracy, agent / baseline): bridge **0.80** / 0.60, comparison 0.80 / 0.80, simple 1.00 / 1.00.
 
 The first test run (5.2) stays reported unchanged. This run is labelled as post-fix because the bug was diagnosed
 while analysing test results.
+
+**What changed compared with 5.2:**
+- **The agent now beats the baseline on test.** Judge accuracy went 0.65 → 0.85 and false abstentions 0.30 → 0.05.
+  The gain is on bridge questions (0.60 → 0.80), where the agent's second search finds a paragraph the single search
+  misses (bridge evidence retrieved 0.80 vs 0.60).
+- **No document-id citations** were made: the validator resolved 0 and the repair retry was not needed, the same as on
+  dev. The clearer instruction did the work.
+- **The baseline also moved (0.70 → 0.75)** without any change to its code. That is run-to-run variance (6.8): one
+  question is 0.05.
+- **Only 3 of the agent's 20 answerable answers are wrong:**
+  - "Which year was the voice actress … born?": answered 1968, gold 1967. The supporting paragraph was never
+    retrieved, so the agent took the year from a different actress (bridge hop, 6.1).
+  - "Which Grammy-nominated album … John Bowman?": abstained. Evidence not retrieved (6.1).
+  - "Are Leopold Lummerstorfer and Valeria Sarmiento both authors?": answered "yes", gold "no". Both paragraphs were
+    retrieved; the model read "wrote films" as "author" (6.4).
+- **Exact match is lower than the baseline (0.55 vs 0.70) even though accuracy is higher.** All 6 extra misses are
+  correct answers in a different form: "6" vs "six", "McLean" vs "McLean, Virginia", "Todd Field" vs "William Todd
+  Field", "director" vs "filmmaker", "Charles Nungesser" vs "Charles Eugène", "The Walt Disney Company" vs "contract
+  with The Walt Disney Company". The judge marked all 6 correct (6.6).
 
 ## 6. Error analysis: where it fails, why, and how to improve
 
@@ -155,8 +179,8 @@ while analysing test results.
 - **Evidence:**
   - In the milestone-4 spot check, single search found the second paragraph in 0/3 bridge questions; the agent found
     and cited it in 3/3.
-  - On the test split, bridge evidence retrieval is still only 0.70, so the agent sometimes stops searching or never
-    discovers the bridge entity.
+  - On the test split, bridge evidence retrieval is 0.80 after the fixes (baseline 0.60). The 2 remaining bridge
+    misses are both questions where the agent stopped searching or never discovered the bridge entity (5.4).
 - **Improve:** prompt an explicit plan ("first find X, then search for what X leads to"); check after each search
   whether every entity the answer depends on has been looked up; allow one more search round when the evidence is
   incomplete.
