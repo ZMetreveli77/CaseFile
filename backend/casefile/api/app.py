@@ -98,7 +98,10 @@ def create_app(services: AppServices | None = None,
             counts = {"documents": services.store.count_documents(), "chunks": services.store.count_chunks()}
         except Exception as error:  # the database is unreachable: report it instead of crashing
             return JSONResponse(status_code=503, content={"status": "degraded", "detail": f"Qdrant: {error}"})
-        return JSONResponse({"status": "ok", "model": services.model_name, **counts})
+        health_report = {"status": "ok", "model": services.model_name, **counts}
+        if services.backup_model_name:
+            health_report["backup_model"] = services.backup_model_name
+        return JSONResponse(health_report)
 
     @app.post("/documents", status_code=201)
     def upload_document(request: Request, file: UploadFile = File(...)) -> dict:

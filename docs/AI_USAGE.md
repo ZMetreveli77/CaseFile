@@ -719,4 +719,31 @@ ran it and made the decision.
     scored all 8 resolved.
   - That pass also found one regression the fixes caused: a squeezed mobile Documents table. Claude Code fixed it and
     checked it in a screenshot; the reviewer did not re-score it.
-- **Still to do:** ask a live question once the quota resets, and read every frontend file myself before the interview.
+- **Live check after the quota reset (Claude Code, at my request):** the Corliss Archer question answered correctly
+  through the UI's server, 2 searches, both paragraphs cited.
+- **Still to do:** read every frontend file myself before the interview.
+
+### Groq failsafe (after milestone 8)
+- **My decision:** add Groq as a failsafe for when Gemini fails (e.g. the daily quota that blocked the evaluation).
+- **All the code was written by Claude Code at my request** (I asked it to do the planned tasks itself, including the
+  two hard ones it had proposed for me), so none of this is my own code:
+  - `GroqProvider` (`rag/llm.py`): Groq's OpenAI-compatible API over plain `httpx`, error translation, rate limiter.
+  - `convert_messages_to_openai_format`: lets Groq continue a conversation Gemini started. It ignores Gemini's
+    reply objects and gives tool calls ids in order (`call_0`, `call_1`…), each tool result taking the oldest
+    unanswered id.
+  - `FallbackProvider`: primary first; on `LLMError` the backup answers. After a primary failure the primary is skipped
+    for 10 minutes (a circuit breaker). Replies from the backup carry a reason that the agent adds to the answer's
+    notes (shown in the UI under "Checks").
+  - `build_llm` (`rag/setup.py`): `LLM_PROVIDER` picks the main provider; the other becomes the failsafe if its key
+    is set. `/health` reports `backup_model`.
+  - 28 new tests (fake HTTP transport, no key needed): 226 pass.
+- **Found while testing live:**
+  - `llama-3.3-70b-versatile` (our configured model) no longer exists on Groq; `openai/gpt-oss-120b` was chosen after
+    checking the models the key can use (another one sent malformed tool calls).
+  - gpt-oss sometimes sends its final JSON answer as a call to a non-existent tool `json` (Groq: `400
+    tool_use_failed`). That code is now retried; other 400s stay permanent.
+  - Groq's free tier allows only 8,000 tokens/minute, so a Groq answer waits on `retry-after` between steps: 67 s
+    for a two-hop question vs ~5 s on Gemini. Fine for a failsafe.
+- **Verified live** with a deliberately wrong Gemini key (only for that command; `.env` unchanged): Groq answered the
+  Corliss Archer question correctly with the switch noted, and declined the unanswerable "favourite colour" question.
+  Weakness seen: Groq cited only the second-hop paragraph.

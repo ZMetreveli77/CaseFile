@@ -12,7 +12,7 @@ Interview: I must explain and change the code live without AI, so every part sta
 | Area | Choice | Why |
 |---|---|---|
 | Backend | Python + FastAPI | Required by the task (Python backend); small, easy to explain |
-| LLM | Gemini free tier, Groq as an alternative behind one interface | Free; two providers let us compare models (bonus) |
+| LLM | Gemini free tier, Groq (`openai/gpt-oss-120b`) as an automatic failsafe behind one interface | Free; the app keeps answering when Gemini's quota runs out |
 | Embeddings | Local `fastembed` (bge-small-en-v1.5) | No API limits when embedding about 50k paragraphs; only query embedding runs in production |
 | Vector DB | Qdrant (Cloud free tier) | Supports dense and sparse vectors, so hybrid search lives in one database |
 | Dataset | HotpotQA (distractor), about 5k questions, about 50k paragraphs | Meets the 50k requirement and has gold answers and supporting facts for evaluation |
@@ -61,7 +61,7 @@ Work in this order. Each milestone ends with passing tests and a git commit, so 
 ## 6. Risks and how we handle them
 | Risk | Mitigation |
 |---|---|
-| Free LLM rate limits | Retry with backoff, caching, small eval batches, Groq fallback |
+| Free LLM rate limits | Retry with backoff, caching, small eval batches, Groq failsafe (`FallbackProvider`) |
 | Render free tier sleeps / low RAM (512 MB) | Small embedding model, document the cold start |
 | 50k paragraphs slow to embed | Embed offline once, push to Qdrant Cloud |
 | Hallucinated answers | Strict grounding prompt, citation check, abstain flag, measured in eval |

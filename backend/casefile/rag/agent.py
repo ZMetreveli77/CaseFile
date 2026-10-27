@@ -8,7 +8,7 @@ import logging
 from dataclasses import dataclass, field
 from typing import Callable
 
-from casefile.rag.llm import LLMProvider, Message
+from casefile.rag.llm import LLMProvider, LLMReply, Message, ToolSpec
 from casefile.rag.prompts import FINAL_ANSWER_REMINDER, FORMAT_REPAIR_REMINDER, build_system_prompt
 from casefile.rag.tools import AGENT_TOOLS, ToolExecutor
 
@@ -116,13 +116,14 @@ class InvestigationAgent:
         tool_executor = self.create_tool_executor()
         messages = [Message(role="user", text=question)]
         llm_calls = 0
+        fallback_notes: list[str] = []  # filled when the backup model wrote a reply (rag/llm.py FallbackProvider)
 
         for _ in range(self.max_tool_steps):
-            reply = self.llm.generate(self.system_prompt, messages, AGENT_TOOLS)
+            reply = self.generate_reply(messages, AGENT_TOOLS, fallback_notes)
             llm_calls += 1
             messages.append(Message.from_reply(reply))
             if not reply.tool_calls:
-                return self.finish(question, messages, reply.text, tool_executor, llm_calls)
+                return self.finish(question, messages, reply.text, tool_executor, llm_calls, fallback_notes)
             for tool_call in reply.tool_calls:
                 send_event(on_event, {"type": "tool_call", "tool": tool_call.name,
                                       "arguments": dict(tool_call.arguments)})
@@ -132,13 +133,20 @@ class InvestigationAgent:
 
         # Step limit reached: ask for the final answer with no tools available.
         messages.append(Message(role="user", text=FINAL_ANSWER_REMINDER))
-        reply = self.llm.generate(self.system_prompt, messages, tools=[])
+        reply = self.generate_reply(messages, [], fallback_notes)
         llm_calls += 1
         messages.append(Message.from_reply(reply))
-        return self.finish(question, messages, reply.text, tool_executor, llm_calls)
+        return self.finish(question, messages, reply.text, tool_executor, llm_calls, fallback_notes)
+
+    def generate_reply(self, messages: list[Message], tools: list[ToolSpec], fallback_notes: list[str]) -> LLMReply:
+        """One LLM call; if the backup model answered it, remember why (once per reason) for the answer's notes."""
+        reply = self.llm.generate(self.system_prompt, messages, tools)
+        if reply.fallback_reason and reply.fallback_reason not in fallback_notes:
+            fallback_notes.append(reply.fallback_reason)
+        return reply
 
     def finish(self, question: str, messages: list[Message], final_text: str, tool_executor: ToolExecutor,
-               llm_calls: int) -> InvestigationAnswer:
+               llm_calls: int, fallback_notes: list[str]) -> InvestigationAnswer:
         try:
             answer = parse_final_answer(question, final_text)
         except ValueError:
@@ -147,7 +155,7 @@ class InvestigationAgent:
             repair_messages = [message for message in messages
                                if message.role != "assistant" or message.text or message.tool_calls]
             repair_messages.append(Message(role="user", text=FORMAT_REPAIR_REMINDER))
-            repair_reply = self.llm.generate(self.system_prompt, repair_messages, tools=[])
+            repair_reply = self.generate_reply(repair_messages, [], fallback_notes)
             llm_calls += 1
             try:
                 answer = parse_final_answer(question, repair_reply.text)
@@ -160,6 +168,7 @@ class InvestigationAgent:
         answer.retrieved_chunk_ids = list(tool_executor.retrieved_chunks)
         answer.source_titles = {chunk_id: chunk.title for chunk_id, chunk in tool_executor.retrieved_chunks.items()}
         answer.llm_calls = llm_calls
+        answer.notes = fallback_notes + answer.notes
 
         validate_citations = self.validate_citations
         if validate_citations is None:

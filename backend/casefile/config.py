@@ -15,11 +15,12 @@ class Settings(BaseSettings):
 
     gemini_api_key: str = ""
     groq_api_key: str = ""
-    llm_provider: str = "gemini"  # "gemini" | "groq"
+    llm_provider: str = "gemini"  # "gemini" | "groq": the main provider; the other one is the failsafe if its key is set
     gemini_model: str = "gemini-3.5-flash-lite"  # fast and available on the free tier (Oct 2026)
     llm_timeout_seconds: int = 30  # a request that takes longer is treated as a temporary failure
     llm_requests_per_minute: int = 14  # one under the Gemini free tier limit (15/min); 0 = no limit
-    groq_model: str = "llama-3.3-70b-versatile"
+    groq_model: str = "openai/gpt-oss-120b"  # llama-3.3-70b is gone from Groq; this one does tool calling (Oct 2026)
+    groq_requests_per_minute: int = 28  # two under the Groq free tier limit (30/min)
 
     # Empty qdrant_url -> in-memory Qdrant (tests / quick local runs).
     qdrant_url: str = ""

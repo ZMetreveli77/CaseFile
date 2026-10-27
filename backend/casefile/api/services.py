@@ -6,7 +6,7 @@ from casefile.config import Settings
 from casefile.ingestion.pipeline import IngestionPipeline
 from casefile.ingestion.qdrant_dedup import QdrantDuplicateDetector
 from casefile.rag.agent import InvestigationAgent
-from casefile.rag.setup import build_agent_for_store, build_store
+from casefile.rag.setup import build_agent_for_store, build_llm, build_store
 from casefile.retrieval.store import QdrantStore
 
 
@@ -16,6 +16,7 @@ class AppServices:
     pipeline: IngestionPipeline
     agent: InvestigationAgent
     model_name: str
+    backup_model_name: str | None = None  # the failsafe model, when one is configured
 
 
 def build_services(settings: Settings) -> AppServices:
@@ -25,5 +26,7 @@ def build_services(settings: Settings) -> AppServices:
     duplicate_detector = QdrantDuplicateDetector(store)
     pipeline = IngestionPipeline(store, settings.chunking_strategy, settings.chunk_size, settings.chunk_overlap,
                                  duplicate_detector=duplicate_detector)
-    agent = build_agent_for_store(settings, store, embedder)
-    return AppServices(store=store, pipeline=pipeline, agent=agent, model_name=settings.gemini_model)
+    llm = build_llm(settings)
+    agent = build_agent_for_store(settings, store, embedder, llm=llm)
+    return AppServices(store=store, pipeline=pipeline, agent=agent, model_name=llm.model_name,
+                       backup_model_name=getattr(llm, "backup_model_name", None))

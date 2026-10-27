@@ -233,3 +233,10 @@ def test_redirects_to_docs_without_a_frontend_build(qdrant_store, tmp_path):
     with TestClient(create_app(services, frontend_directory=tmp_path)) as test_client:
         response = test_client.get("/", follow_redirects=False)
         assert response.status_code == 307 and response.headers["location"] == "/docs"
+
+
+def test_health_reports_the_backup_model_when_there_is_one(qdrant_store):
+    services = AppServices(store=qdrant_store, pipeline=IngestionPipeline(qdrant_store), agent=None,
+                           model_name="gemini", backup_model_name="groq")
+    with TestClient(create_app(services)) as test_client:
+        assert test_client.get("/health").json()["backup_model"] == "groq"

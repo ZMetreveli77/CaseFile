@@ -151,3 +151,10 @@ def test_a_failing_progress_callback_does_not_break_the_answer():
 
     agent, _ = make_agent([search("q"), final_json(answer="still answered")])
     assert agent.answer("question", on_event=broken_display).answer == "still answered"
+
+def test_backup_model_use_is_noted_on_the_answer_once():
+    switched = "gemini was unavailable (quota); answered by the backup model groq"
+    search_reply, final_reply = search("Shirley Temple"), final_json(answer="Chief of Protocol")
+    search_reply.fallback_reason = final_reply.fallback_reason = switched
+    agent, _ = make_agent([search_reply, final_reply])
+    assert agent.answer("question").notes == [switched]
