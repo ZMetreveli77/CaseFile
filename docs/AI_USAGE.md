@@ -782,3 +782,19 @@ ran it and made the decision.
       out-of-memory kills.
     - This test also found a bug: `retry.py` (saved as owner-only) was unreadable to the container's non-root user,
       so every question failed. Fixed in the Dockerfile with `chmod -R a+rX`.
+
+### Stop button (milestone 9)
+- **My request:** a way to cancel an investigation in the middle of it.
+- **Claude Code, at my request:**
+  - UI: while investigating, the button becomes **Stop**; it aborts the stream, and the question shows "You stopped
+    this investigation" with *Ask again* (grey, not an error).
+  - Server: the agent takes a `should_stop` check before every LLM call and tool use; the stream sets a stop flag when
+    the visitor disconnects, so no further Gemini requests are spent on an answer nobody reads.
+  - **A bug its own test caught:** the first version assumed the server closes the stream's generator on disconnect.
+    It doesn't for a plain generator: with a real uvicorn server the agent kept going (7 LLM calls). The stream is
+    now an `async` generator, which Starlette cancels. The test was itself wrong at first (it passed because the
+    fake search crashed); it now checks a real search happened and fails when the fix is disabled.
+- **Live checks (Claude Code):** 4 eval questions answered correctly on Render. My reports of failures: "did Tarantino
+  win an Oscar" is correctly declined (no paragraph says so); "what has Messi won" was declined although the agent
+  found partial evidence (2009 FIFA World Player, 2008–09 treble), because rule 4 and the short-answer format
+  treat open questions as all-or-nothing. A fix is proposed, pending my decision.
