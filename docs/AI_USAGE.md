@@ -5,6 +5,30 @@
   and tests, and explained each part step by step.
 - **grill-me / grilling skills** (Claude Code), used to quiz myself on the design to prepare for the interview.
 
+## At a glance
+- **Tool:** Claude Code (Anthropic's Claude models in the terminal) as a pair programmer, with installed skills for
+  self-quizzing (grill-me) and UI design. No other AI tools.
+- **AI wrote most of the code:** ingestion, the Qdrant store, BM25, RRF, the first reranker, the agent and tools, the
+  Gemini and Groq providers, the API, the React UI, the evaluation runners, the deployment (Dockerfile, demo protection,
+  memory and speed fixes), and most tests. It also explained each part, and I asked it to keep a study guide current.
+- **I decided:** the technologies and dataset, the naming rules, what to keep out of the repository, the UI direction
+  (after rejecting three AI-proposed designs), the default search mode from tuning, and to keep the abstention rules
+  for open questions.
+- **I wrote or did myself** (each with the AI help it had, in the second half of this report):
+  - code: the reranker fix (v1, then v2 after a code review), `rag/retry.py` (backoff + jitter), the citation
+    validator (`rag/citations.py`), the grounding rules in `rag/prompts.py`, `api/streaming.py` (SSE),
+    `evaluation/metrics.py`, moving the duplicate index into Qdrant (startup 77.7 s → 0.9 s), and the dataset-builder
+    and API error-case tests;
+  - measurements and checks: average chunk length for BM25, the retrieval spot check, the prompt-injection check, the
+    Georgian-documents prediction, startup timing, reranker tuning, and reviewing every generated evaluation question
+    by hand (3 kept, 6 fixed, 1 replaced).
+- **I asked AI to do instead of me** (recorded where it happens): checking the LLM judge (done by Claude Code, not a
+  person), the error analysis text, the final evaluation runs, the Groq failsafe, the milestone 9 memory test and demo
+  protection, the Stop button, document search, upload speed, the persistence check and this README.
+- **AI mistakes caught by testing** are logged too, e.g. an LLM request without a timeout that hung, a stop
+  feature that didn't stop the agent (and a first test of it that passed for the wrong reason), and a 1.1 GB memory
+  peak on a 512 MB server.
+
 ## How I worked with AI
 - **I owned the decisions; AI proposed options.** Before any code, I asked for a written plan (`plan.md`) that
   explains *what* we build, *when* and *why*, and I chose the key technologies myself (see Milestone 1).
@@ -18,7 +42,8 @@
 - **I verified results myself.** I ran the test suite on my own machine, and when my test command failed with a
   pytest argument error, I fixed how I was invoking it.
 - **I tracked the requirements.** I checked progress against the assignment and noticed that the
-  "compare 2+ chunking strategies" requirement is only half done (implemented, not yet compared).
+  "compare 2+ chunking strategies" requirement was only half done (implemented, not yet compared); the
+  comparison was then added in milestone 7.
 - **I kept an interview study guide.** I asked for a study guide (kept outside the repository, as a PDF) that covers
   every module, the design decisions, the bugs found, likely interview questions and the key numbers. I asked for it to
   be updated with every code change, with a "new in this version" section, so I always study the current code. I use
@@ -106,7 +131,7 @@
 - **I wrote and ran the retrieval spot check, and wrote the dataset tests** (see "What I changed or verified
   independently").
 
-### Milestone 5: Agentic RAG (in progress)
+### Milestone 5: Agentic RAG
 - **AI did:**
   - Found that `gemini-2.5-flash` is no longer offered to new keys, and that the `google-genai` SDK pinned in
     milestone 1 (0.5.0) was too old to even list models. Upgraded it to 2.33.0, which also needed pydantic 2.14.1.
@@ -475,7 +500,7 @@ I wrote the streaming feature:
 Its review explained the TestClient buffering and the disconnect limitation, and it timed the stream against a real
 server. I wrote the code and tests myself.
 
-### Milestone 7: Evaluation (in progress)
+### Milestone 7: Evaluation
 - **AI did (step 1):**
   - Wrote `casefile/evaluation/eval_set.py` + `eval/build_eval_set.py`, which build a fixed, seeded set of 50
     questions: 20 bridge, 10 comparison, 10 simple, 10 unanswerable. Contradictory questions come in task H2.
@@ -748,7 +773,7 @@ ran it and made the decision.
   Corliss Archer question correctly with the switch noted, and declined the unanswerable "favourite colour" question.
   Weakness seen: Groq cited only the second-hop paragraph.
 
-### Milestone 9: Deployment (in progress)
+### Milestone 9: Deployment
 - **My work:**
   - Created the Render account and the web service, connected GitHub (installed Render's GitHub app for the private
     repo).

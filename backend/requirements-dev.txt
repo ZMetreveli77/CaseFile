@@ -1,4 +1,5 @@
-# Everything for local development: the server's packages plus the test tools.
+# Everything for local development: the server's packages, the test tools, and what the eval/ scripts need.
 -r requirements.txt
 pytest==8.3.4
 pytest-asyncio==0.25.0
+pyarrow==18.1.0  # eval/build_dataset.py reads the HotpotQA parquet file
