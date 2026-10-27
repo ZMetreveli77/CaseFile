@@ -33,7 +33,7 @@ Interview: I must explain and change the code live without AI, so every part sta
 - [x] Python backend + working UI (upload, manage, ask, view sources) (API in milestone 6; React UI in milestone 8, served by FastAPI at `/`)
 - [x] 50,000+ records processed (66,555 HotpotQA paragraphs → 78,730 chunks in Qdrant Cloud)
 - [x] Public deployment, persistence across restarts, secrets protected, deployment description (https://casefile.metroz.me, docs/DEPLOYMENT.md)
-- [ ] Tests, modular code, documentation
+- [x] Tests, modular code, documentation (243 backend + 9 frontend tests; README, EVALUATION, AI_USAGE, DEPLOYMENT)
 
 ## 4. Milestones (when)
 Work in this order. Each milestone ends with passing tests and a git commit, so the history shows real progress.

@@ -850,3 +850,12 @@ ran it and made the decision.
 - I asked Claude Code to do it instead of me. It uploaded a marker file to the live site, pushed a docs commit
   (Render redeployed into a new container; I confirmed the deploy was live in Render's Events), then found the
   document unchanged after the restart and deleted it.
+
+### Milestone 10: Documentation
+- **Claude Code, at my request:** wrote the README (description, architecture, running instructions, technical
+  choices with reasons, results, performance and LLM cost, security, limitations) and the "At a glance" summary of
+  this report, from the existing reports and measurements. It checked its own claims against the code and logs and
+  corrected two before committing (the LLM judge was checked by Claude Code, not by a person; a mistake it listed
+  wasn't in the log). It also found that `eval/build_dataset.py` needed `pyarrow`, which no requirements file
+  listed, and added it to `requirements-dev.txt`.
+- **My part:** reviewing that the summary of what I did is accurate, and making the repository public.
