@@ -102,18 +102,36 @@ public site.
   | **4 (now)** | 66 s | **+70 MB** | 404 MB |
 - **Fix:** batch size 4 (`retrieval/embeddings.py`), 16% slower than 64.
 - **After the fix:** a question followed by the same 1 MB upload peaks at **474 MB** (was 1,142 MB).
-- **Ruled out:** fewer ONNX threads. With 1, 2 or all 10 threads the extra memory stayed at 97–105 MB; 1 thread was
-  only twice as slow.
-- **Not a problem:** vectors for a big file aren't all held at once; the store embeds and uploads in batches of
-  `UPLOAD_BATCH_SIZE`.
+- **Ruled out:**
+  - Fewer ONNX threads: with 1, 2 or all 10 threads the extra memory stayed at 97–105 MB; 1 thread was only twice
+    as slow.
+  - Turning off ONNX Runtime's memory pool (`enable_cpu_mem_arena = False`): **worse**, 912 MB instead of 418 MB
+    after 60 queries, and 50% slower.
+  - A smaller model file: the model is already the quantized `bge-small-en-v1.5-onnx-q` (65 MB).
+- **Second fix, a lock around the model** (`FastEmbedEmbedder.lock`):
+  - The API runs requests in parallel threads that share one model. Two embeddings at once each need working
+    memory, and two first requests on a cold server would **load the model twice** (a test without the lock created
+    it 6 times).
+  - The lock is taken per batch of 4 chunks, so a question waits behind at most one small batch, never a whole
+    upload; a question asked during a 1 MB upload still answered in 23 s. Only embedding is serialized; the LLM part
+    of questions still runs in parallel.
+  - On the Mac: two questions at once 439 → 416 MB; question **during** a 1 MB upload 423 MB.
 
-**Remaining risk:** the margin is about 40 MB. An upload while two questions are running could still go over. Render
-then restarts the service; data is safe in Qdrant, but requests in flight fail. Options if it happens: a smaller
-upload limit, or one write at a time for uploads (there already is one, `write_lock`) plus refusing uploads while
-questions run.
+**Final check: the real image under Render's limit** (`docker run -m 512m --memory-swap 512m`, Linux, numbers from
+the kernel's own cgroup counters `memory.peak` and `oom_kill`):
 
-The numbers come from macOS (`ps` RSS); Linux in Docker is similar but not identical, so Render's *Metrics* tab is
-checked after deploying.
+| Step | Peak | Out-of-memory kills |
+|---|---|---|
+| Startup | 108 MB | 0 |
+| Two first questions at once | 290 MB | 0 |
+| A question during a 1 MB upload (worst case) | **404 MB** | 0 |
+
+About 108 MB of headroom. Render's *Metrics* tab is checked after deploying.
+
+**Found by this test:** every question failed in the container with `PermissionError` on `rag/retry.py`. The file was
+`-rw-------` on the build machine, Docker's `COPY` keeps permissions, and the server runs as a non-root user. Render
+wouldn't have hit it (git stores only the executable bit, so a fresh clone gets normal permissions), but the
+Dockerfile now runs `chmod -R a+rX` on the code so the image never depends on the build machine.
 
 ## 8. Deploying a change
 1. Push to `main`. Render rebuilds the image and switches over only after `/health` answers (zero-downtime deploy).

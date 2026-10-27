@@ -771,3 +771,14 @@ ran it and made the decision.
     - Cause found by measuring batch sizes: `EMBEDDING_BATCH_SIZE = 64` (+871 MB) vs 4 (+70 MB, 16% slower).
       Fewer ONNX threads were tested and ruled out.
     - After the fix: question + 1 MB upload peaks at 474 MB. Details in `docs/DEPLOYMENT.md` section 7.
+  - **More memory savings (I asked whether memory could be cut further; Claude Code measured and implemented):**
+    - Measured each part: libraries ~130 MB, model +151 MB, first query +83 MB, growing with more queries.
+    - Ruled out by measurement: turning off ONNX's memory pool (worse: 912 MB), fewer threads, a smaller model
+      (already quantized).
+    - Added a lock around the shared model: two first requests no longer load it twice (a test without the lock
+      created it 6 times), and parallel embeddings no longer each need working memory. Taken per batch of 4, so
+      questions don't wait behind uploads.
+    - Final check in the real image under `-m 512m`: worst case (question during a 1 MB upload) 404 MB, no
+      out-of-memory kills.
+    - This test also found a bug: `retry.py` (saved as owner-only) was unreadable to the container's non-root user,
+      so every question failed. Fixed in the Dockerfile with `chmod -R a+rX`.

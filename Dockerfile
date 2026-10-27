@@ -19,14 +19,16 @@ COPY backend/requirements.txt ./
 # Long timeout and retries: one stalled download shouldn't fail the whole build on a slow connection.
 RUN pip install --no-cache-dir --default-timeout=120 --retries 10 -r requirements.txt
 
-# Download the embedding model while building, so a cold start doesn't download it again (~130 MB).
+# Download the embedding model while building, so a cold start doesn't download it again (65 MB).
 RUN python -c "from fastembed import TextEmbedding; TextEmbedding('BAAI/bge-small-en-v1.5')"
 
 COPY backend/casefile ./casefile
 COPY --from=frontend /frontend/dist /app/frontend/dist
 
 # Run as a normal user, not root: if the app were ever compromised, the attacker gets fewer rights.
-RUN useradd --create-home casefile && chown -R casefile /app/models
+# a+rX: COPY keeps each file's permissions from the build machine, and a file only its owner may read
+# (-rw-------) would be unreadable to this user (it happened: PermissionError on retry.py).
+RUN useradd --create-home casefile && chown -R casefile /app/models && chmod -R a+rX /app/backend /app/frontend
 USER casefile
 
 # Render passes the port in $PORT. 0.0.0.0 = reachable from outside the container.
