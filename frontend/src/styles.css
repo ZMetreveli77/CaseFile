@@ -534,6 +534,7 @@ a { color: var(--cited); text-underline-offset: 3px; }
 }
 
 .failure .button { flex: none; white-space: nowrap; }
+.failure--stopped { background: var(--sidebar); color: var(--muted); align-items: center; } /* a choice, not an error */
 .failure-message { min-width: 0; }
 .failure-headline { font-weight: 500; }
 .failure-detail { margin-top: 6px; font-size: 13px; }

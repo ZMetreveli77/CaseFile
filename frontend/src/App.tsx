@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { fetchHealth } from './api'
 import {
-  applyInvestigationEvent, createInvestigation, failInvestigation, isRunning, type Investigation,
+  applyInvestigationEvent, createInvestigation, failInvestigation, isRunning, stopInvestigation, type Investigation,
 } from './investigationState'
 import { streamInvestigation } from './investigationStream'
 import { applyTheme, readSavedTheme, readSystemTheme, type Theme } from './theme'
@@ -26,6 +26,8 @@ export default function App() {
   const [investigations, setInvestigations] = useState<Investigation[]>([])
   const [openChunkId, setOpenChunkId] = useState<string | null>(null)
   const nextInvestigationId = useRef(1)
+  // Aborting it closes the stream; the server notices the disconnect and stops the agent before its next step.
+  const runningInvestigation = useRef<AbortController | null>(null)
 
   const isInvestigating = investigations.some(isRunning)
 
@@ -82,15 +84,29 @@ export default function App() {
     setCurrentView('ask')
     const id = nextInvestigationId.current++
     setInvestigations((current) => [...current, createInvestigation(id, question)])
+    const abortController = new AbortController()
+    runningInvestigation.current = abortController
     try {
-      await streamInvestigation(question, (event) => updateInvestigation(id, (investigation) => applyInvestigationEvent(investigation, event)))
+      await streamInvestigation(
+        question,
+        (event) => updateInvestigation(id, (investigation) => applyInvestigationEvent(investigation, event)),
+        abortController.signal,
+      )
       // The stream can end without an answer or error event (e.g. the connection dropped).
       updateInvestigation(id, (investigation) =>
         isRunning(investigation) ? failInvestigation(investigation, 'The connection closed before the answer arrived.') : investigation)
     } catch (error) {
-      updateInvestigation(id, (investigation) => failInvestigation(investigation, describeStreamError(error)))
+      if (abortController.signal.aborted) {
+        updateInvestigation(id, stopInvestigation) // the visitor's choice, not an error
+      } else {
+        updateInvestigation(id, (investigation) => failInvestigation(investigation, describeStreamError(error)))
+      }
+    } finally {
+      runningInvestigation.current = null
     }
   }
+
+  const stopRunningInvestigation = () => runningInvestigation.current?.abort()
 
   const closeSource = useCallback(() => setOpenChunkId(null), [])
 
@@ -112,6 +128,7 @@ export default function App() {
             investigations={investigations}
             isInvestigating={isInvestigating}
             onAsk={askQuestion}
+            onStop={stopRunningInvestigation}
             onRetry={askQuestion}
             onOpenSource={setOpenChunkId}
           />

@@ -12,6 +12,7 @@ from contextlib import asynccontextmanager
 from dataclasses import asdict
 from casefile.api.streaming import KEEP_ALIVE_COMMENT, format_sse
 
+import anyio
 from fastapi import FastAPI, File, HTTPException, Query, Request, UploadFile
 from pydantic import BaseModel, Field, field_validator
 
@@ -21,6 +22,7 @@ from casefile.api.streaming import format_sse
 from casefile.config import get_settings
 from casefile.ingestion.loaders import SUPPORTED_EXTENSIONS, UnsupportedFormat, load_documents
 from casefile.ingestion.pipeline import ProtectedDocumentError
+from casefile.rag.agent import InvestigationStopped
 from casefile.rag.llm import LLMError
 
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10 MB per file
@@ -201,13 +203,18 @@ def create_app(services: AppServices | None = None,
         admit_question(request)  # before the stream starts, so a refusal is a normal 429 response
         agent = get_services(request).agent
         events: queue.Queue[dict | None] = queue.Queue()  # thread-safe hand-over from the worker to the response
+        # Set when the visitor goes away (Stop button, closed tab): the agent then starts no further LLM call or search,
+        # instead of spending the free quota on an answer nobody will read.
+        stop_requested = threading.Event()
 
         def run_investigation() -> None:
             # Runs in its own thread, because agent.answer() blocks until it is done. Errors are caught HERE:
             # the 200 status and headers are already sent, so the LLMError -> 503 handler can no longer help.
             try:
-                final_answer = agent.answer(body.question, on_event=events.put)
+                final_answer = agent.answer(body.question, on_event=events.put, should_stop=stop_requested.is_set)
                 events.put({"type": "answer", **asdict(final_answer)})
+            except InvestigationStopped:
+                logger.info("investigation stopped because the visitor disconnected")
             except LLMError as error:
                 events.put({"type": "error", "detail": describe_llm_error(error)})
             except Exception:
@@ -216,17 +223,27 @@ def create_app(services: AppServices | None = None,
             finally:
                 events.put(END_OF_STREAM)  # always, so the generator below can never wait forever
 
-        def stream_events():
+        async def stream_events():
+            # async, not a plain generator: when the visitor disconnects, Starlette CANCELS an async generator, so the
+            # finally below runs at once. A plain generator is never closed on disconnect (a test caught this: the
+            # agent kept making LLM calls), so the stop flag would never be set.
             threading.Thread(target=run_investigation, daemon=True).start()
-            while True:
-                try:
-                    event = events.get(timeout=HEARTBEAT_SECONDS)  # waits until the worker has something
-                except queue.Empty:
-                    yield KEEP_ALIVE_COMMENT  # nothing new yet: show the connection is still alive
-                    continue
-                if event is END_OF_STREAM:
-                    return
-                yield format_sse(event)
+            try:
+                while True:
+                    try:
+                        # The blocking wait runs in a worker thread; abandon_on_cancel lets a disconnect end it at once.
+                        event = await anyio.to_thread.run_sync(events.get, True, HEARTBEAT_SECONDS,
+                                                               abandon_on_cancel=True)
+                    except queue.Empty:
+                        yield KEEP_ALIVE_COMMENT  # nothing new yet: show the connection is still alive
+                        continue
+                    if event is END_OF_STREAM:
+                        return
+                    yield format_sse(event)
+            finally:
+                # Runs when the stream ends for any reason, including the visitor disconnecting.
+                # After a normal end the worker is already done, so this changes nothing.
+                stop_requested.set()
 
         return StreamingResponse(stream_events(), media_type="text/event-stream", headers=STREAM_HEADERS)
 

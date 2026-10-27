@@ -16,6 +16,11 @@ MAX_TOOL_STEPS = 5  # rounds of tool use per question: enough for 2-hop question
 INVALID_FORMAT_REASON = "The model did not return a valid answer, so no answer is given."
 logger = logging.getLogger(__name__)
 ProgressCallback = Callable[[dict], None]  # receives JSON-serializable progress events, e.g. for a live UI
+StopCheck = Callable[[], bool]  # returns True once the investigation should stop (e.g. the visitor pressed Stop)
+
+
+class InvestigationStopped(Exception):
+    """Raised between steps when should_stop() says so, so no further LLM calls or searches are spent."""
 
 
 @dataclass
@@ -107,11 +112,18 @@ class InvestigationAgent:
         self.max_tool_steps = max_tool_steps
         self.system_prompt = build_system_prompt()
 
-    def answer(self, question: str, on_event: ProgressCallback | None = None) -> InvestigationAnswer:
+    def answer(self, question: str, on_event: ProgressCallback | None = None,
+               should_stop: StopCheck | None = None) -> InvestigationAnswer:
         """Raises LLMError if the LLM is unreachable even after retries (the API turns that into an error response).
 
         on_event, if given, is called with progress events: started, then tool_call / tool_result per tool use.
+        should_stop, if given, is checked before every LLM call and tool use; when it returns True the investigation
+        ends with InvestigationStopped. A step already running is not interrupted, but no new one starts.
         """
+        def stop_if_requested() -> None:
+            if should_stop is not None and should_stop():
+                raise InvestigationStopped(question)
+
         send_event(on_event, {"type": "started", "question": question})
         tool_executor = self.create_tool_executor()
         messages = [Message(role="user", text=question)]
@@ -119,12 +131,14 @@ class InvestigationAgent:
         fallback_notes: list[str] = []  # filled when the backup model wrote a reply (rag/llm.py FallbackProvider)
 
         for _ in range(self.max_tool_steps):
+            stop_if_requested()
             reply = self.generate_reply(messages, AGENT_TOOLS, fallback_notes)
             llm_calls += 1
             messages.append(Message.from_reply(reply))
             if not reply.tool_calls:
                 return self.finish(question, messages, reply.text, tool_executor, llm_calls, fallback_notes)
             for tool_call in reply.tool_calls:
+                stop_if_requested()
                 send_event(on_event, {"type": "tool_call", "tool": tool_call.name,
                                       "arguments": dict(tool_call.arguments)})
                 result = tool_executor.execute(tool_call)
@@ -132,6 +146,7 @@ class InvestigationAgent:
                 messages.append(Message(role="tool", tool_name=tool_call.name, tool_result=result))
 
         # Step limit reached: ask for the final answer with no tools available.
+        stop_if_requested()
         messages.append(Message(role="user", text=FINAL_ANSWER_REMINDER))
         reply = self.generate_reply(messages, [], fallback_notes)
         llm_calls += 1

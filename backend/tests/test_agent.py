@@ -2,7 +2,8 @@ import json
 
 import pytest
 
-from casefile.rag.agent import INVALID_FORMAT_REASON, InvestigationAgent, describe_tool_result, extract_json_object
+from casefile.rag.agent import (INVALID_FORMAT_REASON, InvestigationAgent, InvestigationStopped, describe_tool_result,
+                                extract_json_object)
 from casefile.models import Chunk
 from casefile.rag.llm import LLMError, LLMReply, ToolCall
 from casefile.rag.prompts import FINAL_ANSWER_REMINDER, FORMAT_REPAIR_REMINDER
@@ -158,3 +159,27 @@ def test_backup_model_use_is_noted_on_the_answer_once():
     search_reply.fallback_reason = final_reply.fallback_reason = switched
     agent, _ = make_agent([search_reply, final_reply])
     assert agent.answer("question").notes == [switched]
+
+
+def test_a_stop_request_ends_the_investigation_before_the_next_llm_call():
+    agent, llm = make_agent([search("Kiss and Tell"), search("Shirley Temple"), final_json(answer="never reached")])
+    searches_done = []
+    events = []
+
+    def should_stop():
+        return len(searches_done) >= 1  # the visitor pressed Stop after the first search
+
+    def record(event):
+        events.append(event)
+        if event["type"] == "tool_result":
+            searches_done.append(event)
+
+    with pytest.raises(InvestigationStopped):
+        agent.answer("question", on_event=record, should_stop=should_stop)
+    assert len(llm.requests) == 1  # the second LLM call (and its search) was never made
+    assert [event["type"] for event in events] == ["started", "tool_call", "tool_result"]
+
+
+def test_without_a_stop_request_nothing_changes():
+    agent, _ = make_agent([final_json(answer="yes")])
+    assert agent.answer("question", should_stop=lambda: False).answer == "yes"

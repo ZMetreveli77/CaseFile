@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { applyInvestigationEvent, createInvestigation, isRunning, numberCitations } from './investigationState'
+import {
+  applyInvestigationEvent, createInvestigation, isRunning, numberCitations, stopInvestigation,
+} from './investigationState'
 import { parseEvent } from './investigationStream'
 import { describeInvestigationError } from './errorMessages'
 import type { InvestigationAnswer } from './types'
@@ -76,5 +78,20 @@ describe('describeInvestigationError', () => {
     expect(describeInvestigationError('question must not be empty')).toEqual({
       headline: 'question must not be empty', technicalDetail: null,
     })
+  })
+})
+
+describe('stopInvestigation', () => {
+  it('ends the investigation as stopped and marks the step that was still running', () => {
+    let investigation = createInvestigation(1, 'q')
+    investigation = applyInvestigationEvent(investigation, { type: 'tool_call', tool: 'search_documents', arguments: { query: 'a' } })
+    investigation = applyInvestigationEvent(investigation, { type: 'tool_result', tool: 'search_documents', titles: ['A'], error: null })
+    investigation = applyInvestigationEvent(investigation, { type: 'tool_call', tool: 'search_documents', arguments: { query: 'b' } })
+
+    const stopped = stopInvestigation(investigation)
+    expect(isRunning(stopped)).toBe(false)
+    expect(stopped.wasStopped).toBe(true)
+    expect(stopped.errorMessage).toBeNull() // stopping is the visitor's choice, not an error
+    expect(stopped.steps.map((step) => step.resultSummary)).toEqual(['1 result', 'stopped'])
   })
 })

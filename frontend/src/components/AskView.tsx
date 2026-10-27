@@ -13,11 +13,12 @@ interface AskViewProps {
   investigations: Investigation[]
   isInvestigating: boolean
   onAsk: (question: string) => void
+  onStop: () => void
   onRetry: (question: string) => void
   onOpenSource: (chunkId: string) => void
 }
 
-export function AskView({ investigations, isInvestigating, onAsk, onRetry, onOpenSource }: AskViewProps) {
+export function AskView({ investigations, isInvestigating, onAsk, onStop, onRetry, onOpenSource }: AskViewProps) {
   const [questionText, setQuestionText] = useState('')
   const threadEndRef = useRef<HTMLDivElement>(null)
   const latestInvestigation = investigations[investigations.length - 1]
@@ -65,6 +66,19 @@ export function AskView({ investigations, isInvestigating, onAsk, onRetry, onOpe
             <p className="question-bubble">{investigation.question}</p>
             <InvestigationLog investigation={investigation} />
             {investigation.answer && <AnswerView answer={investigation.answer} onOpenSource={onOpenSource} />}
+            {investigation.wasStopped && (
+              <div className="failure failure--stopped">
+                <p className="failure-headline">You stopped this investigation.</p>
+                <button
+                  type="button"
+                  className="button button--secondary"
+                  disabled={isInvestigating}
+                  onClick={() => onRetry(investigation.question)}
+                >
+                  Ask again
+                </button>
+              </div>
+            )}
             {investigation.errorMessage && (
               <div className="failure" role="alert">
                 <FailureMessage detail={investigation.errorMessage} />
@@ -96,11 +110,19 @@ export function AskView({ investigations, isInvestigating, onAsk, onRetry, onOpe
             onChange={(event) => setQuestionText(event.target.value)}
             onKeyDown={submitOnEnter}
           />
-          {/* Only disabled while busy: an empty question is ignored by submitQuestion, and a grey button reads as broken. */}
-          <button type="submit" className="button" disabled={isInvestigating}>
-            <Icon name="search" size={16} />
-            {isInvestigating ? 'Investigating…' : 'Investigate'}
-          </button>
+          {/* While busy the button becomes Stop. An empty question is ignored by submitQuestion, so the button is
+              never greyed out (a grey button reads as broken). */}
+          {isInvestigating ? (
+            <button type="button" className="button button--secondary" onClick={onStop}>
+              <Icon name="close" size={16} />
+              Stop
+            </button>
+          ) : (
+            <button type="submit" className="button">
+              <Icon name="search" size={16} />
+              Investigate
+            </button>
+          )}
         </form>
       </div>
     </div>

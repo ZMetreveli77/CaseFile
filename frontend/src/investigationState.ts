@@ -16,12 +16,15 @@ export interface Investigation {
   steps: InvestigationStep[]
   answer: InvestigationAnswer | null
   errorMessage: string | null
+  wasStopped: boolean // the visitor pressed Stop before the answer arrived
   startedAt: number // milliseconds, from Date.now()
   finishedAt: number | null
 }
 
 export function createInvestigation(id: number, question: string): Investigation {
-  return { id, question, steps: [], answer: null, errorMessage: null, startedAt: Date.now(), finishedAt: null }
+  return {
+    id, question, steps: [], answer: null, errorMessage: null, wasStopped: false, startedAt: Date.now(), finishedAt: null,
+  }
 }
 
 export function isRunning(investigation: Investigation): boolean {
@@ -47,6 +50,12 @@ export function applyInvestigationEvent(investigation: Investigation, event: Inv
 
 export function failInvestigation(investigation: Investigation, errorMessage: string): Investigation {
   return { ...investigation, errorMessage, finishedAt: Date.now() }
+}
+
+// The visitor pressed Stop: a step still waiting for its result will never get one.
+export function stopInvestigation(investigation: Investigation): Investigation {
+  const steps = investigation.steps.map((step) => (step.resultSummary === null ? { ...step, resultSummary: 'stopped' } : step))
+  return { ...investigation, steps, wasStopped: true, finishedAt: Date.now() }
 }
 
 function describeToolCall(tool: string, toolArguments: Record<string, unknown>): InvestigationStep {

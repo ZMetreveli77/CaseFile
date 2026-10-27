@@ -74,7 +74,8 @@ function describeProgress(investigation: Investigation): string {
     return `${parts.join(' · ')} so far`
   }
   const seconds = (investigation.finishedAt - investigation.startedAt) / MILLISECONDS_PER_SECOND
-  return `${parts.join(' · ')} · ${seconds.toFixed(1)} s`
+  const ending = investigation.wasStopped ? `stopped after ${seconds.toFixed(1)} s` : `${seconds.toFixed(1)} s`
+  return `${parts.join(' · ')} · ${ending}`
 }
 
 function describeCheck(conflictCount: number, noteCount: number): string {
