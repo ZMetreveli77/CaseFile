@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Postmortem INC-2026-036: authorization timeouts on 11 March 2026</title>
+</head>
+<body>
+<h1>Postmortem INC-2026-036: authorization timeouts on 11 March 2026</h1>
+<p>Larkspur Payments (fictional demo data). Severity: SEV-1. Author: Davit Kiknadze. Reviewed by: Mariam Lomidze.</p>
+
+<h2>What happened</h2>
+<p>On 11 March 2026, from 14:40 to 15:35 UTC (55 minutes), many card payments were declined with
+"authorization timeout". About 1,240 payments were declined; customers had to retry them.
+Payments that were not declined were processed normally.</p>
+
+<h2>Affected services</h2>
+<ul>
+  <li><b>fraud-scoring</b>: response time (p99) rose from 120 ms to 1.9 seconds.</li>
+  <li><b>payment-gateway</b>: declined payments when fraud-scoring did not answer within its 800 ms limit.</li>
+</ul>
+<p>ledger-service, settlement-batch and refund-service were not affected.</p>
+
+<h2>Root cause</h2>
+<p>Change CHG-1214, deployed on 10 March, rolled out fraud model v4. The new model calls the device-reputation
+lookup for every payment. When afternoon traffic reached its peak, the lookup slowed down, and fraud-scoring
+answered after the payment-gateway's 800 ms limit. The problem did not show on 10 March because the rollout
+reached 100% of traffic only on the morning of 11 March.</p>
+
+<h2>Resolution</h2>
+<p>At 15:28 UTC the device-reputation lookup was turned off with a feature flag, which brought fraud-scoring back
+to the v3 behaviour. Timeouts stopped by 15:35 UTC.</p>
+
+<h2>Action items</h2>
+<ol>
+  <li>Cache device-reputation results for 10 minutes before enabling v4 again.</li>
+  <li>Roll out fraud model changes to 100% of traffic only after a full peak-traffic day at 25%.</li>
+</ol>
+</body>
+</html>

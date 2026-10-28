@@ -1,0 +1,14 @@
+Larkspur Payments on-call runbook (fictional demo data)
+
+Who to page: the on-call engineer for the affected service first. If the incident affects card payments for more
+than 15 minutes, page the incident commander on duty as well and open an incident channel.
+
+Severity levels: SEV-1 means card payments are failing for many customers. SEV-2 means card payments are slow or
+failing for some customers. SEV-3 means a feature outside the card payment path (payouts, refunds, emails) is broken.
+
+First checks: look at the service dashboard for error rate, response time and queue length. Check the change log
+for anything deployed in the last 48 hours; most incidents start after a change. If a recent change is the likely
+cause, roll it back first and investigate afterwards.
+
+Writing the report: every incident above SEV-3 needs a written report within 5 working days, with a timeline,
+the affected services, the root cause and follow-up actions.

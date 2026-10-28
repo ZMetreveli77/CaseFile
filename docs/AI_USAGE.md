@@ -850,6 +850,16 @@ ran it and made the decision.
   documents again. Each request is numbered, so a slow reply to an older search can't replace a newer one. Upload and
   Replace clear the search. The Search and *Show all* buttons were removed. Frontend only.
 
+### Payments scenario (after milestone 10)
+- **My request:** documents and questions that match the assignment's example (system changes that delayed payments
+  in March, affected services, confirming documents; say so when information is missing or contradictory).
+- **Claude Code, at my request:** wrote a fictional company's document set in `data/scenario/` (architecture
+  overview, change log CSV, three incident reports in Markdown, HTML and PDF, a draft report with an unknown cause, a
+  monthly review that contradicts one incident report, a distractor runbook) and 7 questions with expected answers
+  in `data/scenario/questions.md`. `eval/check_scenario.py` indexes the folder in an in-memory store and asks them.
+  One run: all 7 behaved as intended (conflict reported, unknown cause not invented, revenue question declined);
+  the flaws it showed are listed in `questions.md`.
+
 ### Persistence check (milestone 9)
 - I asked Claude Code to do it instead of me. It uploaded a marker file to the live site, pushed a docs commit
   (Render redeployed into a new container; I confirmed the deploy was live in Render's Events), then found the

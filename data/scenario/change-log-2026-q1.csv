@@ -1,0 +1,9 @@
+change_id,date,service,change,requested_by,approved_by,status
+CHG-1188,2026-02-20,merchant-portal,New layout for the payouts page,Nino Beridze,Levan Kapanadze,deployed
+CHG-1196,2026-02-27,notification-service,Switched receipt emails to a new email provider,Ana Gelashvili,Levan Kapanadze,deployed
+CHG-1203,2026-03-03,ledger-service,Reduced the database connection pool from 60 to 15 connections per instance to lower ledger-db costs,Giorgi Tsiklauri,Mariam Lomidze,rolled back on 2026-03-04
+CHG-1207,2026-03-06,notification-service,Updated the payout email template,Ana Gelashvili,Levan Kapanadze,deployed
+CHG-1214,2026-03-10,fraud-scoring,Rolled out fraud model v4 which adds a device-reputation lookup for every payment,Davit Kiknadze,Mariam Lomidze,disabled by feature flag on 2026-03-11
+CHG-1219,2026-03-17,payment-gateway,Rotated the TLS certificate of the public API,Giorgi Tsiklauri,Levan Kapanadze,deployed
+CHG-1222,2026-03-24,settlement-batch,Moved the nightly settlement run from 01:00 UTC to 23:00 UTC so payouts arrive earlier,Tamar Abashidze,Mariam Lomidze,moved back to 01:00 UTC on 2026-03-26
+CHG-1230,2026-04-01,refund-service,Upgraded refund-service to version 2.8,Nino Beridze,Levan Kapanadze,deployed

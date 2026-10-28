@@ -186,6 +186,7 @@ CLAUDE.md
 .DS_Store
 data/*
 !data/.gitkeep
+!data/scenario/
 node_modules/
 frontend/dist/
 .venv/

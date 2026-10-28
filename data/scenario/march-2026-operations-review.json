@@ -1,0 +1,5 @@
+{
+  "id": "OPS-REVIEW-2026-03",
+  "title": "Operations review, March 2026 (Larkspur Payments, fictional demo data)",
+  "text": "Monthly operations review for March 2026, prepared by the operations team for management. March had three incidents. INC-2026-031 on 4 March: card payments were delayed for about 3 hours 40 minutes because the ledger-service connection pool was too small; the pool size was restored the same day. INC-2026-036 on 11 March: card authorizations timed out for 55 minutes after the fraud model v4 rollout; the new lookup was switched off. INC-2026-041 on 24 March: merchant payouts were sent 6 hours late because the settlement run overlapped with the database backup. Overall card payment availability for March was 99.82%, below the 99.9% target. The team plans to add load tests for configuration changes in April."
+}
