@@ -862,6 +862,7 @@ ran it and made the decision.
 - **Later, my request:** put the scenario on the live site. Claude Code uploaded the 8 files (15 documents) through
   the site's upload API and added them to the read-only list (`SCENARIO_SOURCE_FILES` in `api/services.py`), with a
   test that every scenario document is protected.
+- **Later, my request:** the assignment's example question was added to the site's sample questions (first in the list).
 
 ### Persistence check (milestone 9)
 - I asked Claude Code to do it instead of me. It uploaded a marker file to the live site, pushed a docs commit
