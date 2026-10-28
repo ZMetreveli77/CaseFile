@@ -618,12 +618,21 @@ a { color: var(--cited); text-underline-offset: 3px; }
 .empty { padding: 32px 16px; text-align: center; color: var(--muted); }
 .load-more { margin: 20px auto 0; display: flex; }
 
-.document-search { display: flex; gap: 8px; margin-bottom: 16px; }
+.document-search { position: relative; display: flex; margin-bottom: 16px; }
+.document-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  color: var(--muted);
+  pointer-events: none; /* clicks go through to the box */
+}
 .document-search-input {
   flex: 1;
   min-width: 0;
   height: 40px;
-  padding: 0 12px;
+  padding: 0 12px 0 36px; /* room for the magnifier on the left */
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-small);
   background: var(--surface);

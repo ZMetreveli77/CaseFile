@@ -845,6 +845,10 @@ ran it and made the decision.
     Delete work on results. 2 new API tests.
   - Checked on the real corpus: "Kiss and Tell" finds the film first; "lighthouse keeper" finds lighthouse articles;
     "Lionel Messi" shows that only a few documents mention him (no article about him).
+- **Later, my request:** search without a button, using what is already typed.
+- **Claude Code, at my request:** the search now runs 400 ms after the last key press, and an empty box shows all
+  documents again. Each request is numbered, so a slow reply to an older search can't replace a newer one. Upload and
+  Replace clear the search. The Search and *Show all* buttons were removed. Frontend only.
 
 ### Persistence check (milestone 9)
 - I asked Claude Code to do it instead of me. It uploaded a marker file to the live site, pushed a docs commit

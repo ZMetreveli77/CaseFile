@@ -8,6 +8,8 @@ import { Icon } from './Icon'
 
 const BYTES_PER_MEGABYTE = 1024 * 1024
 const MAX_SEARCH_CHARACTERS = 200 // same limit as the backend
+// Search starts this long after the last key press, so typing "lighthouse" sends one request, not ten.
+const SEARCH_DELAY_MILLISECONDS = 400
 
 // What each upload status means to the person who uploaded the file.
 const STATUS_DESCRIPTIONS: Record<IngestResult['status'], string> = {
@@ -40,20 +42,54 @@ export function DocumentsView() {
   const uploadInputRef = useRef<HTMLInputElement>(null)
   const replaceInputRef = useRef<HTMLInputElement>(null)
   const documentToReplaceRef = useRef<string | null>(null)
+  // Numbers each list request. A slow answer to "lig" must not overwrite a faster answer to "lighthouse",
+  // so only the newest request may change the table.
+  const latestRequestRef = useRef(0)
 
   const loadFirstPage = useCallback(async () => {
+    const requestNumber = ++latestRequestRef.current
     setIsLoading(true)
     setLoadError(null)
-    setActiveSearch(null)
     try {
       const page = await listDocuments(null)
+      if (requestNumber !== latestRequestRef.current) {
+        return
+      }
       setDocuments(page.documents)
       setNextCursor(page.next_cursor)
       setTotalDocuments(page.total)
+      setActiveSearch(null)
     } catch (error) {
-      setLoadError((error as Error).message)
+      if (requestNumber === latestRequestRef.current) {
+        setLoadError((error as Error).message)
+      }
     } finally {
-      setIsLoading(false)
+      if (requestNumber === latestRequestRef.current) {
+        setIsLoading(false)
+      }
+    }
+  }, [])
+
+  const showSearchResults = useCallback(async (text: string) => {
+    const requestNumber = ++latestRequestRef.current
+    setIsLoading(true)
+    setLoadError(null)
+    try {
+      const results = await searchDocuments(text)
+      if (requestNumber !== latestRequestRef.current) {
+        return
+      }
+      setDocuments(results.documents)
+      setNextCursor(null)
+      setActiveSearch(text)
+    } catch (error) {
+      if (requestNumber === latestRequestRef.current) {
+        setLoadError((error as Error).message)
+      }
+    } finally {
+      if (requestNumber === latestRequestRef.current) {
+        setIsLoading(false)
+      }
     }
   }, [])
 
@@ -62,28 +98,19 @@ export function DocumentsView() {
     fetchSupportedFormats().then(setSupportedFormats).catch(() => setSupportedFormats(null))
   }, [loadFirstPage])
 
-  const runSearch = async (event: FormEvent) => {
-    event.preventDefault()
+  // Search as the person types: once they pause, show what matches the box (an empty box shows everything).
+  useEffect(() => {
     const text = searchText.trim()
-    if (!text) {
-      clearSearch()
-      return
+    if (text === (activeSearch ?? '')) {
+      return // the table already shows this
     }
-    setIsLoading(true)
-    setLoadError(null)
-    try {
-      const results = await searchDocuments(text)
-      setDocuments(results.documents)
-      setNextCursor(null)
-      setActiveSearch(text)
-    } catch (error) {
-      setLoadError((error as Error).message)
-    } finally {
-      setIsLoading(false)
-    }
-  }
+    const timer = setTimeout(() => (text ? showSearchResults(text) : loadFirstPage()), SEARCH_DELAY_MILLISECONDS)
+    return () => clearTimeout(timer) // another key press came first: start counting again
+  }, [searchText, activeSearch, showSearchResults, loadFirstPage])
 
-  const clearSearch = () => {
+  const isSearchPending = searchText.trim() !== (activeSearch ?? '')
+
+  const showAllDocuments = () => {
     setSearchText('')
     loadFirstPage()
   }
@@ -122,7 +149,7 @@ export function DocumentsView() {
     }
     setUploadMessages(messages)
     setIsUploading(false)
-    loadFirstPage()
+    showAllDocuments() // clear any search so the new files are in view
   }
 
   const startReplace = (documentId: string) => {
@@ -141,7 +168,7 @@ export function DocumentsView() {
     try {
       const result = await replaceDocument(documentId, file)
       setUploadMessages([{ fileName: file.name, text: `${STATUS_DESCRIPTIONS[result.status]}: ${result.title}`, isError: false }])
-      loadFirstPage()
+      showAllDocuments()
     } catch (error) {
       setUploadMessages([{ fileName: file.name, text: (error as Error).message, isError: true }])
     } finally {
@@ -173,7 +200,9 @@ export function DocumentsView() {
           <h1 className="page-title">Documents</h1>
           <p className="muted">
             {totalDocuments === null ? 'Loading…' : `${totalDocuments.toLocaleString('en-US')} documents indexed`}
-            {activeSearch !== null && ` · ${documents.length} best matches for “${activeSearch}”`}
+            {isSearchPending
+              ? ' · searching…'
+              : activeSearch !== null && ` · ${documents.length} best matches for “${activeSearch}”`}
           </p>
         </div>
         <div className="upload">
@@ -221,8 +250,10 @@ export function DocumentsView() {
         </ul>
       )}
 
-      <form className="document-search" role="search" onSubmit={runSearch}>
+      {/* No search button: results follow the text. Enter is ignored so it doesn't reload the page. */}
+      <form className="document-search" role="search" onSubmit={(event: FormEvent) => event.preventDefault()}>
         <label htmlFor="document-search" className="visually-hidden">Search documents</label>
+        <span className="document-search-icon" aria-hidden="true"><Icon name="search" size={16} /></span>
         <input
           id="document-search"
           type="search"
@@ -232,21 +263,12 @@ export function DocumentsView() {
           value={searchText}
           onChange={(event) => setSearchText(event.target.value)}
         />
-        <button type="submit" className="button button--secondary" disabled={isLoading}>
-          <Icon name="search" size={16} />
-          Search
-        </button>
-        {activeSearch !== null && (
-          <button type="button" className="button button--secondary" onClick={clearSearch}>
-            Show all
-          </button>
-        )}
       </form>
 
       {loadError && (
         <div className="failure" role="alert">
           <p>{loadError}</p>
-          <button type="button" className="button button--secondary" onClick={loadFirstPage}>Try again</button>
+          <button type="button" className="button button--secondary" onClick={showAllDocuments}>Try again</button>
         </div>
       )}
 
