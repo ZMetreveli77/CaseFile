@@ -859,6 +859,9 @@ ran it and made the decision.
   in `data/scenario/questions.md`. `eval/check_scenario.py` indexes the folder in an in-memory store and asks them.
   One run: all 7 behaved as intended (conflict reported, unknown cause not invented, revenue question declined);
   the flaws it showed are listed in `questions.md`.
+- **Later, my request:** put the scenario on the live site. Claude Code uploaded the 8 files (15 documents) through
+  the site's upload API and added them to the read-only list (`SCENARIO_SOURCE_FILES` in `api/services.py`), with a
+  test that every scenario document is protected.
 
 ### Persistence check (milestone 9)
 - I asked Claude Code to do it instead of me. It uploaded a marker file to the live site, pushed a docs commit

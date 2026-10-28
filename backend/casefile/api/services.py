@@ -12,8 +12,15 @@ from casefile.retrieval.store import QdrantStore
 
 
 # Documents indexed from these files are the shared demo corpus: on the public site nobody may change or delete them.
-# A document's source is "<file name>#<record id>" for JSONL records (ingestion/loaders.py).
-PROTECTED_SOURCE_FILES = ("corpus.jsonl", "contradictory_documents.jsonl")
+# A document's source is "<file name>#<record id>" for JSON(L) records and CSV rows, else the file name (ingestion/loaders.py).
+CORPUS_SOURCE_FILES = ("corpus.jsonl", "contradictory_documents.jsonl")
+# The Larkspur Payments scenario (data/scenario), uploaded to the public site so visitors can ask its questions.
+SCENARIO_SOURCE_FILES = (
+    "architecture-overview.md", "change-log-2026-q1.csv", "INC-2026-031-incident-report.md",
+    "INC-2026-036-postmortem.html", "INC-2026-041-incident-report.pdf", "INC-2026-044-incident-report.md",
+    "march-2026-operations-review.json", "on-call-runbook.txt",
+)
+PROTECTED_SOURCE_FILES = CORPUS_SOURCE_FILES + SCENARIO_SOURCE_FILES
 
 
 def is_corpus_document(document: Document) -> bool:

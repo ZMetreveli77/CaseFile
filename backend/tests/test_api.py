@@ -2,12 +2,13 @@
 import json
 import pytest
 import time
+from pathlib import Path
 
 from fastapi.testclient import TestClient
 
 from casefile.api.app import create_app
 from casefile.api.services import AppServices, is_corpus_document
-from casefile.ingestion.loaders import create_document_id
+from casefile.ingestion.loaders import create_document_id, load_documents
 from casefile.ingestion.pipeline import IngestionPipeline
 from casefile.rag.agent import InvestigationAgent
 from casefile.rag.llm import LLMError, LLMReply, ToolCall
@@ -308,3 +309,14 @@ def test_a_blank_search_lists_documents_as_usual(client):
     upload(client, "hotel.txt", HOTEL_TEXT)
     listed = client.get("/documents", params={"query": "  "}).json()["documents"]
     assert [document["title"] for document in listed] == ["hotel.txt"] and "matching_passage" not in listed[0]
+
+
+def test_scenario_files_are_protected_like_the_corpus():
+    scenario_directory = Path(__file__).resolve().parents[2] / "data" / "scenario"
+    for path in scenario_directory.iterdir():
+        if path.name == "questions.md":
+            continue
+        for document in load_documents(path.name, path.read_bytes()):
+            assert is_corpus_document(document), document.metadata["source"]
+    hotel = load_documents("hotel.txt", HOTEL_TEXT.encode())[0]
+    assert not is_corpus_document(hotel)
