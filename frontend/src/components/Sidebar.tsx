@@ -6,6 +6,8 @@ import { StatusIndicator, type ConnectionState } from './StatusIndicator'
 
 export type View = 'ask' | 'documents'
 
+const COPYRIGHT_YEAR = 2026 // the year CaseFile was written, as in LICENSE
+
 interface SidebarProps {
   currentView: View
   onChangeView: (view: View) => void
@@ -72,6 +74,7 @@ export function Sidebar(props: SidebarProps) {
       </section>
 
       <StatusIndicator connectionState={props.connectionState} health={props.health} />
+      <p className="copyright">© {COPYRIGHT_YEAR} Zuka Metreveli</p>
     </aside>
   )
 }

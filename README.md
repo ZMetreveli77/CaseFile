@@ -179,3 +179,7 @@ how to improve it.
 ## 9. AI usage
 Built with Claude Code as a pair programmer. What it wrote, what I decided, wrote, measured and changed myself, and
 what I asked it to do for me is logged milestone by milestone in [`docs/AI_USAGE.md`](docs/AI_USAGE.md).
+
+## 10. Author and license
+CaseFile is made by **Zuka Metreveli** ([`AUTHORS.md`](AUTHORS.md)).
+Copyright © 2026 Zuka Metreveli. Released under the MIT License ([`LICENSE`](LICENSE)).

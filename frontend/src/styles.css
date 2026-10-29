@@ -230,6 +230,8 @@ a { color: var(--cited); text-underline-offset: 3px; }
   background: var(--muted);
 }
 
+.copyright { padding: 6px 10px 0; font-size: 12px; color: var(--muted); }
+
 .status-dot--ready { background: var(--ready); }
 /* Not ready yet: grey, pulsing. Amber stays reserved for conflicts. */
 .status-dot--waking, .status-dot--connecting { background: var(--muted); animation: pulse 1.4s ease-in-out infinite; }
