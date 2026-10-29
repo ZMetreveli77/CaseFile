@@ -187,6 +187,7 @@ CLAUDE.md
 data/*
 !data/.gitkeep
 !data/scenario/
+!data/about/
 node_modules/
 frontend/dist/
 .venv/

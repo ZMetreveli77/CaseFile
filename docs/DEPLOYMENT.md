@@ -49,8 +49,9 @@ Two stages:
 Anyone with the URL can use the site, so two limits apply (both in `config.py`, both on by default):
 - **The demo corpus is read-only** (`PROTECT_CORPUS`).
   - Documents indexed from `corpus.jsonl` (HotpotQA), `contradictory_documents.jsonl` and the 8 files of the
-    Larkspur Payments scenario (`data/scenario/`, uploaded on 2026-10-29) can't be replaced or deleted through the API: 403, with a message saying to upload your own file instead. Your own uploads can be
-    updated and deleted as usual.
+    Larkspur Payments scenario (`data/scenario/`, uploaded on 2026-10-29) and `data/about/about-casefile.md` (who
+    made CaseFile) can't be replaced or deleted through the API: 403, with a message saying to upload your own file
+    instead. Your own uploads can be updated and deleted as usual.
   - The check looks at the **stored** document, not at the upload. A document's id is a hash of its source name, so
     without that, uploading a file *named* `corpus.jsonl` with `{"id": "Flavian dynasty", ...}` would silently replace
     real evidence (status `protected` instead).

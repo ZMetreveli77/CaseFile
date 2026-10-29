@@ -863,6 +863,10 @@ ran it and made the decision.
   the site's upload API and added them to the read-only list (`SCENARIO_SOURCE_FILES` in `api/services.py`), with a
   test that every scenario document is protected.
 - **Later, my request:** the assignment's example question was added to the site's sample questions (first in the list).
+- **Later, my request:** a copyright line in the sidebar and `AUTHORS.md`; then a document in the searchable
+  collection, `data/about/about-casefile.md`, so "Who made CaseFile?" is answered (with a citation) as Zuka Metreveli.
+  Claude Code wrote it, added it to the read-only list (`ABOUT_SOURCE_FILES`) with a test, and checked the answer in
+  an in-memory index.
 
 ### Persistence check (milestone 9)
 - I asked Claude Code to do it instead of me. It uploaded a marker file to the live site, pushed a docs commit

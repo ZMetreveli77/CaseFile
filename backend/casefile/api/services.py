@@ -20,7 +20,9 @@ SCENARIO_SOURCE_FILES = (
     "INC-2026-036-postmortem.html", "INC-2026-041-incident-report.pdf", "INC-2026-044-incident-report.md",
     "march-2026-operations-review.json", "on-call-runbook.txt",
 )
-PROTECTED_SOURCE_FILES = CORPUS_SOURCE_FILES + SCENARIO_SOURCE_FILES
+# Says who made CaseFile (data/about), so "Who made CaseFile?" is answered from the documents like any other question.
+ABOUT_SOURCE_FILES = ("about-casefile.md",)
+PROTECTED_SOURCE_FILES = CORPUS_SOURCE_FILES + SCENARIO_SOURCE_FILES + ABOUT_SOURCE_FILES
 
 
 def is_corpus_document(document: Document) -> bool:

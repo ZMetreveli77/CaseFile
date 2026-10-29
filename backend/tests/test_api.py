@@ -320,3 +320,9 @@ def test_scenario_files_are_protected_like_the_corpus():
             assert is_corpus_document(document), document.metadata["source"]
     hotel = load_documents("hotel.txt", HOTEL_TEXT.encode())[0]
     assert not is_corpus_document(hotel)
+
+
+def test_the_about_document_is_protected_like_the_corpus():
+    about_path = Path(__file__).resolve().parents[2] / "data" / "about" / "about-casefile.md"
+    for document in load_documents(about_path.name, about_path.read_bytes()):
+        assert is_corpus_document(document), document.metadata["source"]
